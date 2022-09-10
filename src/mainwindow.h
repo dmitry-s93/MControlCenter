@@ -33,13 +33,18 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-private slots:
+private:
+    Ui::MainWindow *ui;
+
     void startRealtimeUpdate();
     void stopRealtimeUpdate();
+    void setUpdateInterval(int msec);
     void realtimeUpdate();
+    void updateData();
     void loadConfigs();
 
     QString intToQString(int value);
+
     void updateBatteryCharge();
     void updateBatteryThreshold();
     void updateCpuTemp();
@@ -53,6 +58,7 @@ private slots:
     void updateFnSuperSwapState();
     void updateCoolerBoostState();
 
+private slots:
     void on_bestMobilityRadioButton_toggled(bool checked);
     void on_balancedBatteryRadioButton_toggled(bool checked);
     void on_bestBatteryRadioButton_toggled(bool checked);
@@ -72,8 +78,5 @@ private slots:
     void on_keyboardBrightnessSlider_valueChanged(int value);
 
     void on_keyboardBacklightModeComboBox_currentIndexChanged(int index);
-
-private:
-    Ui::MainWindow *ui;
 };
 #endif // MAINWINDOW_H

@@ -33,29 +33,21 @@ Helper::Helper()
     iface = new QDBusInterface(SERVICE_NAME, "/", "org.MControlCenter", QDBusConnection::systemBus());
 }
 
-
 bool Helper::updateData()
 {
     QDBusReply<bool> reply = iface->call("updateData");
     if (reply.isValid())
         return reply.value();
-
-    if (iface->lastError().isValid()) {
-        fprintf(stderr, "Call failed: %s\n", qPrintable(iface->lastError().message()));
-    }
+    printError(iface->lastError());
     return false;
 }
 
 int Helper::getValue(int address)
 {
     QDBusReply<int> reply = iface->call("getValue", address);
-
     if (reply.isValid())
         return reply.value();
-
-    if (iface->lastError().isValid()) {
-        fprintf(stderr, "Call failed: %s\n", qPrintable(iface->lastError().message()));
-    }
+    printError(iface->lastError());
     return -1;
 }
 
@@ -64,21 +56,14 @@ QByteArray Helper::getValues(int startAddress, int size)
     QDBusReply<QByteArray> reply = iface->call("getValues", startAddress, size);
     if (reply.isValid())
         return reply.value();
-
-    if (iface->lastError().isValid()) {
-        fprintf(stderr, "Call failed: %s\n", qPrintable(iface->lastError().message()));
-    }
-
+    printError(iface->lastError());
     return QByteArray();
 }
 
 void Helper::putValue(int address, int value)
 {
     iface->call("putValue", address, value);
-
-    if (iface->lastError().isValid()) {
-        fprintf(stderr, "Call failed: %s\n", qPrintable(iface->lastError().message()));
-    }
+    printError(iface->lastError());
 }
 
 bool Helper::empty()
@@ -86,9 +71,12 @@ bool Helper::empty()
     QDBusReply<bool> reply = iface->call("empty");
     if (reply.isValid())
         return reply.value();
-
-    if (iface->lastError().isValid()) {
-        fprintf(stderr, "Call failed: %s\n", qPrintable(iface->lastError().message()));
-    }
+    printError(iface->lastError());
     return true;
+}
+
+void Helper::printError(QDBusError error)
+{
+    if (error.isValid())
+        fprintf(stderr, "Call failed: %s\n", qPrintable(error.message()));
 }

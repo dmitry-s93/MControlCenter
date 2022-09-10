@@ -20,15 +20,13 @@
 #include <fstream>
 #include <vector>
 
+const char* ioFile = "/sys/kernel/debug/ec/ec0/io";
+
 ReadWrite::ReadWrite()
 {
 
 }
 
-//const char* ioFile = "/sys/kernel/debug/ec/ec0/io";
-//const char* ioFile = "/home/dmitry/io_new";
-//const char* ioFile = "/home/dmitry/io_fan1";
-const char* ioFile = "/home/dmitry/io_fan_boost";
 typedef unsigned char BYTE;
 
 std::vector<ReadWrite::BYTE> ReadWrite::readFile()

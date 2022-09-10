@@ -19,7 +19,7 @@
 #include "operate.h"
 #include "helper.h"
 
-Helper ec;
+Helper helper;
 
 const int cpuTempAddress = 0x68;
 const int gpuTempAddress = 0x80;
@@ -67,7 +67,7 @@ Operate::Operate()
 
 bool Operate::updateEcData()
 {
-    return ec.updateData();
+    return helper.updateData();
 }
 
 bool Operate::doProbe()
@@ -75,30 +75,30 @@ bool Operate::doProbe()
     int thresholdAddr0 = 0xEF;
     int thresholdAddr1 = 0xD7;
     // Check for charging threshold support
-    if (128 <= ec.getValue(thresholdAddr0) && ec.getValue(thresholdAddr0) <= 228) {
+    if (128 <= helper.getValue(thresholdAddr0) && helper.getValue(thresholdAddr0) <= 228) {
         batteryThresholdAddress = thresholdAddr0;
         batteryThresholdSupport = true;
     } else {
-        if (128 <= ec.getValue(thresholdAddr1) && ec.getValue(thresholdAddr1) <= 228) {
+        if (128 <= helper.getValue(thresholdAddr1) && helper.getValue(thresholdAddr1) <= 228) {
             batteryThresholdAddress = thresholdAddr1;
             batteryThresholdSupport = true;
         }
     }
 
-    if (ec.getValue(usbPowerShareAddress) == usbPowerShareOff || ec.getValue(usbPowerShareAddress) == usbPowerShareOn)
+    if (helper.getValue(usbPowerShareAddress) == usbPowerShareOff || helper.getValue(usbPowerShareAddress) == usbPowerShareOn)
         usbPowerShareSupport = true;
 
-    if (ec.getValue(webCamAddress) == webCamOff || ec.getValue(webCamAddress) == webCamOn)
+    if (helper.getValue(webCamAddress) == webCamOff || helper.getValue(webCamAddress) == webCamOn)
         webCamOffSupport = true;
 
-    if (ec.getValue(fnSuperSwapAddress) == fnSuperSwapOff || ec.getValue(fnSuperSwapAddress) == fnSuperSwapOn)
+    if (helper.getValue(fnSuperSwapAddress) == fnSuperSwapOff || helper.getValue(fnSuperSwapAddress) == fnSuperSwapOn)
         fnSuperSwapSupport = true;
 
     if (
-            ec.getValue(keyboardBacklightAddress) == keyboardBacklight0ff ||
-            ec.getValue(keyboardBacklightAddress) == keyboardBacklightLow ||
-            ec.getValue(keyboardBacklightAddress) == keyboardBacklightMid ||
-            ec.getValue(keyboardBacklightAddress) == keyboardBacklightHigh)
+            helper.getValue(keyboardBacklightAddress) == keyboardBacklight0ff ||
+            helper.getValue(keyboardBacklightAddress) == keyboardBacklightLow ||
+            helper.getValue(keyboardBacklightAddress) == keyboardBacklightMid ||
+            helper.getValue(keyboardBacklightAddress) == keyboardBacklightHigh)
         keyboardBacklightSupport = true;
 
     return true;
@@ -106,12 +106,12 @@ bool Operate::doProbe()
 
 std::string Operate::getEcVersion()
 {
-        return ec.getValues(160, 12).toStdString();
+        return helper.getValues(160, 12).toStdString();
 }
 
 std::string Operate::getEcBuild()
 {
-    std::string s = ec.getValues(172, 16).toStdString();
+    std::string s = helper.getValues(172, 16).toStdString();
     if (s.size() < 16)
         return s;
     return s.substr(0, 2) + "/" + s.substr(2, 2) + "/" + s.substr(4, 4) + " " + s.substr(8, 8);
@@ -119,50 +119,50 @@ std::string Operate::getEcBuild()
 
 int Operate::getBatteryCharge()
 {
-    return ec.getValue(batteryChargeAddress);
+    return helper.getValue(batteryChargeAddress);
 }
 
 int Operate::getBatteryThreshold()
 {
-    return ec.getValue(batteryThresholdAddress)-128;
+    return helper.getValue(batteryThresholdAddress) - 128;
 }
 
 int Operate::getCpuTemp()
 {
-    return ec.getValue(cpuTempAddress);
+    return helper.getValue(cpuTempAddress);
 }
 
 int Operate::getGpuTemp()
 {
-    return ec.getValue(gpuTempAddress);
+    return helper.getValue(gpuTempAddress);
 }
 
 int Operate::getFan1Speed()
 {
-    int value = ec.getValue(fan1Address);
+    int value = helper.getValue(fan1Address);
     if (value > 0)
-        return 470000/value;
+        return 470000 / value;
     return value;
 }
 
 int Operate::getFan2Speed()
 {
-    int value = ec.getValue(fan2Address);
+    int value = helper.getValue(fan2Address);
     if (value > 0)
-        return 470000/value;
+        return 470000 / value;
     return value;
 }
 
 int Operate::getKeybordBacklightMode()
 {
-    if (ec.getValue(keyboardBacklightModeAddress) == keyboardBacklightAutoTurnOff)
+    if (helper.getValue(keyboardBacklightModeAddress) == keyboardBacklightAutoTurnOff)
         return 1;
     return 0;
 }
 
 int Operate::getKeyboardBrightness()
 {
-    int value = ec.getValue(keyboardBacklightAddress);
+    int value = helper.getValue(keyboardBacklightAddress);
     switch (value) {
         case keyboardBacklight0ff:
             return 0;
@@ -179,28 +179,28 @@ int Operate::getKeyboardBrightness()
 
 bool Operate::getUsbPowerShareState()
 {
-    if (ec.getValue(usbPowerShareAddress) == usbPowerShareOn)
+    if (helper.getValue(usbPowerShareAddress) == usbPowerShareOn)
         return true;
     return false;
 }
 
 bool Operate::getWebCamState()
 {
-    if (ec.getValue(webCamAddress) == webCamOn)
+    if (helper.getValue(webCamAddress) == webCamOn)
         return true;
     return false;
 }
 
 bool Operate::getFnSuperSwapState()
 {
-    if (ec.getValue(fnSuperSwapAddress) == fnSuperSwapOn)
+    if (helper.getValue(fnSuperSwapAddress) == fnSuperSwapOn)
         return true;
     return false;
 }
 
 bool Operate::getCoolerBoostState()
 {
-    if (ec.getValue(coolerBoostAddress) > 127)
+    if (helper.getValue(coolerBoostAddress) > 127)
         return true;
     return false;
 }
@@ -208,7 +208,7 @@ bool Operate::getCoolerBoostState()
 void Operate::setBatteryThreshold(int value)
 {
     if (value != getBatteryThreshold())
-        ec.putValue(batteryThresholdAddress, value + 128);
+        helper.putValue(batteryThresholdAddress, value + 128);
 }
 
 void Operate::setKeyoardBacklightMode(int value)
@@ -216,7 +216,7 @@ void Operate::setKeyoardBacklightMode(int value)
     int resValue = keyboardBacklightAlwaysOn;
     if (value == 1)
         resValue = keyboardBacklightAutoTurnOff;
-    ec.putValue(keyboardBacklightModeAddress, resValue);
+    helper.putValue(keyboardBacklightModeAddress, resValue);
 }
 
 void Operate::setKeybordBrightness(int value)
@@ -238,45 +238,45 @@ void Operate::setKeybordBrightness(int value)
         default:
             resValue = keyboardBacklight0ff;
     }
-    ec.putValue(keyboardBacklightAddress, resValue);
+    helper.putValue(keyboardBacklightAddress, resValue);
 }
 
 void Operate::setUsbPowerShareState(bool enabled)
 {
     int value = enabled ? usbPowerShareOn : usbPowerShareOff;
-    ec.putValue(usbPowerShareAddress, value);
+    helper.putValue(usbPowerShareAddress, value);
 }
 
 void Operate::setWebCamState(bool enabled)
 {
     int value = enabled ? webCamOn : webCamOff;
-    ec.putValue(webCamAddress, value);
+    helper.putValue(webCamAddress, value);
 }
 
 void Operate::setFnSuperSwapState(bool enabled)
 {
     int value = enabled ? fnSuperSwapOn : fnSuperSwapOff;
-    ec.putValue(fnSuperSwapAddress, value);
+    helper.putValue(fnSuperSwapAddress, value);
 }
 
 void Operate::setCoolerBoostState(bool enabled)
 {
-    int value = ec.getValue(coolerBoostAddress);
+    int value = helper.getValue(coolerBoostAddress);
     if (enabled && (value < 128))
-        ec.putValue(coolerBoostAddress, value + 128);
+        helper.putValue(coolerBoostAddress, value + 128);
     if (!enabled && (value > 127))
-        ec.putValue(coolerBoostAddress, value - 128);
+        helper.putValue(coolerBoostAddress, value - 128);
 }
 
 int Operate::getValue(int address)
 {
-    ec.updateData();
-    return ec.getValue(address);
+    helper.updateData();
+    return helper.getValue(address);
 }
 
 void Operate::setValue(int address, int value)
 {
-    ec.putValue(address, value);
+    helper.putValue(address, value);
 }
 
 bool Operate::isBatteryThresholdSupport()

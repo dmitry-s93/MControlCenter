@@ -37,6 +37,8 @@ public:
     bool empty();
 public:
     QDBusInterface *iface;
+private:
+    void printError(QDBusError error);
 };
 
 #endif // HELPER_H

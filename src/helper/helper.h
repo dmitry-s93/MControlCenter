@@ -16,8 +16,8 @@
  * with MControlCenter. If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef MAIN_H
-#define MAIN_H
+#ifndef HELPER_H
+#define HELPER_H
 
 #include <QtCore/QObject>
 #include <QtDBus/QDBusAbstractAdaptor>
@@ -43,4 +43,4 @@ public slots:
     Q_NOREPLY void putValue(const int &address, const int &value);
 };
 
-#endif // MAIN_H
+#endif // HELPER_H

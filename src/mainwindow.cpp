@@ -34,9 +34,10 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     // Disable debug tab
     ui->tabWidget->setTabVisible(3, false);
+    updateData();
 
     connect(realtimeUpdateTimer, &QTimer::timeout, this, &MainWindow::realtimeUpdate);
-    realtimeUpdateTimer->setInterval(1000);
+    setUpdateInterval(1000);
 
     startRealtimeUpdate();
 }
@@ -56,14 +57,24 @@ void MainWindow::stopRealtimeUpdate()
     realtimeUpdateTimer->stop();
 }
 
+void MainWindow::setUpdateInterval(int msec)
+{
+    realtimeUpdateTimer->setInterval(msec);
+}
+
 void MainWindow::realtimeUpdate()
+{
+    updateData();
+}
+
+void MainWindow::updateData()
 {
     if (operate.updateEcData()) {
         if (!isActive) {
             operate.doProbe();
-            loadConfigs();
             ui->tabWidget->setDisabled(false);
-            realtimeUpdateTimer->setInterval(1000);
+            loadConfigs();
+            setUpdateInterval(1000);
             isActive= true;
         }
         updateBatteryCharge();
@@ -74,7 +85,7 @@ void MainWindow::realtimeUpdate()
         updateKeyboardBrightness();
     } else {
         ui->tabWidget->setDisabled(true);
-        realtimeUpdateTimer->setInterval(10000);
+        setUpdateInterval(10000);
         isActive= false;
     }
 }
