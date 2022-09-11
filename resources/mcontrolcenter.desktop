@@ -1,0 +1,8 @@
+[Desktop Entry]
+Categories=System;Settings;Utility;
+Encoding=UTF-8
+Name=MControlCenter
+GenericName=Configure MSI Laptop
+Type=Application
+Exec=mcontrolcenter
+Icon=mcontrolcenter
