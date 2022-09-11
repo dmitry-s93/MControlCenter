@@ -2,7 +2,7 @@
 Categories=System;Settings;Utility;
 Encoding=UTF-8
 Name=MControlCenter
-GenericName=Configure MSI Laptop
+GenericName=Change MSI Laptop Settings
 Type=Application
 Exec=mcontrolcenter
 Icon=mcontrolcenter
