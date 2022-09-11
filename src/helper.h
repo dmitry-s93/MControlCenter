@@ -35,6 +35,7 @@ public:
     QByteArray getValues(int startAddress, int size);
     void putValue(int address, int value);
     bool empty();
+    void quit();
 public:
     QDBusInterface *iface;
 private:

@@ -19,7 +19,7 @@
 #include "mainwindow.h"
 
 #include <QApplication>
-#include <thread>
+#include <QProcess>
 
 
 int main(int argc, char *argv[])
@@ -27,5 +27,11 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     MainWindow w;
     w.show();
+
+    QStringList arguments;
+    arguments << "/usr/libexec/mcontrolcenter-helper";
+    QProcess *myProcess = new QProcess();
+    myProcess->start("pkexec", arguments);
+
     return a.exec();
 }

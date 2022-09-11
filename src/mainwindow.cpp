@@ -74,7 +74,6 @@ void MainWindow::updateData()
             operate.doProbe();
             ui->tabWidget->setDisabled(false);
             loadConfigs();
-            setUpdateInterval(1000);
             isActive= true;
         }
         updateBatteryCharge();
@@ -85,7 +84,6 @@ void MainWindow::updateData()
         updateKeyboardBrightness();
     } else {
         ui->tabWidget->setDisabled(true);
-        setUpdateInterval(10000);
         isActive= false;
     }
 }
@@ -216,6 +214,11 @@ void MainWindow::updateFnSuperSwapState()
 void MainWindow::updateCoolerBoostState()
 {
     ui->coolerBoostCheckBox->setChecked(operate.getCoolerBoostState());
+}
+
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    operate.closeHelperApp();
 }
 
 void MainWindow::on_bestMobilityRadioButton_toggled(bool checked)

@@ -75,6 +75,12 @@ bool Helper::empty()
     return true;
 }
 
+void Helper::quit()
+{
+    iface->call("quit");
+    printError(iface->lastError());
+}
+
 void Helper::printError(QDBusError error)
 {
     if (error.isValid())

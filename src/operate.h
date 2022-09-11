@@ -25,6 +25,7 @@ class Operate
 {
 public:
     Operate();
+    void closeHelperApp();
     bool updateEcData();
     bool doProbe();
     std::string getEcVersion();

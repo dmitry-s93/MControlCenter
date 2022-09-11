@@ -20,6 +20,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QCloseEvent>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -57,6 +58,8 @@ private:
     void updateWebCamState();
     void updateFnSuperSwapState();
     void updateCoolerBoostState();
+
+    void closeEvent(QCloseEvent *event);
 
 private slots:
     void on_bestMobilityRadioButton_toggled(bool checked);

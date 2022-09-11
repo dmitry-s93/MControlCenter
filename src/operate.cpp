@@ -65,6 +65,11 @@ Operate::Operate()
 
 }
 
+void Operate::closeHelperApp()
+{
+    helper.quit();
+}
+
 bool Operate::updateEcData()
 {
     return helper.updateData();
