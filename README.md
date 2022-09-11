@@ -17,4 +17,6 @@ MControlCenter is a Free and Open Source GNU/Linux application that allows you t
 
 ## Installation
 
-Work in progress
+The application requires the `ec_sys` module with option `write_support=1` to run.
+
+**Work in progress**
