@@ -22,11 +22,14 @@
 #include <QCoreApplication>
 #include <QDBusConnection>
 #include <QDBusError>
+#include <QProcess>
 #include <QTimer>
 
 std::vector<BYTE> ecData;
 
 ReadWrite rw;
+
+bool firstRun = true;
 
 void Helper::quit()
 {
@@ -35,6 +38,10 @@ void Helper::quit()
 
 bool Helper::updateData()
 {
+    if (firstRun) {
+        firstRun = false;
+        loadEcSysModule();
+    }
     ecData = rw.readFileWithPos(0, 256);
     if (!ecData.empty())
         return true;
@@ -66,6 +73,17 @@ void Helper::putValue(const int &address, const int &value)
 {
     rw.writeToFile(address, value);
     updateData();
+}
+
+void Helper::loadEcSysModule()
+{
+    QProcess *myProcess = new QProcess();
+    myProcess->start("sh", QStringList() << "-c" << "lsmod | grep ec_sys");
+    myProcess->waitForFinished(1000);
+    if (myProcess->readAllStandardOutput() == "") {
+        fprintf(stderr, "%s\n", qPrintable("ec_sys module is not loaded. Trying to load"));
+        myProcess->start("modprobe", QStringList() << "ec_sys write_support=1");
+    }
 }
 
 int main(int argc, char *argv[])

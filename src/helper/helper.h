@@ -41,6 +41,8 @@ public slots:
     QByteArray getValues(const int &address, const int &size);
     int getValue(const int &address);
     Q_NOREPLY void putValue(const int &address, const int &value);
+private:
+    void loadEcSysModule();
 };
 
 #endif // HELPER_H
