@@ -77,12 +77,16 @@ void Helper::putValue(const int &address, const int &value)
 
 void Helper::loadEcSysModule()
 {
-    QProcess *myProcess = new QProcess();
-    myProcess->start("sh", QStringList() << "-c" << "lsmod | grep ec_sys");
-    myProcess->waitForFinished(1000);
-    if (myProcess->readAllStandardOutput() == "") {
+    QProcess *process = new QProcess();
+    process->start("sh", QStringList() << "-c" << "lsmod | grep ec_sys");
+    process->waitForFinished(1000);
+    if (process->readAllStandardOutput() == "") {
         fprintf(stderr, "%s\n", qPrintable("ec_sys module is not loaded. Trying to load"));
-        myProcess->start("modprobe", QStringList() << "ec_sys write_support=1");
+        process->start("sh", QStringList() << "-c" << "modprobe ec_sys write_support=1 2>&1");
+        process->waitForFinished(1000);
+        QByteArray output = process->readAllStandardOutput();
+        if (output != "")
+            fprintf(stderr, "%s", qPrintable(output));
     }
 }
 
