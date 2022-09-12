@@ -34,6 +34,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     // Disable debug tab
     ui->tabWidget->setTabVisible(3, false);
+    ui->tabWidget->setDisabled(true);
+
     updateData();
 
     connect(realtimeUpdateTimer, &QTimer::timeout, this, &MainWindow::realtimeUpdate);
