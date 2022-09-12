@@ -1,4 +1,4 @@
-# M Control Center
+# MControlCenter
 
 MControlCenter is a Free and Open Source GNU/Linux application that allows you to change the settings of MSI laptops.
 
@@ -19,4 +19,10 @@ MControlCenter is a Free and Open Source GNU/Linux application that allows you t
 
 The application requires the `ec_sys` module with option `write_support=1` to run.
 
-**Work in progress**
+This is QT application. You may need to install libqt5widgets5 to run.
+
+### Installation from archive
+
+1. Unpack the archive with the program
+2. Open terminal in unpacked directory
+3. Run the script `sudo ./install`
