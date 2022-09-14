@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>i18n/MControlCenter_en.qm</file>
+    </qresource>
+</RCC>

@@ -76,14 +76,8 @@
         </item>
         <item row="0" column="1">
          <widget class="QLabel" name="ecVersionValueLabel">
-          <property name="accessibleName">
-           <string notr="true"/>
-          </property>
-          <property name="accessibleDescription">
-           <string notr="true"/>
-          </property>
           <property name="text">
-           <string>-</string>
+           <string notr="true">-</string>
           </property>
          </widget>
         </item>
@@ -97,7 +91,7 @@
         <item row="1" column="1">
          <widget class="QLabel" name="ecBuildValueLabel">
           <property name="text">
-           <string>-</string>
+           <string notr="true">-</string>
           </property>
          </widget>
         </item>
@@ -110,11 +104,8 @@
         </item>
         <item row="2" column="1">
          <widget class="QLabel" name="BatteryChargeValueLabel">
-          <property name="accessibleDescription">
-           <string notr="true"/>
-          </property>
           <property name="text">
-           <string>-</string>
+           <string notr="true">-</string>
           </property>
          </widget>
         </item>
@@ -127,14 +118,8 @@
         </item>
         <item row="3" column="1">
          <widget class="QLabel" name="batteryThresholdValueLabel">
-          <property name="accessibleName">
-           <string notr="true"/>
-          </property>
-          <property name="accessibleDescription">
-           <string notr="true"/>
-          </property>
           <property name="text">
-           <string>-</string>
+           <string notr="true">-</string>
           </property>
          </widget>
         </item>
@@ -147,17 +132,8 @@
         </item>
         <item row="4" column="1">
          <widget class="QLabel" name="cpuTempValueLabel">
-          <property name="enabled">
-           <bool>true</bool>
-          </property>
-          <property name="accessibleName">
-           <string notr="true"/>
-          </property>
-          <property name="accessibleDescription">
-           <string notr="true"/>
-          </property>
           <property name="text">
-           <string>-</string>
+           <string notr="true">-</string>
           </property>
          </widget>
         </item>
@@ -170,14 +146,8 @@
         </item>
         <item row="5" column="1">
          <widget class="QLabel" name="gpuTempValueLabel">
-          <property name="accessibleName">
-           <string notr="true"/>
-          </property>
-          <property name="accessibleDescription">
-           <string notr="true"/>
-          </property>
           <property name="text">
-           <string>-</string>
+           <string notr="true">-</string>
           </property>
          </widget>
         </item>
@@ -190,14 +160,8 @@
         </item>
         <item row="6" column="1">
          <widget class="QLabel" name="fan1ValueLabel">
-          <property name="accessibleName">
-           <string notr="true"/>
-          </property>
-          <property name="accessibleDescription">
-           <string notr="true"/>
-          </property>
           <property name="text">
-           <string>-</string>
+           <string notr="true">-</string>
           </property>
          </widget>
         </item>
@@ -210,14 +174,8 @@
         </item>
         <item row="7" column="1">
          <widget class="QLabel" name="fan2ValueLabel">
-          <property name="accessibleName">
-           <string notr="true"/>
-          </property>
-          <property name="accessibleDescription">
-           <string notr="true"/>
-          </property>
           <property name="text">
-           <string>-</string>
+           <string notr="true">-</string>
           </property>
          </widget>
         </item>
@@ -628,7 +586,7 @@
          </rect>
         </property>
         <property name="text">
-         <string>Address</string>
+         <string notr="true">Address</string>
         </property>
        </widget>
        <widget class="QLabel" name="label_2">
@@ -641,7 +599,7 @@
          </rect>
         </property>
         <property name="text">
-         <string>Value</string>
+         <string notr="true">Value</string>
         </property>
        </widget>
        <widget class="QPushButton" name="ReadValueButton">
@@ -654,7 +612,7 @@
          </rect>
         </property>
         <property name="text">
-         <string>Read Value</string>
+         <string notr="true">Read Value</string>
         </property>
        </widget>
        <widget class="QPushButton" name="WriteWalueButton">
@@ -667,7 +625,7 @@
          </rect>
         </property>
         <property name="text">
-         <string>Write Value</string>
+         <string notr="true">Write Value</string>
         </property>
        </widget>
       </widget>
@@ -688,7 +646,7 @@
           <item row="0" column="1">
            <widget class="QLabel" name="versionValueLabel">
             <property name="text">
-             <string>0.1.0 alpha</string>
+             <string notr="true">0.1.0 alpha</string>
             </property>
            </widget>
           </item>
@@ -702,7 +660,7 @@
           <item row="1" column="1">
            <widget class="QLabel" name="gitHubValueLabel">
             <property name="text">
-             <string>&lt;a href=&quot;https://github.com/dmitry-s93/MControlCenter&quot;&gt;https://github.com/dmitry-s93/MControlCenter&lt;/a&gt;</string>
+             <string notr="true">&lt;a href=&quot;https://github.com/dmitry-s93/MControlCenter&quot;&gt;https://github.com/dmitry-s93/MControlCenter&lt;/a&gt;</string>
             </property>
             <property name="openExternalLinks">
              <bool>true</bool>

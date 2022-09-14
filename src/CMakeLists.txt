@@ -12,8 +12,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS DBus)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools DBus)
 
 set(PROJECT_SOURCES
         main.cpp
@@ -24,7 +23,28 @@ set(PROJECT_SOURCES
         operate.h
         helper.cpp
         helper.h
+        languages.qrc
 )
+
+set(TS_FILES
+    MControlCenter_en.ts
+)
+
+find_program(LUPDATE_EXECUTABLE lupdate)
+find_program(LRELEASE_EXECUTABLE lrelease)
+
+foreach(_ts_file ${TS_FILES})
+    execute_process(COMMAND
+        ${LUPDATE_EXECUTABLE}
+        ${CMAKE_SOURCE_DIR}
+        -ts ${CMAKE_SOURCE_DIR}/i18n/${_ts_file}
+        -source-language en_US -no-obsolete -locations none
+    )
+    execute_process(COMMAND
+        ${LRELEASE_EXECUTABLE}
+        ${CMAKE_SOURCE_DIR}/i18n/${_ts_file}
+    )
+endforeach()
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(mcontrolcenter
@@ -49,16 +69,7 @@ else()
     endif()
 endif()
 
-target_link_libraries(mcontrolcenter PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
-target_link_libraries(mcontrolcenter PRIVATE Qt${QT_VERSION_MAJOR}::DBus)
-
-set_target_properties(mcontrolcenter PROPERTIES
-    MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
-    MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
-    MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
-    MACOSX_BUNDLE TRUE
-    WIN32_EXECUTABLE TRUE
-)
+target_link_libraries(mcontrolcenter PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::DBus)
 
 install(TARGETS mcontrolcenter
     BUNDLE DESTINATION .
