@@ -31,7 +31,8 @@ This is QT application. You may need to install `libqt5widgets5` to run.
 
 You can help translate the MControlCenter app into your native language
 
-1. Copy `/src/i18n/MControlCenter_en.ts` to `/src/i18n/MControlCenter_xx.ts` where xx is language code into which the translation is being made.
+1. Copy `/src/i18n/MControlCenter_en.ts` to `src/i18n/MControlCenter_xx.ts` where xx is language code into which the translation is being made.
 2. Open `MControlCenter_xx.ts` in text editor and change `language="en_US"` to your language code.
 3. Translate strings into your language directly in a text editor or use the QT Linguist app.
-4. Send pull request on github.
+4. Translate `GenericName` in app shortcut `resources/mcontrolcenter.desktop`. To do this, add the line `GenericName[xx]=translated generic name`.
+5. Send pull request on github.
