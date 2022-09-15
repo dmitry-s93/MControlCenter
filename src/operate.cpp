@@ -23,8 +23,13 @@ Helper helper;
 
 const int cpuTempAddress = 0x68;
 const int gpuTempAddress = 0x80;
-int batteryChargeAddress = 0x42;
+const int batteryChargeAddress = 0x42;
 int batteryThresholdAddress;
+
+const int batteryChargingStatusAddress = 0x31;
+const int batteryNotCharging = 0x01;
+const int batteryCharging = 0x03;
+const int batteryDischarging = 0x05;
 
 const int keyboardBacklightModeAddress = 0x2C;
 const int keyboardBacklightAlwaysOn = 0x00;
@@ -130,6 +135,20 @@ int Operate::getBatteryCharge()
 int Operate::getBatteryThreshold()
 {
     return helper.getValue(batteryThresholdAddress) - 128;
+}
+
+charging_state Operate::getChargingStatus()
+{
+    switch (getValue(batteryChargingStatusAddress)) {
+        case batteryCharging:
+            return battery_charging;
+        case batteryDischarging:
+            return battery_discharging;
+        case batteryNotCharging:
+            return battery_not_charging;
+        default:
+            return battery_unknown;
+    }
 }
 
 int Operate::getCpuTemp()

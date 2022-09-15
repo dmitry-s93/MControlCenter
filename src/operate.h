@@ -21,6 +21,15 @@
 
 
 #include <string>
+
+enum charging_state
+{
+    battery_charging,
+    battery_discharging,
+    battery_not_charging,
+    battery_unknown
+};
+
 class Operate
 {
 public:
@@ -32,6 +41,7 @@ public:
     std::string getEcBuild();
     int getBatteryCharge();
     int getBatteryThreshold();
+    charging_state getChargingStatus();
     int getCpuTemp();
     int getGpuTemp();
     int getFan1Speed();

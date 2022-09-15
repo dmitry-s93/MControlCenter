@@ -79,6 +79,7 @@ void MainWindow::updateData()
             isActive= true;
         }
         updateBatteryCharge();
+        updateChargingStatus();
         updateCpuTemp();
         updateGpuTemp();
         updateFan1Speed();
@@ -166,6 +167,27 @@ void MainWindow::updateBatteryThreshold()
             ui->customBatteryThresholdRadioButton->click();
             break;
     }
+}
+
+void MainWindow::updateChargingStatus()
+{
+    QString chargingStatus;
+    switch (operate.getChargingStatus())
+    {
+        case battery_charging:
+            chargingStatus = tr("Charging");
+            break;
+        case battery_discharging:
+            chargingStatus = tr("Discharging");
+            break;
+        case battery_not_charging:
+            chargingStatus = tr("Not charging");
+        break;
+        default:
+            chargingStatus = tr("Unknown");
+            break;
+    }
+    ui->chargingStatusValueLabel->setText(chargingStatus);
 }
 
 void MainWindow::updateCpuTemp()
