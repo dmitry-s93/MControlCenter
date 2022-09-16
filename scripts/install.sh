@@ -1,4 +1,4 @@
- #!/bin/bash -e
+#!/bin/bash -e
 
 BIN_PATH='/usr/bin/'
 LIB_EXEC_PATH='/usr/libexec/'
