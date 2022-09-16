@@ -28,6 +28,7 @@ set(PROJECT_SOURCES
 
 set(TS_FILES
     MControlCenter_en.ts
+    MControlCenter_ru.ts
 )
 
 find_program(LUPDATE_EXECUTABLE lupdate)
