@@ -31,15 +31,14 @@ class Helper: public QDBusAbstractAdaptor
     Q_CLASSINFO("D-Bus Interface", "org.MControlCenter")
 public:
     Helper(QObject *obj) : QDBusAbstractAdaptor(obj)
-    { }
+    {
+        loadEcSysModule();
+    }
 signals:
     void aboutToQuit();
 public slots:
     Q_NOREPLY void quit();
-    bool updateData();
-    bool empty();
-    QByteArray getValues(const int &address, const int &size);
-    int getValue(const int &address);
+    QByteArray getData();
     Q_NOREPLY void putValue(const int &address, const int &value);
 private:
     void loadEcSysModule();
