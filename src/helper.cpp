@@ -24,6 +24,10 @@
 
 #include <stdio.h>
 
+#define EC_SPACE_SIZE 256
+
+QByteArray ecData;
+
 Helper::Helper()
 {
     if (!QDBusConnection::systemBus().isConnected()) {
@@ -35,44 +39,31 @@ Helper::Helper()
 
 bool Helper::updateData()
 {
-    QDBusReply<bool> reply = iface->call("updateData");
-    if (reply.isValid())
-        return reply.value();
+    QDBusReply<QByteArray> reply = iface->call("getData");
+    if (reply.isValid() && reply.value().size() == EC_SPACE_SIZE) {
+        ecData = reply.value();
+        return true;
+    }
     printError(iface->lastError());
     return false;
 }
 
 int Helper::getValue(int address)
 {
-    QDBusReply<int> reply = iface->call("getValue", address);
-    if (reply.isValid())
-        return reply.value();
-    printError(iface->lastError());
+    if (!ecData.isEmpty())
+        return (BYTE)ecData[address];
     return -1;
 }
 
 QByteArray Helper::getValues(int startAddress, int size)
 {
-    QDBusReply<QByteArray> reply = iface->call("getValues", startAddress, size);
-    if (reply.isValid())
-        return reply.value();
-    printError(iface->lastError());
-    return QByteArray();
+    return ecData.mid(startAddress, size);;
 }
 
 void Helper::putValue(int address, int value)
 {
     iface->call("putValue", address, value);
     printError(iface->lastError());
-}
-
-bool Helper::empty()
-{
-    QDBusReply<bool> reply = iface->call("empty");
-    if (reply.isValid())
-        return reply.value();
-    printError(iface->lastError());
-    return true;
 }
 
 void Helper::quit()

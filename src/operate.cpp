@@ -139,7 +139,7 @@ int Operate::getBatteryThreshold()
 
 charging_state Operate::getChargingStatus()
 {
-    switch (getValue(batteryChargingStatusAddress)) {
+    switch (helper.getValue(batteryChargingStatusAddress)) {
         case batteryCharging:
             return battery_charging;
         case batteryDischarging:

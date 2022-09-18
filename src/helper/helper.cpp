@@ -25,54 +25,21 @@
 #include <QProcess>
 #include <QTimer>
 
-std::vector<BYTE> ecData;
-
 ReadWrite rw;
-
-bool firstRun = true;
 
 void Helper::quit()
 {
     QTimer::singleShot(0, QCoreApplication::instance(), &QCoreApplication::quit);
 }
 
-bool Helper::updateData()
+QByteArray Helper::getData()
 {
-    if (firstRun) {
-        firstRun = false;
-        loadEcSysModule();
-    }
-    ecData = rw.readFileWithPos(0, 256);
-    if (!ecData.empty())
-        return true;
-    return false;
-}
-
-bool Helper::empty()
-{
-    return ecData.empty();
-}
-
-QByteArray Helper::getValues(const int &address, const int &size)
-{
-    QByteArray out;
-    for (BYTE c: rw.readFileWithPos(address, size)) {
-        out.append(c);
-    }
-    return out;
-}
-
-int Helper::getValue(const int &address)
-{
-    if (ecData.size() < address + 1)
-        return -1;
-    return ecData[address];
+    return rw.readFromFile();
 }
 
 void Helper::putValue(const int &address, const int &value)
 {
     rw.writeToFile(address, value);
-    updateData();
 }
 
 void Helper::loadEcSysModule()

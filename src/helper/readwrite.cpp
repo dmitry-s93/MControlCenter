@@ -18,7 +18,8 @@
 
 #include "readwrite.h"
 #include <fstream>
-#include <vector>
+
+#include <QFile>
 
 const char* ioFile = "/sys/kernel/debug/ec/ec0/io";
 
@@ -27,50 +28,19 @@ ReadWrite::ReadWrite()
 
 }
 
-typedef unsigned char BYTE;
-
-std::vector<ReadWrite::BYTE> ReadWrite::readFile()
+QByteArray ReadWrite::readFromFile()
 {
-    if (!fileExists(ioFile))
-    {
-        return std::vector<BYTE>();
-    }
-    std::streampos fileSize;
-    std::ifstream file(ioFile, std::ios::binary);
-    file.seekg(0, std::ios::end);
-    fileSize = file.tellg();
-    file.seekg(0, std::ios::beg);
-    std::vector<BYTE> fileData(fileSize);
-    file.read((char*) &fileData[0], fileSize);
-    return fileData;
+    QFile file(ioFile);
+    if (file.open(QIODevice::ReadOnly))
+        return file.readAll();
+    return QByteArray();
 }
 
-std::vector<ReadWrite::BYTE> ReadWrite::readFileWithPos(const int startPos, const int size)
-{
-    if (!fileExists(ioFile))
-    {
-        return std::vector<BYTE>();
-    }
-    std::ifstream file(ioFile, std::ios::binary);
-    file.seekg(startPos);
-    std::vector<BYTE> fileData(size);
-    file.read((char*) &fileData[0], size);
-    return fileData;
-}
-
-void ReadWrite::writeToFile(const int pos, const int value)
+void ReadWrite::writeToFile(const int pos, BYTE value)
 {
     std::ofstream file(ioFile, std::ios::in | std::ios::out | std::ios::binary);
-    file.seekp(pos);
-    file << BYTE(value);
-}
-
-bool ReadWrite::fileExists(const std::string &name)
-{
-    if (FILE *file = fopen(name.c_str(), "r")) {
-        fclose(file);
-        return true;
-    } else {
-        return false;
+    if (file.is_open()) {
+        file.seekp(pos);
+        file << value;
     }
 }

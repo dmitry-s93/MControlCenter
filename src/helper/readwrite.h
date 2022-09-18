@@ -19,19 +19,15 @@
 #ifndef READWRITE_H
 #define READWRITE_H
 
+#include <QByteArray>
 
-#include <string>
-#include <vector>
 class ReadWrite
 {
     typedef unsigned char BYTE;
 public:
     ReadWrite();
-    std::vector<BYTE> readFile();
-    std::vector<BYTE> readFileWithPos(const int startPos, const int size);
-    void writeToFile(const int pos, const int value);
-private:
-    inline bool fileExists (const std::string &name);
+    QByteArray readFromFile();
+    void writeToFile(const int pos, BYTE value);
 };
 
 #endif // READWRITE_H
