@@ -146,6 +146,7 @@ void MainWindow::updateBatteryCharge()
 
 void MainWindow::updateBatteryThreshold()
 {
+    operate.updateEcData();
     int batteryThreshold = operate.getBatteryThreshold();
     if (batteryThreshold == 0)
         ui->batteryThresholdValueLabel->setText("100 %");
