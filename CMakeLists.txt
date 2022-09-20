@@ -15,15 +15,15 @@ find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools DBus)
 
 set(PROJECT_SOURCES
-        main.cpp
-        mainwindow.cpp
-        mainwindow.h
-        mainwindow.ui
-        operate.cpp
-        operate.h
-        helper.cpp
-        helper.h
-        languages.qrc
+        src/main.cpp
+        src/mainwindow.cpp
+        src/mainwindow.h
+        src/mainwindow.ui
+        src/operate.cpp
+        src/operate.h
+        src/helper.cpp
+        src/helper.h
+        src/languages.qrc
 )
 
 set(TS_FILES
@@ -38,12 +38,12 @@ foreach(_ts_file ${TS_FILES})
     execute_process(COMMAND
         ${LUPDATE_EXECUTABLE}
         ${CMAKE_SOURCE_DIR}
-        -ts ${CMAKE_SOURCE_DIR}/i18n/${_ts_file}
+        -ts ${CMAKE_SOURCE_DIR}/src/i18n/${_ts_file}
         -source-language en_US -no-obsolete -locations none
     )
     execute_process(COMMAND
         ${LRELEASE_EXECUTABLE}
-        ${CMAKE_SOURCE_DIR}/i18n/${_ts_file}
+        ${CMAKE_SOURCE_DIR}/src/i18n/${_ts_file}
     )
 endforeach()
 
