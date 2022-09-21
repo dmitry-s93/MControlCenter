@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+  <id>mcontrolcenter</id>
+  <metadata_license>CC0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+  <name>MControlCenter</name>
+  <summary>Application for changing the settings of MSI laptops</summary>
+  <description>
+    <p>MControlCenter is a Free and Open Source GNU/Linux application
+       that allows you to change the settings of MSI laptops.</p>
+  </description>
+  <provides>
+    <binary>mcontrolcenter</binary>
+  </provides>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://github.com/dmitry-s93/MControlCenter/raw/main/docs/img/screenshot_info.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://github.com/dmitry-s93/MControlCenter/raw/main/docs/img/screenshot_battery.png</image>
+    </screenshot>
+  </screenshots>
+  <developer_name>Dmitry Serov</developer_name>
+  <url type="homepage">https://github.com/dmitry-s93/MControlCenter</url>
+  <url type="bugtracker">https://github.com/dmitry-s93/MControlCenter/issues</url>
+  <url type="translate">https://github.com/dmitry-s93/MControlCenter/tree/main/src/i18n</url>
+</component>
