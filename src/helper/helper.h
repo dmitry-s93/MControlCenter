@@ -28,7 +28,7 @@ typedef unsigned char BYTE;
 class Helper: public QDBusAbstractAdaptor
 {
     Q_OBJECT
-    Q_CLASSINFO("D-Bus Interface", "org.MControlCenter")
+    Q_CLASSINFO("D-Bus Interface", "MControlCenter")
 public:
     Helper(QObject *obj) : QDBusAbstractAdaptor(obj)
     {

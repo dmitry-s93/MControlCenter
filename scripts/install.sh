@@ -12,7 +12,7 @@ APP_BIN='mcontrolcenter'
 SVG_ICON='mcontrolcenter.svg'
 SHORTCUT='mcontrolcenter.desktop'
 HELPER_BIN='mcontrolcenter-helper'
-DBUS_CONF='org.mcontrolcenter.helper.conf'
+DBUS_CONF='mcontrolcenter-helper.conf'
 
 echo "Installation start"
 
