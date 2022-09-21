@@ -17,3 +17,4 @@
  */
 
 #define SERVICE_NAME "MControlCenter.helper"
+#define INTERFACE_NAME "dmitry_s93.MControlCenter"

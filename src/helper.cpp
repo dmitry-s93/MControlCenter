@@ -34,7 +34,7 @@ Helper::Helper()
         fprintf(stderr, "Cannot connect to the D-Bus system bus");
         return;
     }
-    iface = new QDBusInterface(SERVICE_NAME, "/", "MControlCenter", QDBusConnection::systemBus());
+    iface = new QDBusInterface(SERVICE_NAME, "/", INTERFACE_NAME, QDBusConnection::systemBus());
 }
 
 bool Helper::updateData()

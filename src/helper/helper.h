@@ -19,6 +19,8 @@
 #ifndef HELPER_H
 #define HELPER_H
 
+#include "service.h"
+
 #include <QtCore/QObject>
 #include <QtDBus/QDBusAbstractAdaptor>
 #include <QtDBus/QDBusVariant>
@@ -28,7 +30,7 @@ typedef unsigned char BYTE;
 class Helper: public QDBusAbstractAdaptor
 {
     Q_OBJECT
-    Q_CLASSINFO("D-Bus Interface", "MControlCenter")
+    Q_CLASSINFO("D-Bus Interface", INTERFACE_NAME)
 public:
     Helper(QObject *obj) : QDBusAbstractAdaptor(obj)
     {

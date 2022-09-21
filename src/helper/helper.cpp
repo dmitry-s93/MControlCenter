@@ -16,7 +16,6 @@
  * with MControlCenter. If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include "service.h"
 #include "helper.h"
 #include "readwrite.h"
 #include <QCoreApplication>
