@@ -660,7 +660,7 @@
           <item row="0" column="1">
            <widget class="QLabel" name="versionValueLabel">
             <property name="text">
-             <string notr="true">0.1.0 alpha</string>
+             <string notr="true">0.1.1</string>
             </property>
            </widget>
           </item>
