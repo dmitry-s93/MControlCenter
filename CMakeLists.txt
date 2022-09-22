@@ -31,8 +31,8 @@ set(TS_FILES
     MControlCenter_ru.ts
 )
 
-find_program(LUPDATE_EXECUTABLE lupdate)
-find_program(LRELEASE_EXECUTABLE lrelease)
+find_program(LUPDATE_EXECUTABLE lupdate lupdate-qt5 REQUIRED)
+find_program(LRELEASE_EXECUTABLE lrelease lrelease-qt5 REQUIRED)
 
 foreach(_ts_file ${TS_FILES})
     execute_process(COMMAND
@@ -40,10 +40,12 @@ foreach(_ts_file ${TS_FILES})
         ${CMAKE_SOURCE_DIR}
         -ts ${CMAKE_SOURCE_DIR}/src/i18n/${_ts_file}
         -source-language en_US -no-obsolete -locations none
+        COMMAND_ERROR_IS_FATAL ANY
     )
     execute_process(COMMAND
         ${LRELEASE_EXECUTABLE}
         ${CMAKE_SOURCE_DIR}/src/i18n/${_ts_file}
+        COMMAND_ERROR_IS_FATAL ANY
     )
 endforeach()
 
