@@ -1,6 +1,7 @@
 # MControlCenter
 
 MControlCenter is a Free and Open Source GNU/Linux application that allows you to change the settings of MSI laptops.
+![Screenshots of MControlCenter](https://user-images.githubusercontent.com/12676622/191823328-ca62cae1-6546-4c67-a546-dfbd3fadbeda.png)
 
 ## Features
 
@@ -9,23 +10,35 @@ MControlCenter is a Free and Open Source GNU/Linux application that allows you t
  - Change the maximum battery level limit
  - Change other settings such as keyboard backlight mode, USB Power Share, etc.
 
-## Screenshots
-
-![Info tab](/docs/img/screenshot_info.png?raw=true)
-![Battery tab](/docs/img/screenshot_battery.png?raw=true)
-![Settings tab](/docs/img/screenshot_settings.png?raw=true)
-
 ## Installation
 
 The application requires the `ec_sys` module with option `write_support=1` to run.
 
 This is QT application. You may need to install `libqt5widgets5` to run.
 
-### Installation from archive
+### Installation from the archive
 
 1. Unpack the archive with the program
 2. Open terminal in unpacked directory
 3. Run the script `sudo ./install`
+
+### Installation from the repository
+
+#### openSUSE Tumbleweed:
+
+```sh
+zypper addrepo https://download.opensuse.org/repositories/home:dmitry-s/openSUSE_Tumbleweed/home:dmitry-s.repo
+zypper refresh
+zypper install mcontrolcenter
+```
+
+#### openSUSE Leap 15.4:
+
+```sh
+zypper addrepo https://download.opensuse.org/repositories/home:dmitry-s/15.4/home:dmitry-s.repo
+zypper refresh
+zypper install mcontrolcenter
+```
 
 ## Localization
 
