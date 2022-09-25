@@ -143,5 +143,13 @@
         <source>Unknown</source>
         <translation>Неизвестно</translation>
     </message>
+    <message>
+        <source>Bug tracker:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>An application that allows you to change the settings of MSI laptops running Linux</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>
