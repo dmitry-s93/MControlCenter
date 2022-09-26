@@ -151,5 +151,9 @@
         <source>An application that allows you to change the settings of MSI laptops running Linux</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Swap FN and Super buttons</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>
