@@ -2,15 +2,12 @@
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
-  <property name="enabled">
-   <bool>true</bool>
-  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>559</width>
-    <height>575</height>
+    <width>550</width>
+    <height>550</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -26,32 +23,14 @@
    <property name="enabled">
     <bool>true</bool>
    </property>
-   <property name="sizePolicy">
-    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-     <horstretch>0</horstretch>
-     <verstretch>0</verstretch>
-    </sizepolicy>
-   </property>
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="1">
      <widget class="QTabWidget" name="tabWidget">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
       <property name="minimumSize">
        <size>
         <width>0</width>
         <height>0</height>
        </size>
-      </property>
-      <property name="layoutDirection">
-       <enum>Qt::LeftToRight</enum>
       </property>
       <property name="currentIndex">
        <number>0</number>
@@ -232,41 +211,17 @@
        <property name="enabled">
         <bool>true</bool>
        </property>
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
        <attribute name="title">
         <string>Battery</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
          <widget class="QLabel" name="label_5">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>50</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>60</height>
-           </size>
-          </property>
           <property name="text">
            <string>If you mainly use your laptop with adaptor plugget, we suggest you set the charge capacity at a lower percentage (60% or 80%) to prolong your battery lifecycle</string>
           </property>
-          <property name="scaledContents">
-           <bool>false</bool>
+          <property name="alignment">
+           <set>Qt::AlignJustify|Qt::AlignVCenter</set>
           </property>
           <property name="wordWrap">
            <bool>true</bool>
@@ -302,12 +257,6 @@
           </property>
           <item row="0" column="0">
            <widget class="QRadioButton" name="bestMobilityRadioButton">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>0</height>
-             </size>
-            </property>
             <property name="text">
              <string>Best for Mobility</string>
             </property>
@@ -467,17 +416,24 @@
           </item>
          </layout>
         </item>
+        <item>
+         <spacer name="verticalSpacer_5">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="settingsTab">
        <property name="enabled">
         <bool>true</bool>
-       </property>
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
        </property>
        <attribute name="title">
         <string>Settings</string>
@@ -515,8 +471,17 @@
           <property name="maximum">
            <number>3</number>
           </property>
+          <property name="pageStep">
+           <number>1</number>
+          </property>
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="tickPosition">
+           <enum>QSlider::TicksBothSides</enum>
+          </property>
+          <property name="tickInterval">
+           <number>1</number>
           </property>
          </widget>
         </item>
@@ -741,7 +706,7 @@
            <string>An application that allows you to change the settings of MSI laptops running Linux</string>
           </property>
           <property name="alignment">
-           <set>Qt::AlignCenter</set>
+           <set>Qt::AlignJustify|Qt::AlignVCenter</set>
           </property>
           <property name="wordWrap">
            <bool>true</bool>
@@ -779,7 +744,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>559</width>
+     <width>550</width>
      <height>22</height>
     </rect>
    </property>
