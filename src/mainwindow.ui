@@ -494,6 +494,9 @@
         </item>
         <item>
          <widget class="QCheckBox" name="fnSuperSwapCheckBox">
+          <property name="toolTip">
+           <string>Swap FN and Super buttons</string>
+          </property>
           <property name="text">
            <string>FN ⇄ Super</string>
           </property>
