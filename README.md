@@ -10,6 +10,15 @@ MControlCenter is a Free and Open Source GNU/Linux application that allows you t
  - Change the maximum battery level limit
  - Change other settings such as keyboard backlight mode, USB Power Share, etc.
 
+## TODO
+
+ - Add mode change support (Performance, Balanced, Silent, Super Battery)
+ - Add the ability to adjust the fan speed
+
+## Tested on
+
+MSI Summit E16 Flip Evo
+
 ## Installation
 
 The application requires the `ec_sys` module with option `write_support=1` to run.
