@@ -183,7 +183,10 @@ void MainWindow::updateChargingStatus()
             break;
         case battery_not_charging:
             chargingStatus = tr("Not charging");
-        break;
+            break;
+        case battery_fully_charged:
+            chargingStatus = tr("Fully charged");
+            break;
         default:
             chargingStatus = tr("Unknown");
             break;

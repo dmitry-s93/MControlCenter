@@ -155,5 +155,9 @@
         <source>Swap FN and Super buttons</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Fully charged</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

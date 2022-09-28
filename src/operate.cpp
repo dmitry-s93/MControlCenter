@@ -30,6 +30,7 @@ const int batteryChargingStatusAddress = 0x31;
 const int batteryNotCharging = 0x01;
 const int batteryCharging = 0x03;
 const int batteryDischarging = 0x05;
+const int batteryFullyCharged = 0x09;
 
 const int keyboardBacklightModeAddress = 0x2C;
 const int keyboardBacklightAlwaysOn = 0x00;
@@ -146,6 +147,8 @@ charging_state Operate::getChargingStatus()
             return battery_discharging;
         case batteryNotCharging:
             return battery_not_charging;
+        case batteryFullyCharged:
+            return battery_fully_charged;
         default:
             return battery_unknown;
     }
