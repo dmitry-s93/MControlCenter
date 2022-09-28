@@ -27,6 +27,7 @@ enum charging_state
     battery_charging,
     battery_discharging,
     battery_not_charging,
+    battery_fully_charged,
     battery_unknown
 };
 
