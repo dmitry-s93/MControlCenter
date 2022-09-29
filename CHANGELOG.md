@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 - GUI improvements
 - Added "Fully charged" battery status
+- Added "Fully charged (Discharging)" battery status
 
 ## [0.1.1] 2022-09-21
 

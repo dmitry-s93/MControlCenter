@@ -159,5 +159,9 @@
         <source>Fully charged</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Fully charged (Discharging)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>
