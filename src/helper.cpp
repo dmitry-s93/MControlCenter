@@ -62,6 +62,8 @@ QByteArray Helper::getValues(int startAddress, int size)
 
 void Helper::putValue(int address, int value)
 {
+    if (getValue(address) == value)
+        return;
     iface->call("putValue", address, value);
     printError(iface->lastError());
 }
