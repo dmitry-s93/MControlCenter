@@ -4,7 +4,11 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## [0.1.2] 2022-10-02
+
 - GUI improvements
+- Some optimizations
+- Added link to bug tracker
 - Added "Fully charged" battery status
 - Added "Fully charged (Discharging)" battery status
 
