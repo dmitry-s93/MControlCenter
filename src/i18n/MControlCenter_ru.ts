@@ -145,23 +145,23 @@
     </message>
     <message>
         <source>Bug tracker:</source>
-        <translation type="unfinished"></translation>
+        <translation>Баг трекер:</translation>
     </message>
     <message>
         <source>An application that allows you to change the settings of MSI laptops running Linux</source>
-        <translation type="unfinished"></translation>
+        <translation>Приложение, позволяющее изменять настройки ноутбуков MSI под управлением Linux</translation>
     </message>
     <message>
         <source>Swap FN and Super buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Поменять местами кнопки FN и Super</translation>
     </message>
     <message>
         <source>Fully charged</source>
-        <translation type="unfinished"></translation>
+        <translation>Полностью заряжен</translation>
     </message>
     <message>
         <source>Fully charged (Discharging)</source>
-        <translation type="unfinished"></translation>
+        <translation>Полностью заряжен (Разряжается)</translation>
     </message>
 </context>
 </TS>
