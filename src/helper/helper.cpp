@@ -38,7 +38,10 @@ QByteArray Helper::getData()
 
 void Helper::putValue(const int &address, const int &value)
 {
-    rw.writeToFile(address, value);
+    if (value >= 0 && value <= 255)
+        rw.writeToFile(address, value);
+    else
+        fprintf(stderr, "Putted invalid value. Address: %d, value: %d\n", address, value);
 }
 
 void Helper::loadEcSysModule()
