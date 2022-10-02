@@ -660,6 +660,12 @@
             <property name="text">
              <string notr="true">&lt;a href=&quot;https://github.com/dmitry-s93/MControlCenter/issues&quot;&gt;https://github.com/dmitry-s93/MControlCenter/issues&lt;/a&gt;</string>
             </property>
+            <property name="openExternalLinks">
+             <bool>true</bool>
+            </property>
+            <property name="textInteractionFlags">
+             <set>Qt::TextBrowserInteraction</set>
+            </property>
            </widget>
           </item>
           <item row="0" column="1">
