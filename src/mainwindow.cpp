@@ -209,12 +209,12 @@ void MainWindow::updateGpuTemp()
 
 void MainWindow::updateFan1Speed()
 {
-    ui->fan1ValueLabel->setText(intToQString(operate.getFan1Speed()) + " rpm");
+    ui->fan1ValueLabel->setText(intToQString(operate.getFan1Speed()) + " " + tr("rpm"));
 }
 
 void MainWindow::updateFan2Speed()
 {
-    ui->fan2ValueLabel->setText(intToQString(operate.getFan2Speed()) + " rpm");
+    ui->fan2ValueLabel->setText(intToQString(operate.getFan2Speed()) + " " + tr("rpm"));
 }
 
 void MainWindow::updateKeyboardBacklightMode()
