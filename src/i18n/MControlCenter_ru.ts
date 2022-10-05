@@ -163,5 +163,9 @@
         <source>Fully charged (Discharging)</source>
         <translation>Полностью заряжен (Разряжается)</translation>
     </message>
+    <message>
+        <source>rpm</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>
