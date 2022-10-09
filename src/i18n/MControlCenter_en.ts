@@ -167,5 +167,37 @@
         <source>rpm</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>High Performance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A mode that brings a balance between performance and battery live</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Silent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Super Battery</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A mode that provides the best system performance for multi-tasking and heavy duty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A quet mode that lowers the fan noise</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A power-saving mode that lowers the power consumption for basic needs</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>
