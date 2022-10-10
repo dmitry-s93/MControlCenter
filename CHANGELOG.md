@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+- Addeed mode change
+
 ## [0.1.2] 2022-10-02
 
 - GUI improvements

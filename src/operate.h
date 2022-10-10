@@ -32,6 +32,15 @@ enum charging_state
     battery_unknown
 };
 
+enum user_mode
+{
+    performance_mode,
+    balanced_mode,
+    silent_mode,
+    super_battery_mode,
+    unknown_mode
+};
+
 class Operate
 {
 public:
@@ -55,6 +64,7 @@ public:
     bool getWebCamState();
     bool getFnSuperSwapState();
     bool getCoolerBoostState();
+    user_mode getUserMode();
 
     void setBatteryThreshold(int value);
     void setKeyoardBacklightMode(int value);
@@ -63,6 +73,7 @@ public:
     void setWebCamState(bool enabled);
     void setFnSuperSwapState(bool enabled);
     void setCoolerBoostState(bool enabled);
+    void setUserMode(user_mode userMode);
 
     int getValue(int address);
     void setValue(int address, int value);

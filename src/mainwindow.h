@@ -59,6 +59,7 @@ private:
     void updateWebCamState();
     void updateFnSuperSwapState();
     void updateCoolerBoostState();
+    void updateUserMode();
 
     void closeEvent(QCloseEvent *event);
 
@@ -82,5 +83,9 @@ private slots:
     void on_keyboardBrightnessSlider_valueChanged(int value);
 
     void on_keyboardBacklightModeComboBox_currentIndexChanged(int index);
+    void on_highPerformanceModeRadioButton_toggled(bool checked);
+    void on_balancedModeRadioButton_toggled(bool checked);
+    void on_silentModeRadioButton_toggled(bool checked);
+    void on_superBatteryModeRadioButton_toggled(bool checked);
 };
 #endif // MAINWINDOW_H

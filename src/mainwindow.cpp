@@ -33,7 +33,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     // Disable debug tab
-    ui->tabWidget->setTabVisible(3, false);
+    ui->tabWidget->setTabVisible(4, false);
     ui->tabWidget->setDisabled(true);
 
     updateData();
@@ -96,7 +96,7 @@ void MainWindow::loadConfigs()
     ui->ecVersionValueLabel->setText(QString::fromStdString(operate.getEcVersion()));
     ui->ecBuildValueLabel->setText(QString::fromStdString(operate.getEcBuild()));
 
-    updateBatteryCharge();
+    updateUserMode();
     updateCoolerBoostState();
 
     if (operate.isBatteryThresholdSupport()) {
@@ -247,6 +247,30 @@ void MainWindow::updateCoolerBoostState()
     ui->coolerBoostCheckBox->setChecked(operate.getCoolerBoostState());
 }
 
+void MainWindow::updateUserMode()
+{
+    operate.updateEcData();
+    int userMode = operate.getUserMode();
+    switch (userMode)
+    {
+        case balanced_mode:
+            ui->balancedModeRadioButton->click();
+            break;
+        case performance_mode:
+            ui->highPerformanceModeRadioButton->click();
+            break;
+        case silent_mode:
+            ui->silentModeRadioButton->click();
+            break;
+        case super_battery_mode:
+            ui->superBatteryModeRadioButton->click();
+            break;
+        default:
+            ui->modeTab->setDisabled(true);
+            break;
+    }
+}
+
 void MainWindow::closeEvent(QCloseEvent *event)
 {
     operate.closeHelperApp();
@@ -344,3 +368,39 @@ void MainWindow::on_keyboardBacklightModeComboBox_currentIndexChanged(int index)
 {
     operate.setKeyoardBacklightMode(index);
 }
+
+void MainWindow::on_highPerformanceModeRadioButton_toggled(bool checked)
+{
+    if (checked) {
+        operate.setUserMode(performance_mode);
+        updateUserMode();
+    }
+}
+
+
+void MainWindow::on_balancedModeRadioButton_toggled(bool checked)
+{
+    if (checked) {
+        operate.setUserMode(balanced_mode);
+        updateUserMode();
+    }
+}
+
+
+void MainWindow::on_silentModeRadioButton_toggled(bool checked)
+{
+    if (checked) {
+        operate.setUserMode(silent_mode);
+        updateUserMode();
+    }
+}
+
+
+void MainWindow::on_superBatteryModeRadioButton_toggled(bool checked)
+{
+    if (checked) {
+        operate.setUserMode(super_battery_mode);
+        updateUserMode();
+    }
+}
+

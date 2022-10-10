@@ -48,7 +48,6 @@ const int usbPowerShareOff = 0x08;
 const int usbPowerShareOn = 0x28;
 
 const int coolerBoostAddress = 0x98;
-const int tileAddress = 0xE9;
 
 const int webCamAddress = 0x2E;
 const int webCamOff = 0x08;
@@ -60,6 +59,21 @@ const int fnSuperSwapOn = 0x10;
 
 const int fan1Address = 0xC9;
 const int fan2Address = 0xCB;
+
+// Modes
+const int shiftModeAddress = 0xD2;
+const int shiftMode0 = 0xC0;
+const int shiftMode1 = 0xC1;
+const int shiftMode2 = 0xC2;
+
+const int fanModeAddress = 0xD4;
+const int fanModeAuto = 0x0D;
+const int fanModeSilent = 0x1D;
+const int fanModeAdvanced = 0x4D;
+
+const int superBatteryModeAddress = 0xEB;
+const int superBatteryModeOff = 0x00;
+const int superBatteryModeOn = 0x0F;
 
 bool batteryThresholdSupport = false;
 bool keyboardBacklightSupport = false;
@@ -235,6 +249,27 @@ bool Operate::getCoolerBoostState()
     return false;
 }
 
+user_mode Operate::getUserMode()
+{
+    int shiftMode = helper.getValue(shiftModeAddress);
+    int fanMode = helper.getValue(fanModeAddress);
+    int superBattery = helper.getValue(superBatteryModeAddress);
+
+    if (shiftMode == shiftMode0)
+        return performance_mode;
+
+    if (shiftMode == shiftMode1 && fanMode == fanModeAuto)
+        return balanced_mode;
+
+    if (shiftMode == shiftMode1 && fanMode == fanModeSilent)
+        return silent_mode;
+
+    if (shiftMode == shiftMode2 && superBattery == superBatteryModeOn)
+        return super_battery_mode;
+
+    return unknown_mode;
+}
+
 void Operate::setBatteryThreshold(int value)
 {
     if (value != getBatteryThreshold())
@@ -296,6 +331,35 @@ void Operate::setCoolerBoostState(bool enabled)
         helper.putValue(coolerBoostAddress, value + 128);
     if (!enabled && (value > 127))
         helper.putValue(coolerBoostAddress, value - 128);
+}
+
+void Operate::setUserMode(user_mode userMode)
+{
+    switch (userMode)
+    {
+        case balanced_mode:
+            helper.putValue(shiftModeAddress, shiftMode1);
+            helper.putValue(fanModeAddress, fanModeAuto);
+            helper.putValue(superBatteryModeAddress, superBatteryModeOff);
+            break;
+        case performance_mode:
+            helper.putValue(shiftModeAddress, shiftMode0);
+            helper.putValue(fanModeAddress, fanModeAuto);
+            helper.putValue(superBatteryModeAddress, superBatteryModeOff);
+            break;
+        case silent_mode:
+            helper.putValue(shiftModeAddress, shiftMode1);
+            helper.putValue(fanModeAddress, fanModeSilent);
+            helper.putValue(superBatteryModeAddress, superBatteryModeOff);
+            break;
+        case super_battery_mode:
+            helper.putValue(shiftModeAddress, shiftMode2);
+            helper.putValue(fanModeAddress, fanModeAuto);
+            helper.putValue(superBatteryModeAddress, superBatteryModeOn);
+            break;
+        default:
+            break;
+    }
 }
 
 int Operate::getValue(int address)
