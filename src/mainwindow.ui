@@ -325,7 +325,7 @@
         <item>
          <widget class="QLabel" name="label_5">
           <property name="text">
-           <string>If you mainly use your laptop with adaptor plugget, we suggest you set the charge capacity at a lower percentage (60% or 80%) to prolong your battery lifecycle</string>
+           <string>If you mainly use your laptop with adaptor plugged, we suggest you set the charge capacity at a lower percentage (60% or 80%) to prolong your battery lifecycle</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignJustify|Qt::AlignVCenter</set>

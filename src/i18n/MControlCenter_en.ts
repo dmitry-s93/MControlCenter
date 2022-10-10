@@ -48,7 +48,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>If you mainly use your laptop with adaptor plugget, we suggest you set the charge capacity at a lower percentage (60% or 80%) to prolong your battery lifecycle</source>
+        <source>If you mainly use your laptop with adaptor plugged, we suggest you set the charge capacity at a lower percentage (60% or 80%) to prolong your battery lifecycle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
