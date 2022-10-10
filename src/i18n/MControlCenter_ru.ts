@@ -48,7 +48,7 @@
         <translation>Батарея</translation>
     </message>
     <message>
-        <source>If you mainly use your laptop with adaptor plugget, we suggest you set the charge capacity at a lower percentage (60% or 80%) to prolong your battery lifecycle</source>
+        <source>If you mainly use your laptop with adaptor plugged, we suggest you set the charge capacity at a lower percentage (60% or 80%) to prolong your battery lifecycle</source>
         <translation>Если вы в основном используете ноутбук с подключенным адаптером питания, мы рекомендуем установить ёмкость заряда на более низкий процент (60% или 80%) для продления срока службы аккумулятора</translation>
     </message>
     <message>
