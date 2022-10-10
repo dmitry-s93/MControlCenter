@@ -192,7 +192,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>A quet mode that lowers the fan noise</source>
+        <source>A quiet mode that lowers the fan noise</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
