@@ -4,6 +4,7 @@ Encoding=UTF-8
 Name=MControlCenter
 GenericName=Change MSI Laptop Settings
 GenericName[ru]=Изменение настроек ноутбука MSI
+GenericName[pt]=Alterar Definições de Portáteis MSI
 Type=Application
 Exec=mcontrolcenter
 Icon=mcontrolcenter
