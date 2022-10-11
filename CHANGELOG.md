@@ -4,7 +4,9 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
-- Addeed mode change
+- Added mode change
+- Added support for Portuguese language (Thanks [rottenpants466](https://www.github.com/rottenpants466))
+- Fixed typos
 
 ## [0.1.2] 2022-10-02
 
