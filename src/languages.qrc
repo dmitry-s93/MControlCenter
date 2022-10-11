@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>i18n/MControlCenter_en.qm</file>
         <file>i18n/MControlCenter_ru.qm</file>
+        <file>i18n/MControlCenter_pt.qm</file>
     </qresource>
 </RCC>
