@@ -44,19 +44,31 @@ void Helper::putValue(const int &address, const int &value)
         fprintf(stderr, "Putted invalid value. Address: %d, value: %d\n", address, value);
 }
 
-void Helper::loadEcSysModule()
+bool Helper::isEcSysModuleLoaded()
 {
     QProcess *process = new QProcess();
     process->start("sh", QStringList() << "-c" << "lsmod | grep ec_sys");
     process->waitForFinished(1000);
     if (process->readAllStandardOutput() == "") {
-        fprintf(stderr, "%s\n", qPrintable("ec_sys module is not loaded. Trying to load"));
-        process->start("sh", QStringList() << "-c" << "modprobe ec_sys write_support=1 2>&1");
-        process->waitForFinished(1000);
-        QByteArray output = process->readAllStandardOutput();
-        if (output != "")
-            fprintf(stderr, "%s", qPrintable(output));
+        fprintf(stderr, "%s\n", qPrintable("The ec_sys kernel module is not loaded"));
+        return false;
     }
+    fprintf(stderr, "%s\n", qPrintable("The ec_sys kernel module is loaded"));
+    return true;
+}
+
+bool Helper::loadEcSysModule()
+{
+    fprintf(stderr, "%s\n", qPrintable("Trying to load the ec_sys kernel module"));
+    QProcess *process = new QProcess();
+    process->start("sh", QStringList() << "-c" << "/usr/sbin/modprobe ec_sys write_support=1 2>&1");
+    process->waitForFinished(1000);
+    QByteArray output = process->readAllStandardOutput();
+    if (output != "")
+        fprintf(stderr, "%s", qPrintable(output));
+    if (isEcSysModuleLoaded())
+        return true;
+    return false;
 }
 
 int main(int argc, char *argv[])

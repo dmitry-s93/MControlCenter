@@ -32,18 +32,16 @@ class Helper: public QDBusAbstractAdaptor
     Q_OBJECT
     Q_CLASSINFO("D-Bus Interface", INTERFACE_NAME)
 public:
-    Helper(QObject *obj) : QDBusAbstractAdaptor(obj)
-    {
-        loadEcSysModule();
-    }
+    Helper(QObject *obj) : QDBusAbstractAdaptor(obj) {}
 signals:
     void aboutToQuit();
 public slots:
     Q_NOREPLY void quit();
     QByteArray getData();
     Q_NOREPLY void putValue(const int &address, const int &value);
-private:
-    void loadEcSysModule();
+    bool isEcSysModuleLoaded();
+    bool loadEcSysModule();
+private:    
 };
 
 #endif // HELPER_H
