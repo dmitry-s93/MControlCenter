@@ -40,11 +40,5 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
 
-    QProcess *myProcess = new QProcess();
-    myProcess->start("sh", QStringList() << "-c" << "pidof mcontrolcenter-helper");
-    myProcess->waitForFinished(1000);
-    if (myProcess->readAllStandardOutput() == "")
-        myProcess->start("pkexec", QStringList() << "/usr/libexec/mcontrolcenter-helper");
-
     return a.exec();
 }

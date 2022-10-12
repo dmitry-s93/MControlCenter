@@ -1,0 +1,4 @@
+[D-BUS Service]
+Name=mcontrolcenter.helper
+Exec=/usr/libexec/mcontrolcenter-helper
+User=root
