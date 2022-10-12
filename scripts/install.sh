@@ -5,6 +5,7 @@ LIB_EXEC_PATH='/usr/libexec/'
 SCALABLE_ICONS_PATH='/usr/share/icons/hicolor/scalable/apps/'
 SHORTCUTS_PATH='/usr/share/applications/'
 DBUS_SYSTEM_PATH='/etc/dbus-1/system.d/'
+DBUS_SERVICES_PATH='/usr/share/dbus-1/system-services/'
 
 BUILD_DIR='./build/'
 
@@ -13,6 +14,7 @@ SVG_ICON='mcontrolcenter.svg'
 SHORTCUT='mcontrolcenter.desktop'
 HELPER_BIN='mcontrolcenter-helper'
 DBUS_CONF='mcontrolcenter-helper.conf'
+DBUS_SERVICE='mcontrolcenter.helper.service'
 
 echo "Installation start"
 
@@ -31,5 +33,8 @@ chmod -v 755 $LIB_EXEC_PATH$HELPER_BIN
 
 cp -fv $BUILD_DIR$DBUS_CONF $DBUS_SYSTEM_PATH
 chmod -v 644 $DBUS_SYSTEM_PATH$DBUS_CONF
+
+cp -fv $BUILD_DIR$DBUS_SERVICE $DBUS_SERVICES_PATH
+chmod -v 644 $DBUS_SERVICES_PATH$DBUS_SERVICE
 
 echo "Installation was successful"

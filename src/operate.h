@@ -46,6 +46,8 @@ class Operate
 public:
     Operate();
     void closeHelperApp();
+    bool isEcSysModuleLoaded();
+    bool loadEcSysModule();
     bool updateEcData();
     bool doProbe();
     std::string getEcVersion();

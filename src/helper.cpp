@@ -37,6 +37,24 @@ Helper::Helper()
     iface = new QDBusInterface(SERVICE_NAME, "/", INTERFACE_NAME, QDBusConnection::systemBus());
 }
 
+bool Helper::isEcSysModuleLoaded()
+{
+    QDBusReply<bool> reply = iface->call("isEcSysModuleLoaded");
+    if (reply.isValid())
+        return reply.value();
+    printError(iface->lastError());
+    return false;
+}
+
+bool Helper::loadEcSysModule()
+{
+    QDBusReply<bool> reply = iface->call("loadEcSysModule");
+    if (reply.isValid())
+        return reply.value();
+    printError(iface->lastError());
+    return false;
+}
+
 bool Helper::updateData()
 {
     QDBusReply<QByteArray> reply = iface->call("getData");

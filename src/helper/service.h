@@ -16,5 +16,5 @@
  * with MControlCenter. If not, see <https://www.gnu.org/licenses/>.
  */
 
-#define SERVICE_NAME "MControlCenter.helper"
+#define SERVICE_NAME "mcontrolcenter.helper"
 #define INTERFACE_NAME "dmitry_s93.MControlCenter"

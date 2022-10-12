@@ -91,6 +91,16 @@ void Operate::closeHelperApp()
     helper.quit();
 }
 
+bool Operate::isEcSysModuleLoaded()
+{
+    return helper.isEcSysModuleLoaded();
+}
+
+bool Operate::loadEcSysModule()
+{
+    return helper.loadEcSysModule();
+}
+
 bool Operate::updateEcData()
 {
     return helper.updateData();

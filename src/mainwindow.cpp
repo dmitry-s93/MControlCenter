@@ -36,6 +36,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->tabWidget->setTabVisible(4, false);
     ui->tabWidget->setDisabled(true);
 
+    if (!operate.isEcSysModuleLoaded())
+        operate.loadEcSysModule();
+
     updateData();
 
     connect(realtimeUpdateTimer, &QTimer::timeout, this, &MainWindow::realtimeUpdate);

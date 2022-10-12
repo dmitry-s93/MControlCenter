@@ -30,6 +30,8 @@ class Helper: public QObject
 public:
     Helper();
 
+    bool isEcSysModuleLoaded();
+    bool loadEcSysModule();
     bool updateData();
     int getValue(int address);
     QByteArray getValues(int startAddress, int size);
