@@ -4,8 +4,11 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
-- Added mode change
+## [0.2.0] 2022-10-16
+- Added mode change (High Performance, Balanced, Silent, Super Battery)
 - Added support for Portuguese language (Thanks [rottenpants466](https://www.github.com/rottenpants466))
+- Run helper as D-BUS service
+- Some optimizations
 - Fixed typos
 
 ## [0.1.2] 2022-10-02
