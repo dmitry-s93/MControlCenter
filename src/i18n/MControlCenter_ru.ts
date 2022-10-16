@@ -165,39 +165,39 @@
     </message>
     <message>
         <source>rpm</source>
-        <translation type="unfinished"></translation>
+        <translation>об/мин</translation>
     </message>
     <message>
         <source>Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Режим</translation>
     </message>
     <message>
         <source>High Performance</source>
-        <translation type="unfinished"></translation>
+        <translation>Высокая производительность</translation>
     </message>
     <message>
         <source>A mode that brings a balance between performance and battery live</source>
-        <translation type="unfinished"></translation>
+        <translation>Режим, обеспечивающий баланс между производительностью и временем автономной работы</translation>
     </message>
     <message>
         <source>Silent</source>
-        <translation type="unfinished"></translation>
+        <translation>Тихий</translation>
     </message>
     <message>
         <source>Super Battery</source>
-        <translation type="unfinished"></translation>
+        <translation>Супер батарея</translation>
     </message>
     <message>
         <source>A mode that provides the best system performance for multi-tasking and heavy duty</source>
-        <translation type="unfinished"></translation>
+        <translation>Режим, обеспечивающий наилучшую производительность системы для многозадачности и интенсивной работы</translation>
     </message>
     <message>
         <source>A quiet mode that lowers the fan noise</source>
-        <translation type="unfinished"></translation>
+        <translation>Тихий режим, который снижает шум вентилятора</translation>
     </message>
     <message>
         <source>A power-saving mode that lowers the power consumption for basic needs</source>
-        <translation type="unfinished"></translation>
+        <translation>Энергосберегающий режим, который снижает энергопотребление для базовых потребностей</translation>
     </message>
 </context>
 </TS>
