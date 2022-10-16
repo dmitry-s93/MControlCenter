@@ -7,7 +7,7 @@ SHORTCUTS_PATH='/usr/share/applications/'
 DBUS_SYSTEM_PATH='/etc/dbus-1/system.d/'
 DBUS_SERVICES_PATH='/usr/share/dbus-1/system-services/'
 
-BUILD_DIR='./build/'
+APP_DIR='./app/'
 
 APP_BIN='mcontrolcenter'
 SVG_ICON='mcontrolcenter.svg'
@@ -18,23 +18,23 @@ DBUS_SERVICE='mcontrolcenter.helper.service'
 
 echo "Installation start"
 
-cp -fv $BUILD_DIR$APP_BIN $BIN_PATH
+cp -fv $APP_DIR$APP_BIN $BIN_PATH
 chmod -v 755 $BIN_PATH$APP_BIN
 
 rm -fv /home/$SUDO_USER/.local/share/applications/$SHORTCUT
-cp -fv $BUILD_DIR$SHORTCUT $SHORTCUTS_PATH
+cp -fv $APP_DIR$SHORTCUT $SHORTCUTS_PATH
 chmod -v 644 $SHORTCUTS_PATH$SHORTCUT
 
-cp -fv $BUILD_DIR$SVG_ICON $SCALABLE_ICONS_PATH
+cp -fv $APP_DIR$SVG_ICON $SCALABLE_ICONS_PATH
 chmod -v 644 $SCALABLE_ICONS_PATH$SVG_ICON
 
-cp -fv $BUILD_DIR$HELPER_BIN $LIB_EXEC_PATH
+cp -fv $APP_DIR$HELPER_BIN $LIB_EXEC_PATH
 chmod -v 755 $LIB_EXEC_PATH$HELPER_BIN
 
-cp -fv $BUILD_DIR$DBUS_CONF $DBUS_SYSTEM_PATH
+cp -fv $APP_DIR$DBUS_CONF $DBUS_SYSTEM_PATH
 chmod -v 644 $DBUS_SYSTEM_PATH$DBUS_CONF
 
-cp -fv $BUILD_DIR$DBUS_SERVICE $DBUS_SERVICES_PATH
+cp -fv $APP_DIR$DBUS_SERVICE $DBUS_SERVICES_PATH
 chmod -v 644 $DBUS_SERVICES_PATH$DBUS_SERVICE
 
 echo "Installation was successful"
