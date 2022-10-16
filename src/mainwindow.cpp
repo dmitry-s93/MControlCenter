@@ -34,7 +34,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     // Disable debug tab
     ui->tabWidget->setTabVisible(4, false);
-    ui->tabWidget->setDisabled(true);
+    setTabsEnabled(false);
 
     if (!operate.isEcSysModuleLoaded())
         operate.loadEcSysModule();
@@ -50,6 +50,15 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::setTabsEnabled(bool enabled)
+{
+    ui->infoTab->setEnabled(enabled);
+    ui->modeTab->setEnabled(enabled);
+    ui->batteryTab->setEnabled(enabled);
+    ui->settingsTab->setEnabled(enabled);
+    ui->debugTab->setEnabled(enabled);
 }
 
 void MainWindow::startRealtimeUpdate()
@@ -77,7 +86,7 @@ void MainWindow::updateData()
     if (operate.updateEcData()) {
         if (!isActive) {
             operate.doProbe();
-            ui->tabWidget->setDisabled(false);
+            setTabsEnabled(true);
             loadConfigs();
             isActive= true;
         }
@@ -89,7 +98,7 @@ void MainWindow::updateData()
         updateFan2Speed();
         updateKeyboardBrightness();
     } else {
-        ui->tabWidget->setDisabled(true);
+        setTabsEnabled(false);
         isActive= false;
     }
 }
