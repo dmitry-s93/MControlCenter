@@ -37,6 +37,7 @@ public:
 private:
     Ui::MainWindow *ui;
 
+    void setTabsEnabled(bool enabled);
     void startRealtimeUpdate();
     void stopRealtimeUpdate();
     void setUpdateInterval(int msec);
