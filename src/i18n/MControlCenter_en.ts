@@ -199,5 +199,9 @@
         <source>A power-saving mode that lowers the power consumption for basic needs</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Failed to load the ec_sys kernel module</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

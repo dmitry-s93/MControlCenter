@@ -44,6 +44,7 @@ private:
     void realtimeUpdate();
     void updateData();
     void loadConfigs();
+    void showMessage(QString text);
 
     QString intToQString(int value);
 

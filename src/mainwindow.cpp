@@ -20,6 +20,7 @@
 #include "./ui_mainwindow.h"
 #include "operate.h"
 #include <QTimer>
+#include <QMessageBox>
 
 Operate operate;
 
@@ -37,7 +38,9 @@ MainWindow::MainWindow(QWidget *parent)
     setTabsEnabled(false);
 
     if (!operate.isEcSysModuleLoaded())
-        operate.loadEcSysModule();
+        if (!operate.loadEcSysModule())
+            showMessage(tr("Failed to load the ec_sys kernel module"));
+    showMessage(tr("Failed to load the ec_sys kernel module"));
 
     updateData();
 
@@ -142,6 +145,13 @@ void MainWindow::loadConfigs()
     } else {
         ui->fnSuperSwapCheckBox->setEnabled(false);
     }
+}
+
+void MainWindow::showMessage(QString text)
+{
+    QMessageBox msgBox;
+    msgBox.setText(text);
+    msgBox.exec();
 }
 
 QString MainWindow::intToQString(int value)
