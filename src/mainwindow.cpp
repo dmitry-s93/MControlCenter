@@ -40,7 +40,6 @@ MainWindow::MainWindow(QWidget *parent)
     if (!operate.isEcSysModuleLoaded())
         if (!operate.loadEcSysModule())
             showMessage(tr("Failed to load the ec_sys kernel module"));
-    showMessage(tr("Failed to load the ec_sys kernel module"));
 
     updateData();
 
