@@ -4,7 +4,7 @@ BIN_PATH='/usr/bin/'
 LIB_EXEC_PATH='/usr/libexec/'
 SCALABLE_ICONS_PATH='/usr/share/icons/hicolor/scalable/apps/'
 SHORTCUTS_PATH='/usr/share/applications/'
-DBUS_SYSTEM_PATH='/etc/dbus-1/system.d/'
+DBUS_SYSTEM_PATH='/usr/share/dbus-1/system.d/'
 DBUS_SERVICES_PATH='/usr/share/dbus-1/system-services/'
 
 APP_DIR='./app/'
