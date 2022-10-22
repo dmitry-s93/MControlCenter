@@ -3,5 +3,6 @@
         <file>i18n/MControlCenter_en.qm</file>
         <file>i18n/MControlCenter_ru.qm</file>
         <file>i18n/MControlCenter_pt.qm</file>
+        <file>i18n/MControlCenter_es.qm</file>
     </qresource>
 </RCC>
