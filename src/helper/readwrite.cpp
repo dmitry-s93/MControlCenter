@@ -21,23 +21,17 @@
 
 #include <QFile>
 
-const char* ioFile = "/sys/kernel/debug/ec/ec0/io";
+const char *const ioFile = "/sys/kernel/debug/ec/ec0/io";
 
-ReadWrite::ReadWrite()
-{
+ReadWrite::ReadWrite() = default;
 
-}
-
-QByteArray ReadWrite::readFromFile()
-{
-    QFile file(ioFile);
-    if (file.open(QIODevice::ReadOnly))
+QByteArray ReadWrite::readFromFile() {
+    if (QFile file(ioFile); file.open(QIODevice::ReadOnly))
         return file.readAll();
-    return QByteArray();
+    return {};
 }
 
-void ReadWrite::writeToFile(const int pos, BYTE value)
-{
+void ReadWrite::writeToFile(const int pos, BYTE value) {
     std::ofstream file(ioFile, std::ios::in | std::ios::out | std::ios::binary);
     if (file.is_open()) {
         file.seekp(pos);

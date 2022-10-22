@@ -22,14 +22,13 @@
 #include <QCoreApplication>
 #include <QDBusReply>
 
-#include <stdio.h>
+#include <cstdio>
 
 #define EC_SPACE_SIZE 256
 
 QByteArray ecData;
 
-Helper::Helper()
-{
+Helper::Helper() {
     if (!QDBusConnection::systemBus().isConnected()) {
         fprintf(stderr, "Cannot connect to the D-Bus system bus");
         return;
@@ -37,28 +36,23 @@ Helper::Helper()
     iface = new QDBusInterface(SERVICE_NAME, "/", INTERFACE_NAME, QDBusConnection::systemBus());
 }
 
-bool Helper::isEcSysModuleLoaded()
-{
-    QDBusReply<bool> reply = iface->call("isEcSysModuleLoaded");
-    if (reply.isValid())
+bool Helper::isEcSysModuleLoaded() {
+    if (QDBusReply<bool> reply = iface->call("isEcSysModuleLoaded"); reply.isValid())
         return reply.value();
     printError(iface->lastError());
     return false;
 }
 
-bool Helper::loadEcSysModule()
-{
-    QDBusReply<bool> reply = iface->call("loadEcSysModule");
-    if (reply.isValid())
+bool Helper::loadEcSysModule() {
+    if (QDBusReply<bool> reply = iface->call("loadEcSysModule"); reply.isValid())
         return reply.value();
     printError(iface->lastError());
     return false;
 }
 
-bool Helper::updateData()
-{
-    QDBusReply<QByteArray> reply = iface->call("getData");
-    if (reply.isValid() && reply.value().size() == EC_SPACE_SIZE) {
+bool Helper::updateData() {
+    if (QDBusReply<QByteArray> reply = iface->call("getData"); reply.isValid() &&
+                                                               reply.value().size() == EC_SPACE_SIZE) {
         ecData = reply.value();
         return true;
     }
@@ -66,34 +60,29 @@ bool Helper::updateData()
     return false;
 }
 
-int Helper::getValue(int address)
-{
+int Helper::getValue(int address) const {
     if (!ecData.isEmpty())
-        return (BYTE)ecData[address];
+        return (BYTE) ecData[address];
     return -1;
 }
 
-QByteArray Helper::getValues(int startAddress, int size)
-{
-    return ecData.mid(startAddress, size);;
+QByteArray Helper::getValues(int startAddress, int size) const {
+    return ecData.mid(startAddress, size);
 }
 
-void Helper::putValue(int address, int value)
-{
+void Helper::putValue(int address, int value) {
     if (getValue(address) == value)
         return;
     iface->call("putValue", address, value);
     printError(iface->lastError());
 }
 
-void Helper::quit()
-{
+void Helper::quit() {
     iface->call("quit");
     printError(iface->lastError());
 }
 
-void Helper::printError(QDBusError error)
-{
+void Helper::printError(QDBusError const & error) const {
     if (error.isValid())
         fprintf(stderr, "Call failed: %s\n", qPrintable(error.message()));
 }

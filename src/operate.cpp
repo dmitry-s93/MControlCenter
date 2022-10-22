@@ -81,33 +81,25 @@ bool usbPowerShareSupport = false;
 bool webCamOffSupport = false;
 bool fnSuperSwapSupport = false;
 
-Operate::Operate()
-{
+Operate::Operate() = default;
 
-}
-
-void Operate::closeHelperApp()
-{
+void Operate::closeHelperApp() const {
     helper.quit();
 }
 
-bool Operate::isEcSysModuleLoaded()
-{
+bool Operate::isEcSysModuleLoaded() const {
     return helper.isEcSysModuleLoaded();
 }
 
-bool Operate::loadEcSysModule()
-{
+bool Operate::loadEcSysModule() const {
     return helper.loadEcSysModule();
 }
 
-bool Operate::updateEcData()
-{
+bool Operate::updateEcData() const {
     return helper.updateData();
 }
 
-bool Operate::doProbe()
-{
+bool Operate::doProbe() const {
     int thresholdAddr0 = 0xEF;
     int thresholdAddr1 = 0xD7;
     // Check for charging threshold support
@@ -121,7 +113,8 @@ bool Operate::doProbe()
         }
     }
 
-    if (helper.getValue(usbPowerShareAddress) == usbPowerShareOff || helper.getValue(usbPowerShareAddress) == usbPowerShareOn)
+    if (helper.getValue(usbPowerShareAddress) == usbPowerShareOff ||
+        helper.getValue(usbPowerShareAddress) == usbPowerShareOn)
         usbPowerShareSupport = true;
 
     if (helper.getValue(webCamAddress) == webCamOff || helper.getValue(webCamAddress) == webCamOn)
@@ -140,82 +133,71 @@ bool Operate::doProbe()
     return true;
 }
 
-std::string Operate::getEcVersion()
-{
-        return helper.getValues(160, 12).toStdString();
+std::string Operate::getEcVersion() const {
+    return helper.getValues(160, 12).toStdString();
 }
 
-std::string Operate::getEcBuild()
-{
+std::string Operate::getEcBuild() const {
     std::string s = helper.getValues(172, 16).toStdString();
     if (s.size() < 16)
         return s;
     return s.substr(0, 2) + "/" + s.substr(2, 2) + "/" + s.substr(4, 4) + " " + s.substr(8, 8);
 }
 
-int Operate::getBatteryCharge()
-{
+int Operate::getBatteryCharge() const {
     return helper.getValue(batteryChargeAddress);
 }
 
-int Operate::getBatteryThreshold()
-{
+int Operate::getBatteryThreshold() const {
     return helper.getValue(batteryThresholdAddress) - 128;
 }
 
-charging_state Operate::getChargingStatus()
-{
+charging_state Operate::getChargingStatus() const {
     switch (helper.getValue(batteryChargingStatusAddress)) {
         case batteryCharging:
-            return battery_charging;
+            return charging_state::battery_charging;
         case batteryDischarging:
-            return battery_discharging;
+            return charging_state::battery_discharging;
         case batteryNotCharging:
-            return battery_not_charging;
+            return charging_state::battery_not_charging;
         case batteryFullyCharged:
-            return battery_fully_charged;
+            return charging_state::battery_fully_charged;
         case batteryFullyCharged_noPower:
-            return battery_fully_charged_no_power;
+            return charging_state::battery_fully_charged_no_power;
         default:
-            return battery_unknown;
+            return charging_state::battery_unknown;
     }
 }
 
-int Operate::getCpuTemp()
-{
+int Operate::getCpuTemp() const {
     return helper.getValue(cpuTempAddress);
 }
 
-int Operate::getGpuTemp()
-{
+int Operate::getGpuTemp() const {
     return helper.getValue(gpuTempAddress);
 }
 
-int Operate::getFan1Speed()
-{
+int Operate::getFan1Speed() const {
     int value = helper.getValue(fan1Address);
     if (value > 0)
         return 470000 / value;
     return value;
 }
 
-int Operate::getFan2Speed()
-{
+int Operate::getFan2Speed() const {
     int value = helper.getValue(fan2Address);
     if (value > 0)
         return 470000 / value;
     return value;
 }
 
-int Operate::getKeybordBacklightMode()
-{
+int Operate::getKeyboardBacklightMode() const {
     if (helper.getValue(keyboardBacklightModeAddress) == keyboardBacklightAutoTurnOff)
         return 1;
     return 0;
 }
 
-int Operate::getKeyboardBrightness()
-{
+int Operate::getKeyboardBrightness() const {
     int value = helper.getValue(keyboardBacklightAddress);
     switch (value) {
         case keyboardBacklight0ff:
@@ -231,71 +213,63 @@ int Operate::getKeyboardBrightness()
     }
 }
 
-bool Operate::getUsbPowerShareState()
-{
+bool Operate::getUsbPowerShareState() const {
     if (helper.getValue(usbPowerShareAddress) == usbPowerShareOn)
         return true;
     return false;
 }
 
-bool Operate::getWebCamState()
-{
+bool Operate::getWebCamState() const {
     if (helper.getValue(webCamAddress) == webCamOn)
         return true;
     return false;
 }
 
-bool Operate::getFnSuperSwapState()
-{
+bool Operate::getFnSuperSwapState() const {
     if (helper.getValue(fnSuperSwapAddress) == fnSuperSwapOn)
         return true;
     return false;
 }
 
-bool Operate::getCoolerBoostState()
-{
+bool Operate::getCoolerBoostState() const {
     if (helper.getValue(coolerBoostAddress) > 127)
         return true;
     return false;
 }
 
-user_mode Operate::getUserMode()
-{
+user_mode Operate::getUserMode() const {
     int shiftMode = helper.getValue(shiftModeAddress);
     int fanMode = helper.getValue(fanModeAddress);
     int superBattery = helper.getValue(superBatteryModeAddress);
 
     if (shiftMode == shiftMode0)
-        return performance_mode;
+        return user_mode::performance_mode;
 
     if (shiftMode == shiftMode1 && fanMode == fanModeAuto)
-        return balanced_mode;
+        return user_mode::balanced_mode;
 
     if (shiftMode == shiftMode1 && fanMode == fanModeSilent)
-        return silent_mode;
+        return user_mode::silent_mode;
 
     if (shiftMode == shiftMode2 && superBattery == superBatteryModeOn)
-        return super_battery_mode;
+        return user_mode::super_battery_mode;
 
-    return unknown_mode;
+    return user_mode::unknown_mode;
 }
 
-void Operate::setBatteryThreshold(int value)
-{
+void Operate::setBatteryThreshold(int value) const {
     if (value != getBatteryThreshold())
         helper.putValue(batteryThresholdAddress, value + 128);
 }
 
-void Operate::setKeyoardBacklightMode(int value)
-{
+void Operate::setKeyboardBacklightMode(int value) const {
     int resValue = keyboardBacklightAlwaysOn;
     if (value == 1)
         resValue = keyboardBacklightAutoTurnOff;
     helper.putValue(keyboardBacklightModeAddress, resValue);
 }
 
-void Operate::setKeybordBrightness(int value)
-{
+void Operate::setKeyboardBrightness(int value) const {
     int resValue;
     switch (value) {
         case 0:
@@ -316,26 +290,22 @@ void Operate::setKeybordBrightness(int value)
     helper.putValue(keyboardBacklightAddress, resValue);
 }
 
-void Operate::setUsbPowerShareState(bool enabled)
-{
+void Operate::setUsbPowerShareState(bool enabled) const {
     int value = enabled ? usbPowerShareOn : usbPowerShareOff;
     helper.putValue(usbPowerShareAddress, value);
 }
 
-void Operate::setWebCamState(bool enabled)
-{
+void Operate::setWebCamState(bool enabled) const {
     int value = enabled ? webCamOn : webCamOff;
     helper.putValue(webCamAddress, value);
 }
 
-void Operate::setFnSuperSwapState(bool enabled)
-{
+void Operate::setFnSuperSwapState(bool enabled) const {
     int value = enabled ? fnSuperSwapOn : fnSuperSwapOff;
     helper.putValue(fnSuperSwapAddress, value);
 }
 
-void Operate::setCoolerBoostState(bool enabled)
-{
+void Operate::setCoolerBoostState(bool enabled) const {
     int value = helper.getValue(coolerBoostAddress);
     if (enabled && (value < 128))
         helper.putValue(coolerBoostAddress, value + 128);
@@ -343,26 +313,24 @@ void Operate::setCoolerBoostState(bool enabled)
         helper.putValue(coolerBoostAddress, value - 128);
 }
 
-void Operate::setUserMode(user_mode userMode)
-{
-    switch (userMode)
-    {
-        case balanced_mode:
+void Operate::setUserMode(user_mode userMode) const {
+    switch (userMode) {
+        case user_mode::balanced_mode:
             helper.putValue(shiftModeAddress, shiftMode1);
             helper.putValue(fanModeAddress, fanModeAuto);
             helper.putValue(superBatteryModeAddress, superBatteryModeOff);
             break;
-        case performance_mode:
+        case user_mode::performance_mode:
             helper.putValue(shiftModeAddress, shiftMode0);
             helper.putValue(fanModeAddress, fanModeAuto);
             helper.putValue(superBatteryModeAddress, superBatteryModeOff);
             break;
-        case silent_mode:
+        case user_mode::silent_mode:
             helper.putValue(shiftModeAddress, shiftMode1);
             helper.putValue(fanModeAddress, fanModeSilent);
             helper.putValue(superBatteryModeAddress, superBatteryModeOff);
             break;
-        case super_battery_mode:
+        case user_mode::super_battery_mode:
             helper.putValue(shiftModeAddress, shiftMode2);
             helper.putValue(fanModeAddress, fanModeAuto);
             helper.putValue(superBatteryModeAddress, superBatteryModeOn);
@@ -372,38 +340,31 @@ void Operate::setUserMode(user_mode userMode)
     }
 }
 
-int Operate::getValue(int address)
-{
+int Operate::getValue(int address) const {
     helper.updateData();
     return helper.getValue(address);
 }
 
-void Operate::setValue(int address, int value)
-{
+void Operate::setValue(int address, int value) const {
     helper.putValue(address, value);
 }
 
-bool Operate::isBatteryThresholdSupport()
-{
+bool Operate::isBatteryThresholdSupport() const {
     return batteryThresholdSupport;
 }
 
-bool Operate::isKeyboardBacklightSupport()
-{
+bool Operate::isKeyboardBacklightSupport() const {
     return keyboardBacklightSupport;
 }
 
-bool Operate::isUsbPowerShareSupport()
-{
+bool Operate::isUsbPowerShareSupport() const {
     return usbPowerShareSupport;
 }
 
-bool Operate::isWebCamOffSupport()
-{
+bool Operate::isWebCamOffSupport() const {
     return webCamOffSupport;
 }
 
-bool Operate::isFnSuperSwapSupport()
-{
+bool Operate::isFnSuperSwapSupport() const {
     return fnSuperSwapSupport;
 }

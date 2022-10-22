@@ -29,17 +29,14 @@ bool isActive = false;
 QTimer *realtimeUpdateTimer = new QTimer;
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
-{
+        : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
     // Disable debug tab
     ui->tabWidget->setTabVisible(4, false);
     setTabsEnabled(false);
 
-    if (!operate.isEcSysModuleLoaded())
-        if (!operate.loadEcSysModule())
-            showMessage(tr("Failed to load the ec_sys kernel module"));
+    if (!operate.isEcSysModuleLoaded() && !operate.loadEcSysModule())
+        showMessage(tr("Failed to load the ec_sys kernel module"));
 
     updateData();
 
@@ -49,13 +46,11 @@ MainWindow::MainWindow(QWidget *parent)
     startRealtimeUpdate();
 }
 
-MainWindow::~MainWindow()
-{
+MainWindow::~MainWindow() {
     delete ui;
 }
 
-void MainWindow::setTabsEnabled(bool enabled)
-{
+void MainWindow::setTabsEnabled(bool enabled) {
     ui->infoTab->setEnabled(enabled);
     ui->modeTab->setEnabled(enabled);
     ui->batteryTab->setEnabled(enabled);
@@ -63,34 +58,29 @@ void MainWindow::setTabsEnabled(bool enabled)
     ui->debugTab->setEnabled(enabled);
 }
 
-void MainWindow::startRealtimeUpdate()
-{
+void MainWindow::startRealtimeUpdate() const {
     realtimeUpdateTimer->start();
 }
 
-void MainWindow::stopRealtimeUpdate()
-{
+void MainWindow::stopRealtimeUpdate() const {
     realtimeUpdateTimer->stop();
 }
 
-void MainWindow::setUpdateInterval(int msec)
-{
+void MainWindow::setUpdateInterval(int msec) const {
     realtimeUpdateTimer->setInterval(msec);
 }
 
-void MainWindow::realtimeUpdate()
-{
+void MainWindow::realtimeUpdate() {
     updateData();
 }
 
-void MainWindow::updateData()
-{
+void MainWindow::updateData() {
     if (operate.updateEcData()) {
         if (!isActive) {
             operate.doProbe();
             setTabsEnabled(true);
             loadConfigs();
-            isActive= true;
+            isActive = true;
         }
         updateBatteryCharge();
         updateChargingStatus();
@@ -101,12 +91,11 @@ void MainWindow::updateData()
         updateKeyboardBrightness();
     } else {
         setTabsEnabled(false);
-        isActive= false;
+        isActive = false;
     }
 }
 
-void MainWindow::loadConfigs()
-{
+void MainWindow::loadConfigs() {
     ui->ecVersionValueLabel->setText(QString::fromStdString(operate.getEcVersion()));
     ui->ecBuildValueLabel->setText(QString::fromStdString(operate.getEcBuild()));
 
@@ -146,69 +135,63 @@ void MainWindow::loadConfigs()
     }
 }
 
-void MainWindow::showMessage(QString text)
-{
+void MainWindow::showMessage(QString text) const {
     QMessageBox msgBox;
     msgBox.setText(text);
     msgBox.exec();
 }
 
-QString MainWindow::intToQString(int value)
-{
+QString MainWindow::intToQString(int value) const {
     if (value < 0)
         return "-";
     return QString::number(value);
 }
 
-void MainWindow::updateBatteryCharge()
-{
+void MainWindow::updateBatteryCharge() {
     ui->BatteryChargeValueLabel->setText(intToQString(operate.getBatteryCharge()) + " %");
 }
 
-void MainWindow::updateBatteryThreshold()
-{
-    operate.updateEcData();
-    int batteryThreshold = operate.getBatteryThreshold();
-    if (batteryThreshold == 0)
-        ui->batteryThresholdValueLabel->setText("100 %");
-    else
-        ui->batteryThresholdValueLabel->setText(QString::number(batteryThreshold) + " %");
+void MainWindow::updateBatteryThreshold() {
+    if (operate.updateEcData()) {
+        int batteryThreshold = operate.getBatteryThreshold();
+        if (batteryThreshold == 0)
+            ui->batteryThresholdValueLabel->setText("100 %");
+        else
+            ui->batteryThresholdValueLabel->setText(QString::number(batteryThreshold) + " %");
 
-    switch (batteryThreshold)
-    {
-        case 0:
-            ui->bestMobilityRadioButton->click();
-            break;
-        case 60:
-            ui->bestBatteryRadioButton->click();
-            break;
-        case 80:
-            ui->balancedBatteryRadioButton->click();
-            break;
-        default:
-            ui->customBatteryThresholdRadioButton->click();
-            break;
+        switch (batteryThreshold) {
+            case 0:
+                ui->bestMobilityRadioButton->click();
+                break;
+            case 60:
+                ui->bestBatteryRadioButton->click();
+                break;
+            case 80:
+                ui->balancedBatteryRadioButton->click();
+                break;
+            default:
+                ui->customBatteryThresholdRadioButton->click();
+                break;
+        }
     }
 }
 
-void MainWindow::updateChargingStatus()
-{
+void MainWindow::updateChargingStatus() {
     QString chargingStatus;
-    switch (operate.getChargingStatus())
-    {
-        case battery_charging:
+    switch (operate.getChargingStatus()) {
+        case charging_state::battery_charging:
             chargingStatus = tr("Charging");
             break;
-        case battery_discharging:
+        case charging_state::battery_discharging:
             chargingStatus = tr("Discharging");
             break;
-        case battery_not_charging:
+        case charging_state::battery_not_charging:
             chargingStatus = tr("Not charging");
             break;
-        case battery_fully_charged:
+        case charging_state::battery_fully_charged:
             chargingStatus = tr("Fully charged");
             break;
-        case battery_fully_charged_no_power:
+        case charging_state::battery_fully_charged_no_power:
             chargingStatus = tr("Fully charged (Discharging)");
             break;
         default:
@@ -218,111 +201,94 @@ void MainWindow::updateChargingStatus()
     ui->chargingStatusValueLabel->setText(chargingStatus);
 }
 
-void MainWindow::updateCpuTemp()
-{
+void MainWindow::updateCpuTemp() {
     ui->cpuTempValueLabel->setText(intToQString(operate.getCpuTemp()) + " °C");
 }
 
-void MainWindow::updateGpuTemp()
-{
+void MainWindow::updateGpuTemp() {
     ui->gpuTempValueLabel->setText(intToQString(operate.getGpuTemp()) + " °C");
 }
 
-void MainWindow::updateFan1Speed()
-{
+void MainWindow::updateFan1Speed() {
     ui->fan1ValueLabel->setText(intToQString(operate.getFan1Speed()) + " " + tr("rpm"));
 }
 
-void MainWindow::updateFan2Speed()
-{
+void MainWindow::updateFan2Speed() {
     ui->fan2ValueLabel->setText(intToQString(operate.getFan2Speed()) + " " + tr("rpm"));
 }
 
-void MainWindow::updateKeyboardBacklightMode()
-{
-    ui->keyboardBacklightModeComboBox->setCurrentIndex(operate.getKeybordBacklightMode());
+void MainWindow::updateKeyboardBacklightMode() {
+    ui->keyboardBacklightModeComboBox->setCurrentIndex(operate.getKeyboardBacklightMode());
 }
 
-void MainWindow::updateKeyboardBrightness()
-{
+void MainWindow::updateKeyboardBrightness() {
     ui->keyboardBrightnessSlider->setSliderPosition(operate.getKeyboardBrightness());
 }
 
-void MainWindow::updateUsbPowerShareState()
-{
+void MainWindow::updateUsbPowerShareState() {
     ui->usbPowerShareCheckBox->setChecked(operate.getUsbPowerShareState());
 }
 
-void MainWindow::updateWebCamState()
-{
+void MainWindow::updateWebCamState() {
     ui->webCamCheckBox->setChecked(operate.getWebCamState());
 }
 
-void MainWindow::updateFnSuperSwapState()
-{
+void MainWindow::updateFnSuperSwapState() {
     ui->fnSuperSwapCheckBox->setChecked(operate.getFnSuperSwapState());
 }
 
-void MainWindow::updateCoolerBoostState()
-{
+void MainWindow::updateCoolerBoostState() {
     ui->coolerBoostCheckBox->setChecked(operate.getCoolerBoostState());
 }
 
-void MainWindow::updateUserMode()
-{
-    operate.updateEcData();
-    int userMode = operate.getUserMode();
-    switch (userMode)
-    {
-        case balanced_mode:
-            ui->balancedModeRadioButton->click();
-            break;
-        case performance_mode:
-            ui->highPerformanceModeRadioButton->click();
-            break;
-        case silent_mode:
-            ui->silentModeRadioButton->click();
-            break;
-        case super_battery_mode:
-            ui->superBatteryModeRadioButton->click();
-            break;
-        default:
-            ui->modeTab->setDisabled(true);
-            break;
+void MainWindow::updateUserMode() {
+    if (operate.updateEcData()) {
+        switch (operate.getUserMode()) {
+            case user_mode::balanced_mode:
+                ui->balancedModeRadioButton->click();
+                break;
+            case user_mode::performance_mode:
+                ui->highPerformanceModeRadioButton->click();
+                break;
+            case user_mode::silent_mode:
+                ui->silentModeRadioButton->click();
+                break;
+            case user_mode::super_battery_mode:
+                ui->superBatteryModeRadioButton->click();
+                break;
+            default:
+                ui->modeTab->setDisabled(true);
+                break;
+        }
     }
 }
 
-void MainWindow::closeEvent(QCloseEvent *event)
-{
+void MainWindow::closeEvent(QCloseEvent *event) {
     operate.closeHelperApp();
 }
 
-void MainWindow::on_bestMobilityRadioButton_toggled(bool checked)
-{
+void MainWindow::on_bestMobilityRadioButton_toggled(bool checked) {
     if (checked) {
         operate.setBatteryThreshold(0);
         updateBatteryThreshold();
     }
 }
 
-void MainWindow::on_balancedBatteryRadioButton_toggled(bool checked)
-{
+void MainWindow::on_balancedBatteryRadioButton_toggled(bool checked) {
     if (checked) {
         operate.setBatteryThreshold(80);
         updateBatteryThreshold();
     }
 }
 
-void MainWindow::on_bestBatteryRadioButton_toggled(bool checked)
-{
+void MainWindow::on_bestBatteryRadioButton_toggled(bool checked) {
     if (checked) {
         operate.setBatteryThreshold(60);
         updateBatteryThreshold();
     }
 }
 
-void MainWindow::on_customBatteryThresholdRadioButton_toggled(bool checked)
-{
+void MainWindow::on_customBatteryThresholdRadioButton_toggled(bool checked) {
     if (checked) {
         ui->customBatteryThresholdComboBox->setEnabled(true);
         ui->customBatteryThresholdComboBox->setCurrentText(QString::number(operate.getBatteryThreshold()));
@@ -332,95 +298,82 @@ void MainWindow::on_customBatteryThresholdRadioButton_toggled(bool checked)
 }
 
 
-void MainWindow::on_customBatteryThresholdComboBox_currentTextChanged(const QString &arg1)
-{
+void MainWindow::on_customBatteryThresholdComboBox_currentTextChanged(const QString &arg1) {
     operate.setBatteryThreshold(arg1.toInt());
     updateBatteryThreshold();
 }
 
 
-void MainWindow::on_ReadValueButton_clicked()
-{
+void MainWindow::on_ReadValueButton_clicked() {
     QString text = ui->addressEdit->displayText();
     int value = operate.getValue(text.toInt());
     ui->ValueSpinBox->setValue(value);
 }
 
 
-void MainWindow::on_WriteWalueButton_clicked()
-{
+void MainWindow::on_WriteValueButton_clicked() const {
     QString text = ui->addressEdit->displayText();
     int address = text.toInt();
     operate.setValue(address, ui->ValueSpinBox->value());
 }
 
 
-void MainWindow::on_usbPowerShareCheckBox_toggled(bool checked)
-{
+void MainWindow::on_usbPowerShareCheckBox_toggled(bool checked) const {
     operate.setUsbPowerShareState(checked);
 }
 
 
-void MainWindow::on_webCamCheckBox_toggled(bool checked)
-{
+void MainWindow::on_webCamCheckBox_toggled(bool checked) const {
     operate.setWebCamState(checked);
 }
 
 
-void MainWindow::on_fnSuperSwapCheckBox_toggled(bool checked)
-{
+void MainWindow::on_fnSuperSwapCheckBox_toggled(bool checked) const {
     operate.setFnSuperSwapState(checked);
 }
 
 
-void MainWindow::on_coolerBoostCheckBox_toggled(bool checked)
-{
+void MainWindow::on_coolerBoostCheckBox_toggled(bool checked) const {
     operate.setCoolerBoostState(checked);
 }
 
 
-void MainWindow::on_keyboardBrightnessSlider_valueChanged(int value)
-{
-    operate.setKeybordBrightness(value);
+void MainWindow::on_keyboardBrightnessSlider_valueChanged(int value) const {
+    operate.setKeyboardBrightness(value);
 }
 
 
-void MainWindow::on_keyboardBacklightModeComboBox_currentIndexChanged(int index)
-{
-    operate.setKeyoardBacklightMode(index);
+void MainWindow::on_keyboardBacklightModeComboBox_currentIndexChanged(int index) const {
+    operate.setKeyboardBacklightMode(index);
 }
 
-void MainWindow::on_highPerformanceModeRadioButton_toggled(bool checked)
-{
+void MainWindow::on_highPerformanceModeRadioButton_toggled(bool checked) {
     if (checked) {
-        operate.setUserMode(performance_mode);
+        operate.setUserMode(user_mode::performance_mode);
         updateUserMode();
     }
 }
 
 
-void MainWindow::on_balancedModeRadioButton_toggled(bool checked)
-{
+void MainWindow::on_balancedModeRadioButton_toggled(bool checked) {
     if (checked) {
-        operate.setUserMode(balanced_mode);
+        operate.setUserMode(user_mode::balanced_mode);
         updateUserMode();
     }
 }
 
 
-void MainWindow::on_silentModeRadioButton_toggled(bool checked)
-{
+void MainWindow::on_silentModeRadioButton_toggled(bool checked) {
     if (checked) {
-        operate.setUserMode(silent_mode);
+        operate.setUserMode(user_mode::silent_mode);
         updateUserMode();
     }
 }
 
 
-void MainWindow::on_superBatteryModeRadioButton_toggled(bool checked)
-{
+void MainWindow::on_superBatteryModeRadioButton_toggled(bool checked) {
     if (checked) {
-        operate.setUserMode(super_battery_mode);
+        operate.setUserMode(user_mode::super_battery_mode);
         updateUserMode();
     }
 }

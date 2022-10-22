@@ -26,28 +26,26 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
-class MainWindow : public QMainWindow
-{
-    Q_OBJECT
+class MainWindow : public QMainWindow {
+Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
 private:
     Ui::MainWindow *ui;
 
     void setTabsEnabled(bool enabled);
-    void startRealtimeUpdate();
-    void stopRealtimeUpdate();
-    void setUpdateInterval(int msec);
+    void startRealtimeUpdate() const;
+    void stopRealtimeUpdate() const;
+    void setUpdateInterval(int msec) const;
     void realtimeUpdate();
     void updateData();
     void loadConfigs();
-    void showMessage(QString text);
+    void showMessage(QString text) const;
 
-    QString intToQString(int value);
-
+    [[nodiscard]] QString intToQString(int value) const;
     void updateBatteryCharge();
     void updateBatteryThreshold();
     void updateChargingStatus();
@@ -73,18 +71,19 @@ private slots:
     void on_customBatteryThresholdComboBox_currentTextChanged(const QString &arg1);
     void on_ReadValueButton_clicked();
 
-    void on_WriteWalueButton_clicked();
+    void on_WriteValueButton_clicked() const;
 
-    void on_usbPowerShareCheckBox_toggled(bool checked);
-    void on_webCamCheckBox_toggled(bool checked);
+    void on_usbPowerShareCheckBox_toggled(bool checked) const;
+    void on_webCamCheckBox_toggled(bool checked) const;
 
-    void on_fnSuperSwapCheckBox_toggled(bool checked);
+    void on_fnSuperSwapCheckBox_toggled(bool checked) const;
 
-    void on_coolerBoostCheckBox_toggled(bool checked);
+    void on_coolerBoostCheckBox_toggled(bool checked) const;
 
-    void on_keyboardBrightnessSlider_valueChanged(int value);
+    void on_keyboardBrightnessSlider_valueChanged(int value) const;
 
-    void on_keyboardBacklightModeComboBox_currentIndexChanged(int index);
+    void on_keyboardBacklightModeComboBox_currentIndexChanged(int index) const;
+
     void on_highPerformanceModeRadioButton_toggled(bool checked);
     void on_balancedModeRadioButton_toggled(bool checked);
     void on_silentModeRadioButton_toggled(bool checked);

@@ -26,27 +26,23 @@
 
 ReadWrite rw;
 
-void Helper::quit()
-{
+void Helper::quit() const {
     QTimer::singleShot(0, QCoreApplication::instance(), &QCoreApplication::quit);
 }
 
-QByteArray Helper::getData()
-{
+QByteArray Helper::getData() const {
     return rw.readFromFile();
 }
 
-void Helper::putValue(const int &address, const int &value)
-{
+void Helper::putValue(const int &address, const int &value) const {
     if (value >= 0 && value <= 255)
         rw.writeToFile(address, value);
     else
         fprintf(stderr, "Putted invalid value. Address: %d, value: %d\n", address, value);
 }
 
-bool Helper::isEcSysModuleLoaded()
-{
-    QProcess *process = new QProcess();
+bool Helper::isEcSysModuleLoaded() const {
+    auto *process = new QProcess();
     process->start("sh", QStringList() << "-c" << "lsmod | grep ec_sys");
     process->waitForFinished(1000);
     if (process->readAllStandardOutput() == "") {
@@ -57,26 +53,23 @@ bool Helper::isEcSysModuleLoaded()
     return true;
 }
 
-bool Helper::loadEcSysModule()
-{
+bool Helper::loadEcSysModule() const {
     fprintf(stderr, "%s\n", qPrintable("Trying to load the ec_sys kernel module"));
-    QProcess *process = new QProcess();
+    auto *process = new QProcess();
     process->start("sh", QStringList() << "-c" << "/usr/sbin/modprobe ec_sys write_support=1 2>&1");
     process->waitForFinished(1000);
-    QByteArray output = process->readAllStandardOutput();
-    if (output != "")
+    if (QByteArray output = process->readAllStandardOutput(); output != "")
         fprintf(stderr, "%s", qPrintable(output));
     if (isEcSysModuleLoaded())
         return true;
     return false;
 }
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
     QCoreApplication a(argc, argv);
 
     QObject obj;
-    Helper *helper = new Helper(&obj);
+    auto *helper = new Helper(&obj);
     QObject::connect(&a, &QCoreApplication::aboutToQuit, helper, &Helper::aboutToQuit);
     helper->setProperty("value", "initial value");
     QDBusConnection::systemBus().registerObject("/", &obj);
@@ -86,5 +79,5 @@ int main(int argc, char *argv[])
         exit(1);
     }
 
-    return a.exec();
+    return QCoreApplication::exec();
 }

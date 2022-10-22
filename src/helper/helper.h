@@ -25,23 +25,23 @@
 #include <QtDBus/QDBusAbstractAdaptor>
 #include <QtDBus/QDBusVariant>
 
-typedef unsigned char BYTE;
+using BYTE = unsigned char;
 
-class Helper: public QDBusAbstractAdaptor
-{
-    Q_OBJECT
+class Helper : public QDBusAbstractAdaptor {
+Q_OBJECT
     Q_CLASSINFO("D-Bus Interface", INTERFACE_NAME)
 public:
-    Helper(QObject *obj) : QDBusAbstractAdaptor(obj) {}
+    explicit Helper(QObject *obj) : QDBusAbstractAdaptor(obj) {}
+
 signals:
     void aboutToQuit();
+
 public slots:
-    Q_NOREPLY void quit();
-    QByteArray getData();
-    Q_NOREPLY void putValue(const int &address, const int &value);
-    bool isEcSysModuleLoaded();
-    bool loadEcSysModule();
-private:    
+    Q_NOREPLY void quit() const;
+    [[nodiscard]] QByteArray getData() const;
+    Q_NOREPLY void putValue(const int &address, const int &value) const;
+    [[nodiscard]] bool isEcSysModuleLoaded() const;
+    [[nodiscard]] bool loadEcSysModule() const;
 };
 
 #endif // HELPER_H

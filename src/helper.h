@@ -22,25 +22,23 @@
 #include <QtCore/QObject>
 #include <QtDBus/QDBusInterface>
 
-typedef unsigned char BYTE;
+using BYTE = unsigned char;
 
-class Helper: public QObject
-{
-    Q_OBJECT
+class Helper : public QObject {
+Q_OBJECT
 public:
     Helper();
 
     bool isEcSysModuleLoaded();
     bool loadEcSysModule();
     bool updateData();
-    int getValue(int address);
-    QByteArray getValues(int startAddress, int size);
+    int getValue(int address) const;
+    QByteArray getValues(int startAddress, int size) const;
     void putValue(int address, int value);
     void quit();
-public:
     QDBusInterface *iface;
 private:
-    void printError(QDBusError error);
+    void printError(QDBusError const & error) const;
 };
 
 #endif // HELPER_H
