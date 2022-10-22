@@ -22,8 +22,7 @@
 
 #include <string>
 
-enum charging_state
-{
+enum class charging_state {
     battery_charging,
     battery_discharging,
     battery_not_charging,
@@ -32,8 +31,7 @@ enum charging_state
     battery_unknown
 };
 
-enum user_mode
-{
+enum class user_mode {
     performance_mode,
     balanced_mode,
     silent_mode,
@@ -41,50 +39,49 @@ enum user_mode
     unknown_mode
 };
 
-class Operate
-{
+class Operate {
 public:
     Operate();
-    void closeHelperApp();
-    bool isEcSysModuleLoaded();
-    bool loadEcSysModule();
-    bool updateEcData();
-    bool doProbe();
-    std::string getEcVersion();
-    std::string getEcBuild();
-    int getBatteryCharge();
-    int getBatteryThreshold();
-    charging_state getChargingStatus();
-    int getCpuTemp();
-    int getGpuTemp();
-    int getFan1Speed();
-    int getFan2Speed();
+    void closeHelperApp() const;
+    [[nodiscard]] bool isEcSysModuleLoaded() const;
+    [[nodiscard]] bool loadEcSysModule() const;
+    [[nodiscard]] bool updateEcData() const;
+    [[nodiscard]] bool doProbe() const;
+    [[nodiscard]] std::string getEcVersion() const;
+    [[nodiscard]] std::string getEcBuild() const;
+    [[nodiscard]] int getBatteryCharge() const;
+    [[nodiscard]] int getBatteryThreshold() const;
+    [[nodiscard]] charging_state getChargingStatus() const;
+    [[nodiscard]] int getCpuTemp() const;
+    [[nodiscard]] int getGpuTemp() const;
+    [[nodiscard]] int getFan1Speed() const;
+    [[nodiscard]] int getFan2Speed() const;
 
-    int getKeybordBacklightMode();
-    int getKeyboardBrightness();
-    bool getUsbPowerShareState();
-    bool getWebCamState();
-    bool getFnSuperSwapState();
-    bool getCoolerBoostState();
-    user_mode getUserMode();
+    [[nodiscard]] int getKeyboardBacklightMode() const;
+    [[nodiscard]] int getKeyboardBrightness() const;
+    [[nodiscard]] bool getUsbPowerShareState() const;
+    [[nodiscard]] bool getWebCamState() const;
+    [[nodiscard]] bool getFnSuperSwapState() const;
+    [[nodiscard]] bool getCoolerBoostState() const;
+    [[nodiscard]] user_mode getUserMode() const;
 
-    void setBatteryThreshold(int value);
-    void setKeyoardBacklightMode(int value);
-    void setKeybordBrightness(int value);
-    void setUsbPowerShareState(bool enabled);
-    void setWebCamState(bool enabled);
-    void setFnSuperSwapState(bool enabled);
-    void setCoolerBoostState(bool enabled);
-    void setUserMode(user_mode userMode);
+    void setBatteryThreshold(int value) const;
+    void setKeyboardBacklightMode(int value) const;
+    void setKeyboardBrightness(int value) const;
+    void setUsbPowerShareState(bool enabled) const;
+    void setWebCamState(bool enabled) const;
+    void setFnSuperSwapState(bool enabled) const;
+    void setCoolerBoostState(bool enabled) const;
+    void setUserMode(user_mode userMode) const;
 
-    int getValue(int address);
-    void setValue(int address, int value);
+    [[nodiscard]] int getValue(int address) const;
+    void setValue(int address, int value) const;
 
-    bool isBatteryThresholdSupport();
-    bool isKeyboardBacklightSupport();
-    bool isUsbPowerShareSupport();
-    bool isWebCamOffSupport();
-    bool isFnSuperSwapSupport();
+    [[nodiscard]] bool isBatteryThresholdSupport() const;
+    [[nodiscard]] bool isKeyboardBacklightSupport() const;
+    [[nodiscard]] bool isUsbPowerShareSupport() const;
+    [[nodiscard]] bool isWebCamOffSupport() const;
+    [[nodiscard]] bool isFnSuperSwapSupport() const;
 };
 
 #endif // OPERATE_H

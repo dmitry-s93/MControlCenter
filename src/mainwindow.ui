@@ -701,7 +701,7 @@
          <string notr="true">Read Value</string>
         </property>
        </widget>
-       <widget class="QPushButton" name="WriteWalueButton">
+       <widget class="QPushButton" name="WriteValueButton">
         <property name="geometry">
          <rect>
           <x>190</x>

@@ -21,13 +21,12 @@
 
 #include <QByteArray>
 
-class ReadWrite
-{
-    typedef unsigned char BYTE;
+class ReadWrite {
+    using BYTE = unsigned char;
 public:
     ReadWrite();
     QByteArray readFromFile();
-    void writeToFile(const int pos, BYTE value);
+    void writeToFile(int pos, BYTE value);
 };
 
 #endif // READWRITE_H
