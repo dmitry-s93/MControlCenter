@@ -3,6 +3,8 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
+- Added support for Spanish language (Thanks [ssergio-ll](https://www.github.com/ssergio-ll))
+- Some optimizations
 
 ## [0.2.0] 2022-10-16
 - Added mode change (High Performance, Balanced, Silent, Super Battery)
