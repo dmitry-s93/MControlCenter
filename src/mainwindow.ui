@@ -424,102 +424,56 @@
            </widget>
           </item>
           <item row="3" column="1">
-           <widget class="QComboBox" name="customBatteryThresholdComboBox">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>60</width>
-              <height>16777215</height>
-             </size>
+           <layout class="QHBoxLayout" name="horizontalLayout_3">
+            <property name="sizeConstraint">
+             <enum>QLayout::SetMinimumSize</enum>
             </property>
             <item>
-             <property name="text">
-              <string notr="true">20</string>
-             </property>
+             <widget class="QSpinBox" name="customBatteryThresholdSpinBox">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>52</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+              <property name="minimum">
+               <number>30</number>
+              </property>
+              <property name="maximum">
+               <number>100</number>
+              </property>
+             </widget>
             </item>
             <item>
-             <property name="text">
-              <string notr="true">25</string>
-             </property>
+             <widget class="QPushButton" name="customBatteryApplyButton">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="text">
+               <string>Apply</string>
+              </property>
+             </widget>
             </item>
             <item>
-             <property name="text">
-              <string notr="true">30</string>
-             </property>
+             <spacer name="horizontalSpacer_3">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
             </item>
-            <item>
-             <property name="text">
-              <string notr="true">35</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string notr="true">40</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string notr="true">45</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string notr="true">50</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string notr="true">55</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string notr="true">60</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string notr="true">65</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string notr="true">70</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string notr="true">75</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string notr="true">80</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string notr="true">85</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string notr="true">90</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string notr="true">95</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string notr="true">100</string>
-             </property>
-            </item>
-           </widget>
+           </layout>
           </item>
          </layout>
         </item>
