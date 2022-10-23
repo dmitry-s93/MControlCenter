@@ -68,7 +68,8 @@ private slots:
     void on_balancedBatteryRadioButton_toggled(bool checked);
     void on_bestBatteryRadioButton_toggled(bool checked);
     void on_customBatteryThresholdRadioButton_toggled(bool checked);
-    void on_customBatteryThresholdComboBox_currentTextChanged(const QString &arg1);
+    void on_customBatteryThresholdSpinBox_valueChanged(int arg1);
+    void on_customBatteryApplyButton_clicked();
     void on_ReadValueButton_clicked();
 
     void on_WriteValueButton_clicked() const;

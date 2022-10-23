@@ -162,6 +162,7 @@ void MainWindow::updateBatteryThreshold() {
         switch (batteryThreshold) {
             case 0:
                 ui->bestMobilityRadioButton->click();
+                batteryThreshold = 100;
                 break;
             case 60:
                 ui->bestBatteryRadioButton->click();
@@ -171,8 +172,12 @@ void MainWindow::updateBatteryThreshold() {
                 break;
             default:
                 ui->customBatteryThresholdRadioButton->click();
+                ui->customBatteryApplyButton->setEnabled(
+                        batteryThreshold != ui->customBatteryThresholdSpinBox->value());
                 break;
         }
+
+        ui->customBatteryThresholdSpinBox->setValue(batteryThreshold);
     }
 }
 
@@ -290,19 +295,22 @@ void MainWindow::on_bestBatteryRadioButton_toggled(bool checked) {
 
 void MainWindow::on_customBatteryThresholdRadioButton_toggled(bool checked) {
     if (checked) {
-        ui->customBatteryThresholdComboBox->setEnabled(true);
-        ui->customBatteryThresholdComboBox->setCurrentText(QString::number(operate.getBatteryThreshold()));
+        ui->customBatteryThresholdSpinBox->setEnabled(true);
     } else {
-        ui->customBatteryThresholdComboBox->setEnabled(false);
+        ui->customBatteryThresholdSpinBox->setEnabled(false);
+        ui->customBatteryApplyButton->setEnabled(false);
     }
 }
 
-
-void MainWindow::on_customBatteryThresholdComboBox_currentTextChanged(const QString &arg1) {
-    operate.setBatteryThreshold(arg1.toInt());
-    updateBatteryThreshold();
+void MainWindow::on_customBatteryThresholdSpinBox_valueChanged(int arg1) {
+    ui->customBatteryApplyButton->setEnabled(
+            ui->customBatteryThresholdRadioButton->isChecked() && operate.getBatteryThreshold() != arg1);
 }
 
+void MainWindow::on_customBatteryApplyButton_clicked() {
+    operate.setBatteryThreshold(ui->customBatteryThresholdSpinBox->value());
+    updateBatteryThreshold();
+}
 
 void MainWindow::on_ReadValueButton_clicked() {
     QString text = ui->addressEdit->displayText();
@@ -310,38 +318,31 @@ void MainWindow::on_ReadValueButton_clicked() {
     ui->ValueSpinBox->setValue(value);
 }
 
-
 void MainWindow::on_WriteValueButton_clicked() const {
     QString text = ui->addressEdit->displayText();
     int address = text.toInt();
     operate.setValue(address, ui->ValueSpinBox->value());
 }
 
-
 void MainWindow::on_usbPowerShareCheckBox_toggled(bool checked) const {
     operate.setUsbPowerShareState(checked);
 }
-
 
 void MainWindow::on_webCamCheckBox_toggled(bool checked) const {
     operate.setWebCamState(checked);
 }
 
-
 void MainWindow::on_fnSuperSwapCheckBox_toggled(bool checked) const {
     operate.setFnSuperSwapState(checked);
 }
-
 
 void MainWindow::on_coolerBoostCheckBox_toggled(bool checked) const {
     operate.setCoolerBoostState(checked);
 }
 
-
 void MainWindow::on_keyboardBrightnessSlider_valueChanged(int value) const {
     operate.setKeyboardBrightness(value);
 }
-
 
 void MainWindow::on_keyboardBacklightModeComboBox_currentIndexChanged(int index) const {
     operate.setKeyboardBacklightMode(index);
@@ -354,14 +355,12 @@ void MainWindow::on_highPerformanceModeRadioButton_toggled(bool checked) {
     }
 }
 
-
 void MainWindow::on_balancedModeRadioButton_toggled(bool checked) {
     if (checked) {
         operate.setUserMode(user_mode::balanced_mode);
         updateUserMode();
     }
 }
-
 
 void MainWindow::on_silentModeRadioButton_toggled(bool checked) {
     if (checked) {
@@ -370,11 +369,9 @@ void MainWindow::on_silentModeRadioButton_toggled(bool checked) {
     }
 }
 
-
 void MainWindow::on_superBatteryModeRadioButton_toggled(bool checked) {
     if (checked) {
         operate.setUserMode(user_mode::super_battery_mode);
         updateUserMode();
     }
 }
-
