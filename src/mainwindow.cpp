@@ -31,12 +31,16 @@ QTimer *realtimeUpdateTimer = new QTimer;
 MainWindow::MainWindow(QWidget *parent)
         : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
+
+    if (QSystemTrayIcon::isSystemTrayAvailable())
+        createTrayIcon();
+
     // Disable debug tab
     ui->tabWidget->setTabVisible(4, false);
     setTabsEnabled(false);
 
     if (!operate.isEcSysModuleLoaded() && !operate.loadEcSysModule())
-        showMessage(tr("Failed to load the ec_sys kernel module"));
+        QMessageBox::critical(nullptr, this->windowTitle(), tr("Failed to load the ec_sys kernel module"));
 
     updateData();
 
@@ -56,6 +60,11 @@ void MainWindow::setTabsEnabled(bool enabled) {
     ui->batteryTab->setEnabled(enabled);
     ui->settingsTab->setEnabled(enabled);
     ui->debugTab->setEnabled(enabled);
+
+    if (modeTrayMenu)
+        modeTrayMenu->setEnabled(enabled);
+    if (batteryTrayMenu)
+        batteryTrayMenu->setEnabled(enabled);
 }
 
 void MainWindow::startRealtimeUpdate() const {
@@ -106,6 +115,8 @@ void MainWindow::loadConfigs() {
         updateBatteryThreshold();
     } else {
         ui->batteryTab->setEnabled(false);
+        if (batteryTrayMenu)
+            batteryTrayMenu->setEnabled(false);
     }
 
     if (operate.isKeyboardBacklightSupport()) {
@@ -133,12 +144,6 @@ void MainWindow::loadConfigs() {
     } else {
         ui->fnSuperSwapCheckBox->setEnabled(false);
     }
-}
-
-void MainWindow::showMessage(QString text) const {
-    QMessageBox msgBox;
-    msgBox.setText(text);
-    msgBox.exec();
 }
 
 QString MainWindow::intToQString(int value) const {
@@ -263,34 +268,74 @@ void MainWindow::updateUserMode() {
                 break;
             default:
                 ui->modeTab->setDisabled(true);
+                if (modeTrayMenu)
+                    modeTrayMenu->setDisabled(true);
                 break;
         }
     }
 }
 
+void MainWindow::setBestMobility() {
+    operate.setBatteryThreshold(0);
+    updateBatteryThreshold();
+}
+
+void MainWindow::setBalancedBattery() {
+    operate.setBatteryThreshold(80);
+    updateBatteryThreshold();
+}
+
+void MainWindow::setBestBattery() {
+    operate.setBatteryThreshold(60);
+    updateBatteryThreshold();
+}
+
+void MainWindow::setHighPerformanceMode() {
+    operate.setUserMode(user_mode::performance_mode);
+    updateUserMode();
+}
+
+void MainWindow::setBalancedMode() {
+    operate.setUserMode(user_mode::balanced_mode);
+    updateUserMode();
+}
+
+void MainWindow::setSilentMode() {
+    operate.setUserMode(user_mode::silent_mode);
+    updateUserMode();
+}
+
+void MainWindow::setSuperBatteryMode() {
+    operate.setUserMode(user_mode::super_battery_mode);
+    updateUserMode();
+}
+
+void MainWindow::showWindow() {
+    startRealtimeUpdate();
+    MainWindow::show();
+}
+
 void MainWindow::closeEvent(QCloseEvent *event) {
+    if (trayIcon->isVisible()) {
+        stopRealtimeUpdate();
+        return;
+    }
     operate.closeHelperApp();
 }
 
 void MainWindow::on_bestMobilityRadioButton_toggled(bool checked) {
-    if (checked) {
-        operate.setBatteryThreshold(0);
-        updateBatteryThreshold();
-    }
+    if (checked)
+        setBestMobility();
 }
 
 void MainWindow::on_balancedBatteryRadioButton_toggled(bool checked) {
-    if (checked) {
-        operate.setBatteryThreshold(80);
-        updateBatteryThreshold();
-    }
+    if (checked)
+        setBalancedBattery();
 }
 
 void MainWindow::on_bestBatteryRadioButton_toggled(bool checked) {
-    if (checked) {
-        operate.setBatteryThreshold(60);
-        updateBatteryThreshold();
-    }
+    if (checked)
+        setBestBattery();
 }
 
 void MainWindow::on_customBatteryThresholdRadioButton_toggled(bool checked) {
@@ -349,29 +394,91 @@ void MainWindow::on_keyboardBacklightModeComboBox_currentIndexChanged(int index)
 }
 
 void MainWindow::on_highPerformanceModeRadioButton_toggled(bool checked) {
-    if (checked) {
-        operate.setUserMode(user_mode::performance_mode);
-        updateUserMode();
-    }
+    if (checked)
+        setHighPerformanceMode();
 }
 
 void MainWindow::on_balancedModeRadioButton_toggled(bool checked) {
-    if (checked) {
-        operate.setUserMode(user_mode::balanced_mode);
-        updateUserMode();
-    }
+    if (checked)
+        setBalancedMode();
 }
 
 void MainWindow::on_silentModeRadioButton_toggled(bool checked) {
-    if (checked) {
-        operate.setUserMode(user_mode::silent_mode);
-        updateUserMode();
-    }
+    if (checked)
+        setSilentMode();
 }
 
 void MainWindow::on_superBatteryModeRadioButton_toggled(bool checked) {
-    if (checked) {
-        operate.setUserMode(user_mode::super_battery_mode);
-        updateUserMode();
+    if (checked)
+        setSuperBatteryMode();
+}
+
+void MainWindow::iconActivated(QSystemTrayIcon::ActivationReason reason) {
+    switch (reason) {
+        case QSystemTrayIcon::Trigger:
+        case QSystemTrayIcon::DoubleClick:
+            showWindow();
+            break;
+        case QSystemTrayIcon::MiddleClick:
+            break;
+        default:;
     }
+}
+
+void MainWindow::createTrayIcon() {
+    createActions();
+
+    modeTrayMenu = new QMenu(tr("Mode"));
+    modeTrayMenu->addAction(highPerformanceMode);
+    modeTrayMenu->addAction(balancedMode);
+    modeTrayMenu->addAction(silentMode);
+    modeTrayMenu->addAction(superBatteryMode);
+
+    batteryTrayMenu = new QMenu(tr("Charge limit"));
+    batteryTrayMenu->addAction(bestMobilityAction);
+    batteryTrayMenu->addAction(balancedBatteryAction);
+    batteryTrayMenu->addAction(bestBatteryAction);
+
+    trayIconMenu = new QMenu(this);
+    trayIconMenu->addAction(restoreAction);
+    trayIconMenu->addSeparator();
+    trayIconMenu->addMenu(modeTrayMenu);
+    trayIconMenu->addMenu(batteryTrayMenu);
+    trayIconMenu->addSeparator();
+    trayIconMenu->addAction(quitAction);
+
+    trayIcon = new QSystemTrayIcon(this);
+    trayIcon->setContextMenu(trayIconMenu);
+    auto icon = QIcon(":/images/mcontrolcenter.png");
+    trayIcon->setIcon(icon);
+
+    trayIcon->show();
+
+    connect(trayIcon, &QSystemTrayIcon::activated, this, &MainWindow::iconActivated);
+}
+
+void MainWindow::createActions() {
+    restoreAction = new QAction(tr("Show"), this);
+    connect(restoreAction, &QAction::triggered, this, &MainWindow::showWindow);
+
+    highPerformanceMode = new QAction(ui->highPerformanceModeRadioButton->text(), this);
+    balancedMode = new QAction(ui->balancedModeRadioButton->text(), this);
+    silentMode = new QAction(ui->silentModeRadioButton->text(), this);
+    superBatteryMode = new QAction(ui->superBatteryModeRadioButton->text(), this);
+
+    connect(highPerformanceMode, &QAction::triggered, this, &MainWindow::setHighPerformanceMode);
+    connect(balancedMode, &QAction::triggered, this, &MainWindow::setBalancedMode);
+    connect(silentMode, &QAction::triggered, this, &MainWindow::setSilentMode);
+    connect(superBatteryMode, &QAction::triggered, this, &MainWindow::setSuperBatteryMode);
+
+    bestMobilityAction = new QAction(ui->bestMobilityRadioButton->text() + " (100%)", this);
+    balancedBatteryAction = new QAction(ui->balancedBatteryRadioButton->text() + " (80%)", this);
+    bestBatteryAction = new QAction(ui->bestBatteryRadioButton->text() + " (60%)", this);
+
+    connect(bestMobilityAction, &QAction::triggered, this, &MainWindow::setBestMobility);
+    connect(balancedBatteryAction, &QAction::triggered, this, &MainWindow::setBalancedBattery);
+    connect(bestBatteryAction, &QAction::triggered, this, &MainWindow::setBestBattery);
+
+    quitAction = new QAction(tr("Quit"), this);
+    connect(quitAction, &QAction::triggered, qApp, &QCoreApplication::quit);
 }

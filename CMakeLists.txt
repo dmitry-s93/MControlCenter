@@ -24,6 +24,7 @@ set(PROJECT_SOURCES
         src/helper.cpp
         src/helper.h
         src/languages.qrc
+        src/images.qrc
 )
 
 set(TS_FILES
