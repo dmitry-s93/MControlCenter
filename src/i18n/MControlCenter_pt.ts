@@ -201,11 +201,11 @@
     </message>
     <message>
         <source>Failed to load the ec_sys kernel module</source>
-        <translation type="unfinished"></translation>
+        <translation>O carregamento do módulo do kernel ec_sys falhou</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Aplicar</translation>
     </message>
 </context>
 </TS>
