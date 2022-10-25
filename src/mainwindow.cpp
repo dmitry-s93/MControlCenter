@@ -312,6 +312,7 @@ void MainWindow::setSuperBatteryMode() {
 
 void MainWindow::showEvent(QShowEvent *event) {
     startRealtimeUpdate();
+    activateWindow();
 }
 
 void MainWindow::closeEvent(QCloseEvent *event) {
