@@ -23,9 +23,8 @@ set(PROJECT_SOURCES
         src/operate.h
         src/helper.cpp
         src/helper.h
-        src/languages.qrc
-        src/images.qrc
-)
+        src/resources.qrc
+        )
 
 set(TS_FILES
     MControlCenter_en.ts

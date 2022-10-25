@@ -449,7 +449,7 @@ void MainWindow::createTrayIcon() {
 
     trayIcon = new QSystemTrayIcon(this);
     trayIcon->setContextMenu(trayIconMenu);
-    auto icon = QIcon(":/images/mcontrolcenter.png");
+    auto icon = QIcon(":/images/AppIcon");
     trayIcon->setIcon(icon);
 
     trayIcon->show();

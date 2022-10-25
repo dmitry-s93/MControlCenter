@@ -1,5 +1,8 @@
 <RCC>
-    <qresource prefix="/">
+    <qresource prefix="/images">
+        <file alias="AppIcon">images/mcontrolcenter.png</file>
+    </qresource>
+    <qresource prefix="/translations">
         <file>i18n/MControlCenter_en.qm</file>
         <file>i18n/MControlCenter_ru.qm</file>
         <file>i18n/MControlCenter_pt.qm</file>
