@@ -21,7 +21,10 @@ MControlCenter is a Free and Open Source GNU/Linux application that allows you t
 
 ## Tested on
 
-MSI Summit E16 Flip Evo
+The main device on which the application is being tested: **MSI Summit E16 Flip Evo A12MT**
+
+[List of tested devices](/docs/tested_devices.md)
+
 
 ## Installation
 
