@@ -320,7 +320,12 @@ void MainWindow::closeEvent(QCloseEvent *event) {
         stopRealtimeUpdate();
         return;
     }
+    quitApp();
+}
+
+void MainWindow::quitApp() const {
     operate.closeHelperApp();
+    (void) QCoreApplication::quit();
 }
 
 void MainWindow::on_bestMobilityRadioButton_toggled(bool checked) {
@@ -480,5 +485,5 @@ void MainWindow::createActions() {
     connect(bestBatteryAction, &QAction::triggered, this, &MainWindow::setBestBattery);
 
     quitAction = new QAction(tr("Quit"), this);
-    connect(quitAction, &QAction::triggered, qApp, &QCoreApplication::quit);
+    connect(quitAction, &QAction::triggered, this, &MainWindow::quitApp);
 }

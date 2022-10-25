@@ -73,6 +73,7 @@ private:
 
     void showWindow();
     void closeEvent(QCloseEvent *event);
+    void quitApp() const;
 
     void createTrayIcon();
     void createActions();
