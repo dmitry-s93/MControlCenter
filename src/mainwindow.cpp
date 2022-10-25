@@ -46,8 +46,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(realtimeUpdateTimer, &QTimer::timeout, this, &MainWindow::realtimeUpdate);
     setUpdateInterval(1000);
-
-    startRealtimeUpdate();
 }
 
 MainWindow::~MainWindow() {
@@ -310,9 +308,8 @@ void MainWindow::setSuperBatteryMode() {
     updateUserMode();
 }
 
-void MainWindow::showWindow() {
+void MainWindow::showEvent(QShowEvent *event) {
     startRealtimeUpdate();
-    MainWindow::show();
 }
 
 void MainWindow::closeEvent(QCloseEvent *event) {
@@ -422,7 +419,7 @@ void MainWindow::iconActivated(QSystemTrayIcon::ActivationReason reason) {
     switch (reason) {
         case QSystemTrayIcon::Trigger:
         case QSystemTrayIcon::DoubleClick:
-            showWindow();
+            MainWindow::show();
             break;
         case QSystemTrayIcon::MiddleClick:
             break;
@@ -464,7 +461,7 @@ void MainWindow::createTrayIcon() {
 
 void MainWindow::createActions() {
     restoreAction = new QAction(tr("Show"), this);
-    connect(restoreAction, &QAction::triggered, this, &MainWindow::showWindow);
+    connect(restoreAction, &QAction::triggered, this, &MainWindow::show);
 
     highPerformanceMode = new QAction(ui->highPerformanceModeRadioButton->text(), this);
     balancedMode = new QAction(ui->balancedModeRadioButton->text(), this);

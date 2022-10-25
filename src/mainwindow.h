@@ -71,7 +71,7 @@ private:
     void setSilentMode();
     void setSuperBatteryMode();
 
-    void showWindow();
+    void showEvent(QShowEvent *event);
     void closeEvent(QCloseEvent *event);
     void quitApp() const;
 
