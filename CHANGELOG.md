@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 - Added support for Spanish language (Thanks [ssergio-ll](https://www.github.com/ssergio-ll))
 - Ability to set the battery charge limit from 30% to 100% in steps of 1
+- Prevent launching more than one instance
 - Added application icon to system tray
 - Some optimizations
 
