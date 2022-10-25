@@ -23,6 +23,8 @@ MControlCenter is a Free and Open Source GNU/Linux application that allows you t
 
 MSI Summit E16 Flip Evo
 
+MSI Summit E16 Flip (A12UCT)
+
 ## Installation
 
 The application requires the `ec_sys` module with option `write_support=1` to run.
