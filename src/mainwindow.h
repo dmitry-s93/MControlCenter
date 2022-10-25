@@ -21,6 +21,8 @@
 
 #include <QMainWindow>
 #include <QCloseEvent>
+#include <QSystemTrayIcon>
+#include <QtWidgets>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -43,7 +45,6 @@ private:
     void realtimeUpdate();
     void updateData();
     void loadConfigs();
-    void showMessage(QString text) const;
 
     [[nodiscard]] QString intToQString(int value) const;
     void updateBatteryCharge();
@@ -61,7 +62,39 @@ private:
     void updateCoolerBoostState();
     void updateUserMode();
 
+    void setBestMobility();
+    void setBalancedBattery();
+    void setBestBattery();
+
+    void setHighPerformanceMode();
+    void setBalancedMode();
+    void setSilentMode();
+    void setSuperBatteryMode();
+
+    void showEvent(QShowEvent *event);
     void closeEvent(QCloseEvent *event);
+    void quitApp() const;
+
+    void createTrayIcon();
+    void createActions();
+    void iconActivated(QSystemTrayIcon::ActivationReason reason);
+
+    QSystemTrayIcon *trayIcon = nullptr;;
+    QMenu *trayIconMenu = nullptr;
+    QMenu *modeTrayMenu = nullptr;
+    QMenu *batteryTrayMenu = nullptr;
+
+    QAction *highPerformanceMode = nullptr;;
+    QAction *balancedMode = nullptr;;
+    QAction *silentMode = nullptr;;
+    QAction *superBatteryMode = nullptr;;
+
+    QAction *bestMobilityAction = nullptr;;
+    QAction *balancedBatteryAction = nullptr;;
+    QAction *bestBatteryAction = nullptr;;
+
+    QAction *restoreAction = nullptr;;
+    QAction *quitAction = nullptr;;
 
 private slots:
     void on_bestMobilityRadioButton_toggled(bool checked);

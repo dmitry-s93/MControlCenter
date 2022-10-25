@@ -20,23 +20,45 @@
 
 #include <QApplication>
 #include <QTranslator>
+#include <QLocalSocket>
+#include <QLocalServer>
 
 
 int main(int argc, char *argv[]) {
+    const QString serverName = "MControlCenter";
+    auto *socket = new QLocalSocket();
+    socket->connectToServer(serverName);
+    if (socket->isOpen()) {
+        fprintf(stderr, "Another instance of the application is already running\n");
+        socket->close();
+        socket->deleteLater();
+        return 0;
+    }
+    socket->deleteLater();
+
     QApplication a(argc, argv);
 
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();
     for (const QString &locale: uiLanguages) {
-        const QString baseName = "MControlCenter_" + QLocale(locale).name();
-        if (translator.load(":/i18n/" + baseName)) {
+        const QString baseName = "lang_" + QLocale(locale).name();
+        if (translator.load(":/translations/" + baseName)) {
             QApplication::installTranslator(&translator);
             break;
         }
     }
 
     MainWindow w;
-    w.show();
+
+    QLocalServer server;
+    QObject::connect(&server, &QLocalServer::newConnection, [&w]() {
+        w.show();
+    });
+    bool serverListening = server.listen(serverName);
+    if (!serverListening && (server.serverError() == QAbstractSocket::AddressInUseError)) {
+        QLocalServer::removeServer(serverName);
+        server.listen(serverName);
+    }
 
     return QApplication::exec();
 }

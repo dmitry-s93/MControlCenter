@@ -207,5 +207,17 @@
         <source>Apply</source>
         <translation>Aplicar</translation>
     </message>
+    <message>
+        <source>Show</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Charge limit</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>
