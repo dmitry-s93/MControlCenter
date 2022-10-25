@@ -3,9 +3,9 @@
         <file alias="AppIcon">images/mcontrolcenter.png</file>
     </qresource>
     <qresource prefix="/translations">
-        <file>i18n/MControlCenter_en.qm</file>
-        <file>i18n/MControlCenter_ru.qm</file>
-        <file>i18n/MControlCenter_pt.qm</file>
-        <file>i18n/MControlCenter_es.qm</file>
+        <file alias="lang_en">i18n/MControlCenter_en.qm</file>
+        <file alias="lang_ru">i18n/MControlCenter_ru.qm</file>
+        <file alias="lang_pt">i18n/MControlCenter_pt.qm</file>
+        <file alias="lang_es">i18n/MControlCenter_es.qm</file>
     </qresource>
 </RCC>
