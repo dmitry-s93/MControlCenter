@@ -25,11 +25,11 @@
     </message>
     <message>
         <source>CPU temp:</source>
-        <translation>Temperatura do CPU:</translation>
+        <translation>Temperatura da CPU:</translation>
     </message>
     <message>
         <source>GPU temp:</source>
-        <translation>Temperatura do GPU:</translation>
+        <translation>Temperatura da GPU:</translation>
     </message>
     <message>
         <source>Fan 1:</source>
@@ -49,7 +49,7 @@
     </message>
     <message>
         <source>If you mainly use your laptop with adaptor plugged, we suggest you set the charge capacity at a lower percentage (60% or 80%) to prolong your battery lifecycle</source>
-        <translation>Se você usa principalmente o seu portátil com o adaptador conectado, sugerimos que defina uma capacidade de carga mais baixa (60% ou 80%) para prolongar a vida útil da bateria</translation>
+        <translation>Se você usa principalmente o seu portátil com o adaptador de energia conectado, sugerimos que defina uma capacidade de carga mais baixa (60% ou 80%) para prolongar a vida útil da bateria</translation>
     </message>
     <message>
         <source>Best for Mobility</source>
@@ -209,15 +209,15 @@
     </message>
     <message>
         <source>Show</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>Sair</translation>
     </message>
     <message>
         <source>Charge limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Limite de carga</translation>
     </message>
 </context>
 </TS>
