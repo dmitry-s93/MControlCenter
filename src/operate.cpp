@@ -50,8 +50,6 @@ const int usbPowerShareOn = 0x28;
 const int coolerBoostAddress = 0x98;
 
 const int webCamAddress = 0x2E;
-const int webCamOff = 0x08;
-const int webCamOn = 0x0A;
 
 const int fnSuperSwapAddress = 0xE8;
 const int fnSuperSwapOff = 0x00;
@@ -117,7 +115,7 @@ bool Operate::doProbe() const {
         helper.getValue(usbPowerShareAddress) == usbPowerShareOn)
         usbPowerShareSupport = true;
 
-    if (helper.getValue(webCamAddress) == webCamOff || helper.getValue(webCamAddress) == webCamOn)
+    if (helper.getValue(webCamAddress) > 0)
         webCamOffSupport = true;
 
     if (helper.getValue(fnSuperSwapAddress) == fnSuperSwapOff || helper.getValue(fnSuperSwapAddress) == fnSuperSwapOn)
@@ -220,7 +218,7 @@ bool Operate::getUsbPowerShareState() const {
 }
 
 bool Operate::getWebCamState() const {
-    if (helper.getValue(webCamAddress) == webCamOn)
+    if (helper.getValue(webCamAddress) / 2 % 2 != 0)
         return true;
     return false;
 }
@@ -296,7 +294,9 @@ void Operate::setUsbPowerShareState(bool enabled) const {
 }
 
 void Operate::setWebCamState(bool enabled) const {
-    int value = enabled ? webCamOn : webCamOff;
+    if (getWebCamState() == enabled)
+        return;
+    int value = helper.getValue(webCamAddress) + (enabled ? 2 : -2);
     helper.putValue(webCamAddress, value);
 }
 

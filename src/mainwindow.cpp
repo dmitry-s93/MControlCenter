@@ -98,6 +98,7 @@ void MainWindow::updateData() {
         updateFan1Speed();
         updateFan2Speed();
         updateKeyboardBrightness();
+        updateWebCamState();
     } else {
         setTabsEnabled(false);
         isActive = false;
