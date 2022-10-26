@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 - Prevent launching more than one instance
 - Added application icon to system tray
 - Some optimizations
+- Fixed turning on/off webcam
 
 ## [0.2.0] 2022-10-16
 - Added mode change (High Performance, Balanced, Silent, Super Battery)
