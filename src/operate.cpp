@@ -18,6 +18,7 @@
 
 #include "operate.h"
 #include "helper.h"
+#include "settings.h"
 
 Helper helper;
 
@@ -78,6 +79,8 @@ bool keyboardBacklightSupport = false;
 bool usbPowerShareSupport = false;
 bool webCamOffSupport = false;
 bool fnSuperSwapSupport = false;
+
+const QString settingsGroup = "Settings/";
 
 Operate::Operate() = default;
 
@@ -291,6 +294,7 @@ void Operate::setKeyboardBrightness(int value) const {
 void Operate::setUsbPowerShareState(bool enabled) const {
     int value = enabled ? usbPowerShareOn : usbPowerShareOff;
     helper.putValue(usbPowerShareAddress, value);
+    Settings::setValue(settingsGroup + "UsbPowerShare", enabled);
 }
 
 void Operate::setWebCamState(bool enabled) const {
@@ -303,6 +307,7 @@ void Operate::setWebCamState(bool enabled) const {
 void Operate::setFnSuperSwapState(bool enabled) const {
     int value = enabled ? fnSuperSwapOn : fnSuperSwapOff;
     helper.putValue(fnSuperSwapAddress, value);
+    Settings::setValue(settingsGroup + "FnSuperSwap", enabled);
 }
 
 void Operate::setCoolerBoostState(bool enabled) const {
@@ -319,21 +324,25 @@ void Operate::setUserMode(user_mode userMode) const {
             helper.putValue(shiftModeAddress, shiftMode1);
             helper.putValue(fanModeAddress, fanModeAuto);
             helper.putValue(superBatteryModeAddress, superBatteryModeOff);
+            Settings::setValue(settingsGroup + "UserMode", "balanced_mode");
             break;
         case user_mode::performance_mode:
             helper.putValue(shiftModeAddress, shiftMode0);
             helper.putValue(fanModeAddress, fanModeAuto);
             helper.putValue(superBatteryModeAddress, superBatteryModeOff);
+            Settings::setValue(settingsGroup + "UserMode", "performance_mode");
             break;
         case user_mode::silent_mode:
             helper.putValue(shiftModeAddress, shiftMode1);
             helper.putValue(fanModeAddress, fanModeSilent);
             helper.putValue(superBatteryModeAddress, superBatteryModeOff);
+            Settings::setValue(settingsGroup + "UserMode", "silent_mode");
             break;
         case user_mode::super_battery_mode:
             helper.putValue(shiftModeAddress, shiftMode2);
             helper.putValue(fanModeAddress, fanModeAuto);
             helper.putValue(superBatteryModeAddress, superBatteryModeOn);
+            Settings::setValue(settingsGroup + "UserMode", "super_battery_mode");
             break;
         default:
             break;
@@ -367,4 +376,25 @@ bool Operate::isWebCamOffSupport() const {
 
 bool Operate::isFnSuperSwapSupport() const {
     return fnSuperSwapSupport;
+}
+
+void Operate::loadSettings() {
+    Settings s;
+
+    if (getUserMode() != user_mode::unknown_mode && s.isValueExist(settingsGroup + "UserMode")) {
+        QString value = s.getValue(settingsGroup + "UserMode").toString();
+        if (value == "balanced_mode")
+            setUserMode(user_mode::balanced_mode);
+        else if (value == "performance_mode")
+            setUserMode(user_mode::performance_mode);
+        else if (value == "silent_mode")
+            setUserMode(user_mode::silent_mode);
+        else if (value == "super_battery_mode")
+            setUserMode(user_mode::super_battery_mode);
+    }
+
+    if (isFnSuperSwapSupport() && s.isValueExist(settingsGroup + "FnSuperSwap"))
+        setFnSuperSwapState(s.getValue(settingsGroup + "FnSuperSwap").toBool());
+    if (isUsbPowerShareSupport() && s.isValueExist(settingsGroup + "UsbPowerShare"))
+        setUsbPowerShareState(s.getValue(settingsGroup + "UsbPowerShare").toBool());
 }

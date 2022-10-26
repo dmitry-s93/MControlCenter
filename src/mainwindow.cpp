@@ -19,6 +19,7 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 #include "operate.h"
+#include "settings.h"
 #include <QTimer>
 #include <QMessageBox>
 
@@ -33,6 +34,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     MainWindow::setWindowIcon(QIcon(":/images/AppIcon"));
+    Settings s;
+    if (s.isValueExist("MainWindow/Width") && s.isValueExist("MainWindow/Height"))
+        MainWindow::resize(s.getValue("MainWindow/Width").toInt(), s.getValue("MainWindow/Height").toInt());
 
     if (QSystemTrayIcon::isSystemTrayAvailable())
         createTrayIcon();
@@ -109,6 +113,7 @@ void MainWindow::loadConfigs() {
     ui->ecVersionValueLabel->setText(QString::fromStdString(operate.getEcVersion()));
     ui->ecBuildValueLabel->setText(QString::fromStdString(operate.getEcBuild()));
 
+    operate.loadSettings();
     updateUserMode();
     updateCoolerBoostState();
 
@@ -326,6 +331,8 @@ void MainWindow::closeEvent(QCloseEvent *event) {
 
 void MainWindow::quitApp() const {
     operate.closeHelperApp();
+    Settings::setValue("MainWindow/Width", MainWindow::width());
+    Settings::setValue("MainWindow/Height", MainWindow::height());
     (void) QCoreApplication::quit();
 }
 
