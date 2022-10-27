@@ -1,0 +1,29 @@
+# Maintainer: X
+# Contributor: JordanViknar
+pkgname=mcontrolcenter-bin
+pkgver=0.2.0
+pkgrel=1
+pkgdesc="An application that allows you to change the settings of MSI laptops running Linux."
+arch=('x86_64')
+url="https://github.com/dmitry-s93/MControlCenter"
+license=('GPL3')
+depends=(
+  'qt5-base'
+)
+conflicts=('mcontrolcenter')
+provides=('mcontrolcenter')
+
+source=("https://github.com/dmitry-s93/MControlCenter/releases/download/${pkgver}/MControlCenter-${pkgver}.tar.gz")
+
+sha256sums=('9382ee44404db5297b44c8c41ef14b65a550cd46d52811f0c654c5954428f835')
+
+package() {
+  app_directory="${srcdir}/MControlCenter-${pkgver}/app"
+
+  install -Dm755 "${app_directory}/mcontrolcenter" "${pkgdir}/usr/bin/mcontrolcenter"
+  install -Dm644 "${app_directory}/mcontrolcenter.desktop" "${pkgdir}/usr/share/applications/mcontrolcenter.desktop"
+  install -Dm644 "${app_directory}/mcontrolcenter.svg" "${pkgdir}/usr/share/icons/hicolor/scalable/apps/mcontrolcenter.svg"
+  install -Dm755 "${app_directory}/mcontrolcenter-helper" "${pkgdir}/usr/libexec/mcontrolcenter-helper"
+  install -Dm644 "${app_directory}/mcontrolcenter-helper.conf" "${pkgdir}/usr/share/dbus-1/system.d/mcontrolcenter-helper.conf"
+  install -Dm644 "${app_directory}/mcontrolcenter.helper.service" "${pkgdir}/usr/share/dbus-1/system-services/mcontrolcenter-helper.service"
+}

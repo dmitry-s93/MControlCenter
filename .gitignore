@@ -30,3 +30,6 @@
 *.exe
 *.out
 *.app
+
+# AUR packaging leftovers
+scripts/aur-bin-pkgbuild/*.tar*
