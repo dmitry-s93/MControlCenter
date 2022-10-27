@@ -16,13 +16,11 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools DBu
 
 set(PROJECT_SOURCES
     src/main.cpp
-    src/mainwindow.cpp
-    src/mainwindow.h
     src/mainwindow.ui
-    src/operate.cpp
-    src/operate.h
-    src/helper.cpp
-    src/helper.h
+    src/mainwindow.cpp src/mainwindow.h
+    src/operate.cpp src/operate.h
+    src/helper.cpp src/helper.h
+    src/settings.cpp src/settings.h
     src/resources.qrc
 )
 

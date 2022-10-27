@@ -82,6 +82,8 @@ public:
     [[nodiscard]] bool isUsbPowerShareSupport() const;
     [[nodiscard]] bool isWebCamOffSupport() const;
     [[nodiscard]] bool isFnSuperSwapSupport() const;
+
+    void loadSettings();
 };
 
 #endif // OPERATE_H
