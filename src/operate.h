@@ -84,6 +84,8 @@ public:
     [[nodiscard]] bool isFnSuperSwapSupport() const;
 
     void loadSettings();
+
+    void putSuperBatteryModeValue(bool enabled) const;
 };
 
 #endif // OPERATE_H

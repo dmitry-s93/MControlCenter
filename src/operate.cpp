@@ -71,8 +71,6 @@ const int fanModeSilent = 0x1D;
 const int fanModeAdvanced = 0x4D;
 
 const int superBatteryModeAddress = 0xEB;
-const int superBatteryModeOff = 0x00;
-const int superBatteryModeOn = 0x0F;
 
 bool batteryThresholdSupport = false;
 bool keyboardBacklightSupport = false;
@@ -239,23 +237,18 @@ bool Operate::getCoolerBoostState() const {
 }
 
 user_mode Operate::getUserMode() const {
-    int shiftMode = helper.getValue(shiftModeAddress);
-    int fanMode = helper.getValue(fanModeAddress);
-    int superBattery = helper.getValue(superBatteryModeAddress);
-
-    if (shiftMode == shiftMode0)
-        return user_mode::performance_mode;
-
-    if (shiftMode == shiftMode1 && fanMode == fanModeAuto)
-        return user_mode::balanced_mode;
-
-    if (shiftMode == shiftMode1 && fanMode == fanModeSilent)
-        return user_mode::silent_mode;
-
-    if (shiftMode == shiftMode2 && superBattery == superBatteryModeOn)
-        return user_mode::super_battery_mode;
-
-    return user_mode::unknown_mode;
+    switch (helper.getValue(shiftModeAddress)) {
+        case shiftMode0:
+            return user_mode::performance_mode;
+        case shiftMode1:
+            if (helper.getValue(fanModeAddress) == fanModeSilent)
+                return user_mode::silent_mode;
+            return user_mode::balanced_mode;
+        case shiftMode2:
+            return user_mode::super_battery_mode;
+        default:
+            return user_mode::unknown_mode;
+    }
 }
 
 void Operate::setBatteryThreshold(int value) const {
@@ -323,25 +316,25 @@ void Operate::setUserMode(user_mode userMode) const {
         case user_mode::balanced_mode:
             helper.putValue(shiftModeAddress, shiftMode1);
             helper.putValue(fanModeAddress, fanModeAuto);
-            helper.putValue(superBatteryModeAddress, superBatteryModeOff);
+            putSuperBatteryModeValue(false);
             Settings::setValue(settingsGroup + "UserMode", "balanced_mode");
             break;
         case user_mode::performance_mode:
             helper.putValue(shiftModeAddress, shiftMode0);
             helper.putValue(fanModeAddress, fanModeAuto);
-            helper.putValue(superBatteryModeAddress, superBatteryModeOff);
+            putSuperBatteryModeValue(false);
             Settings::setValue(settingsGroup + "UserMode", "performance_mode");
             break;
         case user_mode::silent_mode:
             helper.putValue(shiftModeAddress, shiftMode1);
             helper.putValue(fanModeAddress, fanModeSilent);
-            helper.putValue(superBatteryModeAddress, superBatteryModeOff);
+            putSuperBatteryModeValue(false);
             Settings::setValue(settingsGroup + "UserMode", "silent_mode");
             break;
         case user_mode::super_battery_mode:
             helper.putValue(shiftModeAddress, shiftMode2);
             helper.putValue(fanModeAddress, fanModeAuto);
-            helper.putValue(superBatteryModeAddress, superBatteryModeOn);
+            putSuperBatteryModeValue(true);
             Settings::setValue(settingsGroup + "UserMode", "super_battery_mode");
             break;
         default:
@@ -397,4 +390,11 @@ void Operate::loadSettings() {
         setFnSuperSwapState(s.getValue(settingsGroup + "FnSuperSwap").toBool());
     if (isUsbPowerShareSupport() && s.isValueExist(settingsGroup + "UsbPowerShare"))
         setUsbPowerShareState(s.getValue(settingsGroup + "UsbPowerShare").toBool());
+}
+
+void Operate::putSuperBatteryModeValue(bool enabled) const {
+    if ((helper.getValue(superBatteryModeAddress) / 2 % 2 != 0) == enabled)
+        return;
+    int currValue = helper.getValue(superBatteryModeAddress);
+    helper.putValue(superBatteryModeAddress, currValue + (enabled ? 15 : -15));
 }
