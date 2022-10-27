@@ -25,5 +25,5 @@ package() {
   install -Dm644 "${app_directory}/mcontrolcenter.svg" "${pkgdir}/usr/share/icons/hicolor/scalable/apps/mcontrolcenter.svg"
   install -Dm755 "${app_directory}/mcontrolcenter-helper" "${pkgdir}/usr/libexec/mcontrolcenter-helper"
   install -Dm644 "${app_directory}/mcontrolcenter-helper.conf" "${pkgdir}/usr/share/dbus-1/system.d/mcontrolcenter-helper.conf"
-  install -Dm644 "${app_directory}/mcontrolcenter.helper.service" "${pkgdir}/usr/share/dbus-1/system-services/mcontrolcenter-helper.service"
+  install -Dm644 "${app_directory}/mcontrolcenter.helper.service" "${pkgdir}/usr/share/dbus-1/system-services/mcontrolcenter.helper.service"
 }
