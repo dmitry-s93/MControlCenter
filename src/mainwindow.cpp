@@ -33,6 +33,8 @@ MainWindow::MainWindow(QWidget *parent)
         : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
 
+    connect(qApp, &QGuiApplication::saveStateRequest,this, &MainWindow::saveStateRequest);
+
     MainWindow::setWindowIcon(QIcon(":/images/AppIcon"));
     Settings s;
     if (s.isValueExist("MainWindow/Width") && s.isValueExist("MainWindow/Height"))
@@ -495,4 +497,8 @@ void MainWindow::createActions() {
 
     quitAction = new QAction(tr("Quit"), this);
     connect(quitAction, &QAction::triggered, this, &MainWindow::quitApp);
+}
+
+void MainWindow::saveStateRequest(QSessionManager &sessionManager) {
+    sessionManager.setRestartHint(QSessionManager::RestartNever);
 }
