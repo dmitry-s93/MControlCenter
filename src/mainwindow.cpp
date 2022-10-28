@@ -323,6 +323,8 @@ void MainWindow::showEvent(QShowEvent *event) {
 void MainWindow::closeEvent(QCloseEvent *event) {
     if (trayIcon && trayIcon->isVisible()) {
         stopRealtimeUpdate();
+        MainWindow::hide();
+        event->ignore();
         return;
     }
     quitApp();
