@@ -38,8 +38,7 @@ MainWindow::MainWindow(QWidget *parent)
     if (s.isValueExist("MainWindow/Width") && s.isValueExist("MainWindow/Height"))
         MainWindow::resize(s.getValue("MainWindow/Width").toInt(), s.getValue("MainWindow/Height").toInt());
 
-    if (QSystemTrayIcon::isSystemTrayAvailable())
-        createTrayIcon();
+    createTrayIcon();
 
     // Disable debug tab
     ui->tabWidget->setTabVisible(4, false);
