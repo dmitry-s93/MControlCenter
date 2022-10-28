@@ -78,6 +78,7 @@ private:
     void createTrayIcon();
     void createActions();
     void iconActivated(QSystemTrayIcon::ActivationReason reason);
+    void saveStateRequest(QSessionManager &sessionManager);
 
     QSystemTrayIcon *trayIcon = nullptr;;
     QMenu *trayIconMenu = nullptr;
