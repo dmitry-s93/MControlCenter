@@ -16,7 +16,7 @@ MControlCenter is a Free and Open Source GNU/Linux application that allows you t
  - Change other settings such as keyboard backlight mode, USB Power Share, etc.
 
 ## TODO
- - Add save selected mode after reboot
+
  - Add the ability to adjust the fan speed
 
 ## Tested on
@@ -48,6 +48,14 @@ zypper refresh
 zypper install mcontrolcenter
 ```
 
+#### openSUSE Leap 15.5
+
+```sh
+zypper addrepo https://download.opensuse.org/repositories/home:dmitry-s/openSUSE_Leap_15.5/home:dmitry-s.repo
+zypper refresh
+zypper install mcontrolcenter
+```
+
 #### openSUSE Leap 15.4:
 
 ```sh
@@ -55,6 +63,14 @@ zypper addrepo https://download.opensuse.org/repositories/home:dmitry-s/15.4/hom
 zypper refresh
 zypper install mcontrolcenter
 ```
+
+### Launch MControlCenter on session startup
+
+To restore settings after a reboot, add MControlCenter to startup.
+
+Execute this command on a terminal:
+
+`cp /usr/share/applications/mcontrolcenter.desktop ~/.config/autostart/mcontrolcenter.desktop`
 
 ## Localization
 
