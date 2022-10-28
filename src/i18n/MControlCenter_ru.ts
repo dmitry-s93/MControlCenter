@@ -201,23 +201,23 @@
     </message>
     <message>
         <source>Failed to load the ec_sys kernel module</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось загрузить модуль ядра ec_sys</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Применить</translation>
     </message>
     <message>
         <source>Show</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>Выход</translation>
     </message>
     <message>
         <source>Charge limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Ограничение заряда</translation>
     </message>
 </context>
 </TS>
