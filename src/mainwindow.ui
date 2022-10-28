@@ -729,7 +729,7 @@
           <item row="0" column="1">
            <widget class="QLabel" name="versionValueLabel">
             <property name="text">
-             <string notr="true">0.2.0</string>
+             <string notr="true">0.3.0</string>
             </property>
            </widget>
           </item>
