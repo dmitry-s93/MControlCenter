@@ -49,7 +49,7 @@
     </message>
     <message>
         <source>If you mainly use your laptop with adaptor plugged, we suggest you set the charge capacity at a lower percentage (60% or 80%) to prolong your battery lifecycle</source>
-        <translation>Hvis du stort sett bruker laptopen med adapteret tilkoblet, foreslår vi at du setter ladekapasiteten til en lavere prosentverdi (60% eller 80%) for å forlenge batterilevetiden</translation>
+        <translation>Hvis du stort sett bruker laptopen med adapter tilkoblet, foreslår vi at du setter ladekapasiteten til en lavere prosentverdi (60% eller 80%) for å forlenge batterilevetiden</translation>
     </message>
     <message>
         <source>Best for Mobility</source>
