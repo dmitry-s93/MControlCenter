@@ -146,11 +146,7 @@ void MainWindow::loadConfigs() {
         ui->webCamCheckBox->setEnabled(false);
     }
 
-    if (operate.isFnSuperSwapSupport()) {
-        updateFnSuperSwapState();
-    } else {
-        ui->fnSuperSwapCheckBox->setEnabled(false);
-    }
+    updateFnSuperSwapState();
 }
 
 QString MainWindow::intToQString(int value) const {
