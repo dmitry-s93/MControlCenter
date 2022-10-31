@@ -5,219 +5,219 @@
     <name>MainWindow</name>
     <message>
         <source>Info</source>
-        <translation type="Info"></translation>
+        <translation>Info</translation>
     </message>
     <message>
         <source>EC Version:</source>
-        <translation type="EC-versjon:"></translation>
+        <translation>EC-versjon:</translation>
     </message>
     <message>
         <source>EC Build:</source>
-        <translation type="EC-build:"></translation>
+        <translation>EC-build:</translation>
     </message>
     <message>
         <source>Battery charge:</source>
-        <translation type="Batterinivå:"></translation>
+        <translation>Batterinivå:</translation>
     </message>
     <message>
         <source>Battery threshold:</source>
-        <translation type="Batterigrense:"></translation>
+        <translation>Batterigrense:</translation>
     </message>
     <message>
         <source>CPU temp:</source>
-        <translation type="CPU-temperatur:"></translation>
+        <translation>CPU-temperatur:</translation>
     </message>
     <message>
         <source>GPU temp:</source>
-        <translation type="GPU-temperatur:"></translation>
+        <translation>GPU-temperatur:</translation>
     </message>
     <message>
         <source>Fan 1:</source>
-        <translation type="Vifte 1"></translation>
+        <translation>Vifte 1</translation>
     </message>
     <message>
         <source>Fan 2:</source>
-        <translation type="Vifte 2"></translation>
+        <translation>Vifte 2</translation>
     </message>
     <message>
         <source>Cooler Boost</source>
-        <translation type="Cooler Boost"></translation>
+        <translation>Cooler Boost</translation>
     </message>
     <message>
         <source>Battery</source>
-        <translation type="Batteri"></translation>
+        <translation>Batteri</translation>
     </message>
     <message>
         <source>If you mainly use your laptop with adaptor plugged, we suggest you set the charge capacity at a lower percentage (60% or 80%) to prolong your battery lifecycle</source>
-        <translation type="Hvis du stort sett bruker laptopen med adapteret tilkoblet, foreslår vi at du setter ladekapasiteten til en lavere prosentverdi (60% eller 80%) for å forlenge batterilevetiden"></translation>
+        <translation>Hvis du stort sett bruker laptopen med adapteret tilkoblet, foreslår vi at du setter ladekapasiteten til en lavere prosentverdi (60% eller 80%) for å forlenge batterilevetiden</translation>
     </message>
     <message>
         <source>Best for Mobility</source>
-        <translation type="Best for mobilitet"></translation>
+        <translation>Best for mobilitet</translation>
     </message>
     <message>
         <source>Charge the battery to 100% all the time</source>
-        <translation type="Lad batteriet til 100% hele tiden"></translation>
+        <translation>Lad batteriet til 100% hele tiden</translation>
     </message>
     <message>
         <source>Balanced</source>
-        <translation type="Balansert"></translation>
+        <translation>Balansert</translation>
     </message>
     <message>
         <source>Charge the battery when under 70%, stop at 80%</source>
-        <translation type="Lad batteriet når under 70%, stopp ved 80%"></translation>
+        <translation>Lad batteriet når under 70%, stopp ved 80%</translation>
     </message>
     <message>
         <source>Best for battery</source>
-        <translation type="Best for batteri"></translation>
+        <translation>Best for batteri</translation>
     </message>
     <message>
         <source>Charge the battery when under 50%, stop at 60%</source>
-        <translation type="Lad batteriet når under 50%, stopp ved 60%"></translation>
+        <translation>Lad batteriet når under 50%, stopp ved 60%</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation type="Egendefinert"></translation>
+        <translation>Egendefinert</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="Innstillinger"></translation>
+        <translation>Innstillinger</translation>
     </message>
     <message>
         <source>Keyboard Backlit</source>
-        <translation type="Tastaturbelysning"></translation>
+        <translation>Tastaturbelysning</translation>
     </message>
     <message>
         <source>Always on</source>
-        <translation type="Alltid på"></translation>
+        <translation>Alltid på</translation>
     </message>
     <message>
         <source>Auto turn off in 10 sec</source>
-        <translation type="Slå av automatisk om 10 sek"></translation>
+        <translation>Slå av automatisk om 10 sek</translation>
     </message>
     <message>
         <source>FN ⇄ Super</source>
-        <translation type="FN ⇄ Super"></translation>
+        <translation>FN ⇄ Super</translation>
     </message>
     <message>
         <source>WebCam</source>
-        <translation type="Webkamera"></translation>
+        <translation>Webkamera</translation>
     </message>
     <message>
         <source>USB Power Share</source>
-        <translation type="USB Power Share"></translation>
+        <translation>USB Power Share</translation>
     </message>
     <message>
         <source>Debug</source>
-        <translation type="Feilsøking"></translation>
+        <translation>Feilsøking</translation>
     </message>
     <message>
         <source>About</source>
-        <translation type="Om"></translation>
+        <translation>Om</translation>
     </message>
     <message>
         <source>Version:</source>
-        <translation type="Versjon:"></translation>
+        <translation>Versjon:</translation>
     </message>
     <message>
         <source>GitHub:</source>
-        <translation type="GitHub:"></translation>
+        <translation>GitHub:</translation>
     </message>
     <message>
         <source>Charging status:</source>
-        <translation type="Ladestatus:"></translation>
+        <translation>Ladestatus:</translation>
     </message>
     <message>
         <source>Charging</source>
-        <translation type="Lader"></translation>
+        <translation>Lader</translation>
     </message>
     <message>
         <source>Discharging</source>
-        <translation type="Utlader"></translation>
+        <translation>Utlader</translation>
     </message>
     <message>
         <source>Not charging</source>
-        <translation type="Lader ikke"></translation>
+        <translation>Lader ikke</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="Ukjent"></translation>
+        <translation>Ukjent</translation>
     </message>
     <message>
         <source>Bug tracker:</source>
-        <translation type="Bug tracker:"></translation>
+        <translation>Bug tracker:</translation>
     </message>
     <message>
         <source>An application that allows you to change the settings of MSI laptops running Linux</source>
-        <translation type="En applikasjon som lar deg endre innstillingene til MSI-laptoper som kjører Linux"></translation>
+        <translation>En applikasjon som lar deg endre innstillingene til MSI-laptoper som kjører Linux</translation>
     </message>
     <message>
         <source>Swap FN and Super buttons</source>
-        <translation type="Bytt om FN- og Super-knapper"></translation>
+        <translation>Bytt om FN- og Super-knapper</translation>
     </message>
     <message>
         <source>Fully charged</source>
-        <translation type="Fulladet"></translation>
+        <translation>Fulladet</translation>
     </message>
     <message>
         <source>Fully charged (Discharging)</source>
-        <translation type="Fulladet (Utlader)"></translation>
+        <translation>Fulladet (Utlader)</translation>
     </message>
     <message>
         <source>rpm</source>
-        <translation type="o/min"></translation>
+        <translation>o/min</translation>
     </message>
     <message>
         <source>Mode</source>
-        <translation type="Modus"></translation>
+        <translation>Modus</translation>
     </message>
     <message>
         <source>High Performance</source>
-        <translation type="Høy ytelse"></translation>
+        <translation>Høy ytelse</translation>
     </message>
     <message>
         <source>A mode that brings a balance between performance and battery live</source>
-        <translation type="En modus som gir en balanse mellom ytelse og batterilevetid"></translation>
+        <translation>En modus som gir en balanse mellom ytelse og batterilevetid</translation>
     </message>
     <message>
         <source>Silent</source>
-        <translation type="Stille"></translation>
+        <translation>Stille</translation>
     </message>
     <message>
         <source>Super Battery</source>
-        <translation type="Superbatteri"></translation>
+        <translation>Superbatteri</translation>
     </message>
     <message>
         <source>A mode that provides the best system performance for multi-tasking and heavy duty</source>
-        <translation type="En modus som gir den beste systemytelsen for multitasking og tunge oppgaver"></translation>
+        <translation>En modus som gir den beste systemytelsen for multitasking og tunge oppgaver</translation>
     </message>
     <message>
         <source>A quiet mode that lowers the fan noise</source>
-        <translation type="En stille modus som demper viftestøyen"></translation>
+        <translation>En stille modus som demper viftestøyen</translation>
     </message>
     <message>
         <source>A power-saving mode that lowers the power consumption for basic needs</source>
-        <translation type="En strømsparende modus som senker strømforbruket for grunnleggende behov"></translation>
+        <translation>En strømsparende modus som senker strømforbruket for grunnleggende behov</translation>
     </message>
     <message>
         <source>Failed to load the ec_sys kernel module</source>
-        <translation type="Kunne ikke laste inn ec_sys-kjernemodulen"></translation>
+        <translation>Kunne ikke laste inn ec_sys-kjernemodulen</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation type="Bruk"></translation>
+        <translation>Bruk</translation>
     </message>
     <message>
         <source>Show</source>
-        <translation type="Vis"></translation>
+        <translation>Vis</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation type="Avslutt"></translation>
+        <translation>Avslutt</translation>
     </message>
     <message>
         <source>Charge limit</source>
-        <translation type="Ladegrense"></translation>
+        <translation>Ladegrense</translation>
     </message>
 </context>
 </TS>
