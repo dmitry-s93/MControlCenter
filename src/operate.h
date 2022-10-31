@@ -86,6 +86,8 @@ public:
     void loadSettings();
 
     void putSuperBatteryModeValue(bool enabled) const;
+private:
+    int detectFan1Address() const;
 };
 
 #endif // OPERATE_H
