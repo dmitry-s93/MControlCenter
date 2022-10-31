@@ -56,7 +56,9 @@ const int fnSuperSwapAddress = 0xE8;
 const int fnSuperSwapOff = 0x00;
 const int fnSuperSwapOn = 0x10;
 
-const int fan1Address = 0xC9;
+int fan1Address;
+const int fan1Address_0xC9 = 0xC9;
+const int fan1Address_0xCD = 0xCD;
 const int fan2Address = 0xCB;
 
 // Modes
@@ -99,6 +101,8 @@ bool Operate::updateEcData() const {
 }
 
 bool Operate::doProbe() const {
+    fan1Address = detectFan1Address();
+
     int thresholdAddr0 = 0xEF;
     int thresholdAddr1 = 0xD7;
     // Check for charging threshold support
@@ -397,4 +401,13 @@ void Operate::putSuperBatteryModeValue(bool enabled) const {
         return;
     int currValue = helper.getValue(superBatteryModeAddress);
     helper.putValue(superBatteryModeAddress, currValue + (enabled ? 15 : -15));
+}
+
+int Operate::detectFan1Address() const {
+    int value_0xC9 = helper.getValue(fan1Address_0xC9);
+    if (int value_0xCD = helper.getValue(fan1Address_0xCD); value_0xCD > 0)
+        return fan1Address_0xCD;
+    if (value_0xC9 > 0 && value_0xC9 < 50)
+        return fan1Address_0xCD;
+    return fan1Address_0xC9;
 }
