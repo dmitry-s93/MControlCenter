@@ -6,6 +6,7 @@ GenericName=Change MSI Laptop Settings
 GenericName[ru]=Изменение настроек ноутбука MSI
 GenericName[pt]=Alterar Definições de Portáteis MSI
 GenericName[es]=Modifica los ajustos de portátiles MSI
+GenericName[nb]=Endre innstillinger til MSI-laptop
 Type=Application
 Exec=mcontrolcenter
 Icon=mcontrolcenter
