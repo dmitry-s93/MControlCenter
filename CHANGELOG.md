@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
+- Fixed fan 1 speed display for some devices
+- Fixed "FN <-> Super" for some devices (Issue https://github.com/dmitry-s93/MControlCenter/issues/53)
+
+## [0.3.0] 2022-10-28
 - Added support for Spanish language (Thanks [ssergio-ll](https://www.github.com/ssergio-ll))
 - Ability to set the battery charge limit from 30% to 100% in steps of 1
 - Prevent launching more than one instance
