@@ -53,8 +53,6 @@ const int coolerBoostAddress = 0x98;
 const int webCamAddress = 0x2E;
 
 const int fnSuperSwapAddress = 0xE8;
-const int fnSuperSwapOff = 0x00;
-const int fnSuperSwapOn = 0x10;
 
 int fan1Address;
 const int fan1Address_0xC9 = 0xC9;
@@ -78,7 +76,6 @@ bool batteryThresholdSupport = false;
 bool keyboardBacklightSupport = false;
 bool usbPowerShareSupport = false;
 bool webCamOffSupport = false;
-bool fnSuperSwapSupport = false;
 
 const QString settingsGroup = "Settings/";
 
@@ -122,9 +119,6 @@ bool Operate::doProbe() const {
 
     if (helper.getValue(webCamAddress) > 0)
         webCamOffSupport = true;
-
-    if (helper.getValue(fnSuperSwapAddress) == fnSuperSwapOff || helper.getValue(fnSuperSwapAddress) == fnSuperSwapOn)
-        fnSuperSwapSupport = true;
 
     if (
             helper.getValue(keyboardBacklightAddress) == keyboardBacklight0ff ||
@@ -229,7 +223,7 @@ bool Operate::getWebCamState() const {
 }
 
 bool Operate::getFnSuperSwapState() const {
-    if (helper.getValue(fnSuperSwapAddress) == fnSuperSwapOn)
+    if (helper.getValue(fnSuperSwapAddress) / 16 % 2 != 0)
         return true;
     return false;
 }
@@ -302,7 +296,9 @@ void Operate::setWebCamState(bool enabled) const {
 }
 
 void Operate::setFnSuperSwapState(bool enabled) const {
-    int value = enabled ? fnSuperSwapOn : fnSuperSwapOff;
+    if (getFnSuperSwapState() == enabled)
+        return;
+    int value = helper.getValue(fnSuperSwapAddress) + (enabled ? 16 : -16);
     helper.putValue(fnSuperSwapAddress, value);
     Settings::setValue(settingsGroup + "FnSuperSwap", enabled);
 }
@@ -371,10 +367,6 @@ bool Operate::isWebCamOffSupport() const {
     return webCamOffSupport;
 }
 
-bool Operate::isFnSuperSwapSupport() const {
-    return fnSuperSwapSupport;
-}
-
 void Operate::loadSettings() {
     Settings s;
 
@@ -390,7 +382,7 @@ void Operate::loadSettings() {
             setUserMode(user_mode::super_battery_mode);
     }
 
-    if (isFnSuperSwapSupport() && s.isValueExist(settingsGroup + "FnSuperSwap"))
+    if (s.isValueExist(settingsGroup + "FnSuperSwap"))
         setFnSuperSwapState(s.getValue(settingsGroup + "FnSuperSwap").toBool());
     if (isUsbPowerShareSupport() && s.isValueExist(settingsGroup + "UsbPowerShare"))
         setUsbPowerShareState(s.getValue(settingsGroup + "UsbPowerShare").toBool());

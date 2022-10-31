@@ -81,7 +81,6 @@ public:
     [[nodiscard]] bool isKeyboardBacklightSupport() const;
     [[nodiscard]] bool isUsbPowerShareSupport() const;
     [[nodiscard]] bool isWebCamOffSupport() const;
-    [[nodiscard]] bool isFnSuperSwapSupport() const;
 
     void loadSettings();
 
