@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 - Added support for Norwegian Bokmål (Thanks [msigurdsen](https://github.com/msigurdsen))
+- Corrected display of the current battery level
 - Fixed fan 1 speed display for some devices
 - Fixed "FN <-> Super" for some devices (Issue https://github.com/dmitry-s93/MControlCenter/issues/53)
 

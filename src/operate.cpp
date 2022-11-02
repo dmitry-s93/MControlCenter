@@ -142,7 +142,7 @@ std::string Operate::getEcBuild() const {
 }
 
 int Operate::getBatteryCharge() const {
-    return helper.getValue(batteryChargeAddress);
+    return helper.getValue(batteryChargeAddress) - 1;
 }
 
 int Operate::getBatteryThreshold() const {
