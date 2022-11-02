@@ -91,7 +91,6 @@
     </message>
     <message>
         <source>Always on</source>
-        <translatorcomment>this translation is context dependant, I need context</translatorcomment>
         <translation>Hep açık</translation>
     </message>
     <message>
