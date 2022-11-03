@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="tr_TR" sourcelanguage="en_US">
+<TS version="2.1" language="tr_TR" sourcelanguage="en_US">
 <context>
     <name>MainWindow</name>
     <message>
@@ -10,12 +10,12 @@
     <message>
         <source>EC Version:</source>
         <translatorcomment>don&apos;t know how to translate this</translatorcomment>
-        <translation>EC Version:</translation>
+        <translation type="unfinished">EC Version:</translation>
     </message>
     <message>
         <source>EC Build:</source>
         <translatorcomment>don&apos;t know how to translate this</translatorcomment>
-        <translation>EC Build:</translation>
+        <translation type="unfinished">EC Build:</translation>
     </message>
     <message>
         <source>Battery charge:</source>
@@ -148,7 +148,7 @@
     <message>
         <source>Bug tracker:</source>
         <translatorcomment>not sure on this one</translatorcomment>
-        <translation>Hata takibi:</translation>
+        <translation type="unfinished">Hata takibi:</translation>
     </message>
     <message>
         <source>An application that allows you to change the settings of MSI laptops running Linux</source>
@@ -189,7 +189,7 @@
     <message>
         <source>Super Battery</source>
         <translatorcomment>I don&apos;t know what this is</translatorcomment>
-        <translation>Super Battery</translation>
+        <translation type="unfinished">Super Battery</translation>
     </message>
     <message>
         <source>A mode that provides the best system performance for multi-tasking and heavy duty</source>
