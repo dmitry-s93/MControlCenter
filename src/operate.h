@@ -82,11 +82,12 @@ public:
     [[nodiscard]] bool isUsbPowerShareSupport() const;
     [[nodiscard]] bool isWebCamOffSupport() const;
 
-    void loadSettings();
+    void loadSettings() const;
 
     void putSuperBatteryModeValue(bool enabled) const;
 private:
     int detectFan1Address() const;
+    int detectBatteryThresholdAddress() const;
 };
 
 #endif // OPERATE_H

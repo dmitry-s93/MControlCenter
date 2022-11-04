@@ -26,6 +26,8 @@ const int cpuTempAddress = 0x68;
 const int gpuTempAddress = 0x80;
 const int batteryChargeAddress = 0x42;
 int batteryThresholdAddress;
+const int batteryThresholdAddress_0xEF = 0xEF;
+const int batteryThresholdAddress_0xD7 = 0xD7;
 
 const int batteryChargingStatusAddress = 0x31;
 const int batteryNotCharging = 0x01;
@@ -72,11 +74,6 @@ const int fanModeAdvanced = 0x4D;
 
 const int superBatteryModeAddress = 0xEB;
 
-bool batteryThresholdSupport = false;
-bool keyboardBacklightSupport = false;
-bool usbPowerShareSupport = false;
-bool webCamOffSupport = false;
-
 const QString settingsGroup = "Settings/";
 
 Operate::Operate() = default;
@@ -99,33 +96,7 @@ bool Operate::updateEcData() const {
 
 bool Operate::doProbe() const {
     fan1Address = detectFan1Address();
-
-    int thresholdAddr0 = 0xEF;
-    int thresholdAddr1 = 0xD7;
-    // Check for charging threshold support
-    if (128 <= helper.getValue(thresholdAddr0) && helper.getValue(thresholdAddr0) <= 228) {
-        batteryThresholdAddress = thresholdAddr0;
-        batteryThresholdSupport = true;
-    } else {
-        if (128 <= helper.getValue(thresholdAddr1) && helper.getValue(thresholdAddr1) <= 228) {
-            batteryThresholdAddress = thresholdAddr1;
-            batteryThresholdSupport = true;
-        }
-    }
-
-    if (helper.getValue(usbPowerShareAddress) == usbPowerShareOff ||
-        helper.getValue(usbPowerShareAddress) == usbPowerShareOn)
-        usbPowerShareSupport = true;
-
-    if (helper.getValue(webCamAddress) > 0)
-        webCamOffSupport = true;
-
-    if (
-            helper.getValue(keyboardBacklightAddress) == keyboardBacklight0ff ||
-            helper.getValue(keyboardBacklightAddress) == keyboardBacklightLow ||
-            helper.getValue(keyboardBacklightAddress) == keyboardBacklightMid ||
-            helper.getValue(keyboardBacklightAddress) == keyboardBacklightHigh)
-        keyboardBacklightSupport = true;
+    batteryThresholdAddress = detectBatteryThresholdAddress();
 
     return true;
 }
@@ -352,22 +323,26 @@ void Operate::setValue(int address, int value) const {
 }
 
 bool Operate::isBatteryThresholdSupport() const {
-    return batteryThresholdSupport;
+    return batteryThresholdAddress != 0;
 }
 
 bool Operate::isKeyboardBacklightSupport() const {
-    return keyboardBacklightSupport;
+    return (helper.getValue(keyboardBacklightAddress) == keyboardBacklight0ff ||
+            helper.getValue(keyboardBacklightAddress) == keyboardBacklightLow ||
+            helper.getValue(keyboardBacklightAddress) == keyboardBacklightMid ||
+            helper.getValue(keyboardBacklightAddress) == keyboardBacklightHigh);
 }
 
 bool Operate::isUsbPowerShareSupport() const {
-    return usbPowerShareSupport;
+    return (helper.getValue(usbPowerShareAddress) == usbPowerShareOff ||
+            helper.getValue(usbPowerShareAddress) == usbPowerShareOn);
 }
 
 bool Operate::isWebCamOffSupport() const {
-    return webCamOffSupport;
+    return helper.getValue(webCamAddress) > 0;
 }
 
-void Operate::loadSettings() {
+void Operate::loadSettings() const {
     Settings s;
 
     if (getUserMode() != user_mode::unknown_mode && s.isValueExist(settingsGroup + "UserMode")) {
@@ -389,7 +364,7 @@ void Operate::loadSettings() {
 }
 
 void Operate::putSuperBatteryModeValue(bool enabled) const {
-    if ((helper.getValue(superBatteryModeAddress) / 2 % 2 != 0) == enabled)
+    if ((helper.getValue(superBatteryModeAddress) / 15 % 2 != 0) == enabled)
         return;
     int currValue = helper.getValue(superBatteryModeAddress);
     helper.putValue(superBatteryModeAddress, currValue + (enabled ? 15 : -15));
@@ -402,4 +377,12 @@ int Operate::detectFan1Address() const {
     if (value_0xC9 > 0 && value_0xC9 < 50)
         return fan1Address_0xCD;
     return fan1Address_0xC9;
+}
+
+int Operate::detectBatteryThresholdAddress() const {
+    if (128 <= helper.getValue(batteryThresholdAddress_0xEF) && helper.getValue(batteryThresholdAddress_0xEF) <= 228)
+        return batteryThresholdAddress_0xEF;
+    if (128 <= helper.getValue(batteryThresholdAddress_0xD7) && helper.getValue(batteryThresholdAddress_0xD7) <= 228)
+        return batteryThresholdAddress_0xD7;
+    return 0;
 }
