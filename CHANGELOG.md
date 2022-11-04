@@ -3,6 +3,8 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
+
+## [0.3.1] 2022-11-04
 - Added support for Norwegian Bokmål (Thanks [msigurdsen](https://github.com/msigurdsen))
 - Added support for Turkish language (Thanks [emrgncr](https://github.com/emrgncr))
 - Corrected display of the current battery level
