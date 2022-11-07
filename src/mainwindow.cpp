@@ -100,6 +100,7 @@ void MainWindow::updateData() {
         updateChargingStatus();
         updateCpuTemp();
         updateGpuTemp();
+        updateFanMode();
         updateFan1Speed();
         updateFan2Speed();
         updateKeyboardBrightness();
@@ -276,6 +277,28 @@ void MainWindow::updateUserMode() {
                 break;
         }
     }
+}
+
+void MainWindow::updateFanMode() {
+    QString fanMode;
+    switch (operate.getFanMode()) {
+        case fan_mode::auto_fan_mode:
+            fanMode = tr("Auto");
+            break;
+        case fan_mode::silent_fan_mode:
+            fanMode = tr("Silent");
+            break;
+        case fan_mode::basic_fan_mode:
+            fanMode = tr("Basic");
+            break;
+        case fan_mode::advanced_fan_mode:
+            fanMode = tr("Advanced");
+            break;
+        default:
+            fanMode = tr("Unknown");
+            break;
+    }
+    ui->fanModeValueLabel->setText(fanMode);
 }
 
 void MainWindow::setBestMobility() {

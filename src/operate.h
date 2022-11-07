@@ -39,6 +39,14 @@ enum class user_mode {
     unknown_mode
 };
 
+enum class fan_mode {
+    auto_fan_mode,
+    silent_fan_mode,
+    basic_fan_mode,
+    advanced_fan_mode,
+    unknown_fan_mode
+};
+
 class Operate {
 public:
     Operate();
@@ -64,6 +72,7 @@ public:
     [[nodiscard]] bool getFnSuperSwapState() const;
     [[nodiscard]] bool getCoolerBoostState() const;
     [[nodiscard]] user_mode getUserMode() const;
+    [[nodiscard]] fan_mode getFanMode() const;
 
     void setBatteryThreshold(int value) const;
     void setKeyboardBacklightMode(int value) const;
@@ -88,6 +97,7 @@ public:
 private:
     int detectFan1Address() const;
     int detectBatteryThresholdAddress() const;
+    int detectFanModeAddress() const;
 };
 
 #endif // OPERATE_H

@@ -61,6 +61,7 @@ private:
     void updateFnSuperSwapState();
     void updateCoolerBoostState();
     void updateUserMode();
+    void updateFanMode();
 
     void setBestMobility();
     void setBalancedBattery();
