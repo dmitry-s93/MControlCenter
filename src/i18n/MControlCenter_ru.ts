@@ -235,5 +235,9 @@
         <source>Advanced</source>
         <translation>Расширенный</translation>
     </message>
+    <message>
+        <source>Choose the mode that best suits your use case</source>
+        <translation>Выберите режим, который лучше всего подходит для вашего варианта использования</translation>
+    </message>
 </context>
 </TS>

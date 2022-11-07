@@ -241,5 +241,9 @@
         <source>Advanced</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Choose the mode that best suits your use case</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

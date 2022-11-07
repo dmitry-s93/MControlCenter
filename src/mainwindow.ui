@@ -227,6 +227,26 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
+         <widget class="QLabel" name="modeDescriptionLabel">
+          <property name="text">
+           <string>Choose the mode that best suits your use case</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignJustify|Qt::AlignVCenter</set>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="Line" name="line_4">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
          <layout class="QFormLayout" name="formLayout_4">
           <property name="fieldGrowthPolicy">
            <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
@@ -250,6 +270,16 @@
            <widget class="QRadioButton" name="highPerformanceModeRadioButton">
             <property name="text">
              <string>High Performance</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="label_11">
+            <property name="text">
+             <string>A mode that provides the best system performance for multi-tasking and heavy duty</string>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -277,23 +307,6 @@
             </property>
            </widget>
           </item>
-          <item row="3" column="0">
-           <widget class="QRadioButton" name="superBatteryModeRadioButton">
-            <property name="text">
-             <string>Super Battery</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QLabel" name="label_11">
-            <property name="text">
-             <string>A mode that provides the best system performance for multi-tasking and heavy duty</string>
-            </property>
-            <property name="wordWrap">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
           <item row="2" column="1">
            <widget class="QLabel" name="label_12">
             <property name="text">
@@ -301,6 +314,13 @@
             </property>
             <property name="wordWrap">
              <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QRadioButton" name="superBatteryModeRadioButton">
+            <property name="text">
+             <string>Super Battery</string>
             </property>
            </widget>
           </item>
