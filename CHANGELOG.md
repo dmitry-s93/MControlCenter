@@ -3,6 +3,9 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
+- Added fan mode display
+- Added description on mode tab
+- Fixed display of the window when clicking the tray icon if the application was minimized
 
 ## [0.3.1] 2022-11-04
 - Added support for Norwegian Bokmål (Thanks [msigurdsen](https://github.com/msigurdsen))
