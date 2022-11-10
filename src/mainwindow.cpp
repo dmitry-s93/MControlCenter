@@ -452,7 +452,7 @@ void MainWindow::iconActivated(QSystemTrayIcon::ActivationReason reason) {
     switch (reason) {
         case QSystemTrayIcon::Trigger:
         case QSystemTrayIcon::DoubleClick:
-            MainWindow::show();
+            MainWindow::showNormal();
             break;
         case QSystemTrayIcon::MiddleClick:
             break;
@@ -494,7 +494,7 @@ void MainWindow::createTrayIcon() {
 
 void MainWindow::createActions() {
     restoreAction = new QAction(tr("Show"), this);
-    connect(restoreAction, &QAction::triggered, this, &MainWindow::show);
+    connect(restoreAction, &QAction::triggered, this, &MainWindow::showNormal);
 
     highPerformanceMode = new QAction(ui->highPerformanceModeRadioButton->text(), this);
     balancedMode = new QAction(ui->balancedModeRadioButton->text(), this);
