@@ -59,7 +59,7 @@ private:
     void updateUsbPowerShareState();
     void updateWebCamState();
     void updateFnSuperSwapState();
-    void updateCoolerBoostState();
+    void updateCoolerBoostState() const;
     void updateUserMode();
     void updateFanMode();
 
@@ -71,6 +71,8 @@ private:
     void setBalancedMode();
     void setSilentMode();
     void setSuperBatteryMode();
+
+    void setCoolerBoostState(bool enabled) const;
 
     void showEvent(QShowEvent *event);
     void closeEvent(QCloseEvent *event);
@@ -84,19 +86,22 @@ private:
     QSystemTrayIcon *trayIcon = nullptr;;
     QMenu *trayIconMenu = nullptr;
     QMenu *modeTrayMenu = nullptr;
+    QMenu *fanTrayMenu = nullptr;
     QMenu *batteryTrayMenu = nullptr;
 
-    QAction *highPerformanceMode = nullptr;;
-    QAction *balancedMode = nullptr;;
-    QAction *silentMode = nullptr;;
-    QAction *superBatteryMode = nullptr;;
+    QAction *coolerBoostAction = nullptr;
 
-    QAction *bestMobilityAction = nullptr;;
-    QAction *balancedBatteryAction = nullptr;;
-    QAction *bestBatteryAction = nullptr;;
+    QAction *highPerformanceMode = nullptr;
+    QAction *balancedMode = nullptr;
+    QAction *silentMode = nullptr;
+    QAction *superBatteryMode = nullptr;
 
-    QAction *restoreAction = nullptr;;
-    QAction *quitAction = nullptr;;
+    QAction *bestMobilityAction = nullptr;
+    QAction *balancedBatteryAction = nullptr;
+    QAction *bestBatteryAction = nullptr;
+
+    QAction *restoreAction = nullptr;
+    QAction *quitAction = nullptr;
 
 private slots:
     void on_bestMobilityRadioButton_toggled(bool checked);

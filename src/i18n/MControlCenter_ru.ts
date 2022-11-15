@@ -239,5 +239,9 @@
         <source>Choose the mode that best suits your use case</source>
         <translation>Выберите режим, который лучше всего подходит для вашего варианта использования</translation>
     </message>
+    <message>
+        <source>Cooling</source>
+        <translation>Охлаждение</translation>
+    </message>
 </context>
 </TS>
