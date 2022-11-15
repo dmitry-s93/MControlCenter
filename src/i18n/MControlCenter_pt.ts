@@ -221,27 +221,27 @@
     </message>
     <message>
         <source>Fan Mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>Modo da Ventoinha:</translation>
     </message>
     <message>
         <source>Auto</source>
-        <translation type="unfinished"></translation>
+        <translation>Automático</translation>
     </message>
     <message>
         <source>Basic</source>
-        <translation type="unfinished"></translation>
+        <translation>Básico</translation>
     </message>
     <message>
         <source>Advanced</source>
-        <translation type="unfinished"></translation>
+        <translation>Avançado</translation>
     </message>
     <message>
         <source>Choose the mode that best suits your use case</source>
-        <translation type="unfinished"></translation>
+        <translation>Escolha o modo que se adapta melhor às suas actividades</translation>
     </message>
     <message>
         <source>Cooling</source>
-        <translation type="unfinished"></translation>
+        <translation>Arrefecimento</translation>
     </message>
 </context>
 </TS>
