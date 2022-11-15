@@ -219,5 +219,29 @@
         <source>Charge limit</source>
         <translation>Ограничение заряда</translation>
     </message>
+    <message>
+        <source>Fan Mode:</source>
+        <translation>Режим вентилятора:</translation>
+    </message>
+    <message>
+        <source>Auto</source>
+        <translation>Автоматический</translation>
+    </message>
+    <message>
+        <source>Basic</source>
+        <translation>Базовый</translation>
+    </message>
+    <message>
+        <source>Advanced</source>
+        <translation>Расширенный</translation>
+    </message>
+    <message>
+        <source>Choose the mode that best suits your use case</source>
+        <translation>Выберите режим, который лучше всего подходит для вашего варианта использования</translation>
+    </message>
+    <message>
+        <source>Cooling</source>
+        <translation>Охлаждение</translation>
+    </message>
 </context>
 </TS>

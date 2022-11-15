@@ -144,42 +144,42 @@
           </property>
          </widget>
         </item>
-        <item row="7" column="0">
+        <item row="8" column="0">
          <widget class="QLabel" name="label_8">
           <property name="text">
            <string>Fan 1:</string>
           </property>
          </widget>
         </item>
-        <item row="7" column="1">
+        <item row="8" column="1">
          <widget class="QLabel" name="fan1ValueLabel">
           <property name="text">
            <string notr="true">-</string>
           </property>
          </widget>
         </item>
-        <item row="8" column="0">
+        <item row="9" column="0">
          <widget class="QLabel" name="label_9">
           <property name="text">
            <string>Fan 2:</string>
           </property>
          </widget>
         </item>
-        <item row="8" column="1">
+        <item row="9" column="1">
          <widget class="QLabel" name="fan2ValueLabel">
           <property name="text">
            <string notr="true">-</string>
           </property>
          </widget>
         </item>
-        <item row="9" column="1">
+        <item row="10" column="1">
          <widget class="QCheckBox" name="coolerBoostCheckBox">
           <property name="text">
            <string>Cooler Boost</string>
           </property>
          </widget>
         </item>
-        <item row="10" column="0">
+        <item row="11" column="0">
          <spacer name="verticalSpacer_2">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
@@ -192,7 +192,7 @@
           </property>
          </spacer>
         </item>
-        <item row="10" column="1">
+        <item row="11" column="1">
          <spacer name="verticalSpacer_3">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
@@ -205,6 +205,20 @@
           </property>
          </spacer>
         </item>
+        <item row="7" column="0">
+         <widget class="QLabel" name="label_14">
+          <property name="text">
+           <string>Fan Mode:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="1">
+         <widget class="QLabel" name="fanModeValueLabel">
+          <property name="text">
+           <string notr="true">-</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="modeTab">
@@ -212,6 +226,26 @@
         <string>Mode</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QLabel" name="modeDescriptionLabel">
+          <property name="text">
+           <string>Choose the mode that best suits your use case</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignJustify|Qt::AlignVCenter</set>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="Line" name="line_4">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
         <item>
          <layout class="QFormLayout" name="formLayout_4">
           <property name="fieldGrowthPolicy">
@@ -239,6 +273,16 @@
             </property>
            </widget>
           </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="label_11">
+            <property name="text">
+             <string>A mode that provides the best system performance for multi-tasking and heavy duty</string>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
           <item row="1" column="0">
            <widget class="QRadioButton" name="balancedModeRadioButton">
             <property name="text">
@@ -263,23 +307,6 @@
             </property>
            </widget>
           </item>
-          <item row="3" column="0">
-           <widget class="QRadioButton" name="superBatteryModeRadioButton">
-            <property name="text">
-             <string>Super Battery</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QLabel" name="label_11">
-            <property name="text">
-             <string>A mode that provides the best system performance for multi-tasking and heavy duty</string>
-            </property>
-            <property name="wordWrap">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
           <item row="2" column="1">
            <widget class="QLabel" name="label_12">
             <property name="text">
@@ -287,6 +314,13 @@
             </property>
             <property name="wordWrap">
              <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QRadioButton" name="superBatteryModeRadioButton">
+            <property name="text">
+             <string>Super Battery</string>
             </property>
            </widget>
           </item>
@@ -812,7 +846,7 @@
      <x>0</x>
      <y>0</y>
      <width>550</width>
-     <height>22</height>
+     <height>30</height>
     </rect>
    </property>
    <property name="acceptDrops">

@@ -67,10 +67,13 @@ const int shiftMode0 = 0xC0;
 const int shiftMode1 = 0xC1;
 const int shiftMode2 = 0xC2;
 
-const int fanModeAddress = 0xD4;
+int fanModeAddress;
+const int fanModeAddress_0xD4 = 0xD4;
+const int fanModeAddress_0xF4 = 0xF4;
 const int fanModeAuto = 0x0D;
 const int fanModeSilent = 0x1D;
-const int fanModeAdvanced = 0x4D;
+const int fanModeBasic = 0x4D;
+const int fanModeAdvanced = 0x8D;
 
 const int superBatteryModeAddress = 0xEB;
 
@@ -97,6 +100,7 @@ bool Operate::updateEcData() const {
 bool Operate::doProbe() const {
     fan1Address = detectFan1Address();
     batteryThresholdAddress = detectBatteryThresholdAddress();
+    fanModeAddress = detectFanModeAddress();
 
     return true;
 }
@@ -217,6 +221,21 @@ user_mode Operate::getUserMode() const {
             return user_mode::super_battery_mode;
         default:
             return user_mode::unknown_mode;
+    }
+}
+
+fan_mode Operate::getFanMode() const {
+    switch (helper.getValue(fanModeAddress)) {
+        case fanModeAuto:
+            return fan_mode::auto_fan_mode;
+        case fanModeSilent:
+            return fan_mode::silent_fan_mode;
+        case fanModeBasic:
+            return fan_mode::basic_fan_mode;
+        case fanModeAdvanced:
+            return fan_mode::advanced_fan_mode;
+        default:
+            return fan_mode::unknown_fan_mode;
     }
 }
 
@@ -385,4 +404,14 @@ int Operate::detectBatteryThresholdAddress() const {
     if (128 <= helper.getValue(batteryThresholdAddress_0xD7) && helper.getValue(batteryThresholdAddress_0xD7) <= 228)
         return batteryThresholdAddress_0xD7;
     return 0;
+}
+
+int Operate::detectFanModeAddress() const {
+    if (int fanModeValue = helper.getValue(fanModeAddress_0xD4);
+            fanModeValue == fanModeAuto ||
+            fanModeValue == fanModeSilent ||
+            fanModeValue == fanModeBasic ||
+            fanModeValue == fanModeAdvanced)
+        return fanModeAddress_0xD4;
+    return fanModeAddress_0xF4;
 }

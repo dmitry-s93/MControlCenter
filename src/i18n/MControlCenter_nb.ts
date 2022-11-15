@@ -219,5 +219,29 @@
         <source>Charge limit</source>
         <translation>Ladegrense</translation>
     </message>
+    <message>
+        <source>Fan Mode:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Basic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Advanced</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose the mode that best suits your use case</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cooling</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

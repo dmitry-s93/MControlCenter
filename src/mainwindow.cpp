@@ -100,6 +100,7 @@ void MainWindow::updateData() {
         updateChargingStatus();
         updateCpuTemp();
         updateGpuTemp();
+        updateFanMode();
         updateFan1Speed();
         updateFan2Speed();
         updateKeyboardBrightness();
@@ -250,8 +251,9 @@ void MainWindow::updateFnSuperSwapState() {
     ui->fnSuperSwapCheckBox->setChecked(operate.getFnSuperSwapState());
 }
 
-void MainWindow::updateCoolerBoostState() {
+void MainWindow::updateCoolerBoostState() const {
     ui->coolerBoostCheckBox->setChecked(operate.getCoolerBoostState());
+    coolerBoostAction->setChecked(operate.getCoolerBoostState());
 }
 
 void MainWindow::updateUserMode() {
@@ -276,6 +278,28 @@ void MainWindow::updateUserMode() {
                 break;
         }
     }
+}
+
+void MainWindow::updateFanMode() {
+    QString fanMode;
+    switch (operate.getFanMode()) {
+        case fan_mode::auto_fan_mode:
+            fanMode = tr("Auto");
+            break;
+        case fan_mode::silent_fan_mode:
+            fanMode = tr("Silent");
+            break;
+        case fan_mode::basic_fan_mode:
+            fanMode = tr("Basic");
+            break;
+        case fan_mode::advanced_fan_mode:
+            fanMode = tr("Advanced");
+            break;
+        default:
+            fanMode = tr("Unknown");
+            break;
+    }
+    ui->fanModeValueLabel->setText(fanMode);
 }
 
 void MainWindow::setBestMobility() {
@@ -311,6 +335,12 @@ void MainWindow::setSilentMode() {
 void MainWindow::setSuperBatteryMode() {
     operate.setUserMode(user_mode::super_battery_mode);
     updateUserMode();
+}
+
+void MainWindow::setCoolerBoostState(bool enabled) const {
+    operate.setCoolerBoostState(enabled);
+    if (operate.updateEcData())
+        updateCoolerBoostState();
 }
 
 void MainWindow::showEvent(QShowEvent *event) {
@@ -394,7 +424,8 @@ void MainWindow::on_fnSuperSwapCheckBox_toggled(bool checked) const {
 }
 
 void MainWindow::on_coolerBoostCheckBox_toggled(bool checked) const {
-    operate.setCoolerBoostState(checked);
+    if (operate.getCoolerBoostState() != checked)
+        setCoolerBoostState(checked);
 }
 
 void MainWindow::on_keyboardBrightnessSlider_valueChanged(int value) const {
@@ -429,7 +460,7 @@ void MainWindow::iconActivated(QSystemTrayIcon::ActivationReason reason) {
     switch (reason) {
         case QSystemTrayIcon::Trigger:
         case QSystemTrayIcon::DoubleClick:
-            MainWindow::show();
+            MainWindow::showNormal();
             break;
         case QSystemTrayIcon::MiddleClick:
             break;
@@ -446,6 +477,9 @@ void MainWindow::createTrayIcon() {
     modeTrayMenu->addAction(silentMode);
     modeTrayMenu->addAction(superBatteryMode);
 
+    fanTrayMenu = new QMenu(tr("Cooling"));
+    fanTrayMenu->addAction(coolerBoostAction);
+
     batteryTrayMenu = new QMenu(tr("Charge limit"));
     batteryTrayMenu->addAction(bestMobilityAction);
     batteryTrayMenu->addAction(balancedBatteryAction);
@@ -455,6 +489,7 @@ void MainWindow::createTrayIcon() {
     trayIconMenu->addAction(restoreAction);
     trayIconMenu->addSeparator();
     trayIconMenu->addMenu(modeTrayMenu);
+    trayIconMenu->addMenu(fanTrayMenu);
     trayIconMenu->addMenu(batteryTrayMenu);
     trayIconMenu->addSeparator();
     trayIconMenu->addAction(quitAction);
@@ -471,7 +506,7 @@ void MainWindow::createTrayIcon() {
 
 void MainWindow::createActions() {
     restoreAction = new QAction(tr("Show"), this);
-    connect(restoreAction, &QAction::triggered, this, &MainWindow::show);
+    connect(restoreAction, &QAction::triggered, this, &MainWindow::showNormal);
 
     highPerformanceMode = new QAction(ui->highPerformanceModeRadioButton->text(), this);
     balancedMode = new QAction(ui->balancedModeRadioButton->text(), this);
@@ -482,6 +517,11 @@ void MainWindow::createActions() {
     connect(balancedMode, &QAction::triggered, this, &MainWindow::setBalancedMode);
     connect(silentMode, &QAction::triggered, this, &MainWindow::setSilentMode);
     connect(superBatteryMode, &QAction::triggered, this, &MainWindow::setSuperBatteryMode);
+
+    coolerBoostAction = new QAction(tr("Cooler Boost"), this);
+    coolerBoostAction->setCheckable(true);
+
+    connect(coolerBoostAction, &QAction::triggered, this, &MainWindow::setCoolerBoostState);
 
     bestMobilityAction = new QAction(ui->bestMobilityRadioButton->text() + " (100%)", this);
     balancedBatteryAction = new QAction(ui->balancedBatteryRadioButton->text() + " (80%)", this);
