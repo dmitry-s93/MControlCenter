@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 - Added fan mode display
 - Added description on mode tab
 - Added "Cooler Boost" item to tray menu
+- Added support for [acpi_ec](https://github.com/musikid/acpi_ec) kernel module
 - Fixed display of the window when clicking the tray icon if the application was minimized
 
 ## [0.3.1] 2022-11-04
