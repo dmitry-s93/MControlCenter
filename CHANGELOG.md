@@ -3,6 +3,8 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
+
+## [0.3.2] 2022-11-28
 - Added fan mode display
 - Added description on mode tab
 - Added "Cooler Boost" item to tray menu
