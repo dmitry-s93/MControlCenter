@@ -1,7 +1,7 @@
 # MControlCenter
 
 MControlCenter is a Free and Open Source GNU/Linux application that allows you to change the settings of MSI laptops.
-![Screenshots of MControlCenter](https://user-images.githubusercontent.com/12676622/195147148-398b6cb5-6907-4a54-a8d8-e2386b7650fe.png)
+![Screenshots of MControlCenter](https://user-images.githubusercontent.com/12676622/204340408-9a488cb5-2e1b-4cee-87fd-2c2327f3f611.png)
 
 ## Features
 
@@ -29,6 +29,8 @@ The main device on which the application is being tested: **MSI Summit E16 Flip 
 ## Installation
 
 The application requires the `ec_sys` module with option `write_support=1` to run.
+
+If the `ec_sys` kernel module is not included in your distribution's kernel, you can use the `acpi_ec` kernel module.
 
 This is QT application. You may need to install `libqt5widgets5` to run.
 
