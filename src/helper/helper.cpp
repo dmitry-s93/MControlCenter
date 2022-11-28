@@ -42,15 +42,16 @@ void Helper::putValue(const int &address, const int &value) const {
 }
 
 bool Helper::isEcSysModuleLoaded() const {
-    auto *process = new QProcess();
-    process->start("sh", QStringList() << "-c" << "lsmod | grep ec_sys");
-    process->waitForFinished(1000);
-    if (process->readAllStandardOutput() == "") {
-        fprintf(stderr, "%s\n", qPrintable("The ec_sys kernel module is not loaded"));
-        return false;
+    if (rw.isEcSys()) {
+        fprintf(stderr, "%s\n", qPrintable("The ec_sys kernel module is loaded"));
+        return true;
     }
-    fprintf(stderr, "%s\n", qPrintable("The ec_sys kernel module is loaded"));
-    return true;
+    if (rw.isAcpiEc()) {
+        fprintf(stderr, "%s\n", qPrintable("The acpi_ec kernel module is loaded"));
+        return true;
+    }
+    fprintf(stderr, "%s\n", qPrintable("The ec_sys kernel module is not loaded"));
+    return false;
 }
 
 bool Helper::loadEcSysModule() const {
