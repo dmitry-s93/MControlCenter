@@ -10,5 +10,6 @@
         <file alias="lang_nb">i18n/MControlCenter_nb.qm</file>
         <file alias="lang_tr">i18n/MControlCenter_tr.qm</file>
         <file alias="lang_pt_br">i18n/MControlCenter_pt_br.qm</file>
+        <file alias="lang_it">i18n/MControlCenter_it.qm</file>
     </qresource>
 </RCC>

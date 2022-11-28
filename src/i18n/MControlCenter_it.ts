@@ -65,7 +65,7 @@
     </message>
     <message>
         <source>Charge the battery when under 70%, stop at 80%</source>
-        <translation>Carica la batteria quando sotto 70%, ferma all'80%</translation>
+        <translation>Carica la batteria quando sotto 70%, ferma all&apos;80%</translation>
     </message>
     <message>
         <source>Best for battery</source>
