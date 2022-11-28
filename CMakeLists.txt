@@ -32,6 +32,7 @@ set(TS_FILES
     MControlCenter_nb.ts
     MControlCenter_tr.ts
     MControlCenter_pt_br.ts
+    MControlCenter_it.ts
 )
 
 find_program(LUPDATE_EXECUTABLE lupdate lupdate-qt5 REQUIRED)
