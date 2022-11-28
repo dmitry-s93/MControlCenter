@@ -25,8 +25,10 @@ class ReadWrite {
     using BYTE = unsigned char;
 public:
     ReadWrite();
-    QByteArray readFromFile();
-    void writeToFile(int pos, BYTE value);
+    QByteArray readFromFile() const;
+    void writeToFile(int pos, BYTE value) const;
+    bool isAcpiEc() const;
+    bool isEcSys() const;
 };
 
 #endif // READWRITE_H

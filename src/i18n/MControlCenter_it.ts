@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="es_ES" sourcelanguage="en_US">
+<TS version="2.1" language="it_IT" sourcelanguage="en_US">
 <context>
     <name>MainWindow</name>
     <message>
         <source>Info</source>
-        <translation>Información</translation>
+        <translation>Info</translation>
     </message>
     <message>
         <source>EC Version:</source>
-        <translation>Versión del EC:</translation>
+        <translation>EC Version:</translation>
     </message>
     <message>
         <source>EC Build:</source>
-        <translation>Compilación del EC:</translation>
+        <translation>EC Build:</translation>
     </message>
     <message>
         <source>Battery charge:</source>
-        <translation>Carga de la batería:</translation>
+        <translation>Carica batteria:</translation>
     </message>
     <message>
         <source>Battery threshold:</source>
-        <translation>Límite de carga de batería:</translation>
+        <translation>Limite di carica batteria:</translation>
     </message>
     <message>
         <source>CPU temp:</source>
@@ -33,11 +33,11 @@
     </message>
     <message>
         <source>Fan 1:</source>
-        <translation>Ventilador 1:</translation>
+        <translation>Ventola 1:</translation>
     </message>
     <message>
         <source>Fan 2:</source>
-        <translation>Ventilador 2:</translation>
+        <translation>Ventola 2</translation>
     </message>
     <message>
         <source>Cooler Boost</source>
@@ -45,55 +45,55 @@
     </message>
     <message>
         <source>Battery</source>
-        <translation>Batería</translation>
+        <translation>Batteria</translation>
     </message>
     <message>
         <source>If you mainly use your laptop with adaptor plugged, we suggest you set the charge capacity at a lower percentage (60% or 80%) to prolong your battery lifecycle</source>
-        <translation>Si sueles usar tu portátil normalmente con el adaptador, te recomendamos establezcas la capacidad de carga con un porcentaje más bajo (60% o 80%) para prolongar la vida de tu batería</translation>
+        <translation>Se di solito usi il tuo portatile collegato alla rete, ti suggeriamo di cambiare la capacità di carica con una percentuale più bassa (60% o 80%) per prolungare la vita della batteria</translation>
     </message>
     <message>
         <source>Best for Mobility</source>
-        <translation>Mejor para la mobilidad</translation>
+        <translation>Migliore per mobilità</translation>
     </message>
     <message>
         <source>Charge the battery to 100% all the time</source>
-        <translation>Carga la batería hasta el 100% todo el tiempo</translation>
+        <translation>Carica la batteria fino al 100% tutto il tempo</translation>
     </message>
     <message>
         <source>Balanced</source>
-        <translation>Balanceado</translation>
+        <translation>Bilanciato</translation>
     </message>
     <message>
         <source>Charge the battery when under 70%, stop at 80%</source>
-        <translation>Carga la batería cuando esta por debajo del 70% hasta llegar al 80%</translation>
+        <translation>Carica la batteria quando sotto 70%, ferma all'80%</translation>
     </message>
     <message>
         <source>Best for battery</source>
-        <translation>Lo mejor para la batería</translation>
+        <translation>Migliore per batteria</translation>
     </message>
     <message>
         <source>Charge the battery when under 50%, stop at 60%</source>
-        <translation>Carga la batería cuando esta por debajo del 50% hasta llegar al 60%</translation>
+        <translation>Carica la batteria quando sotto 50%, ferma al 60%</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation>Personalizado</translation>
+        <translation>Personalizzato</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation>Ajustes</translation>
+        <translation>Impostazioni</translation>
     </message>
     <message>
         <source>Keyboard Backlit</source>
-        <translation>Teclado retroiluminado</translation>
+        <translation>Illuminazione tastiera</translation>
     </message>
     <message>
         <source>Always on</source>
-        <translation>Siempre encendido</translation>
+        <translation>Sempre attivo</translation>
     </message>
     <message>
         <source>Auto turn off in 10 sec</source>
-        <translation>Apagar automáticamente en 10 sec</translation>
+        <translation>Spegni dopo 10 secondi</translation>
     </message>
     <message>
         <source>FN ⇄ Super</source>
@@ -101,23 +101,23 @@
     </message>
     <message>
         <source>WebCam</source>
-        <translation>Cámara Web</translation>
+        <translation>WebCam</translation>
     </message>
     <message>
         <source>USB Power Share</source>
-        <translation>Reparto del energía USB</translation>
+        <translation>USB Power Share</translation>
     </message>
     <message>
         <source>Debug</source>
-        <translation>Depurar</translation>
+        <translation>Debug</translation>
     </message>
     <message>
         <source>About</source>
-        <translation>Acerca de</translation>
+        <translation>About</translation>
     </message>
     <message>
         <source>Version:</source>
-        <translation>Versión:</translation>
+        <translation>Versione:</translation>
     </message>
     <message>
         <source>GitHub:</source>
@@ -125,43 +125,43 @@
     </message>
     <message>
         <source>Charging status:</source>
-        <translation>Estado de la carga:</translation>
+        <translation>Stato della carica</translation>
     </message>
     <message>
         <source>Charging</source>
-        <translation>Cargando</translation>
+        <translation>Caricando</translation>
     </message>
     <message>
         <source>Discharging</source>
-        <translation>Descargando</translation>
+        <translation>Scaricando</translation>
     </message>
     <message>
         <source>Not charging</source>
-        <translation>No carga</translation>
+        <translation>Non in carica</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation>Desconocido</translation>
+        <translation>Sconosciuto</translation>
     </message>
     <message>
         <source>Bug tracker:</source>
-        <translation>Seguimiento de Bugs:</translation>
+        <translation>Bug tracker:</translation>
     </message>
     <message>
         <source>An application that allows you to change the settings of MSI laptops running Linux</source>
-        <translation>Una aplicación que te permite cambiar los ajustes de tus portátiles en MSI en Linux</translation>
+        <translation>Una applicazione che permette di cambiare le impostazioni di laptop MSI su Linux</translation>
     </message>
     <message>
         <source>Swap FN and Super buttons</source>
-        <translation>Intercambiar botones FN y Super</translation>
+        <translation>Scambia tasti FN e Super</translation>
     </message>
     <message>
         <source>Fully charged</source>
-        <translation>Totalmente cargada</translation>
+        <translation>Completamente carico</translation>
     </message>
     <message>
         <source>Fully charged (Discharging)</source>
-        <translation>Totalmente cargada (Descargando)</translation>
+        <translation>Completamente carico (In scaricamento)</translation>
     </message>
     <message>
         <source>rpm</source>
@@ -169,79 +169,79 @@
     </message>
     <message>
         <source>Mode</source>
-        <translation>Modo</translation>
+        <translation>Modalità</translation>
     </message>
     <message>
         <source>High Performance</source>
-        <translation>Alto rendimiento</translation>
+        <translation>Alta Performance</translation>
     </message>
     <message>
         <source>A mode that brings a balance between performance and battery live</source>
-        <translation>Brinda un equilibrio entre rendimiento y el cuidado de vida de la batería</translation>
+        <translation>Modalità che apporta bilanciamento tra performance e vita della batteria</translation>
     </message>
     <message>
         <source>Silent</source>
-        <translation>Silencioso</translation>
+        <translation>Silenzioso</translation>
     </message>
     <message>
         <source>Super Battery</source>
-        <translation>Super Batería</translation>
+        <translation>Super Batteria</translation>
     </message>
     <message>
         <source>A mode that provides the best system performance for multi-tasking and heavy duty</source>
-        <translation>Provee del mejor rendimiento para multi-tareas y trabajos pesados</translation>
+        <translation>Modalità che apporta il massimo della performance per multi-tasking e carichi pesanti</translation>
     </message>
     <message>
         <source>A quiet mode that lowers the fan noise</source>
-        <translation>Modo silencioso que reduce el ruido de los ventiladores</translation>
+        <translation>Modalità silenziosa che abbassa il rumore delle ventole</translation>
     </message>
     <message>
         <source>A power-saving mode that lowers the power consumption for basic needs</source>
-        <translation>Modo de ahorro de energía que reduce el consumo de energía para tareas básicas</translation>
+        <translation>Modalità risparmio batteria che abbassa il consumo energico per un uso base</translation>
     </message>
     <message>
         <source>Failed to load the ec_sys kernel module</source>
-        <translation>No se pudo cargar el módulo del kernel ec_sys</translation>
+        <translation>Fallito tentativo di caricare il modulo kernel ec_sys</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation>Aplicar</translation>
+        <translation>Applica</translation>
     </message>
     <message>
         <source>Show</source>
-        <translation>Mostrar</translation>
+        <translation>Mostra</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation>Salir</translation>
+        <translation>Esci</translation>
     </message>
     <message>
         <source>Charge limit</source>
-        <translation>Límite de carga</translation>
+        <translation>Carica limite</translation>
     </message>
     <message>
         <source>Fan Mode:</source>
-        <translation>Modo del Ventilador:</translation>
+        <translation>Modalità Ventola:</translation>
     </message>
     <message>
         <source>Auto</source>
-        <translation>Automático</translation>
+        <translation>Auto</translation>
     </message>
     <message>
         <source>Basic</source>
-        <translation>Básico</translation>
+        <translation>Base</translation>
     </message>
     <message>
         <source>Advanced</source>
-        <translation>Avanzado</translation>
+        <translation>Avanzato</translation>
     </message>
     <message>
         <source>Choose the mode that best suits your use case</source>
-        <translation>Elija el modo que mejor se adapte a su caso de uso</translation>
+        <translation>Scegli la modalità si adatta meglio alle tue necessità</translation>
     </message>
     <message>
         <source>Cooling</source>
-        <translation>Enfriamiento</translation>
+        <translation>Raffreddamento</translation>
     </message>
 </context>
 </TS>
