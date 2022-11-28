@@ -5,15 +5,15 @@
     <name>MainWindow</name>
     <message>
         <source>Info</source>
-        <translation>Info</translation>
+        <translation>Información</translation>
     </message>
     <message>
         <source>EC Version:</source>
-        <translation>EC Version:</translation>
+        <translation>Versión del EC:</translation>
     </message>
     <message>
         <source>EC Build:</source>
-        <translation>EC Build:</translation>
+        <translation>Compilación del EC:</translation>
     </message>
     <message>
         <source>Battery charge:</source>
@@ -101,15 +101,15 @@
     </message>
     <message>
         <source>WebCam</source>
-        <translation>WebCam</translation>
+        <translation>Cámara Web</translation>
     </message>
     <message>
         <source>USB Power Share</source>
-        <translation>USB Power Share</translation>
+        <translation>Reparto del energía USB</translation>
     </message>
     <message>
         <source>Debug</source>
-        <translation>Debug</translation>
+        <translation>Depurar</translation>
     </message>
     <message>
         <source>About</source>
@@ -201,47 +201,47 @@
     </message>
     <message>
         <source>Failed to load the ec_sys kernel module</source>
-        <translation type="unfinished"></translation>
+        <translation>No se pudo cargar el módulo del kernel ec_sys</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Aplicar</translation>
     </message>
     <message>
         <source>Show</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>Salir</translation>
     </message>
     <message>
         <source>Charge limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Límite de carga</translation>
     </message>
     <message>
         <source>Fan Mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>Modo del Ventilador:</translation>
     </message>
     <message>
         <source>Auto</source>
-        <translation type="unfinished"></translation>
+        <translation>Automático</translation>
     </message>
     <message>
         <source>Basic</source>
-        <translation type="unfinished"></translation>
+        <translation>Básico</translation>
     </message>
     <message>
         <source>Advanced</source>
-        <translation type="unfinished"></translation>
+        <translation>Avanzado</translation>
     </message>
     <message>
         <source>Choose the mode that best suits your use case</source>
-        <translation type="unfinished"></translation>
+        <translation>Elija el modo que mejor se adapte a su caso de uso</translation>
     </message>
     <message>
         <source>Cooling</source>
-        <translation type="unfinished"></translation>
+        <translation>Enfriamiento</translation>
     </message>
 </context>
 </TS>
