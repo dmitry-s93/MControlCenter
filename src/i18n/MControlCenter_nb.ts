@@ -221,27 +221,27 @@
     </message>
     <message>
         <source>Fan Mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>Viftemodus:</translation>
     </message>
     <message>
         <source>Auto</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatisk</translation>
     </message>
     <message>
         <source>Basic</source>
-        <translation type="unfinished"></translation>
+        <translation>Grunnleggende</translation>
     </message>
     <message>
         <source>Advanced</source>
-        <translation type="unfinished"></translation>
+        <translation>Avansert</translation>
     </message>
     <message>
         <source>Choose the mode that best suits your use case</source>
-        <translation type="unfinished"></translation>
+        <translation>Velg modusen som passer best til ditt bruk</translation>
     </message>
     <message>
         <source>Cooling</source>
-        <translation type="unfinished"></translation>
+        <translation>Kjøling</translation>
     </message>
 </context>
 </TS>
