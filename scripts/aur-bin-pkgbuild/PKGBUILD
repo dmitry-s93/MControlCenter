@@ -1,7 +1,7 @@
 # Maintainer: X
 # Contributor: JordanViknar
 pkgname=mcontrolcenter-bin
-pkgver=0.3.1
+pkgver=0.3.2
 pkgrel=1
 pkgdesc="An application that allows you to change the settings of MSI laptops running Linux."
 arch=('x86_64')
@@ -15,7 +15,7 @@ provides=('mcontrolcenter')
 
 source=("https://github.com/dmitry-s93/MControlCenter/releases/download/${pkgver}/MControlCenter-${pkgver}.tar.gz")
 
-sha256sums=('085a03fde36ed7bb0ee1424ba3e1f223c1f6bef1d913d4c85c0bdc85171b3308')
+sha256sums=('bab563f692fb3d42494d95de21611d230e0b0736e2e80f08cf8a1b7b990d9f0f')
 
 package() {
   app_directory="${srcdir}/MControlCenter-${pkgver}/app"
