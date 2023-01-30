@@ -1,6 +1,7 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+Updated Norwegian Bokmål (Thanks [msigurdsen](https://github.com/msigurdsen))
 
 ## Unreleased
 
