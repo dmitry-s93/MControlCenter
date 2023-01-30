@@ -1,9 +1,9 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-Updated Norwegian Bokmål (Thanks [msigurdsen](https://github.com/msigurdsen))
 
 ## Unreleased
+Updated Norwegian Bokmål (Thanks [msigurdsen](https://github.com/msigurdsen))
 
 ## [0.3.2] 2022-11-28
 - Added fan mode display
