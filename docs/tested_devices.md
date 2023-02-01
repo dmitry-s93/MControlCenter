@@ -9,5 +9,6 @@
 | MSI Modern 15 A11M            | 1552EMS1.118 07/21/2021 | ✔ Mode<br> ✔ Battery Limit<br> ✔ Cooler Boost | ✔ Keyboard Backlit (auto turn off not working)<br> ✔ FN -> Super<br> ✔ Webcam<br>  ❌ USB Power Share                          |
 | MSI Modern 15 A11SB           | 1552EMS1.120 01/11/2022 | ✔ Mode<br> ✔ Battery Limit<br> ✔ Cooler Boost | ✔ Keyboard Backlit (auto turn off not working)<br> ✔ FN -> Super<br> ✔ Webcam<br>  ❌ USB Power Share (greyed out)             |
 | MSI Prestige 14 Evo           | 14C4EMS1.120 04/25/2022 | ✔ Mode<br> ✔ Battery Limit<br> ✔ Cooler Boost | ✔ Keyboard Backlit (auto turn off not working)<br> ✔ FN -> Super<br> ❌ Webcam (greyed out)<br> ❌ USB Power Share (greyed out) |
-| Summit E13FlipEvo A11MT       | 13P2EMS1.110 09/08/2021 | ✔ Mode<br> ✔ Battery Limit<br> ✔ Cooler Boost | ✔ Keyboard Backlit<br> ✔ FN -> Super<br> ✔ Webcam <br> ❌ USB Power Share (greyed out) |
+| Summit E13FlipEvo A11MT       | 13P2EMS1.110 09/08/2021 | ✔ Mode<br> ✔ Battery Limit<br> ✔ Cooler Boost | ✔ Keyboard Backlit<br> ✔ FN -> Super<br> ✔ Webcam <br> ❌ USB Power Share (greyed out)                                         |
+
 If the table does not contain the device you are using, then you can add it.
