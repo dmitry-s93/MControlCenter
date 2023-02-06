@@ -61,6 +61,11 @@ const int fan1Address_0xC9 = 0xC9;
 const int fan1Address_0xCD = 0xCD;
 const int fan2Address = 0xCB;
 
+const int fan1SpeedSettingAddress = 0x72;
+const int fan2SpeedSettingAddress = 0x8A;
+const int fan1TempSettingAddress = 0x6A;
+const int fan2TempSettingAddress = 0x82;
+
 // Modes
 const int shiftModeAddress = 0xD2;
 const int shiftMode0 = 0xC0;
@@ -161,6 +166,22 @@ int Operate::getFan2Speed() const {
     if (value > 0)
         return 470000 / value;
     return value;
+}
+
+int Operate::getFan1SpeedSetting(int index) const {
+    return helper.getValue(fan1SpeedSettingAddress + index);
+}
+
+int Operate::getFan2SpeedSetting(int index) const {
+    return helper.getValue(fan2SpeedSettingAddress + index);
+}
+
+int Operate::getFan1TempSetting(int index) const {
+    return helper.getValue(fan1TempSettingAddress + index);
+}
+
+int Operate::getFan2TempSetting(int index) const {
+    return helper.getValue(fan2TempSettingAddress + index);
 }
 
 int Operate::getKeyboardBacklightMode() const {
@@ -305,31 +326,56 @@ void Operate::setUserMode(user_mode userMode) const {
     switch (userMode) {
         case user_mode::balanced_mode:
             helper.putValue(shiftModeAddress, shiftMode1);
-            helper.putValue(fanModeAddress, fanModeAuto);
+            setFanMode(fanModeAuto);
             putSuperBatteryModeValue(false);
             Settings::setValue(settingsGroup + "UserMode", "balanced_mode");
             break;
         case user_mode::performance_mode:
             helper.putValue(shiftModeAddress, shiftMode0);
-            helper.putValue(fanModeAddress, fanModeAuto);
+            setFanMode(fanModeAuto);
             putSuperBatteryModeValue(false);
             Settings::setValue(settingsGroup + "UserMode", "performance_mode");
             break;
         case user_mode::silent_mode:
             helper.putValue(shiftModeAddress, shiftMode1);
-            helper.putValue(fanModeAddress, fanModeSilent);
+            setFanMode(fanModeSilent);
             putSuperBatteryModeValue(false);
             Settings::setValue(settingsGroup + "UserMode", "silent_mode");
             break;
         case user_mode::super_battery_mode:
             helper.putValue(shiftModeAddress, shiftMode2);
-            helper.putValue(fanModeAddress, fanModeAuto);
+            setFanMode(fanModeAuto);
             putSuperBatteryModeValue(true);
             Settings::setValue(settingsGroup + "UserMode", "super_battery_mode");
             break;
         default:
             break;
     }
+}
+
+void Operate::setFan1SpeedSetting(int index, int value) const {
+    if (index < 0 || index > 6)
+        return;
+    helper.putValue(fan1SpeedSettingAddress + index, value);
+}
+
+void Operate::setFan2SpeedSetting(int index, int value) const {
+    if (index < 0 || index > 6)
+        return;
+    helper.putValue(fan2SpeedSettingAddress + index, value);
+}
+
+void Operate::setFanMode(int value) const {
+    if (helper.getValue(fanModeAddress) == fanModeAdvanced)
+        return;
+    helper.putValue(fanModeAddress, value);
+}
+
+void Operate::setFanModeAdvanced(bool enabled) const {
+    if (enabled)
+        helper.putValue(fanModeAddress, fanModeAdvanced);
+    else
+        helper.putValue(fanModeAddress, fanModeAuto);
 }
 
 int Operate::getValue(int address) const {

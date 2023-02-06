@@ -64,6 +64,10 @@ public:
     [[nodiscard]] int getGpuTemp() const;
     [[nodiscard]] int getFan1Speed() const;
     [[nodiscard]] int getFan2Speed() const;
+    [[nodiscard]] int getFan1SpeedSetting(int index) const;
+    [[nodiscard]] int getFan2SpeedSetting(int index) const;
+    [[nodiscard]] int getFan1TempSetting(int index) const;
+    [[nodiscard]] int getFan2TempSetting(int index) const;
 
     [[nodiscard]] int getKeyboardBacklightMode() const;
     [[nodiscard]] int getKeyboardBrightness() const;
@@ -82,6 +86,10 @@ public:
     void setFnSuperSwapState(bool enabled) const;
     void setCoolerBoostState(bool enabled) const;
     void setUserMode(user_mode userMode) const;
+    void setFan1SpeedSetting(int index, int value) const;
+    void setFan2SpeedSetting(int index, int value) const;
+    void setFanMode(int value) const;
+    void setFanModeAdvanced(bool enabled) const;
 
     [[nodiscard]] int getValue(int address) const;
     void setValue(int address, int value) const;
