@@ -21,6 +21,7 @@
 
 
 #include <string>
+#include <vector>
 
 enum class charging_state {
     battery_charging,
@@ -64,10 +65,10 @@ public:
     [[nodiscard]] int getGpuTemp() const;
     [[nodiscard]] int getFan1Speed() const;
     [[nodiscard]] int getFan2Speed() const;
-    [[nodiscard]] int getFan1SpeedSetting(int index) const;
-    [[nodiscard]] int getFan2SpeedSetting(int index) const;
-    [[nodiscard]] int getFan1TempSetting(int index) const;
-    [[nodiscard]] int getFan2TempSetting(int index) const;
+    [[nodiscard]] std::vector<int> getFan1SpeedSettings() const;
+    [[nodiscard]] std::vector<int> getFan2SpeedSettings() const;
+    [[nodiscard]] std::vector<int> getFan1TempSettings() const;
+    [[nodiscard]] std::vector<int> getFan2TempSettings() const;
 
     [[nodiscard]] int getKeyboardBacklightMode() const;
     [[nodiscard]] int getKeyboardBrightness() const;
@@ -86,8 +87,10 @@ public:
     void setFnSuperSwapState(bool enabled) const;
     void setCoolerBoostState(bool enabled) const;
     void setUserMode(user_mode userMode) const;
-    void setFan1SpeedSetting(int index, int value) const;
-    void setFan2SpeedSetting(int index, int value) const;
+    void setFan1SpeedSettings(std::vector<int> value) const;
+    void setFan2SpeedSettings(std::vector<int> value) const;
+    void setFan1TempSettings(std::vector<int> value) const;
+    void setFan2TempSettings(std::vector<int> value) const;
     void setFanMode(int value) const;
     void setFanModeAdvanced(bool enabled) const;
 

@@ -341,37 +341,42 @@ void MainWindow::updateFanMode() {
 }
 
 void MainWindow::updateFanSpeedSettings() {
-    ui->fan1Speed1Slider->setValue(operate.getFan1SpeedSetting(0));
-    ui->fan1Speed2Slider->setValue(operate.getFan1SpeedSetting(1));
-    ui->fan1Speed3Slider->setValue(operate.getFan1SpeedSetting(2));
-    ui->fan1Speed4Slider->setValue(operate.getFan1SpeedSetting(3));
-    ui->fan1Speed5Slider->setValue(operate.getFan1SpeedSetting(4));
-    ui->fan1Speed6Slider->setValue(operate.getFan1SpeedSetting(5));
-    ui->fan1Speed7Slider->setValue(operate.getFan1SpeedSetting(6));
+    std::vector fan1SpeedSettings = operate.getFan1SpeedSettings();
+    std::vector fan1TempSettings = operate.getFan1TempSettings();
+    std::vector fan2SpeedSettings = operate.getFan2SpeedSettings();
+    std::vector fan2TempSettings = operate.getFan2TempSettings();
 
-    ui->fan1Speed1TempLabel->setText(QString("< %1 °C").arg(operate.getFan1TempSetting(0)));
-    ui->fan1Speed2TempSpinBox->setValue(operate.getFan1TempSetting((0)));
-    ui->fan1Speed3TempSpinBox->setValue(operate.getFan1TempSetting((1)));
-    ui->fan1Speed4TempSpinBox->setValue(operate.getFan1TempSetting((2)));
-    ui->fan1Speed5TempSpinBox->setValue(operate.getFan1TempSetting((3)));
-    ui->fan1Speed6TempSpinBox->setValue(operate.getFan1TempSetting((4)));
-    ui->fan1Speed7TempSpinBox->setValue(operate.getFan1TempSetting((5)));
+    ui->fan1Speed1Slider->setValue(fan1SpeedSettings[0]);
+    ui->fan1Speed2Slider->setValue(fan1SpeedSettings[1]);
+    ui->fan1Speed3Slider->setValue(fan1SpeedSettings[2]);
+    ui->fan1Speed4Slider->setValue(fan1SpeedSettings[3]);
+    ui->fan1Speed5Slider->setValue(fan1SpeedSettings[4]);
+    ui->fan1Speed6Slider->setValue(fan1SpeedSettings[5]);
+    ui->fan1Speed7Slider->setValue(fan1SpeedSettings[6]);
 
-    ui->fan2Speed1Slider->setValue(operate.getFan2SpeedSetting(0));
-    ui->fan2Speed2Slider->setValue(operate.getFan2SpeedSetting(1));
-    ui->fan2Speed3Slider->setValue(operate.getFan2SpeedSetting(2));
-    ui->fan2Speed4Slider->setValue(operate.getFan2SpeedSetting(3));
-    ui->fan2Speed5Slider->setValue(operate.getFan2SpeedSetting(4));
-    ui->fan2Speed6Slider->setValue(operate.getFan2SpeedSetting(5));
-    ui->fan2Speed7Slider->setValue(operate.getFan2SpeedSetting(6));
+    ui->fan1Speed1TempLabel->setText(QString("< %1 °C").arg(fan1TempSettings[0]));
+    ui->fan1Speed2TempSpinBox->setValue(fan1TempSettings[0]);
+    ui->fan1Speed3TempSpinBox->setValue(fan1TempSettings[1]);
+    ui->fan1Speed4TempSpinBox->setValue(fan1TempSettings[2]);
+    ui->fan1Speed5TempSpinBox->setValue(fan1TempSettings[3]);
+    ui->fan1Speed6TempSpinBox->setValue(fan1TempSettings[4]);
+    ui->fan1Speed7TempSpinBox->setValue(fan1TempSettings[5]);
 
-    ui->fan2Speed1TempLabel->setText(QString("< %1 °C").arg(operate.getFan2TempSetting(0)));
-    ui->fan2Speed2TempSpinBox->setValue(operate.getFan2TempSetting((0)));
-    ui->fan2Speed3TempSpinBox->setValue(operate.getFan2TempSetting((1)));
-    ui->fan2Speed4TempSpinBox->setValue(operate.getFan2TempSetting((2)));
-    ui->fan2Speed5TempSpinBox->setValue(operate.getFan2TempSetting((3)));
-    ui->fan2Speed6TempSpinBox->setValue(operate.getFan2TempSetting((4)));
-    ui->fan2Speed7TempSpinBox->setValue(operate.getFan2TempSetting((5)));
+    ui->fan2Speed1Slider->setValue(fan2SpeedSettings[0]);
+    ui->fan2Speed2Slider->setValue(fan2SpeedSettings[1]);
+    ui->fan2Speed3Slider->setValue(fan2SpeedSettings[2]);
+    ui->fan2Speed4Slider->setValue(fan2SpeedSettings[3]);
+    ui->fan2Speed5Slider->setValue(fan2SpeedSettings[4]);
+    ui->fan2Speed6Slider->setValue(fan2SpeedSettings[5]);
+    ui->fan2Speed7Slider->setValue(fan2SpeedSettings[6]);
+
+    ui->fan2Speed1TempLabel->setText(QString("< %1 °C").arg(fan2TempSettings[0]));
+    ui->fan2Speed2TempSpinBox->setValue(fan2TempSettings[0]);
+    ui->fan2Speed3TempSpinBox->setValue(fan2TempSettings[1]);
+    ui->fan2Speed4TempSpinBox->setValue(fan2TempSettings[2]);
+    ui->fan2Speed5TempSpinBox->setValue(fan2TempSettings[3]);
+    ui->fan2Speed6TempSpinBox->setValue(fan2TempSettings[4]);
+    ui->fan2Speed7TempSpinBox->setValue(fan2TempSettings[5]);
 }
 
 void MainWindow::setBestMobility() {
@@ -416,21 +421,45 @@ void MainWindow::setCoolerBoostState(bool enabled) const {
 }
 
 void MainWindow::setFanSpeedSettings() {
-    operate.setFan1SpeedSetting(0, ui->fan1Speed1Slider->value());
-    operate.setFan1SpeedSetting(1, ui->fan1Speed2Slider->value());
-    operate.setFan1SpeedSetting(2, ui->fan1Speed3Slider->value());
-    operate.setFan1SpeedSetting(3, ui->fan1Speed4Slider->value());
-    operate.setFan1SpeedSetting(4, ui->fan1Speed5Slider->value());
-    operate.setFan1SpeedSetting(5, ui->fan1Speed6Slider->value());
-    operate.setFan1SpeedSetting(6, ui->fan1Speed7Slider->value());
+    std::vector<int> fan1SpeedSettings;
+    std::vector<int> fan1TempSettings;
+    std::vector<int> fan2SpeedSettings;
+    std::vector<int> fan2TempSettings;
 
-    operate.setFan2SpeedSetting(0, ui->fan2Speed1Slider->value());
-    operate.setFan2SpeedSetting(1, ui->fan2Speed2Slider->value());
-    operate.setFan2SpeedSetting(2, ui->fan2Speed3Slider->value());
-    operate.setFan2SpeedSetting(3, ui->fan2Speed4Slider->value());
-    operate.setFan2SpeedSetting(4, ui->fan2Speed5Slider->value());
-    operate.setFan2SpeedSetting(5, ui->fan2Speed6Slider->value());
-    operate.setFan2SpeedSetting(6, ui->fan2Speed7Slider->value());
+    fan1SpeedSettings.push_back(ui->fan1Speed1Slider->value());
+    fan1SpeedSettings.push_back(ui->fan1Speed2Slider->value());
+    fan1SpeedSettings.push_back(ui->fan1Speed3Slider->value());
+    fan1SpeedSettings.push_back(ui->fan1Speed4Slider->value());
+    fan1SpeedSettings.push_back(ui->fan1Speed5Slider->value());
+    fan1SpeedSettings.push_back(ui->fan1Speed6Slider->value());
+    fan1SpeedSettings.push_back(ui->fan1Speed7Slider->value());
+
+    fan1TempSettings.push_back(ui->fan1Speed2TempSpinBox->value());
+    fan1TempSettings.push_back(ui->fan1Speed3TempSpinBox->value());
+    fan1TempSettings.push_back(ui->fan1Speed4TempSpinBox->value());
+    fan1TempSettings.push_back(ui->fan1Speed5TempSpinBox->value());
+    fan1TempSettings.push_back(ui->fan1Speed6TempSpinBox->value());
+    fan1TempSettings.push_back(ui->fan1Speed7TempSpinBox->value());
+
+    fan2SpeedSettings.push_back(ui->fan2Speed1Slider->value());
+    fan2SpeedSettings.push_back(ui->fan2Speed2Slider->value());
+    fan2SpeedSettings.push_back(ui->fan2Speed3Slider->value());
+    fan2SpeedSettings.push_back(ui->fan2Speed4Slider->value());
+    fan2SpeedSettings.push_back(ui->fan2Speed5Slider->value());
+    fan2SpeedSettings.push_back(ui->fan2Speed6Slider->value());
+    fan2SpeedSettings.push_back(ui->fan2Speed7Slider->value());
+
+    fan2TempSettings.push_back(ui->fan2Speed2TempSpinBox->value());
+    fan2TempSettings.push_back(ui->fan2Speed3TempSpinBox->value());
+    fan2TempSettings.push_back(ui->fan2Speed4TempSpinBox->value());
+    fan2TempSettings.push_back(ui->fan2Speed5TempSpinBox->value());
+    fan2TempSettings.push_back(ui->fan2Speed6TempSpinBox->value());
+    fan2TempSettings.push_back(ui->fan2Speed7TempSpinBox->value());
+
+    operate.setFan1SpeedSettings(fan1SpeedSettings);
+    operate.setFan1TempSettings(fan1TempSettings);
+    operate.setFan2SpeedSettings(fan2SpeedSettings);
+    operate.setFan2TempSettings(fan2TempSettings);
 }
 
 void MainWindow::setFanModeAdvanced(bool enabled) const {

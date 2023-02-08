@@ -61,10 +61,13 @@ const int fan1Address_0xC9 = 0xC9;
 const int fan1Address_0xCD = 0xCD;
 const int fan2Address = 0xCB;
 
-const int fan1SpeedSettingAddress = 0x72;
-const int fan2SpeedSettingAddress = 0x8A;
-const int fan1TempSettingAddress = 0x6A;
-const int fan2TempSettingAddress = 0x82;
+const int fan1SpeedSettingStartAddress = 0x72;
+const int fan2SpeedSettingStartAddress = 0x8A;
+const int fanSpeedSettingsCount = 7;
+const int fan1TempSettingStartAddress = 0x6A;
+const int fan2TempSettingStartAddress = 0x82;
+const int fanTempSettingsCount = fanSpeedSettingsCount - 1;
+
 
 // Modes
 const int shiftModeAddress = 0xD2;
@@ -168,20 +171,36 @@ int Operate::getFan2Speed() const {
     return value;
 }
 
-int Operate::getFan1SpeedSetting(int index) const {
-    return helper.getValue(fan1SpeedSettingAddress + index);
+std::vector<int> Operate::getFan1SpeedSettings() const {
+    std::vector<int> a;
+    for (int i = 0; i < fanSpeedSettingsCount; i++) {
+        a.push_back(helper.getValue(fan1SpeedSettingStartAddress + i));
+    }
+    return a;
 }
 
-int Operate::getFan2SpeedSetting(int index) const {
-    return helper.getValue(fan2SpeedSettingAddress + index);
+std::vector<int> Operate::getFan2SpeedSettings() const {
+    std::vector<int> a;
+    for (int i = 0; i < fanSpeedSettingsCount; i++) {
+        a.push_back(helper.getValue(fan2SpeedSettingStartAddress + i));
+    }
+    return a;
 }
 
-int Operate::getFan1TempSetting(int index) const {
-    return helper.getValue(fan1TempSettingAddress + index);
+std::vector<int> Operate::getFan1TempSettings() const {
+    std::vector<int> a;
+    for (int i = 0; i < fanTempSettingsCount; i++) {
+        a.push_back(helper.getValue(fan1TempSettingStartAddress + i));
+    }
+    return a;
 }
 
-int Operate::getFan2TempSetting(int index) const {
-    return helper.getValue(fan2TempSettingAddress + index);
+std::vector<int> Operate::getFan2TempSettings() const {
+    std::vector<int> a;
+    for (int i = 0; i < fanTempSettingsCount; i++) {
+        a.push_back(helper.getValue(fan2TempSettingStartAddress + i));
+    }
+    return a;
 }
 
 int Operate::getKeyboardBacklightMode() const {
@@ -353,16 +372,28 @@ void Operate::setUserMode(user_mode userMode) const {
     }
 }
 
-void Operate::setFan1SpeedSetting(int index, int value) const {
-    if (index < 0 || index > 6)
-        return;
-    helper.putValue(fan1SpeedSettingAddress + index, value);
+void Operate::setFan1SpeedSettings(std::vector<int> value) const {
+    for (int i = 0; i < value.size(); i++) {
+        helper.putValue(fan1SpeedSettingStartAddress + i, value[i]);
+    }
 }
 
-void Operate::setFan2SpeedSetting(int index, int value) const {
-    if (index < 0 || index > 6)
-        return;
-    helper.putValue(fan2SpeedSettingAddress + index, value);
+void Operate::setFan2SpeedSettings(std::vector<int> value) const {
+    for (int i = 0; i < value.size(); i++) {
+        helper.putValue(fan2SpeedSettingStartAddress + i, value[i]);
+    }
+}
+
+void Operate::setFan1TempSettings(std::vector<int> value) const {
+    for (int i = 0; i < value.size(); i++) {
+        helper.putValue(fan1TempSettingStartAddress + i, value[i]);
+    }
+}
+
+void Operate::setFan2TempSettings(std::vector<int> value) const {
+    for (int i = 0; i < value.size(); i++) {
+        helper.putValue(fan2TempSettingStartAddress + i, value[i]);
+    }
 }
 
 void Operate::setFanMode(int value) const {
