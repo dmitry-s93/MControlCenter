@@ -171,32 +171,32 @@ int Operate::getFan2Speed() const {
     return value;
 }
 
-std::vector<int> Operate::getFan1SpeedSettings() const {
-    std::vector<int> a;
+QVector<int> Operate::getFan1SpeedSettings() const {
+    QVector<int> a;
     for (int i = 0; i < fanSpeedSettingsCount; i++) {
         a.push_back(helper.getValue(fan1SpeedSettingStartAddress + i));
     }
     return a;
 }
 
-std::vector<int> Operate::getFan2SpeedSettings() const {
-    std::vector<int> a;
+QVector<int> Operate::getFan2SpeedSettings() const {
+    QVector<int> a;
     for (int i = 0; i < fanSpeedSettingsCount; i++) {
         a.push_back(helper.getValue(fan2SpeedSettingStartAddress + i));
     }
     return a;
 }
 
-std::vector<int> Operate::getFan1TempSettings() const {
-    std::vector<int> a;
+QVector<int> Operate::getFan1TempSettings() const {
+    QVector<int> a;
     for (int i = 0; i < fanTempSettingsCount; i++) {
         a.push_back(helper.getValue(fan1TempSettingStartAddress + i));
     }
     return a;
 }
 
-std::vector<int> Operate::getFan2TempSettings() const {
-    std::vector<int> a;
+QVector<int> Operate::getFan2TempSettings() const {
+    QVector<int> a;
     for (int i = 0; i < fanTempSettingsCount; i++) {
         a.push_back(helper.getValue(fan2TempSettingStartAddress + i));
     }
@@ -372,28 +372,40 @@ void Operate::setUserMode(user_mode userMode) const {
     }
 }
 
-void Operate::setFan1SpeedSettings(std::vector<int> value) const {
+void Operate::setFan1SpeedSettings(QVector<int> value) const {
+    if (value.size() != fanSpeedSettingsCount)
+        return;
     for (int i = 0; i < value.size(); i++) {
         helper.putValue(fan1SpeedSettingStartAddress + i, value[i]);
     }
+    Settings::setValue(settingsGroup + QString("fan1SpeedSettings"), value);
 }
 
-void Operate::setFan2SpeedSettings(std::vector<int> value) const {
+void Operate::setFan2SpeedSettings(QVector<int> value) const {
+    if (value.size() != fanSpeedSettingsCount)
+        return;
     for (int i = 0; i < value.size(); i++) {
         helper.putValue(fan2SpeedSettingStartAddress + i, value[i]);
     }
+    Settings::setValue(settingsGroup + QString("fan2SpeedSettings"), value);
 }
 
-void Operate::setFan1TempSettings(std::vector<int> value) const {
+void Operate::setFan1TempSettings(QVector<int> value) const {
+    if (value.size() != fanTempSettingsCount)
+        return;
     for (int i = 0; i < value.size(); i++) {
         helper.putValue(fan1TempSettingStartAddress + i, value[i]);
     }
+    Settings::setValue(settingsGroup + QString("fan1TempSettings"), value);
 }
 
-void Operate::setFan2TempSettings(std::vector<int> value) const {
+void Operate::setFan2TempSettings(QVector<int> value) const {
+    if (value.size() != fanTempSettingsCount)
+        return;
     for (int i = 0; i < value.size(); i++) {
         helper.putValue(fan2TempSettingStartAddress + i, value[i]);
     }
+    Settings::setValue(settingsGroup + QString("fan2TempSettings"), value);
 }
 
 void Operate::setFanMode(int value) const {
@@ -407,6 +419,7 @@ void Operate::setFanModeAdvanced(bool enabled) const {
         helper.putValue(fanModeAddress, fanModeAdvanced);
     else
         helper.putValue(fanModeAddress, fanModeAuto);
+    Settings::setValue(settingsGroup + "fanModeAdvanced", enabled);
 }
 
 int Operate::getValue(int address) const {
@@ -457,6 +470,17 @@ void Operate::loadSettings() const {
         setFnSuperSwapState(s.getValue(settingsGroup + "FnSuperSwap").toBool());
     if (isUsbPowerShareSupport() && s.isValueExist(settingsGroup + "UsbPowerShare"))
         setUsbPowerShareState(s.getValue(settingsGroup + "UsbPowerShare").toBool());
+
+    if (s.isValueExist(settingsGroup + "fan1SpeedSettings"))
+        setFan1SpeedSettings(s.getValueVector(settingsGroup + "fan1SpeedSettings"));
+    if (s.isValueExist(settingsGroup + "fan2SpeedSettings"))
+        setFan2SpeedSettings(s.getValueVector(settingsGroup + "fan2SpeedSettings"));
+    if (s.isValueExist(settingsGroup + "fan1TempSettings"))
+        setFan1TempSettings(s.getValueVector(settingsGroup + "fan1TempSettings"));
+    if (s.isValueExist(settingsGroup + "fan2TempSettings"))
+        setFan2TempSettings(s.getValueVector(settingsGroup + "fan2TempSettings"));
+    if (s.isValueExist(settingsGroup + "fanModeAdvanced"))
+        setFanModeAdvanced(s.getValue(settingsGroup + "fanModeAdvanced").toBool());
 }
 
 void Operate::putSuperBatteryModeValue(bool enabled) const {

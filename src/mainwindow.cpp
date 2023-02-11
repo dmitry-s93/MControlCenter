@@ -341,10 +341,12 @@ void MainWindow::updateFanMode() {
 }
 
 void MainWindow::updateFanSpeedSettings() {
-    std::vector fan1SpeedSettings = operate.getFan1SpeedSettings();
-    std::vector fan1TempSettings = operate.getFan1TempSettings();
-    std::vector fan2SpeedSettings = operate.getFan2SpeedSettings();
-    std::vector fan2TempSettings = operate.getFan2TempSettings();
+    ui->advancedFanControlCheckBox->setChecked(operate.getFanMode() == fan_mode::advanced_fan_mode);
+
+    QVector fan1SpeedSettings = operate.getFan1SpeedSettings();
+    QVector fan1TempSettings = operate.getFan1TempSettings();
+    QVector fan2SpeedSettings = operate.getFan2SpeedSettings();
+    QVector fan2TempSettings = operate.getFan2TempSettings();
 
     ui->fan1Speed1Slider->setValue(fan1SpeedSettings[0]);
     ui->fan1Speed2Slider->setValue(fan1SpeedSettings[1]);
@@ -421,10 +423,10 @@ void MainWindow::setCoolerBoostState(bool enabled) const {
 }
 
 void MainWindow::setFanSpeedSettings() {
-    std::vector<int> fan1SpeedSettings;
-    std::vector<int> fan1TempSettings;
-    std::vector<int> fan2SpeedSettings;
-    std::vector<int> fan2TempSettings;
+    QVector<int> fan1SpeedSettings;
+    QVector<int> fan1TempSettings;
+    QVector<int> fan2SpeedSettings;
+    QVector<int> fan2TempSettings;
 
     fan1SpeedSettings.push_back(ui->fan1Speed1Slider->value());
     fan1SpeedSettings.push_back(ui->fan1Speed2Slider->value());
