@@ -36,9 +36,10 @@ This is QT application. You may need to install `libqt5widgets5` to run.
 
 ### Installation from the archive
 
-1. Unpack the archive with the program
-2. Open terminal in unpacked directory
-3. Run the script `sudo ./install`
+1. Download `MControlCenter-x.x.x.tar.gz` from the releases page
+2. Unpack the archive with the program
+3. Open terminal in unpacked directory
+4. Run the script `sudo ./install`
 
 ### Installation from the repository
 
