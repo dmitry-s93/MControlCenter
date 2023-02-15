@@ -466,6 +466,9 @@ void MainWindow::setFanSpeedSettings() {
 
 void MainWindow::setFanModeAdvanced(bool enabled) const {
     operate.setFanModeAdvanced(enabled);
+    ui->fanControlTabWidget->setEnabled(enabled);
+    ui->fanSpeedResetButton->setEnabled(enabled);
+    ui->fanSpeedApplyButton->setEnabled(enabled);
 }
 
 void MainWindow::showEvent(QShowEvent *event) {
