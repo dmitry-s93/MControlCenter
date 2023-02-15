@@ -1,7 +1,7 @@
 # MControlCenter
 
 MControlCenter is a Free and Open Source GNU/Linux application that allows you to change the settings of MSI laptops.
-![Screenshots of MControlCenter](https://user-images.githubusercontent.com/12676622/204340408-9a488cb5-2e1b-4cee-87fd-2c2327f3f611.png)
+![Screenshots of MControlCenter](https://user-images.githubusercontent.com/12676622/219121128-0476b54b-3330-40c7-b7ac-8d4a884f8abd.png)
 
 ## Features
 
@@ -13,11 +13,12 @@ MControlCenter is a Free and Open Source GNU/Linux application that allows you t
    - Silent
    - Super Battery
  - Change the maximum battery level limit
+ - Advanced Fan Speed Control (Since version 0.4)
  - Change other settings such as keyboard backlight mode, USB Power Share, etc.
 
 ## TODO
 
- - Add the ability to adjust the fan speed
+- Saving multiple fan speed profiles
 
 ## Tested on
 
