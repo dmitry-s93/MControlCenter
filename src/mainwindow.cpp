@@ -33,7 +33,42 @@ MainWindow::MainWindow(QWidget *parent)
         : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
 
-    connect(qApp, &QGuiApplication::saveStateRequest,this, &MainWindow::saveStateRequest);
+    connect(ui->advancedFanControlCheckBox, &QCheckBox::toggled, this, &MainWindow::setFanModeAdvanced);
+
+    connect(ui->fan1Speed1Slider, &QSlider::valueChanged, this,
+            [=]() { this->ui->fan1Speed1Label->setText(QString("%1%").arg(ui->fan1Speed1Slider->value())); });
+    connect(ui->fan1Speed2Slider, &QSlider::valueChanged, this,
+            [=]() { this->ui->fan1Speed2Label->setText(QString("%1%").arg(ui->fan1Speed2Slider->value())); });
+    connect(ui->fan1Speed3Slider, &QSlider::valueChanged, this,
+            [=]() { this->ui->fan1Speed3Label->setText(QString("%1%").arg(ui->fan1Speed3Slider->value())); });
+    connect(ui->fan1Speed4Slider, &QSlider::valueChanged, this,
+            [=]() { this->ui->fan1Speed4Label->setText(QString("%1%").arg(ui->fan1Speed4Slider->value())); });
+    connect(ui->fan1Speed5Slider, &QSlider::valueChanged, this,
+            [=]() { this->ui->fan1Speed5Label->setText(QString("%1%").arg(ui->fan1Speed5Slider->value())); });
+    connect(ui->fan1Speed6Slider, &QSlider::valueChanged, this,
+            [=]() { this->ui->fan1Speed6Label->setText(QString("%1%").arg(ui->fan1Speed6Slider->value())); });
+    connect(ui->fan1Speed7Slider, &QSlider::valueChanged, this,
+            [=]() { this->ui->fan1Speed7Label->setText(QString("%1%").arg(ui->fan1Speed7Slider->value())); });
+
+    connect(ui->fan2Speed1Slider, &QSlider::valueChanged, this,
+            [=]() { this->ui->fan2Speed1Label->setText(QString("%1%").arg(ui->fan2Speed1Slider->value())); });
+    connect(ui->fan2Speed2Slider, &QSlider::valueChanged, this,
+            [=]() { this->ui->fan2Speed2Label->setText(QString("%1%").arg(ui->fan2Speed2Slider->value())); });
+    connect(ui->fan2Speed3Slider, &QSlider::valueChanged, this,
+            [=]() { this->ui->fan2Speed3Label->setText(QString("%1%").arg(ui->fan2Speed3Slider->value())); });
+    connect(ui->fan2Speed4Slider, &QSlider::valueChanged, this,
+            [=]() { this->ui->fan2Speed4Label->setText(QString("%1%").arg(ui->fan2Speed4Slider->value())); });
+    connect(ui->fan2Speed5Slider, &QSlider::valueChanged, this,
+            [=]() { this->ui->fan2Speed5Label->setText(QString("%1%").arg(ui->fan2Speed5Slider->value())); });
+    connect(ui->fan2Speed6Slider, &QSlider::valueChanged, this,
+            [=]() { this->ui->fan2Speed6Label->setText(QString("%1%").arg(ui->fan2Speed6Slider->value())); });
+    connect(ui->fan2Speed7Slider, &QSlider::valueChanged, this,
+            [=]() { this->ui->fan2Speed7Label->setText(QString("%1%").arg(ui->fan2Speed7Slider->value())); });
+
+    connect(ui->fanSpeedResetButton, &QPushButton::clicked, this, &MainWindow::updateFanSpeedSettings);
+    connect(ui->fanSpeedApplyButton, &QPushButton::clicked, this, &MainWindow::setFanSpeedSettings);
+
+    connect(qApp, &QGuiApplication::saveStateRequest, this, &MainWindow::saveStateRequest);
 
     MainWindow::setWindowIcon(QIcon(":/images/AppIcon"));
     Settings s;
@@ -43,7 +78,7 @@ MainWindow::MainWindow(QWidget *parent)
     createTrayIcon();
 
     // Disable debug tab
-    ui->tabWidget->setTabVisible(4, false);
+    ui->tabWidget->setTabVisible(5, false);
     setTabsEnabled(false);
 
     if (!operate.isEcSysModuleLoaded() && !operate.loadEcSysModule())
@@ -63,6 +98,7 @@ void MainWindow::setTabsEnabled(bool enabled) {
     ui->infoTab->setEnabled(enabled);
     ui->modeTab->setEnabled(enabled);
     ui->batteryTab->setEnabled(enabled);
+    ui->fanControlTab->setEnabled(enabled);
     ui->settingsTab->setEnabled(enabled);
     ui->debugTab->setEnabled(enabled);
 
@@ -126,6 +162,8 @@ void MainWindow::loadConfigs() {
         if (batteryTrayMenu)
             batteryTrayMenu->setEnabled(false);
     }
+
+    updateFanSpeedSettings();
 
     if (operate.isKeyboardBacklightSupport()) {
         updateKeyboardBacklightMode();
@@ -302,6 +340,47 @@ void MainWindow::updateFanMode() {
     ui->fanModeValueLabel->setText(fanMode);
 }
 
+void MainWindow::updateFanSpeedSettings() {
+    ui->advancedFanControlCheckBox->setChecked(operate.getFanMode() == fan_mode::advanced_fan_mode);
+
+    QVector fan1SpeedSettings = operate.getFan1SpeedSettings();
+    QVector fan1TempSettings = operate.getFan1TempSettings();
+    QVector fan2SpeedSettings = operate.getFan2SpeedSettings();
+    QVector fan2TempSettings = operate.getFan2TempSettings();
+
+    ui->fan1Speed1Slider->setValue(fan1SpeedSettings[0]);
+    ui->fan1Speed2Slider->setValue(fan1SpeedSettings[1]);
+    ui->fan1Speed3Slider->setValue(fan1SpeedSettings[2]);
+    ui->fan1Speed4Slider->setValue(fan1SpeedSettings[3]);
+    ui->fan1Speed5Slider->setValue(fan1SpeedSettings[4]);
+    ui->fan1Speed6Slider->setValue(fan1SpeedSettings[5]);
+    ui->fan1Speed7Slider->setValue(fan1SpeedSettings[6]);
+
+    ui->fan1Speed1TempLabel->setText(QString("< %1 °C").arg(fan1TempSettings[0]));
+    ui->fan1Speed2TempSpinBox->setValue(fan1TempSettings[0]);
+    ui->fan1Speed3TempSpinBox->setValue(fan1TempSettings[1]);
+    ui->fan1Speed4TempSpinBox->setValue(fan1TempSettings[2]);
+    ui->fan1Speed5TempSpinBox->setValue(fan1TempSettings[3]);
+    ui->fan1Speed6TempSpinBox->setValue(fan1TempSettings[4]);
+    ui->fan1Speed7TempSpinBox->setValue(fan1TempSettings[5]);
+
+    ui->fan2Speed1Slider->setValue(fan2SpeedSettings[0]);
+    ui->fan2Speed2Slider->setValue(fan2SpeedSettings[1]);
+    ui->fan2Speed3Slider->setValue(fan2SpeedSettings[2]);
+    ui->fan2Speed4Slider->setValue(fan2SpeedSettings[3]);
+    ui->fan2Speed5Slider->setValue(fan2SpeedSettings[4]);
+    ui->fan2Speed6Slider->setValue(fan2SpeedSettings[5]);
+    ui->fan2Speed7Slider->setValue(fan2SpeedSettings[6]);
+
+    ui->fan2Speed1TempLabel->setText(QString("< %1 °C").arg(fan2TempSettings[0]));
+    ui->fan2Speed2TempSpinBox->setValue(fan2TempSettings[0]);
+    ui->fan2Speed3TempSpinBox->setValue(fan2TempSettings[1]);
+    ui->fan2Speed4TempSpinBox->setValue(fan2TempSettings[2]);
+    ui->fan2Speed5TempSpinBox->setValue(fan2TempSettings[3]);
+    ui->fan2Speed6TempSpinBox->setValue(fan2TempSettings[4]);
+    ui->fan2Speed7TempSpinBox->setValue(fan2TempSettings[5]);
+}
+
 void MainWindow::setBestMobility() {
     operate.setBatteryThreshold(0);
     updateBatteryThreshold();
@@ -341,6 +420,55 @@ void MainWindow::setCoolerBoostState(bool enabled) const {
     operate.setCoolerBoostState(enabled);
     if (operate.updateEcData())
         updateCoolerBoostState();
+}
+
+void MainWindow::setFanSpeedSettings() {
+    QVector<int> fan1SpeedSettings;
+    QVector<int> fan1TempSettings;
+    QVector<int> fan2SpeedSettings;
+    QVector<int> fan2TempSettings;
+
+    fan1SpeedSettings.push_back(ui->fan1Speed1Slider->value());
+    fan1SpeedSettings.push_back(ui->fan1Speed2Slider->value());
+    fan1SpeedSettings.push_back(ui->fan1Speed3Slider->value());
+    fan1SpeedSettings.push_back(ui->fan1Speed4Slider->value());
+    fan1SpeedSettings.push_back(ui->fan1Speed5Slider->value());
+    fan1SpeedSettings.push_back(ui->fan1Speed6Slider->value());
+    fan1SpeedSettings.push_back(ui->fan1Speed7Slider->value());
+
+    fan1TempSettings.push_back(ui->fan1Speed2TempSpinBox->value());
+    fan1TempSettings.push_back(ui->fan1Speed3TempSpinBox->value());
+    fan1TempSettings.push_back(ui->fan1Speed4TempSpinBox->value());
+    fan1TempSettings.push_back(ui->fan1Speed5TempSpinBox->value());
+    fan1TempSettings.push_back(ui->fan1Speed6TempSpinBox->value());
+    fan1TempSettings.push_back(ui->fan1Speed7TempSpinBox->value());
+
+    fan2SpeedSettings.push_back(ui->fan2Speed1Slider->value());
+    fan2SpeedSettings.push_back(ui->fan2Speed2Slider->value());
+    fan2SpeedSettings.push_back(ui->fan2Speed3Slider->value());
+    fan2SpeedSettings.push_back(ui->fan2Speed4Slider->value());
+    fan2SpeedSettings.push_back(ui->fan2Speed5Slider->value());
+    fan2SpeedSettings.push_back(ui->fan2Speed6Slider->value());
+    fan2SpeedSettings.push_back(ui->fan2Speed7Slider->value());
+
+    fan2TempSettings.push_back(ui->fan2Speed2TempSpinBox->value());
+    fan2TempSettings.push_back(ui->fan2Speed3TempSpinBox->value());
+    fan2TempSettings.push_back(ui->fan2Speed4TempSpinBox->value());
+    fan2TempSettings.push_back(ui->fan2Speed5TempSpinBox->value());
+    fan2TempSettings.push_back(ui->fan2Speed6TempSpinBox->value());
+    fan2TempSettings.push_back(ui->fan2Speed7TempSpinBox->value());
+
+    operate.setFan1SpeedSettings(fan1SpeedSettings);
+    operate.setFan1TempSettings(fan1TempSettings);
+    operate.setFan2SpeedSettings(fan2SpeedSettings);
+    operate.setFan2TempSettings(fan2TempSettings);
+}
+
+void MainWindow::setFanModeAdvanced(bool enabled) const {
+    operate.setFanModeAdvanced(enabled);
+    ui->fanControlTabWidget->setEnabled(enabled);
+    ui->fanSpeedResetButton->setEnabled(enabled);
+    ui->fanSpeedApplyButton->setEnabled(enabled);
 }
 
 void MainWindow::showEvent(QShowEvent *event) {

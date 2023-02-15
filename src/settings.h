@@ -25,7 +25,9 @@
 class Settings {
 public:
     QVariant getValue(const QString &key);
+    QVector<int> getValueVector(const QString &key);
     static void setValue(const QString &key, const QVariant &value);
+    static void setValue(const QString &key, const QVector<int> &value);
     bool isValueExist(const QString &key);
 };
 

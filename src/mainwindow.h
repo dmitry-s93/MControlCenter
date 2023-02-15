@@ -62,6 +62,7 @@ private:
     void updateCoolerBoostState() const;
     void updateUserMode();
     void updateFanMode();
+    void updateFanSpeedSettings();
 
     void setBestMobility();
     void setBalancedBattery();
@@ -73,6 +74,8 @@ private:
     void setSuperBatteryMode();
 
     void setCoolerBoostState(bool enabled) const;
+    void setFanSpeedSettings();
+    void setFanModeAdvanced(bool enabled) const;
 
     void showEvent(QShowEvent *event);
     void closeEvent(QCloseEvent *event);

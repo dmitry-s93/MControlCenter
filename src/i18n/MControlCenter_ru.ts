@@ -243,5 +243,25 @@
         <source>Cooling</source>
         <translation>Охлаждение</translation>
     </message>
+    <message>
+        <source>Fan 1 speed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fan 2 speed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fan control</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable advanced fan control</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

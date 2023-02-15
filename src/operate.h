@@ -21,6 +21,7 @@
 
 
 #include <string>
+#include <QVector>
 
 enum class charging_state {
     battery_charging,
@@ -64,6 +65,10 @@ public:
     [[nodiscard]] int getGpuTemp() const;
     [[nodiscard]] int getFan1Speed() const;
     [[nodiscard]] int getFan2Speed() const;
+    [[nodiscard]] QVector<int> getFan1SpeedSettings() const;
+    [[nodiscard]] QVector<int> getFan2SpeedSettings() const;
+    [[nodiscard]] QVector<int> getFan1TempSettings() const;
+    [[nodiscard]] QVector<int> getFan2TempSettings() const;
 
     [[nodiscard]] int getKeyboardBacklightMode() const;
     [[nodiscard]] int getKeyboardBrightness() const;
@@ -82,6 +87,12 @@ public:
     void setFnSuperSwapState(bool enabled) const;
     void setCoolerBoostState(bool enabled) const;
     void setUserMode(user_mode userMode) const;
+    void setFan1SpeedSettings(QVector<int> value) const;
+    void setFan2SpeedSettings(QVector<int> value) const;
+    void setFan1TempSettings(QVector<int> value) const;
+    void setFan2TempSettings(QVector<int> value) const;
+    void setFanMode(int value) const;
+    void setFanModeAdvanced(bool enabled) const;
 
     [[nodiscard]] int getValue(int address) const;
     void setValue(int address, int value) const;
