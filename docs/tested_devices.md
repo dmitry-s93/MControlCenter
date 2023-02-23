@@ -14,9 +14,3 @@
 | MSI PS63 Modern 8RC           | E16S1IMS.106 12/24/2018 | ❌ Mode (greyed out)<br> ✔ Battery Limit<br> ✔ Cooler Boost<br> ❌ Fan Control (missing) | ❌ Keyboard Backlit (greyed out)<br> ✔ FN -> Super<br> ✔ Webcam<br> ❌ USB Power Share (greyed out)              |
 
 If the table does not contain the device you are using, then you can add it.
-
-To get the EC Version and release date, you can use the following commands:
-```sh
-sudo dmidecode -s bios-version
-sudo dmidecode -s bios-release-date
-```
