@@ -245,23 +245,23 @@
     </message>
     <message>
         <source>Fan 1 speed</source>
-        <translation type="unfinished"></translation>
+        <translation>Velocidade da ventoinha 1</translation>
     </message>
     <message>
         <source>Fan 2 speed</source>
-        <translation type="unfinished"></translation>
+        <translation>Velocidade da ventoinha 2</translation>
     </message>
     <message>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Repor</translation>
     </message>
     <message>
         <source>Fan control</source>
-        <translation type="unfinished"></translation>
+        <translation>Controlo de ventoinha</translation>
     </message>
     <message>
         <source>Enable advanced fan control</source>
-        <translation type="unfinished"></translation>
+        <translation>Activar controlo avançado da ventoinha</translation>
     </message>
 </context>
 </TS>
