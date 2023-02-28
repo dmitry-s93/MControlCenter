@@ -26,13 +26,13 @@ set(PROJECT_SOURCES
 
 set(TS_FILES
     MControlCenter_en.ts
-    MControlCenter_ru.ts
-    MControlCenter_pt.ts
     MControlCenter_es.ts
-    MControlCenter_nb.ts
-    MControlCenter_tr.ts
-    MControlCenter_pt_br.ts
     MControlCenter_it.ts
+    MControlCenter_nb.ts
+    MControlCenter_pt_BR.ts
+    MControlCenter_pt_PT.ts
+    MControlCenter_ru.ts
+    MControlCenter_tr.ts
 )
 
 find_program(LUPDATE_EXECUTABLE lupdate lupdate-qt5 REQUIRED)
