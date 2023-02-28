@@ -5,6 +5,9 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 - Added fan control support
 - Updated Norwegian Bokmål (Thanks [msigurdsen](https://github.com/msigurdsen))
+- Updated Spanish translation (Thanks [rottenpants466](https://www.github.com/rottenpants466))
+- Updated Italian translation (Thanks [rottenpants466](https://www.github.com/rottenpants466))
+- Updated Portuguese translation (Thanks [rottenpants466](https://www.github.com/rottenpants466))
 
 ## [0.3.2] 2022-11-28
 - Added fan mode display
