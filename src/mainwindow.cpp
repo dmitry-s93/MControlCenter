@@ -50,6 +50,10 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->fan1Speed7Slider, &QSlider::valueChanged, this,
             [=]() { this->ui->fan1Speed7Label->setText(QString("%1%").arg(ui->fan1Speed7Slider->value())); });
 
+    connect(ui->fan1Speed2TempSpinBox, &QSpinBox::textChanged, this, [=]() {
+        ui->fan1Speed1TempLabel->setText(QString("< %1 °C").arg(ui->fan1Speed2TempSpinBox->value()));
+    });
+
     connect(ui->fan2Speed1Slider, &QSlider::valueChanged, this,
             [=]() { this->ui->fan2Speed1Label->setText(QString("%1%").arg(ui->fan2Speed1Slider->value())); });
     connect(ui->fan2Speed2Slider, &QSlider::valueChanged, this,
@@ -64,6 +68,10 @@ MainWindow::MainWindow(QWidget *parent)
             [=]() { this->ui->fan2Speed6Label->setText(QString("%1%").arg(ui->fan2Speed6Slider->value())); });
     connect(ui->fan2Speed7Slider, &QSlider::valueChanged, this,
             [=]() { this->ui->fan2Speed7Label->setText(QString("%1%").arg(ui->fan2Speed7Slider->value())); });
+
+    connect(ui->fan2Speed2TempSpinBox, &QSpinBox::textChanged, this, [=]() {
+        ui->fan2Speed1TempLabel->setText(QString("< %1 °C").arg(ui->fan2Speed2TempSpinBox->value()));
+    });
 
     connect(ui->fanSpeedResetButton, &QPushButton::clicked, this, &MainWindow::updateFanSpeedSettings);
     connect(ui->fanSpeedApplyButton, &QPushButton::clicked, this, &MainWindow::setFanSpeedSettings);
