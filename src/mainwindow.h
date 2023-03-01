@@ -74,8 +74,14 @@ private:
     void setSuperBatteryMode();
 
     void setCoolerBoostState(bool enabled) const;
+
+    QVector<int> getFan1SpeedValues() const;
+    QVector<int> getFan2SpeedValues() const;
+    QVector<int> getFan1TempValues() const;
+    QVector<int> getFan2TempValues() const;
     void setFanSpeedSettings();
     void setFanModeAdvanced(bool enabled) const;
+    void checkFanSettingsChanged() const;
 
     void showEvent(QShowEvent *event);
     void closeEvent(QCloseEvent *event);
