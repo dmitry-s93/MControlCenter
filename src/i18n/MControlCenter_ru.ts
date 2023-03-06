@@ -245,23 +245,23 @@
     </message>
     <message>
         <source>Fan 1 speed</source>
-        <translation type="unfinished"></translation>
+        <translation>Скорость вентилятора 1</translation>
     </message>
     <message>
         <source>Fan 2 speed</source>
-        <translation type="unfinished"></translation>
+        <translation>Скорость вентилятора 2</translation>
     </message>
     <message>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Сброс</translation>
     </message>
     <message>
         <source>Fan control</source>
-        <translation type="unfinished"></translation>
+        <translation>Управление вентилятором</translation>
     </message>
     <message>
         <source>Enable advanced fan control</source>
-        <translation type="unfinished"></translation>
+        <translation>Включить расширенное управление вентилятором</translation>
     </message>
 </context>
 </TS>
