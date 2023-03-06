@@ -3,6 +3,8 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
+
+## [0.4.0] 2023-03-06
 - Added fan control support
 - Updated Norwegian Bokmål (Thanks [msigurdsen](https://github.com/msigurdsen))
 - Updated Spanish translation (Thanks [rottenpants466](https://www.github.com/rottenpants466))
