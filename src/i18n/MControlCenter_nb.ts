@@ -245,23 +245,23 @@
     </message>
     <message>
         <source>Fan 1 speed</source>
-        <translation type="unfinished"></translation>
+        <translation>Vifte 1 hastighet</translation>
     </message>
     <message>
         <source>Fan 2 speed</source>
-        <translation type="unfinished"></translation>
+        <translation>Vifte 2 hastighet</translation>
     </message>
     <message>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Nullstill</translation>
     </message>
     <message>
         <source>Fan control</source>
-        <translation type="unfinished"></translation>
+        <translation>Viftekontroll</translation>
     </message>
     <message>
         <source>Enable advanced fan control</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktiver avansert viftekontroll</translation>
     </message>
 </context>
 </TS>
