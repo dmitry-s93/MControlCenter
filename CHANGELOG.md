@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
+- Updated Norwegian Bokmål (Thanks [msigurdsen](https://github.com/msigurdsen))
 
 ## [0.4.0] 2023-03-06
 - Added fan control support
