@@ -65,7 +65,7 @@
     </message>
     <message>
         <source>Charge the battery when under 70%, stop at 80%</source>
-        <translation>Lade die Batterie wenn sie unter 70% ist, und stoppe das Laden bei 80%</translation>
+        <translation>Lade die Batterie, wenn sie unter 70% ist, und stoppe das Laden bei 80%</translation>
     </message>
     <message>
         <source>Best for battery</source>
@@ -73,7 +73,7 @@
     </message>
     <message>
         <source>Charge the battery when under 50%, stop at 60%</source>
-        <translation>Lade die Batterie, wenn unter 50% und stoppe das Laden bei 60%</translation>
+        <translation>Lade die Batterie, wenn sie unter 50% ist, und stoppe das Laden bei 60%</translation>
     </message>
     <message>
         <source>Custom</source>
@@ -85,7 +85,7 @@
     </message>
     <message>
         <source>Keyboard Backlit</source>
-        <translation>Tastatur Beleuchtung</translation>
+        <translation>Tastaturbeleuchtung</translation>
     </message>
     <message>
         <source>Always on</source>
