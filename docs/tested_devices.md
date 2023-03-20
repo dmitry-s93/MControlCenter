@@ -13,5 +13,6 @@
 | MSI GF63 Thin 11UC-866IN      | 16R6EMS1.104 11/14/2021 | ✔ Mode<br> ✔ Battery Limit<br> ✔ Cooler Boost<br> ❓ Fan Control              | ✔ Keyboard Backlit (auto turn off not working)<br> ✔ FN -> Super<br> ✔ Webcam<br> ❌ USB Power Share (greyed out)              |
 | MSI PS63 Modern 8RC           | E16S1IMS.106 12/24/2018 | ❌ Mode (greyed out)<br> ✔ Battery Limit<br> ✔ Cooler Boost<br> ❓ Fan Control | ❌ Keyboard Backlit (greyed out)<br> ✔ FN -> Super<br> ✔ Webcam<br> ❌ USB Power Share (greyed out)                             |
 | MSI Vector GP66 12UGSO        | 1544EMS1.112            | ✔ Mode<br> ✔ Battery Limit<br> ✔ Cooler Boost<br> ✔ Fan Control              | ❌ Keyboard Backlit<br> ✔ FN -> Super<br> ✔ Webcam<br> ❌ USB Power Share (greyed out)                                          |
+| MSI GF65 Thin 10UE            | 16W2EMS1.101 12/15/2020 | ❌ Mode (everything's greyed out)<br> ✔ Battery Limit<br> ✔ Cooler Boost<br> ❓ Fan Control | ❌ Keyboard Backlit (greyed out)<br> ❓ FN -> Super (Not greyed out, but doesn't affect  anything when ticked)<br> ✔ Webcam<br> ❓ USB Power Share (Not greyed out, but doesn't affect  anything when ticked) |
 
 If the table does not contain the device you are using, then you can add it.
