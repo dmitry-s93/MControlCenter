@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 - Updated Norwegian Bokmål (Thanks [msigurdsen](https://github.com/msigurdsen))
+- Added support for German language (Thanks [EchterAlsFake](https://github.com/EchterAlsFake))
+- Added support for Hungarian language (Thanks [BiRo96](https://github.com/BiRo96))
 
 ## [0.4.0] 2023-03-06
 - Added fan control support
