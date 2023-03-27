@@ -25,8 +25,10 @@ set(PROJECT_SOURCES
 )
 
 set(TS_FILES
+    MControlCenter_de_DE.ts
     MControlCenter_en.ts
     MControlCenter_es.ts
+    MControlCenter_hu.ts
     MControlCenter_it.ts
     MControlCenter_nb.ts
     MControlCenter_pt_BR.ts
