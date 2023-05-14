@@ -16,5 +16,6 @@
 | MSI GF65 Thin 10UE            | 16W2EMS1.101 12/15/2020 | ❌ Mode (everything's greyed out)<br> ✔ Battery Limit<br> ✔ Cooler Boost<br> ❓ Fan Control | ❌ Keyboard Backlit (greyed out)<br> ❓ FN -> Super (Not greyed out, but doesn't affect  anything when ticked)<br> ✔ Webcam<br> ❓ USB Power Share (Not greyed out, but doesn't affect  anything when ticked) |
 | MSI GF65 Thin 10SDR            | E16W1IMS.50C 11/19/2020 | ❌ Mode (everything's greyed out)<br> ✔ Battery Limit<br> ✔ Cooler Boost<br> ✔ Fan Control | ❌ Keyboard Backlit (greyed out)<br> ❓ FN -> Super (Not greyed out, but doesn't affect  anything when ticked)<br> ✔ Webcam<br> ❌ USB Power Share (greyed out)  |
 | MSI Modern 15 B5M             | 15HKEMS1.103 06/29/2022 | ❌ Mode (everything's greyed out)<br> ❓ Battery Limit<br> ✔ Cooler Boost<br> ❓ Fan Control | ❌ Keyboard Backlit (greyed out)<br> ❓ FN -> Super (Not greyed out, but doesn't affect anything when ticked)<br> ✔ Webcam<br> ❓ USB Power Share |
+| MSI Katana GF66 12UD          | 1584EMS1.110 06/21/2022 | ✔ Mode<br> ✔ Battery Limit<br> ✔ Cooler Boost<br> ✔ Fan Control | ✔ Keyboard Backlit<br> ✔ FN -> Super<br> ✔ Webcam<br> ✔ USB Power Share  |
 
 If the table does not contain the device you are using, then you can add it.
