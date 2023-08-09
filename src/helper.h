@@ -32,6 +32,7 @@ public:
     bool isEcSysModuleLoaded();
     bool loadEcSysModule();
     bool updateData();
+    void updateDataAsync();
     int getValue(int address) const;
     QByteArray getValues(int startAddress, int size) const;
     void putValue(int address, int value);
@@ -39,6 +40,8 @@ public:
     QDBusInterface *iface;
 private:
     void printError(QDBusError const & error) const;
+private slots:
+    void callFinishedSlot(QDBusPendingCallWatcher *call);
 };
 
 #endif // HELPER_H

@@ -26,6 +26,7 @@
 Operate operate;
 
 bool isActive = false;
+bool isUpdateDataError = false;
 
 QTimer *realtimeUpdateTimer = new QTimer;
 
@@ -152,7 +153,8 @@ MainWindow::MainWindow(QWidget *parent)
     if (!operate.isEcSysModuleLoaded() && !operate.loadEcSysModule())
         QMessageBox::critical(nullptr, this->windowTitle(), tr("Failed to load the ec_sys kernel module"));
 
-    updateData();
+    if(operate.updateEcData())
+        updateData();
 
     connect(realtimeUpdateTimer, &QTimer::timeout, this, &MainWindow::realtimeUpdate);
     setUpdateInterval(1000);
@@ -160,6 +162,10 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow() {
     delete ui;
+}
+
+void MainWindow::setUpdateDataError(bool error) {
+    isUpdateDataError = error;
 }
 
 void MainWindow::setTabsEnabled(bool enabled) {
@@ -189,11 +195,12 @@ void MainWindow::setUpdateInterval(int msec) const {
 }
 
 void MainWindow::realtimeUpdate() {
+    operate.updateEcDataAsync();
     updateData();
 }
 
 void MainWindow::updateData() {
-    if (operate.updateEcData()) {
+    if (!isUpdateDataError && !operate.getEcVersion().empty()) {
         if (!isActive) {
             operate.doProbe();
             setTabsEnabled(true);

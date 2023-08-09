@@ -105,6 +105,10 @@ bool Operate::updateEcData() const {
     return helper.updateData();
 }
 
+void Operate::updateEcDataAsync() const {
+    helper.updateDataAsync();
+}
+
 bool Operate::doProbe() const {
     fan1Address = detectFan1Address();
     batteryThresholdAddress = detectBatteryThresholdAddress();
