@@ -18,6 +18,7 @@
 
 #include "helper/service.h"
 #include "helper.h"
+#include "mainwindow.h"
 
 #include <QCoreApplication>
 #include <QDBusReply>
@@ -58,6 +59,25 @@ bool Helper::updateData() {
     }
     printError(iface->lastError());
     return false;
+}
+
+void Helper::updateDataAsync() {
+    QDBusPendingCall async = iface->asyncCall("getData");
+    QDBusPendingCallWatcher const *watcher = new QDBusPendingCallWatcher(async, this);
+
+    QObject::connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),this, SLOT(callFinishedSlot(QDBusPendingCallWatcher*)));
+}
+
+void Helper::callFinishedSlot(QDBusPendingCallWatcher *call) {
+    QDBusPendingReply<QByteArray> reply = *call;
+    if (reply.isError()) {
+        printError(reply.error());
+        MainWindow::setUpdateDataError(true);
+    } else {
+        ecData = reply.value();
+        MainWindow::setUpdateDataError(false);
+    }
+    call->deleteLater();
 }
 
 int Helper::getValue(int address) const {

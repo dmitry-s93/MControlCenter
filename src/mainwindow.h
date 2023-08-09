@@ -23,6 +23,7 @@
 #include <QCloseEvent>
 #include <QSystemTrayIcon>
 #include <QtWidgets>
+#include <QDBusPendingCallWatcher>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -34,6 +35,8 @@ Q_OBJECT
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void updateData();
+    static void setUpdateDataError(bool error);
 
 private:
     Ui::MainWindow *ui;
@@ -43,7 +46,6 @@ private:
     void stopRealtimeUpdate() const;
     void setUpdateInterval(int msec) const;
     void realtimeUpdate();
-    void updateData();
     void loadConfigs();
 
     [[nodiscard]] QString intToQString(int value) const;
