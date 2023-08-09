@@ -3,6 +3,8 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
+
+## [0.4.1] 2023-08-09
 - Fixed UI lags when resizing the window (issue https://github.com/dmitry-s93/MControlCenter/issues/97)
 - Updated Norwegian Bokmål (Thanks [msigurdsen](https://github.com/msigurdsen))
 - Added support for German language (Thanks [EchterAlsFake](https://github.com/EchterAlsFake))
