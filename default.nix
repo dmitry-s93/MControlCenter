@@ -28,6 +28,8 @@ stdenv.mkDerivation (finalAttrs: rec {
 
   src = ./.;
 
+  patches = [ ./nixos.patch ];
+
   cmakeFlags = [
     "-DENABLE_TESTING=OFF"
     "-DENABLE_INSTALL=ON"
