@@ -5,7 +5,7 @@
     <name>MainWindow</name>
     <message>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation type="Info"></translation>
     </message>
     <message>
         <source>EC Version:</source>
