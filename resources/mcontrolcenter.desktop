@@ -12,6 +12,7 @@ GenericName[pt_br]=Mudar Definições de Portáteis MSI
 GenericName[it]=Modifica impostazioni del portatile MSI
 GenericName[de_DE]=Ändern der MSI Laptop Einstellungen
 GenericName[hu]=Változtasd meg az MSI Laptop beállításait
+GenericName[zh_CN]=调整 MSI 笔记本电脑的电源和性能设置
 Type=Application
 Exec=mcontrolcenter
 Icon=mcontrolcenter
