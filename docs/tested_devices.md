@@ -23,5 +23,6 @@
 | MSI Delta 15 A5EFK | 15CKEMS1.108 02/09/2021 | ❌ Mode (everything's greyed out)<br> ✔ Battery Limit<br> ✔ Cooler Boost<br> ✔ Fan Control | ❌ Keyboard Backlit<br> ❓ FN -> Super (Not greyed out, but doesn't affect  anything when ticked)<br> ✔ Webcam<br> ❌ USB Power Share (greyed out)|
 | MSI Summit E13 Flip Evo A13MT | 13P3EMS1.50B 01/17/2023 | ✔ Mode<br> ✔ Battery Limit<br> ✔ Cooler Boost<br> ❓ Fan Control              | ✔ Keyboard Backlit<br> ✔ FN -> Super<br> ✔ Webcam <br> ✔ USB Power Share                           
 | MSI Bravo B5DD          | 158KEMS1.104 05/19/2021 | ❌ Mode<br> ✔ Battery Limit<br> ✔ Cooler Boost<br> ✔ Fan Control              | ❌ Keyboard Backlit<br> ✔ FN -> Super<br> ✔ Webcam<br> ❌ USB Power Share
+| MSI GL65 Leopard 10SCXR       | 16U8EMS1.100 12/20/2019 | ❌ Mode<br> ✔ Battery Limit<br> ✔ Cooler Boost<br> ✔ Fan Control              | ❌ Keyboard Backlit<br> ❓ FN -> Super (Not greyed out, but doesn't affect  anything when ticked)<br> ✔ Webcam<br> ❌ USB Power Share
 
 If the table does not contain the device you are using, then you can add it.
