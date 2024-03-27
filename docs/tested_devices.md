@@ -27,5 +27,6 @@
 | MSI Bravo B5DD          | 158KEMS1.104 05/19/2021 | ❌ Mode<br> ✔ Battery Limit<br> ✔ Cooler Boost<br> ✔ Fan Control              | ❌ Keyboard Backlit<br> ✔ FN -> Super<br> ✔ Webcam<br> ❌ USB Power Share
 | MSI GS66 12-UGS          | E16V5IMS.10F 06/14/2023 | ❓ Mode<br> ✔ Battery Limit<br> ✔ Cooler Boost<br> ✔/❌ Fan Control(cpu-ok, gpu-not)              | ❌ Keyboard Backlit<br> ✔ FN -> Super<br> ✔ Webcam<br> ❓ USB Power Share
 | MSI GL65 Leopard 10SCXR       | 16U8EMS1.100 12/20/2019 | ❌ Mode (everything's greyed out) <br> ✔ Battery Limit<br> ✔ Cooler Boost<br> ✔ Fan Control              | ❌ Keyboard Backlit (greyed out)<br> ❓ FN -> Super (Not greyed out, but doesn't affect  anything when ticked)<br> ✔ Webcam<br> ❌ USB Power Share (greyed out)
+| MSI GF75 Thin 10SC            | 17F6EMS1.103 03/22/2021 | ❌ Mode (everything's greyed out) <br> ✔ Battery Limit<br> ✔ Cooler Boost<br> ❓ Fan Control | ❌ Keyboard Backlit (greyed out)<br> ❓ FN -> Super (Not greyed out, but doesn't affect  anything when ticked)<br> ✔ Webcam<br> ✔ USB Power Share
 
 If the table does not contain the device you are using, then you can add it.
