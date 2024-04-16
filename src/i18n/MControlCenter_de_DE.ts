@@ -297,5 +297,77 @@ Weitere Informationen finden Sie auf der Seite &lt;Über&gt;.</translation>
         <source>If you mainly use your laptop with the charger plugged most of the time, it is recommended to set the charge capacity at a lower percentage (60% or 80%) to prolong your battery lifecycle.</source>
         <translation>Wenn Sie Ihren Laptop überwiegend mit angeschlossenem Ladegerät verwenden, empfiehlt es sich, die Ladekapazität auf einen niedrigeren Prozentsatz (60 % oder 80 %) einzustellen, um die Lebensdauer Ihres Akkus zu verlängern.</translation>
     </message>
+    <message>
+        <source>Fan 1:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fan 2:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fan Mode:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose the mode that best suits your use case</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A mode that provides the best system performance for multi-tasking and heavy duty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A mode that brings a balance between performance and battery live</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A quiet mode that lowers the fan noise</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A power-saving mode that lowers the power consumption for basic needs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If you mainly use your laptop with adaptor plugged, we suggest you set the charge capacity at a lower percentage (60% or 80%) to prolong your battery lifecycle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Charge the battery to 100% all the time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Keyboard Backlit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FN ⇄ Super</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>USB Power Share</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>GitHub:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bug tracker:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>An application that allows you to change the settings of MSI laptops running Linux</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>
