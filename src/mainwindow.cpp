@@ -23,7 +23,7 @@
 #include <QTimer>
 #include <QMessageBox>
 
-Operate operate;
+static Operate operate;
 
 bool isActive = false;
 bool isUpdateDataError = false;
@@ -199,6 +199,11 @@ void MainWindow::realtimeUpdate() {
     updateData();
 }
 
+void MainWindow::externalUpdate() {
+    if(operate.updateEcData())
+        updateData();
+}
+
 void MainWindow::updateData() {
     if (!isUpdateDataError && !operate.getEcVersion().empty()) {
         if (!isActive) {
@@ -216,6 +221,7 @@ void MainWindow::updateData() {
         updateFan2Speed();
         updateKeyboardBrightness();
         updateWebCamState();
+        updateCoolerBoostState();
     } else {
         setTabsEnabled(false);
         isActive = false;
@@ -418,10 +424,10 @@ void MainWindow::updateFanMode() {
 void MainWindow::updateFanSpeedSettings() {
     ui->advancedFanControlCheckBox->setChecked(operate.getFanMode() == fan_mode::advanced_fan_mode);
 
-    QVector fan1SpeedSettings = operate.getFan1SpeedSettings();
-    QVector fan1TempSettings = operate.getFan1TempSettings();
-    QVector fan2SpeedSettings = operate.getFan2SpeedSettings();
-    QVector fan2TempSettings = operate.getFan2TempSettings();
+    QVector<int> fan1SpeedSettings = operate.getFan1SpeedSettings();
+    QVector<int> fan1TempSettings = operate.getFan1TempSettings();
+    QVector<int> fan2SpeedSettings = operate.getFan2SpeedSettings();
+    QVector<int> fan2TempSettings = operate.getFan2TempSettings();
 
     ui->fan1Speed1Slider->setValue(fan1SpeedSettings[0]);
     ui->fan1Speed2Slider->setValue(fan1SpeedSettings[1]);

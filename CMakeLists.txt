@@ -19,8 +19,10 @@ set(PROJECT_SOURCES
     src/mainwindow.ui
     src/mainwindow.cpp src/mainwindow.h
     src/operate.cpp src/operate.h
+    src/cli.cpp src/cli.h
     src/helper.cpp src/helper.h
     src/settings.cpp src/settings.h
+    src/options.cpp src/options.h
     src/resources.qrc
 )
 
@@ -85,7 +87,7 @@ install(TARGETS mcontrolcenter
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
 
 if(QT_VERSION_MAJOR EQUAL 6)
-    qt_finalize_executable(MControlCenter)
+    qt_finalize_executable(mcontrolcenter)
 endif()
 
 add_subdirectory(src/helper ${CMAKE_BINARY_DIR}/helper)
