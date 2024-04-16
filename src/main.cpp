@@ -17,6 +17,8 @@
  */
 
 #include "mainwindow.h"
+#include "cli.h"
+#include "options.h"
 
 #include <QApplication>
 #include <QTranslator>
@@ -25,11 +27,34 @@
 
 
 int main(int argc, char *argv[]) {
+
+    Options options;
+    options.process_args(argc, argv);
+
     const QString serverName = "MControlCenter";
-    auto *socket = new QLocalSocket();
+    QLocalSocket* socket = new QLocalSocket();
     socket->connectToServer(serverName);
+
+    if(options.cli){
+        fprintf(stderr, "Executing CLI commands...\n");
+        CLI cli;
+        if(options.cooler_boost.has_value()){
+            cli.setCoolerBoost(options.cooler_boost.value());
+        }
+
+        if (socket->isOpen()) {
+            socket->write("update");
+            socket->flush();
+            socket->close();
+        }
+        socket->deleteLater();
+        return 0;
+    }
+
     if (socket->isOpen()) {
         fprintf(stderr, "Another instance of the application is already running\n");
+        socket->write("show");
+        socket->flush();
         socket->close();
         socket->deleteLater();
         return 0;
@@ -51,8 +76,17 @@ int main(int argc, char *argv[]) {
     MainWindow w;
 
     QLocalServer server;
-    QObject::connect(&server, &QLocalServer::newConnection, [&w]() {
-        w.show();
+    QObject::connect(&server, &QLocalServer::newConnection, [&w, &server]() {
+        QLocalSocket* socket = server.nextPendingConnection();
+        if(socket->waitForConnected() && socket->waitForReadyRead()){
+            QByteArray data = socket->readAll();
+            if(std::strcmp(data.data(), "show") == 0){
+                w.show();
+            }
+            else if(std::strcmp(data.data(), "update") == 0){
+                w.externalUpdate();
+            }
+        }
     });
     bool serverListening = server.listen(serverName);
     if (!serverListening && (server.serverError() == QAbstractSocket::AddressInUseError)) {

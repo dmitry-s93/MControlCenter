@@ -35,6 +35,7 @@ Q_OBJECT
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void externalUpdate();
     void updateData();
     static void setUpdateDataError(bool error);
 
