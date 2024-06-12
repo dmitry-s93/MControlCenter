@@ -356,7 +356,7 @@ void MainWindow::updateUsbPowerShareState() {
     ui->usbPowerShareCheckBox->setChecked(operate.getUsbPowerShareState());
 }
 
-void MainWindow::updateWebCamState() {
+void MainWindow::updateWebCamState() const {
     ui->webCamCheckBox->setChecked(operate.getWebCamState());
 }
 
@@ -652,6 +652,9 @@ void MainWindow::on_usbPowerShareCheckBox_toggled(bool checked) const {
 
 void MainWindow::on_webCamCheckBox_toggled(bool checked) const {
     operate.setWebCamState(checked);
+    if (operate.updateEcData()) {
+        updateWebCamState();
+    }
 }
 
 void MainWindow::on_fnSuperSwapCheckBox_toggled(bool checked) const {

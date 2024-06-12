@@ -59,7 +59,7 @@ private:
     void updateKeyboardBacklightMode();
     void updateKeyboardBrightness();
     void updateUsbPowerShareState();
-    void updateWebCamState();
+    void updateWebCamState() const;
     void updateFnSuperSwapState();
     void updateCoolerBoostState() const;
     void updateUserMode();
