@@ -104,6 +104,7 @@ public:
     [[nodiscard]] bool isWebCamOffSupport() const;
 
     void loadSettings() const;
+    void handleWakeEvent() const;
 
     void putSuperBatteryModeValue(bool enabled) const;
 private:
