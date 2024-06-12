@@ -352,7 +352,7 @@ void MainWindow::updateKeyboardBacklightMode() {
     ui->keyboardBacklightModeComboBox->setCurrentIndex(operate.getKeyboardBacklightMode());
 }
 
-void MainWindow::updateKeyboardBrightness() {
+void MainWindow::updateKeyboardBrightness() const {
     ui->keyboardBrightnessSlider->setSliderPosition(operate.getKeyboardBrightness());
 }
 
@@ -669,6 +669,9 @@ void MainWindow::on_coolerBoostCheckBox_toggled(bool checked) const {
 
 void MainWindow::on_keyboardBrightnessSlider_valueChanged(int value) const {
     operate.setKeyboardBrightness(value);
+    if (operate.updateEcData()) {
+        updateKeyboardBrightness();
+    }
 }
 
 void MainWindow::on_keyboardBacklightModeComboBox_currentIndexChanged(int index) const {
