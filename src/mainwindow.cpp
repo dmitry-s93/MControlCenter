@@ -646,22 +646,22 @@ void MainWindow::on_WriteValueButton_clicked() const {
     operate.setValue(address, ui->ValueSpinBox->value());
 }
 
-void MainWindow::on_usbPowerShareCheckBox_toggled(bool checked) const {
+void MainWindow::on_usbPowerShareCheckBox_clicked(bool checked) const {
     operate.setUsbPowerShareState(checked);
 }
 
-void MainWindow::on_webCamCheckBox_toggled(bool checked) const {
+void MainWindow::on_webCamCheckBox_clicked(bool checked) const {
     operate.setWebCamState(checked);
     if (operate.updateEcData()) {
         updateWebCamState();
     }
 }
 
-void MainWindow::on_fnSuperSwapCheckBox_toggled(bool checked) const {
+void MainWindow::on_fnSuperSwapCheckBox_clicked(bool checked) const {
     operate.setFnSuperSwapState(checked);
 }
 
-void MainWindow::on_coolerBoostCheckBox_toggled(bool checked) const {
+void MainWindow::on_coolerBoostCheckBox_clicked(bool checked) const {
     if (operate.getCoolerBoostState() != checked)
         setCoolerBoostState(checked);
 }

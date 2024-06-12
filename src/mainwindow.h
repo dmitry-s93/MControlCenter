@@ -125,12 +125,12 @@ private slots:
 
     void on_WriteValueButton_clicked() const;
 
-    void on_usbPowerShareCheckBox_toggled(bool checked) const;
-    void on_webCamCheckBox_toggled(bool checked) const;
+    void on_usbPowerShareCheckBox_clicked(bool checked) const;
+    void on_webCamCheckBox_clicked(bool checked) const;
 
-    void on_fnSuperSwapCheckBox_toggled(bool checked) const;
+    void on_fnSuperSwapCheckBox_clicked(bool checked) const;
 
-    void on_coolerBoostCheckBox_toggled(bool checked) const;
+    void on_coolerBoostCheckBox_clicked(bool checked) const;
 
     void on_keyboardBrightnessSlider_valueChanged(int value) const;
 
