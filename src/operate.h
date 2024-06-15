@@ -107,6 +107,7 @@ public:
     void setValue(int address, int value) const;
 
     [[nodiscard]] bool isBatteryThresholdSupport() const;
+    [[nodiscard]] bool isKeyboardBacklightModeSupport() const;
     [[nodiscard]] bool isKeyboardBacklightSupport() const;
     [[nodiscard]] bool isUsbPowerShareSupport() const;
     [[nodiscard]] bool isWebCamOffSupport() const;

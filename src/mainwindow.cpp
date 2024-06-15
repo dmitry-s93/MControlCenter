@@ -240,11 +240,15 @@ void MainWindow::loadConfigs() {
 
     updateFanSpeedSettings();
 
-    if (operate.isKeyboardBacklightSupport()) {
+    if (operate.isKeyboardBacklightModeSupport()) {
         updateKeyboardBacklightMode();
-        updateKeyboardBrightness();
     } else {
         ui->keyboardBacklightModeComboBox->setEnabled(false);
+    }
+
+    if (operate.isKeyboardBacklightSupport()) {
+        updateKeyboardBrightness();
+    } else {
         ui->keyboardBrightnessSlider->setEnabled(false);
     }
 
