@@ -162,14 +162,20 @@ int Operate::getGpuTemp() const {
 }
 
 int Operate::getFan1Speed() const {
-    int value = helper.getValue(fan1Address);
+    // Read 2 bytes (big-endian)
+    int value0 = helper.getValue(fan1Address);
+    int value1 = helper.getValue(fan1Address - 1);
+    int value = (value1 << 8) | value0;
     if (value > 0)
         return 470000 / value;
     return value;
 }
 
 int Operate::getFan2Speed() const {
-    int value = helper.getValue(fan2Address);
+    // Read 2 bytes (big-endian)
+    int value0 = helper.getValue(fan2Address);
+    int value1 = helper.getValue(fan2Address - 1);
+    int value = (value1 << 8) | value0;
     if (value > 0)
         return 470000 / value;
     return value;
