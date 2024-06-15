@@ -39,11 +39,13 @@ const QString msi_ec_cpu_realtime_fan_speed = msi_ec_path + "/cpu/realtime_fan_s
 const QString msi_ec_cpu_basic_fan_speed = msi_ec_path + "/cpu/basic_fan_speed";
 const QString msi_ec_gpu_realtime_temperature = msi_ec_path + "/gpu/realtime_temperature";
 const QString msi_ec_gpu_realtime_fan_speed = msi_ec_path + "/gpu/realtime_fan_speed";
-
-// /sys/class/power_supply/<supply_name>/charge_control_start_threshold
-// /sys/class/power_supply/<supply_name>/charge_control_end_threshold
+const QString msi_ec_bat1 = "/sys/class/power_supply/BAT1";
+const QString msi_ec_bat1_start_threshold = msi_ec_bat1 + "/charge_control_start_threshold";
+const QString msi_ec_bat1_end_threshold = msi_ec_bat1 + "/charge_control_end_threshold";
+const QString msi_ec_bat1_capacity = msi_ec_bat1 + "/capacity";
+const QString msi_ec_bat1_status = msi_ec_bat1 + "/status";
 // /sys/class/leds/platform::<led_name>/brightness
-// /sys/class/leds/msiacpi::kbd_backlight/brightness
+const QString msi_ec_kbd_backlight_brightness = "/sys/class/leds/msiacpi::kbd_backlight/brightness";
 
 QString MsiEc::readFile(QString path) const {
     if (QFile file(path); file.exists() && file.open(QIODevice::ReadOnly)) {
@@ -264,4 +266,59 @@ bool MsiEc::hasGPURealtimeFanSpeed() const {
 }
 int MsiEc::getGPURealtimeFanSpeed() const {
     return readFile(msi_ec_gpu_realtime_fan_speed).toInt();
+}
+
+//////////////// Charge control ////////////////
+
+// BAT1/charge_control_start_threshold 0-100 (percent)
+bool MsiEc::hasBatteryStartThreshold() const {
+    return QFile::exists(msi_ec_bat1_start_threshold);
+}
+int MsiEc::getBatteryStartThreshold() const {
+    return readFile(msi_ec_bat1_start_threshold).toInt();
+}
+void MsiEc::setBatteryStartThreshold(int value) const {
+    writeFile(msi_ec_bat1_start_threshold, QString::number(value));
+}
+
+// BAT1/charge_control_end_threshold 0-100 (percent)
+bool MsiEc::hasBatteryEndThreshold() const {
+    return QFile::exists(msi_ec_bat1_end_threshold);
+}
+int MsiEc::getBatteryEndThreshold() const {
+    return readFile(msi_ec_bat1_end_threshold).toInt();
+}
+void MsiEc::setBatteryEndThreshold(int value) const {
+    writeFile(msi_ec_bat1_end_threshold, QString::number(value));
+}
+
+// BAT1/capacity 0-100 (percent)
+bool MsiEc::hasBatteryCapacity() const {
+    return QFile::exists(msi_ec_bat1_capacity);
+}
+
+int MsiEc::getBatteryCapacity() const {
+    return readFile(msi_ec_bat1_capacity).toInt();
+}
+
+// BAT1/status 0-100 (percent)
+bool MsiEc::hasBatteryStatus() const {
+    return QFile::exists(msi_ec_bat1_status);
+}
+
+QString MsiEc::getBatteryStatus() const {
+    return readFile(msi_ec_bat1_status);
+}
+
+//////////////// Keyboard Backlight ////////////////
+
+// kbd_backlight/brightness 0-3
+bool MsiEc::hasKeyboardBacklightBrightness() const {
+    return QFile::exists(msi_ec_kbd_backlight_brightness);
+}
+int MsiEc::getKeyboardBacklightBrightness() const {
+    return readFile(msi_ec_kbd_backlight_brightness).toInt();
+}
+void MsiEc::setKeyboardBacklightBrightness(int value) const {
+    writeFile(msi_ec_kbd_backlight_brightness, QString::number(value));
 }

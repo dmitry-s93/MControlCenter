@@ -115,6 +115,29 @@ public slots:
     // gpu/realtime_fan_speed 0-100 (percent)
     [[nodiscard]] bool hasGPURealtimeFanSpeed() const;
     [[nodiscard]] int getGPURealtimeFanSpeed() const;
+
+    // BAT1/charge_control_start_threshold 0-100 (percent)
+    [[nodiscard]] bool hasBatteryStartThreshold() const;
+    [[nodiscard]] int getBatteryStartThreshold() const;
+    Q_NOREPLY void setBatteryStartThreshold(int value) const;
+
+    // BAT1/charge_control_end_threshold 0-100 (percent)
+    [[nodiscard]] bool hasBatteryEndThreshold() const;
+    [[nodiscard]] int getBatteryEndThreshold() const;
+    Q_NOREPLY void setBatteryEndThreshold(int value) const;
+
+    // BAT1/capacity 0-100 (percent)
+    [[nodiscard]] bool hasBatteryCapacity() const;
+    [[nodiscard]] int getBatteryCapacity() const;
+
+    // BAT1/status
+    [[nodiscard]] bool hasBatteryStatus() const;
+    [[nodiscard]] QString getBatteryStatus() const;
+
+    // kbd_backlight/brightness 0-3
+    [[nodiscard]] bool hasKeyboardBacklightBrightness() const;
+    [[nodiscard]] int getKeyboardBacklightBrightness() const;
+    Q_NOREPLY void setKeyboardBacklightBrightness(int value) const;
 };
 
 #endif // MSI_EC_H
