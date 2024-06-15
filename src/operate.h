@@ -119,6 +119,7 @@ private:
     int detectFan1Address() const;
     int detectBatteryThresholdAddress() const;
     int detectFanModeAddress() const;
+    int detectKeyboardBacklightAddress() const;
 };
 
 #endif // OPERATE_H

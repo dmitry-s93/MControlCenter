@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="fr_FR" sourcelanguage="en_US">
+<TS version="2.1" language="nl_NL" sourcelanguage="en_US">
 <context>
     <name>MainWindow</name>
     <message>
         <source>Info</source>
-        <translation>Info</translation>
+        <translation>Informatie</translation>
     </message>
     <message>
         <source>EC Version:</source>
-        <translation>EC Version :</translation>
+        <translation>EC Versie:</translation>
     </message>
     <message>
         <source>EC Build:</source>
-        <translation>EC Build :</translation>
+        <translation>EC Build:</translation>
     </message>
     <message>
         <source>Battery charge:</source>
-        <translation>Charge de la batterie :</translation>
+        <translation>Acculading:</translation>
     </message>
     <message>
         <source>Battery threshold:</source>
-        <translation>Seuil de charge maximum :</translation>
+        <translation>Drempel Accu:</translation>
     </message>
     <message>
         <source>CPU temp:</source>
-        <translation>Température CPU :</translation>
+        <translation>CPU temperatuur:</translation>
     </message>
     <message>
         <source>GPU temp:</source>
-        <translation>Température GPU :</translation>
+        <translation>GPU temperatuur:</translation>
     </message>
     <message>
         <source>Fan 1:</source>
-        <translation>Ventilateur 1 :</translation>
+        <translation>Ventilator 1:</translation>
     </message>
     <message>
         <source>Fan 2:</source>
-        <translation>Ventilateur 2 :</translation>
+        <translation>Ventilator 2:</translation>
     </message>
     <message>
         <source>Cooler Boost</source>
@@ -45,55 +45,55 @@
     </message>
     <message>
         <source>Battery</source>
-        <translation>Batterie</translation>
+        <translation>Accu</translation>
     </message>
     <message>
         <source>If you mainly use your laptop with adaptor plugged, we suggest you set the charge capacity at a lower percentage (60% or 80%) to prolong your battery lifecycle</source>
-        <translation>Si vous utilisez principalement votre ordinateur portable branché au secteur, il est recommandé de fixer la charge maximum à une valeur moyenne (60% - 80%) pour prolonger la vie de la batterie</translation>
+        <translation>Als je je laptop vooral gebruikt wanneer deze aangesloten is op het stroomnet, suggereren we dat je de acculading stopt op een laag percentage (60% tot 80%) om de batterijduur te verlengen.</translation>
     </message>
     <message>
         <source>Best for Mobility</source>
-        <translation>Mieux pour la mobilité</translation>
+        <translation>Beste voor mobiliteit</translation>
     </message>
     <message>
         <source>Charge the battery to 100% all the time</source>
-        <translation>Charge la batterie jusqu&apos;à 100%</translation>
+        <translation>Laad de accu altijd tot 100%</translation>
     </message>
     <message>
         <source>Balanced</source>
-        <translation>Equilibré</translation>
+        <translation>Gebalanceerd</translation>
     </message>
     <message>
         <source>Charge the battery when under 70%, stop at 80%</source>
-        <translation>Charge la batterie en-dessous de 70%, jusqu&apos;à 80%</translation>
+        <translation>Laad de accu als deze onder 70% is, stop bij 80%</translation>
     </message>
     <message>
         <source>Best for battery</source>
-        <translation>Mieux pour la batterie</translation>
+        <translation>Beste voor de accu</translation>
     </message>
     <message>
         <source>Charge the battery when under 50%, stop at 60%</source>
-        <translation>Charge la batterie en-dessous de 50%, stoppe à 60%</translation>
+        <translation>Laad de accu wanneer deze onder de 50% is, stop bij 60%</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation>Personalisé</translation>
+        <translation>Aangepast</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation>Paramètres</translation>
+        <translation>Instellingen</translation>
     </message>
     <message>
         <source>Keyboard Backlit</source>
-        <translation>Rétroéclairage du clavier</translation>
+        <translation>Toetsenbordverlichting</translation>
     </message>
     <message>
         <source>Always on</source>
-        <translation>Toujours allumé</translation>
+        <translation>Altijd aan</translation>
     </message>
     <message>
         <source>Auto turn off in 10 sec</source>
-        <translation>S&apos;éteint après 10 sec</translation>
+        <translation>Automatisch in 10 seconden uit</translation>
     </message>
     <message>
         <source>FN ⇄ Super</source>
@@ -101,11 +101,11 @@
     </message>
     <message>
         <source>WebCam</source>
-        <translation>Webcam</translation>
+        <translation>Camera</translation>
     </message>
     <message>
         <source>USB Power Share</source>
-        <translation>Partage de l&apos;alimentation (USB Power Share)</translation>
+        <translation>USB Power Share</translation>
     </message>
     <message>
         <source>Debug</source>
@@ -113,55 +113,55 @@
     </message>
     <message>
         <source>About</source>
-        <translation>À propos</translation>
+        <translation>Over applicatie</translation>
     </message>
     <message>
         <source>Version:</source>
-        <translation>Version :</translation>
+        <translation>Versie:</translation>
     </message>
     <message>
         <source>GitHub:</source>
-        <translation>Github :</translation>
+        <translation>GitHub:</translation>
     </message>
     <message>
         <source>Charging status:</source>
-        <translation>État de charge :</translation>
+        <translation>Oplaad Status:</translation>
     </message>
     <message>
         <source>Charging</source>
-        <translation>En charge</translation>
+        <translation>Opladen</translation>
     </message>
     <message>
         <source>Discharging</source>
-        <translation>En décharge</translation>
+        <translation>Ontladen</translation>
     </message>
     <message>
         <source>Not charging</source>
-        <translation>N&apos;est pas en charge</translation>
+        <translation>Laad niet op</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation>Inconnu</translation>
+        <translation>Onbekend</translation>
     </message>
     <message>
         <source>Bug tracker:</source>
-        <translation>Tracker de bugs :</translation>
+        <translation>Bug tracker:</translation>
     </message>
     <message>
         <source>An application that allows you to change the settings of MSI laptops running Linux</source>
-        <translation>Une application permettant de modifier les paramètres des ordinateurs portables MSI sous Linux</translation>
+        <translation>Een applicatie die het toelaat om de instellingen van een MSI laptop te veranderen die Linux draait</translation>
     </message>
     <message>
         <source>Swap FN and Super buttons</source>
-        <translation>Inverser les boutons FN et Super</translation>
+        <translation>Verwissel de FN en Super knoppen</translation>
     </message>
     <message>
         <source>Fully charged</source>
-        <translation>Chargé à 100 %</translation>
+        <translation>Volledig geladen</translation>
     </message>
     <message>
         <source>Fully charged (Discharging)</source>
-        <translation>Chargé (en décharge)</translation>
+        <translation>Volledig geladen (Aan het ontladen)</translation>
     </message>
     <message>
         <source>rpm</source>
@@ -173,83 +173,83 @@
     </message>
     <message>
         <source>High Performance</source>
-        <translation>Haute Performance</translation>
+        <translation>Hoge Prestaties</translation>
     </message>
     <message>
         <source>A mode that brings a balance between performance and battery live</source>
-        <translation>Un mode équilibré entre performance et durée de la batterie</translation>
+        <translation>Een modus die balans tussen prestaties en batterijleven geeft</translation>
     </message>
     <message>
         <source>Silent</source>
-        <translation>Silencieux</translation>
+        <translation>Stil</translation>
     </message>
     <message>
         <source>Super Battery</source>
-        <translation>Economie de batterie</translation>
+        <translation>Extreme accu modus</translation>
     </message>
     <message>
         <source>A mode that provides the best system performance for multi-tasking and heavy duty</source>
-        <translation>Un mode pourvoyant la meilleure performance pour les tâches multiples et gourmandes en ressources</translation>
+        <translation>Een modus dat de beste prestaties voor multitasking en zware taken geeft</translation>
     </message>
     <message>
         <source>A quiet mode that lowers the fan noise</source>
-        <translation>Un mode silencieux diminuant le bruit des ventilateurs</translation>
+        <translation>Een stille modus dat ventilatorgeluid verminderd</translation>
     </message>
     <message>
         <source>A power-saving mode that lowers the power consumption for basic needs</source>
-        <translation>Un mode d&apos;économie d&apos;énergie qui diminue la consommation de la batterie, pour les besoins minimums</translation>
+        <translation>Een stroombesparende modus dat de stroomconsumptie verminderd</translation>
     </message>
     <message>
         <source>Failed to load the ec_sys kernel module</source>
-        <translation>Echec du chargement du module du noyau linux ec_sys</translation>
+        <translation>De ec_sys module\ kon niet geladen worden</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation>Appliquer</translation>
+        <translation>Toepassen</translation>
     </message>
     <message>
         <source>Show</source>
-        <translation>Afficher</translation>
+        <translation>Toon</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation>Quitter</translation>
+        <translation>Afsluiten</translation>
     </message>
     <message>
         <source>Charge limit</source>
-        <translation>Limite de charge</translation>
+        <translation>Oplaadlimiet</translation>
     </message>
     <message>
         <source>Fan Mode:</source>
-        <translation>Mode des ventilateurs :</translation>
+        <translation>Ventilatormodus:</translation>
     </message>
     <message>
         <source>Auto</source>
-        <translation>Auto</translation>
+        <translation>Automatisch</translation>
     </message>
     <message>
         <source>Basic</source>
-        <translation>Basique</translation>
+        <translation>Basis</translation>
     </message>
     <message>
         <source>Advanced</source>
-        <translation>Avancé</translation>
+        <translation>Geavanceerd</translation>
     </message>
     <message>
         <source>Choose the mode that best suits your use case</source>
-        <translation>Choississez le mode qui répond le mieux à vos besoins</translation>
+        <translation>Kies de modus die het beste uitkomt voor jouw gebruik</translation>
     </message>
     <message>
         <source>Cooling</source>
-        <translation>Refroidissement</translation>
+        <translation>Koelen</translation>
     </message>
     <message>
         <source>Fan 1 speed</source>
-        <translation>Vitesse du ventilateur 1</translation>
+        <translation>Snelheid ventilator 1</translation>
     </message>
     <message>
         <source>Fan 2 speed</source>
-        <translation>Vitesse du ventilateur 2</translation>
+        <translation>Snelheid ventilator 2</translation>
     </message>
     <message>
         <source>Reset</source>
@@ -257,11 +257,11 @@
     </message>
     <message>
         <source>Fan control</source>
-        <translation>Contrôle des ventilateurs</translation>
+        <translation>Ventilator instellingen</translation>
     </message>
     <message>
         <source>Enable advanced fan control</source>
-        <translation>Activer le contrôle avancé des ventilateurs</translation>
+        <translation>Activeer geavanceerde ventilatorinstellingen</translation>
     </message>
 </context>
 </TS>

@@ -42,7 +42,9 @@ const int keyboardBacklightModeAddress = 0x2C;
 const int keyboardBacklightAlwaysOn = 0x00;
 const int keyboardBacklightAutoTurnOff = 0x08;
 
-const int keyboardBacklightAddress = 0xD3;
+int keyboardBacklightAddress;
+const int keyboardBacklightAddress_0xD3 = 0xD3;
+const int keyboardBacklightAddress_0xF3 = 0xF3;
 const int keyboardBacklight0ff = 0x80;
 const int keyboardBacklightLow = 0x81;
 const int keyboardBacklightMid = 0x82;
@@ -115,6 +117,7 @@ bool Operate::doProbe() const {
     fan1Address = detectFan1Address();
     batteryThresholdAddress = detectBatteryThresholdAddress();
     fanModeAddress = detectFanModeAddress();
+    keyboardBacklightAddress = detectKeyboardBacklightAddress();
 
     return true;
 }
@@ -190,14 +193,20 @@ int Operate::getGpuTemp() const {
 }
 
 int Operate::getFan1Speed() const {
-    int value = helper.getValue(fan1Address);
+    // Read 2 bytes (big-endian)
+    int value0 = helper.getValue(fan1Address);
+    int value1 = helper.getValue(fan1Address - 1);
+    int value = (value1 << 8) | value0;
     if (value > 0)
         return 470000 / value;
     return value;
 }
 
 int Operate::getFan2Speed() const {
-    int value = helper.getValue(fan2Address);
+    // Read 2 bytes (big-endian)
+    int value0 = helper.getValue(fan2Address);
+    int value1 = helper.getValue(fan2Address - 1);
+    int value = (value1 << 8) | value0;
     if (value > 0)
         return 470000 / value;
     return value;
@@ -539,13 +548,21 @@ bool Operate::isKeyboardBacklightModeSupport() const {
             helper.getValue(keyboardBacklightAddress) == keyboardBacklightHigh);
 }
 
+bool Operate::isKeyboardBacklightModeSupport() const {
+    // Backlight mode is not available for all keyboard with backlight
+    
+    // Keep the same behaviour for devices with brightness at 0xD3
+    if (keyboardBacklightAddress == keyboardBacklightAddress_0xD3)
+        return true;
+    
+    // By security, we concider that devices with brightness at 0xF3 don't have backlight mode
+    return false;
+}
+
 bool Operate::isKeyboardBacklightSupport() const {
     if (msiEcHelper.hasKeyboardBacklightBrightness())
         return true;
-    return (helper.getValue(keyboardBacklightAddress) == keyboardBacklight0ff ||
-            helper.getValue(keyboardBacklightAddress) == keyboardBacklightLow ||
-            helper.getValue(keyboardBacklightAddress) == keyboardBacklightMid ||
-            helper.getValue(keyboardBacklightAddress) == keyboardBacklightHigh);
+    return keyboardBacklightAddress != -1;
 }
 
 bool Operate::isUsbPowerShareSupport() const {
@@ -621,4 +638,24 @@ int Operate::detectFanModeAddress() const {
             fanModeValue == fanModeAdvanced)
         return fanModeAddress_0xD4;
     return fanModeAddress_0xF4;
+}
+
+int Operate::detectKeyboardBacklightAddress() const {
+    int value_0xD3 = helper.getValue(keyboardBacklightAddress_0xD3);
+    if (value_0xD3 == keyboardBacklight0ff ||
+        value_0xD3 == keyboardBacklightLow ||
+        value_0xD3 == keyboardBacklightMid ||
+        value_0xD3 == keyboardBacklightHigh) {
+        return keyboardBacklightAddress_0xD3;
+    }
+    
+    int value_0xF3 = helper.getValue(keyboardBacklightAddress_0xF3);
+    if (value_0xF3 == keyboardBacklight0ff ||
+        value_0xF3 == keyboardBacklightLow ||
+        value_0xF3 == keyboardBacklightMid ||
+        value_0xF3 == keyboardBacklightHigh) {
+        return keyboardBacklightAddress_0xF3;
+    }
+
+    return -1;
 }
