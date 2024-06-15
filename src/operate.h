@@ -32,6 +32,14 @@ enum class charging_state {
     battery_unknown
 };
 
+enum class shift_mode {
+    eco_mode,
+    comfort_mode,
+    sport_mode,
+    turbo_mode,
+    unknown_mode
+};
+
 enum class user_mode {
     performance_mode,
     balanced_mode,

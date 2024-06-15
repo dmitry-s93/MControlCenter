@@ -18,9 +18,11 @@
 
 #include "operate.h"
 #include "helper.h"
+#include "msi-ec_helper.h"
 #include "settings.h"
 
 Helper helper;
+MsiEcHelper msiEcHelper;
 
 const int cpuTempAddress = 0x68;
 const int gpuTempAddress = 0x80;
