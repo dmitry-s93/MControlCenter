@@ -18,3 +18,4 @@
 
 #define SERVICE_NAME "mcontrolcenter.helper"
 #define INTERFACE_NAME "dmitry_s93.MControlCenter"
+#define INTERFACE_NAME_MSI_EC "BeardOverflow.msi_ec"
