@@ -240,11 +240,15 @@ void MainWindow::loadConfigs() {
 
     updateFanSpeedSettings();
 
-    if (operate.isKeyboardBacklightSupport()) {
+    if (operate.isKeyboardBacklightModeSupport()) {
         updateKeyboardBacklightMode();
-        updateKeyboardBrightness();
     } else {
         ui->keyboardBacklightModeComboBox->setEnabled(false);
+    }
+
+    if (operate.isKeyboardBacklightSupport()) {
+        updateKeyboardBrightness();
+    } else {
         ui->keyboardBrightnessSlider->setEnabled(false);
     }
 
@@ -348,7 +352,7 @@ void MainWindow::updateKeyboardBacklightMode() {
     ui->keyboardBacklightModeComboBox->setCurrentIndex(operate.getKeyboardBacklightMode());
 }
 
-void MainWindow::updateKeyboardBrightness() {
+void MainWindow::updateKeyboardBrightness() const {
     ui->keyboardBrightnessSlider->setSliderPosition(operate.getKeyboardBrightness());
 }
 
@@ -668,6 +672,9 @@ void MainWindow::on_coolerBoostCheckBox_clicked(bool checked) const {
 
 void MainWindow::on_keyboardBrightnessSlider_valueChanged(int value) const {
     operate.setKeyboardBrightness(value);
+    if (operate.updateEcData()) {
+        updateKeyboardBrightness();
+    }
 }
 
 void MainWindow::on_keyboardBacklightModeComboBox_currentIndexChanged(int index) const {

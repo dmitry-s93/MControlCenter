@@ -99,6 +99,7 @@ public:
     void setValue(int address, int value) const;
 
     [[nodiscard]] bool isBatteryThresholdSupport() const;
+    [[nodiscard]] bool isKeyboardBacklightModeSupport() const;
     [[nodiscard]] bool isKeyboardBacklightSupport() const;
     [[nodiscard]] bool isUsbPowerShareSupport() const;
     [[nodiscard]] bool isWebCamOffSupport() const;
@@ -110,6 +111,7 @@ private:
     int detectFan1Address() const;
     int detectBatteryThresholdAddress() const;
     int detectFanModeAddress() const;
+    int detectKeyboardBacklightAddress() const;
 };
 
 #endif // OPERATE_H

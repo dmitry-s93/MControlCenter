@@ -57,7 +57,7 @@ private:
     void updateFan1Speed();
     void updateFan2Speed();
     void updateKeyboardBacklightMode();
-    void updateKeyboardBrightness();
+    void updateKeyboardBrightness() const;
     void updateUsbPowerShareState();
     void updateWebCamState() const;
     void updateFnSuperSwapState();
