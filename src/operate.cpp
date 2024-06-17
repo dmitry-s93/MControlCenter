@@ -539,16 +539,6 @@ bool Operate::isBatteryThresholdSupport() const {
 }
 
 bool Operate::isKeyboardBacklightModeSupport() const {
-    // Discard this, it is temporary
-    // This is a security to prevent me from modifying keyboardBacklightModeAddress
-    // while allowing others to have the same behaviour
-    return (helper.getValue(keyboardBacklightAddress) == keyboardBacklight0ff ||
-            helper.getValue(keyboardBacklightAddress) == keyboardBacklightLow ||
-            helper.getValue(keyboardBacklightAddress) == keyboardBacklightMid ||
-            helper.getValue(keyboardBacklightAddress) == keyboardBacklightHigh);
-}
-
-bool Operate::isKeyboardBacklightModeSupport() const {
     // Backlight mode is not available for all keyboard with backlight
     
     // Keep the same behaviour for devices with brightness at 0xD3
