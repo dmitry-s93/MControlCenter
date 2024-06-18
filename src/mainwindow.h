@@ -89,6 +89,10 @@ private:
     void closeEvent(QCloseEvent *event);
     void quitApp() const;
 
+    QTimer timerSleepWatcher;
+    qint64 timeLastWatcherInterval = 0;
+    void timerSleepTimeout();
+
     void createTrayIcon();
     void createActions();
     void iconActivated(QSystemTrayIcon::ActivationReason reason);

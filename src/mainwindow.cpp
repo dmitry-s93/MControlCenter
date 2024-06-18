@@ -158,6 +158,11 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(realtimeUpdateTimer, &QTimer::timeout, this, &MainWindow::realtimeUpdate);
     setUpdateInterval(1000);
+
+    // Timer to detect sleep and reapply Advanced Mode Fan if necessary
+    connect(&timerSleepWatcher, &QTimer::timeout, this, &MainWindow::timerSleepTimeout);
+    timerSleepWatcher.setInterval(10 * 1000);
+    timerSleepWatcher.start();
 }
 
 MainWindow::~MainWindow() {
@@ -602,6 +607,20 @@ void MainWindow::quitApp() const {
     Settings::setValue("MainWindow/Width", MainWindow::width());
     Settings::setValue("MainWindow/Height", MainWindow::height());
     (void) QCoreApplication::quit();
+}
+
+void MainWindow::timerSleepTimeout() {
+    qint64 timeNow = QDateTime::currentMSecsSinceEpoch();
+    if (timeLastWatcherInterval == 0) {
+        timeLastWatcherInterval = timeNow;
+        return;
+    }
+    qint64 msecsSinceTimeout = timeNow - timeLastWatcherInterval;
+    timeLastWatcherInterval = timeNow;
+    if (msecsSinceTimeout > timerSleepWatcher.interval() + 5000) {
+        // Went to sleep for at least 5 seconds
+        operate.handleWakeEvent();
+    }
 }
 
 void MainWindow::on_bestMobilityRadioButton_toggled(bool checked) {

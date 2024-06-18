@@ -504,6 +504,12 @@ void Operate::loadSettings() const {
         setFanModeAdvanced(s.getValue(settingsGroup + "fanModeAdvanced").toBool());
 }
 
+void Operate::handleWakeEvent() const {
+    Settings s;
+    if (s.isValueExist(settingsGroup + "fanModeAdvanced"))
+        setFanModeAdvanced(s.getValue(settingsGroup + "fanModeAdvanced").toBool());
+}
+
 void Operate::putSuperBatteryModeValue(bool enabled) const {
     if ((helper.getValue(superBatteryModeAddress) / 15 % 2 != 0) == enabled)
         return;
