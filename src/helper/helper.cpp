@@ -17,6 +17,7 @@
  */
 
 #include "helper.h"
+#include "msi-ec.h"
 #include "readwrite.h"
 #include <QCoreApplication>
 #include <QDBusConnection>
@@ -74,6 +75,10 @@ int main(int argc, char *argv[]) {
     QObject::connect(&a, &QCoreApplication::aboutToQuit, helper, &Helper::aboutToQuit);
     helper->setProperty("value", "initial value");
     QDBusConnection::systemBus().registerObject("/", &obj);
+
+    QObject objMsiEc;
+    auto *helperMsiEc = new MsiEc(&objMsiEc);
+    QDBusConnection::systemBus().registerObject("/msi_ec", &objMsiEc);
 
     if (!QDBusConnection::systemBus().registerService(SERVICE_NAME)) {
         fprintf(stderr, "%s\n", qPrintable(QDBusConnection::systemBus().lastError().message()));
