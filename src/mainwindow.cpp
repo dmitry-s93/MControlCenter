@@ -207,7 +207,7 @@ void MainWindow::realtimeUpdate() {
 void MainWindow::updateData() {
     if (!isUpdateDataError && !operate.getEcVersion().empty()) {
         if (!isActive) {
-            operate.doProbe();
+            bool _ = operate.doProbe();
             setTabsEnabled(true);
             loadConfigs();
             isActive = true;
@@ -427,10 +427,10 @@ void MainWindow::updateFanMode() {
 void MainWindow::updateFanSpeedSettings() {
     ui->advancedFanControlCheckBox->setChecked(operate.getFanMode() == fan_mode::advanced_fan_mode);
 
-    QVector fan1SpeedSettings = operate.getFan1SpeedSettings();
-    QVector fan1TempSettings = operate.getFan1TempSettings();
-    QVector fan2SpeedSettings = operate.getFan2SpeedSettings();
-    QVector fan2TempSettings = operate.getFan2TempSettings();
+    QVector<int> fan1SpeedSettings = operate.getFan1SpeedSettings();
+    QVector<int> fan1TempSettings = operate.getFan1TempSettings();
+    QVector<int> fan2SpeedSettings = operate.getFan2SpeedSettings();
+    QVector<int> fan2TempSettings = operate.getFan2TempSettings();
 
     ui->fan1Speed1Slider->setValue(fan1SpeedSettings[0]);
     ui->fan1Speed2Slider->setValue(fan1SpeedSettings[1]);
