@@ -1,5 +1,7 @@
 # MControlCenter
 
+This is a fork of [MControlCenter](https://github.com/dmitry-s93/MControlCenter) created to work with QT6 on Ubuntu 24.04 and clang compiler.
+
 MControlCenter is a Free and Open Source GNU/Linux application that allows you to change the settings of MSI laptops.
 ![Screenshots of MControlCenter](https://user-images.githubusercontent.com/12676622/219121128-0476b54b-3330-40c7-b7ac-8d4a884f8abd.png)
 
@@ -16,15 +18,11 @@ MControlCenter is a Free and Open Source GNU/Linux application that allows you t
  - Advanced Fan Speed Control (Since version 0.4)
  - Change other settings such as keyboard backlight mode, USB Power Share, etc.
 
-## TODO
-
-- Saving multiple fan speed profiles
-
 ## Tested on
 
-The main device on which the application is being tested: **MSI Summit E16 Flip Evo A12MT**
+This fork tested on MSI Creator 17 B11UG and Ubuntu 24.04.
 
-[List of tested devices](/docs/tested_devices.md)
+[List of original tested devices](/docs/tested_devices.md)
 
 
 ## Installation
@@ -32,8 +30,6 @@ The main device on which the application is being tested: **MSI Summit E16 Flip 
 The application requires the `ec_sys` module with option `write_support=1` to run.
 
 If the `ec_sys` kernel module is not included in your distribution's kernel, you can use the `acpi_ec` kernel module.
-
-This is QT application. You may need to install `libqt5widgets5` to run.
 
 ### Installation from the archive
 
@@ -44,28 +40,12 @@ This is QT application. You may need to install `libqt5widgets5` to run.
 
 ### Installation from the repository
 
-#### openSUSE Tumbleweed:
+Create package with:
 
-```sh
-zypper addrepo https://download.opensuse.org/repositories/home:dmitry-s/openSUSE_Tumbleweed/home:dmitry-s.repo
-zypper refresh
-zypper install mcontrolcenter
-```
-
-#### openSUSE Leap 15.5
-
-```sh
-zypper addrepo https://download.opensuse.org/repositories/home:dmitry-s/openSUSE_Leap_15.5/home:dmitry-s.repo
-zypper refresh
-zypper install mcontrolcenter
-```
-
-#### openSUSE Leap 15.4:
-
-```sh
-zypper addrepo https://download.opensuse.org/repositories/home:dmitry-s/15.4/home:dmitry-s.repo
-zypper refresh
-zypper install mcontrolcenter
+```bash
+cd scripts/
+bash build.sh
+bash create_installer.sh
 ```
 
 ### Launch MControlCenter on session startup
@@ -80,8 +60,8 @@ Execute this command on a terminal:
 
 You can help translate the MControlCenter app into your native language
 
-1. Copy `/src/i18n/MControlCenter_en.ts` to `src/i18n/MControlCenter_xx.ts` where xx is language code into which the translation is being made.
-2. Open `MControlCenter_xx.ts` in text editor and change `language="en_US"` to your language code.
+1. Copy `/src/i18n/en.ts` to `src/i18n/xx.ts` where xx is language code into which the translation is being made.
+2. Open `xx.ts` in text editor and change `language="en_US"` to your language code.
 3. Translate strings into your language directly in a text editor or use the QT Linguist app.
 4. Translate `GenericName` in app shortcut `resources/mcontrolcenter.desktop`. To do this, add the line `GenericName[xx]=translated generic name`.
 5. Send pull request on github.
