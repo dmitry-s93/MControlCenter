@@ -14,14 +14,14 @@
   </provides>
   <screenshots>
     <screenshot type="default">
-      <image>https://github.com/dmitry-s93/MControlCenter/raw/main/docs/img/screenshot_info.png</image>
+      <image>https://user-images.githubusercontent.com/12676622/219121128-0476b54b-3330-40c7-b7ac-8d4a884f8abd.png</image>
     </screenshot>
     <screenshot>
-      <image>https://github.com/dmitry-s93/MControlCenter/raw/main/docs/img/screenshot_battery.png</image>
+      <image>https://user-images.githubusercontent.com/12676622/219121128-0476b54b-3330-40c7-b7ac-8d4a884f8abd.png</image>
     </screenshot>
   </screenshots>
   <developer_name>Dmitry Serov</developer_name>
-  <url type="homepage">https://github.com/dmitry-s93/MControlCenter</url>
-  <url type="bugtracker">https://github.com/dmitry-s93/MControlCenter/issues</url>
-  <url type="translate">https://github.com/dmitry-s93/MControlCenter/tree/main/src/i18n</url>
+  <url type="homepage">https://github.com/valboldakov/MControlCenter</url>
+  <url type="bugtracker">https://github.com/valboldakov/MControlCenter/issues</url>
+  <url type="translate">https://github.com/valboldakov/MControlCenter/tree/main/src/i18n</url>
 </component>

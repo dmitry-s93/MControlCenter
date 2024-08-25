@@ -1570,7 +1570,7 @@
           <item row="1" column="1">
            <widget class="QLabel" name="gitHubValueLabel">
             <property name="text">
-             <string notr="true">&lt;a href=&quot;https://github.com/dmitry-s93/MControlCenter&quot;&gt;https://github.com/dmitry-s93/MControlCenter&lt;/a&gt;</string>
+             <string notr="true">&lt;a href=&quot;https://github.com/valboldakov/MControlCenter&quot;&gt;https://github.com/valboldakov/MControlCenter&lt;/a&gt;</string>
             </property>
             <property name="openExternalLinks">
              <bool>true</bool>
@@ -1590,7 +1590,7 @@
           <item row="2" column="1">
            <widget class="QLabel" name="bugTrackerValueLabel">
             <property name="text">
-             <string notr="true">&lt;a href=&quot;https://github.com/dmitry-s93/MControlCenter/issues&quot;&gt;https://github.com/dmitry-s93/MControlCenter/issues&lt;/a&gt;</string>
+             <string notr="true">&lt;a href=&quot;https://github.com/valboldakov/MControlCenter/issues&quot;&gt;https://github.com/valboldakov/MControlCenter/issues&lt;/a&gt;</string>
             </property>
             <property name="openExternalLinks">
              <bool>true</bool>
