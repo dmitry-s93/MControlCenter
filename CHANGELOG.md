@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## [1.0.0] 2024-08-25
+- Added support for Qt6 on Ubuntu 24.04.
+- Removed support of Qt5.
+- Added support for clang compiler.
+
 ## [0.4.1] 2023-08-09
 - Fixed UI lags when resizing the window (issue https://github.com/dmitry-s93/MControlCenter/issues/97)
 - Updated Norwegian Bokmål (Thanks [msigurdsen](https://github.com/msigurdsen))
