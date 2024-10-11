@@ -34,5 +34,6 @@
 | MSI Prestige 15 A10SC         | E16S3IMS.108 | ❌ Mode<br> ✔ Battery Limit<br> ✔ Cooler Boost<br> ✔/❌ Fan Control: Fan 1 = YES, Fan 2 = NO | ❌ Keyboard Backlit (greyed out)<br> ❌ FN -> Super (nothing changes)<br> ✔ Webcam<br> ❌ USB Power Share (greyed out)
 | MSI GF75 Thin 10SCXR            | 17F4EMS1.101 09/14/2020 | ❌ Mode (everything's greyed out) <br> ✔ Battery Limit<br> ✔ Cooler Boost<br> ✔ Fan Control | ❌ Keyboard Backlit (greyed out)<br> ❓ FN -> Super (Not greyed out, but doesn't affect  anything when ticked)<br> ✔ Webcam<br> ❌ USB Power Share
 | MSI Cyborg 15 A12VE            | 15K1IMS1.104 12/26/2022 | ✔ Mode <br> ✔ Battery Limit<br> ✔ Cooler Boost<br> ✔ Fan Control | ✔ Keyboard Backlit <br> ✔ FN -> Super <br> ✔ Webcam<br> ❓ USB Power Share
+| MSI Cyborg 15 A13UDX            | E15K1MS.114 09/27/2024 | ❓ Mode (Silent mode moves to balanced) <br> ✔ Battery Limit<br> ✔ Cooler Boost<br> ✔ Fan Control | ❓ Keyboard Backlit (Timeout doesn't work) <br> ✔ FN -> Super <br> ✔ Webcam <br> ❓ USB Power Share
 
 If the table does not contain the device you are using, then you can add it.
