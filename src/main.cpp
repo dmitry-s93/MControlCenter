@@ -40,6 +40,9 @@ int main(int argc, char *argv[]) {
         if(options.cooler_boost.has_value()){
             cli.setCoolerBoost(options.cooler_boost.value());
         }
+        if(options.user_mode.has_value()){
+            cli.changeUserMode(options.user_mode.value());
+        }
 
         if (socket->isOpen()) {
             socket->write("update");

@@ -58,3 +58,65 @@ void CLI::setCoolerBoost(Options::State state){
         }
     }
 }
+
+void CLI::changeUserMode(Options::Mode mode){
+    bool mode_found = true;
+    Options::Mode change_mode = mode;
+
+    if(mode == Options::Mode::NEXT){
+        user_mode cur_mode = operate.getUserMode();
+        switch (cur_mode) {
+            case user_mode::performance_mode:
+                change_mode = Options::Mode::BALANCED;
+                break;
+
+            case user_mode::balanced_mode:
+                change_mode = Options::Mode::SILENT;
+                break;
+
+            case user_mode::silent_mode:
+                change_mode = Options::Mode::BATTERY;
+                break;
+
+            case user_mode::super_battery_mode:
+                change_mode = Options::Mode::PERFORMANCE;
+                break;
+
+            default:
+                change_mode = Options::Mode::PERFORMANCE;
+                mode_found = false;
+        }
+    }
+
+    user_mode user_mode = user_mode::performance_mode;
+    std::string text_mode;
+
+    switch (change_mode){
+        case Options::Mode::PERFORMANCE:
+            user_mode = user_mode::performance_mode;
+            text_mode = "performance";
+            break;
+        
+        case Options::Mode::BALANCED:
+            user_mode = user_mode::balanced_mode;
+            text_mode = "balanced";
+            break;
+        
+        case Options::Mode::SILENT:
+            user_mode = user_mode::silent_mode;
+            text_mode = "silent";
+            break;
+        
+        case Options::Mode::BATTERY:
+            user_mode = user_mode::super_battery_mode;
+            text_mode = "super battery";
+            break;
+    }
+
+    if (!mode_found) {
+        fprintf(stdout, "Can't get current mode..");
+    }
+    fprintf(stdout, "Changing user mode to %s mode\n", ( text_mode.c_str() ));
+    operate.setUserMode(user_mode);
+    operate.updateEcData();
+}
