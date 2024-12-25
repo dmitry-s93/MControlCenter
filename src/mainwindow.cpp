@@ -175,7 +175,6 @@ void MainWindow::setUpdateDataError(bool error) {
 
 void MainWindow::setTabsEnabled(bool enabled) {
     ui->overviewTab->setEnabled(enabled);
-    ui->modeTab->setEnabled(enabled);
     ui->batteryTab->setEnabled(enabled);
     ui->fanControlTab->setEnabled(enabled);
     ui->keyboardTab->setEnabled(enabled);
