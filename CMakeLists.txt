@@ -11,7 +11,7 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Network)
+find_package(QT NAMES Qt6 REQUIRED COMPONENTS Widgets Network)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools DBus Network)
 
 set(PROJECT_SOURCES
@@ -40,8 +40,8 @@ set(TS_FILES
     MControlCenter_zh_CN.ts
 )
 
-find_program(LUPDATE_EXECUTABLE lupdate lupdate-qt5 REQUIRED)
-find_program(LRELEASE_EXECUTABLE lrelease lrelease-qt5 REQUIRED)
+find_program(LUPDATE_EXECUTABLE lupdate lupdate-qt6 PATHS /lib/qt6/bin/ REQUIRED)
+find_program(LRELEASE_EXECUTABLE lrelease lrelease-qt6 PATHS /lib/qt6/bin/ REQUIRED)
 
 foreach(_ts_file ${TS_FILES})
     execute_process(COMMAND
