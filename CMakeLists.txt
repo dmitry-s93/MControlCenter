@@ -40,8 +40,8 @@ set(TS_FILES
     MControlCenter_zh_CN.ts
 )
 
-find_program(LUPDATE_EXECUTABLE lupdate lupdate-qt6 PATHS /lib/qt6/bin/ REQUIRED)
-find_program(LRELEASE_EXECUTABLE lrelease lrelease-qt6 PATHS /lib/qt6/bin/ REQUIRED)
+find_program(LUPDATE_EXECUTABLE lupdate lupdate6 lupdate-qt6 PATHS /lib/qt6/bin/ REQUIRED)
+find_program(LRELEASE_EXECUTABLE lrelease lrelease6 lrelease-qt6 PATHS /lib/qt6/bin/ REQUIRED)
 
 foreach(_ts_file ${TS_FILES})
     execute_process(COMMAND
