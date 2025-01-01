@@ -1,7 +1,10 @@
 # MControlCenter
 
 MControlCenter is a Free and Open Source GNU/Linux application that allows you to change the settings of MSI laptops.
-![Screenshots of MControlCenter](https://user-images.githubusercontent.com/12676622/219121128-0476b54b-3330-40c7-b7ac-8d4a884f8abd.png)
+
+![Screenshots of MControlCenter](https://github.com/user-attachments/assets/85616b6a-6ec4-4533-b1b7-e5d9b521f82d)
+
+
 
 ## Features
 
@@ -20,12 +23,13 @@ MControlCenter is a Free and Open Source GNU/Linux application that allows you t
 
 - Saving multiple fan speed profiles
 
-## Tested on
+## Supported devices
 
-The main device on which the application is being tested: **MSI Summit E16 Flip Evo A12MT**
+The app uses the msi-ec driver that comes with the linux kernel, so device support depends on whether the kernel driver supports your device or not.
 
-[List of tested devices](/docs/tested_devices.md)
+[List of tested devices by msi-ec](https://github.com/BeardOverflow/msi-ec/blob/main/docs/supported_devices.md)
 
+In case of missing performance mode selection, follow the steps on the msi-ec github page to add support for your device.
 
 ## Installation
 

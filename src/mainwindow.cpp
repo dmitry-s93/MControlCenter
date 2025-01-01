@@ -174,11 +174,10 @@ void MainWindow::setUpdateDataError(bool error) {
 }
 
 void MainWindow::setTabsEnabled(bool enabled) {
-    ui->infoTab->setEnabled(enabled);
-    ui->modeTab->setEnabled(enabled);
+    ui->overviewTab->setEnabled(enabled);
     ui->batteryTab->setEnabled(enabled);
     ui->fanControlTab->setEnabled(enabled);
-    ui->settingsTab->setEnabled(enabled);
+    ui->keyboardTab->setEnabled(enabled);
     ui->debugTab->setEnabled(enabled);
 
     if (modeTrayMenu)
@@ -394,7 +393,7 @@ void MainWindow::updateUserMode() {
                 ui->superBatteryModeRadioButton->click();
                 break;
             default:
-                ui->modeTab->setDisabled(true);
+                ui->overviewTab->setDisabled(true);
                 if (modeTrayMenu)
                     modeTrayMenu->setDisabled(true);
                 break;
