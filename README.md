@@ -2,9 +2,7 @@
 
 MControlCenter is a Free and Open Source GNU/Linux application that allows you to change the settings of MSI laptops.
 
-![Screenshots of MControlCenter](https://github.com/user-attachments/assets/85616b6a-6ec4-4533-b1b7-e5d9b521f82d)
-
-
+![Screenshots of MControlCenter](https://github.com/user-attachments/assets/6a46ad88-cb23-44a4-a756-e0d95df7cd6d)
 
 ## Features
 
@@ -29,7 +27,7 @@ The app uses the msi-ec driver that comes with the linux kernel, so device suppo
 
 [List of tested devices by msi-ec](https://github.com/BeardOverflow/msi-ec/blob/main/docs/supported_devices.md)
 
-In case of missing performance mode selection, follow the steps on the msi-ec github page to add support for your device.
+If your device is not on the list, follow the steps on the `msi-ec` github page to add support for your device.
 
 ## Installation
 
@@ -37,7 +35,9 @@ The application requires the `ec_sys` module with option `write_support=1` to ru
 
 If the `ec_sys` kernel module is not included in your distribution's kernel, you can use the `acpi_ec` kernel module.
 
-This is QT application. You may need to install `libqt5widgets5` to run.
+If your laptop is in the supported devices list but all the options are grayed out, consider [reinstalling](https://github.com/BeardOverflow/msi-ec?tab=readme-ov-file#installation) the `msi-ec` driver.
+
+This is a Qt6 application. You may need to install `libqt6widgets6` or its equivalent on your distribution for the applicatoin to run.
 
 ### Installation from the archive
 
