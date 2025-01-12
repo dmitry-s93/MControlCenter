@@ -379,7 +379,7 @@
              </size>
             </property>
             <property name="text">
-             <string>Cooler Buster 5</string>
+             <string>Cooler Boost</string>
             </property>
            </widget>
           </item>
@@ -1554,7 +1554,7 @@
           <item row="0" column="1">
            <widget class="QLabel" name="versionValueLabel">
             <property name="text">
-             <string notr="true">0.4.1</string>
+             <string notr="true">0.5.0</string>
             </property>
            </widget>
           </item>

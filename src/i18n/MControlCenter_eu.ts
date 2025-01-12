@@ -4,10 +4,6 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <source>Info</source>
-        <translation>Informazioa</translation>
-    </message>
-    <message>
         <source>EC Version:</source>
         <translation>EC Bertsioa:</translation>
     </message>
@@ -32,24 +28,12 @@
         <translation>GPU tenp:</translation>
     </message>
     <message>
-        <source>Fan 1:</source>
-        <translation>Haizagailu 1:</translation>
-    </message>
-    <message>
-        <source>Fan 2:</source>
-        <translation>Haizagailu 2:</translation>
-    </message>
-    <message>
         <source>Cooler Boost</source>
         <translation>Cooler Boost</translation>
     </message>
     <message>
         <source>Battery</source>
         <translation>Bateria</translation>
-    </message>
-    <message>
-        <source>If you mainly use your laptop with adaptor plugged, we suggest you set the charge capacity at a lower percentage (60% or 80%) to prolong your battery lifecycle</source>
-        <translation>Zure ordenagailua gehienetan adaptadorearekin erabiltzen baduzu, gomendatzen dizugu karga gaitasuna ehuneko baxuago batean (%60 edo %80) ezar dezazun, zure bateriaren bizitza luzatzeko</translation>
     </message>
     <message>
         <source>Best for Mobility</source>
@@ -80,10 +64,6 @@
         <translation>Pertsonalizatua</translation>
     </message>
     <message>
-        <source>Settings</source>
-        <translation>Ezarpenak</translation>
-    </message>
-    <message>
         <source>Keyboard Backlit</source>
         <translation>Teklatuaren atzeko argia</translation>
     </message>
@@ -96,16 +76,8 @@
         <translation>Automatikoki itzali 10 segundotan</translation>
     </message>
     <message>
-        <source>FN ⇄ Super</source>
-        <translation>FN ⇄ Super</translation>
-    </message>
-    <message>
         <source>WebCam</source>
         <translation>Web Kamera</translation>
-    </message>
-    <message>
-        <source>USB Power Share</source>
-        <translation>USB Energia Banaketa</translation>
     </message>
     <message>
         <source>Debug</source>
@@ -118,10 +90,6 @@
     <message>
         <source>Version:</source>
         <translation>Bertsioa:</translation>
-    </message>
-    <message>
-        <source>GitHub:</source>
-        <translation>GitHub:</translation>
     </message>
     <message>
         <source>Charging status:</source>
@@ -144,14 +112,6 @@
         <translation>Ezezaguna</translation>
     </message>
     <message>
-        <source>Bug tracker:</source>
-        <translation>Akatsak jarraitu:</translation>
-    </message>
-    <message>
-        <source>An application that allows you to change the settings of MSI laptops running Linux</source>
-        <translation>Linux-en funtzionatzen duten MSI ordenagailuen ezarpenak aldatzen uzten duen aplikazioa</translation>
-    </message>
-    <message>
         <source>Swap FN and Super buttons</source>
         <translation>FN eta Super botoiak trukatu</translation>
     </message>
@@ -172,32 +132,12 @@
         <translation>Modua</translation>
     </message>
     <message>
-        <source>High Performance</source>
-        <translation>Errendimendu handia</translation>
-    </message>
-    <message>
-        <source>A mode that brings a balance between performance and battery live</source>
-        <translation>Errendimenduaren eta bateriaren bizitzaren artean orekatu bat eskaintzen duen modua</translation>
-    </message>
-    <message>
         <source>Silent</source>
         <translation>Isila</translation>
     </message>
     <message>
         <source>Super Battery</source>
         <translation>Super Bateria</translation>
-    </message>
-    <message>
-        <source>A mode that provides the best system performance for multi-tasking and heavy duty</source>
-        <translation>Zeregin anitzekoa eta lan handientzako sistema errendimendu onena eskaintzen duen modua</translation>
-    </message>
-    <message>
-        <source>A quiet mode that lowers the fan noise</source>
-        <translation>Haizagailuaren zarata murrizten duen modua</translation>
-    </message>
-    <message>
-        <source>A power-saving mode that lowers the power consumption for basic needs</source>
-        <translation>Oinarrizko beharrak asetzeko energia kontsumoa murrizten duen energia aurrezteko modua</translation>
     </message>
     <message>
         <source>Failed to load the ec_sys kernel module</source>
@@ -220,10 +160,6 @@
         <translation>Karga muga</translation>
     </message>
     <message>
-        <source>Fan Mode:</source>
-        <translation>Haizagailuaren Modua:</translation>
-    </message>
-    <message>
         <source>Auto</source>
         <translation>Automatikoa</translation>
     </message>
@@ -234,10 +170,6 @@
     <message>
         <source>Advanced</source>
         <translation>Aurreratua</translation>
-    </message>
-    <message>
-        <source>Choose the mode that best suits your use case</source>
-        <translation>Aukeratu zure kasuaren erabilerari ondoen egokitzen den modua</translation>
     </message>
     <message>
         <source>Cooling</source>
@@ -262,6 +194,82 @@
     <message>
         <source>Enable advanced fan control</source>
         <translation>Gaitu aurreratuko haizagailuaren kontrola</translation>
+    </message>
+    <message>
+        <source>Overview</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;High Performance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Maximum performance at the cost of heat and increased power consumption&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The middle spot between fan noise and power usage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Low fan noise and moderate power usage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Limits performance and turns off fans at lower temperatures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>GPU Fan:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CPU Fan:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>USB Power</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FN ⇄ Meta</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Current fan Mode:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If you mainly use your laptop with the charger plugged most of the time, it is recommended to set the charge capacity at a lower percentage (60% or 80%) to prolong your battery lifecycle.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Keyboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;MC&lt;/span&gt;ontrol&lt;span style=&quot; font-weight:700;&quot;&gt;C&lt;/span&gt;enter (MCC) is an application that allows you to change the settings of MSI laptops running Linux.&lt;/p&gt;&lt;p&gt;MCC acts as a graphical interface for the &lt;span style=&quot; font-weight:700;&quot;&gt;MSI-EC &lt;/span&gt;driver that already exist in the Linux kernel, if your device is not supported (grey buttons/limited in-app functionality), please visit the msi-ec github page to get help.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MCC GitHub:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MCC Bug tracker:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MSI-EC GitHub:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/BeardOverflow/msi-ec&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#1ec974;&quot;&gt;https://github.com/BeardOverflow/msi-ec&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Warning&lt;/span&gt;: Writing the wrong values to the wrong addresses &lt;span style=&quot; font-weight:700;&quot;&gt;WILL BRICK YOUR DEVICE!&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Never write to EC memory without knowing how to do a proper BIOS/EC reset, keep in mind that a reset &lt;span style=&quot; font-weight:700;&quot;&gt;might not&lt;/span&gt; fix the device if the device got bricked/broken. &lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

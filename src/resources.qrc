@@ -6,10 +6,12 @@
         <file alias="lang_de_DE">i18n/MControlCenter_de_DE.qm</file>
         <file alias="lang_en">i18n/MControlCenter_en.qm</file>
         <file alias="lang_es">i18n/MControlCenter_es.qm</file>
+        <file alias="lang_eu">i18n/MControlCenter_eu.qm</file>
         <file alias="lang_fr">i18n/MControlCenter_fr.qm</file>
         <file alias="lang_hu">i18n/MControlCenter_hu.qm</file>
         <file alias="lang_it">i18n/MControlCenter_it.qm</file>
         <file alias="lang_nb">i18n/MControlCenter_nb.qm</file>
+        <file alias="lang_nl_NL">i18n/MControlCenter_nl_NL.qm</file>
         <file alias="lang_pt_br">i18n/MControlCenter_pt_BR.qm</file>
         <file alias="lang_pt_pt">i18n/MControlCenter_pt_PT.qm</file>
         <file alias="lang_ru">i18n/MControlCenter_ru.qm</file>

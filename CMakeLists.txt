@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(MControlCenter VERSION 0.4.1 LANGUAGES CXX)
+project(MControlCenter VERSION 0.5.0 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -29,10 +29,12 @@ set(TS_FILES
     MControlCenter_de_DE.ts
     MControlCenter_en.ts
     MControlCenter_es.ts
+    MControlCenter_eu.ts
     MControlCenter_fr.ts
     MControlCenter_hu.ts
     MControlCenter_it.ts
     MControlCenter_nb.ts
+    MControlCenter_nl_NL.ts
     MControlCenter_pt_BR.ts
     MControlCenter_pt_PT.ts
     MControlCenter_ru.ts
