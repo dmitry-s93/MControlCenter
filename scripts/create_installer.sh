@@ -3,7 +3,7 @@ echo "Creating the installer"
 
 VERSION=$(grep -oP "(?<=MControlCenter VERSION )[0-9.]*" ../CMakeLists.txt)
 
-DIST_DIR="MControlCenter-$VERSION"
+DIST_DIR="MControlCenter-$VERSION-bin"
 APP_DIR="$DIST_DIR/app"
 
 rm -rf $DIST_DIR
