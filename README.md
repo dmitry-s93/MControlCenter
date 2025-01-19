@@ -2,7 +2,9 @@
 
 MControlCenter is a Free and Open Source GNU/Linux application that allows you to change the settings of MSI laptops.
 
-![Screenshots of MControlCenter](https://github.com/user-attachments/assets/6a46ad88-cb23-44a4-a756-e0d95df7cd6d)
+![Screenshots of MControlCenter](https://github.com/user-attachments/assets/e2ebacda-1c6b-48aa-8739-d4a88ee4af67)
+
+
 
 ## Features
 
@@ -23,7 +25,7 @@ MControlCenter is a Free and Open Source GNU/Linux application that allows you t
 
 ## Supported devices
 
-The app uses the msi-ec driver that comes with the linux kernel, so device support depends on whether the kernel driver supports your device or not.
+With version 0.5.0 the app uses the msi-ec driver that comes with the linux kernel (you might need to reinstall the driver), so device support depends on whether the kernel driver supports your device or not.
 
 [List of tested devices by msi-ec](https://github.com/BeardOverflow/msi-ec/blob/main/docs/supported_devices.md)
 
@@ -31,13 +33,14 @@ If your device is not on the list, follow the steps on the `msi-ec` github page 
 
 ## Installation
 
-The application requires the `ec_sys` module with option `write_support=1` to run.
+This is a Qt6 application. You need to install `libqt6widgets6` or its equivalent on your distribution (```qt6-base``` for example). **the application will fail to open without it!** 
+
+Check the output of ```cat /sys/devices/platform/msi-ec/shift_mode``` in your terminal, if it says ```No such file or directory``` it means that you need to install or reinstall (uninstall first then install) the [msi-ec driver](https://github.com/BeardOverflow/msi-ec?tab=readme-ov-file#installation). or the application will open **but it wont have any effect!**  
+
+Also, McontrolCenter requires the `ec_sys` module with option `write_support=1` to run.
 
 If the `ec_sys` kernel module is not included in your distribution's kernel, you can use the `acpi_ec` kernel module.
 
-If your laptop is in the supported devices list but all the options are grayed out, consider [reinstalling](https://github.com/BeardOverflow/msi-ec?tab=readme-ov-file#installation) the `msi-ec` driver.
-
-This is a Qt6 application. You may need to install `libqt6widgets6` or its equivalent on your distribution for the applicatoin to run.
 
 ### Installation from the archive
 
