@@ -31,13 +31,6 @@ int batteryThresholdAddress;
 const int batteryThresholdAddress_0xEF = 0xEF;
 const int batteryThresholdAddress_0xD7 = 0xD7;
 
-const int batteryChargingStatusAddress = 0x31;
-const int batteryNotCharging = 0x01;
-const int batteryCharging = 0x03;
-const int batteryDischarging = 0x05;
-const int batteryFullyCharged = 0x09;
-const int batteryFullyCharged_noPower = 0x0D;
-
 const int keyboardBacklightModeAddress = 0x2C;
 const int keyboardBacklightAlwaysOn = 0x00;
 const int keyboardBacklightAutoTurnOff = 0x08;
@@ -153,10 +146,10 @@ charging_state Operate::getChargingStatus() const {
     if (msiEcHelper.hasBatteryStatus()) {
         QString status = msiEcHelper.getBatteryStatus();
         if (status == "Charging")
-            return charging_state::battery_not_charging;
+            return charging_state::battery_charging;
         else if (status == "Discharging")
             return charging_state::battery_discharging;
-        else if (status == "Not Charging")
+        else if (status == "Not charging")
             return charging_state::battery_not_charging;
         else if (status == "Full")
             return charging_state::battery_fully_charged;
@@ -164,20 +157,7 @@ charging_state Operate::getChargingStatus() const {
         else
             return charging_state::battery_unknown;
     }
-    switch (helper.getValue(batteryChargingStatusAddress)) {
-        case batteryCharging:
-            return charging_state::battery_charging;
-        case batteryDischarging:
-            return charging_state::battery_discharging;
-        case batteryNotCharging:
-            return charging_state::battery_not_charging;
-        case batteryFullyCharged:
-            return charging_state::battery_fully_charged;
-        case batteryFullyCharged_noPower:
-            return charging_state::battery_fully_charged_no_power;
-        default:
-            return charging_state::battery_unknown;
-    }
+    return charging_state::battery_unknown;
 }
 
 int Operate::getCpuTemp() const {
