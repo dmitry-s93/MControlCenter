@@ -16,6 +16,7 @@
         <file alias="lang_pt_pt">i18n/MControlCenter_pt_PT.qm</file>
         <file alias="lang_ru">i18n/MControlCenter_ru.qm</file>
         <file alias="lang_tr">i18n/MControlCenter_tr.qm</file>
+        <file alias="lang_vi">i18n/MControlCenter_vi.qm</file>
         <file alias="lang_zh_cn">i18n/MControlCenter_zh_CN.qm</file>
     </qresource>
 </RCC>
