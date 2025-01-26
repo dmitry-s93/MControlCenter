@@ -41,6 +41,7 @@ set(TS_FILES
     MControlCenter_pt_PT.ts
     MControlCenter_ru.ts
     MControlCenter_tr.ts
+    MControlCenter_vi.ts
     MControlCenter_zh_CN.ts
 )
 

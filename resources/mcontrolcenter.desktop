@@ -16,6 +16,7 @@ GenericName[hu]=Változtasd meg az MSI Laptop beállításait
 GenericName[zh_CN]=调整 MSI 笔记本电脑的电源和性能设置
 GenericName[nl_NL]=Wijzig de instellingen van de MSI Laptop
 GenericName[eu]=Aldatu MSI eramangarrien doikuntzak
+GenericName[vi]=Thay đổi cài đặt máy tính xách tay MSI
 Type=Application
 Exec=mcontrolcenter
 Icon=mcontrolcenter
