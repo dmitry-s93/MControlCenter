@@ -30,3 +30,10 @@
 *.exe
 *.out
 *.app
+
+# Generated files
+src/i18n/*
+
+# Generated build files
+compile_commands.json
+build/
