@@ -390,9 +390,10 @@ void MainWindow::updateUserMode() {
                 ui->superBatteryModeRadioButton->click();
                 break;
             default:
-                ui->overviewTab->setDisabled(true);
-                if (modeTrayMenu)
-                    modeTrayMenu->setDisabled(true);
+                ui->superBatteryModeRadioButton->setChecked(0);
+                ui->silentModeRadioButton->setChecked(0);
+                ui->highPerformanceModeRadioButton->setChecked(0);
+                ui->balancedModeRadioButton->setChecked(0);
                 break;
         }
     }
