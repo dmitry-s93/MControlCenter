@@ -241,7 +241,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If you mainly use your laptop with the charger plugged most of the time, it is recommended to set the charge capacity at a lower percentage (60% or 80%) to prolong your battery lifecycle.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="Jeigu dažniausiai naudojate savo nešiojamąjį kompiuterį įkroviklio, esant įjungtam į elektrą, rekomenduojama nustatyti įkrovimo talpą mažesne procentine dalimi (60% arba 80%) siekiant ilgesnės baterijos gyvavimo trukmės."></translation>
+        <translation type="Jeigu dažniausiai naudojate savo nešiojamąjį kompiuterį su įkrovikliu, esant įjungtam į elektrą, rekomenduojama nustatyti įkrovimo talpą mažesne procentine dalimi (60% arba 80%) siekiant ilgesnės baterijos gyvavimo trukmės."></translation>
     </message>
     <message>
         <source>Keyboard</source>
