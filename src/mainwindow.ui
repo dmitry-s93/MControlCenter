@@ -74,100 +74,102 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout">
         <item row="2" column="0" colspan="5">
-         <layout class="QFormLayout" name="formLayout_5">
-          <property name="fieldGrowthPolicy">
-           <enum>QFormLayout::FieldGrowthPolicy::AllNonFixedFieldsGrow</enum>
-          </property>
-          <property name="rowWrapPolicy">
-           <enum>QFormLayout::RowWrapPolicy::WrapLongRows</enum>
-          </property>
-          <property name="labelAlignment">
-           <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
-          </property>
-          <property name="formAlignment">
-           <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
-          </property>
-          <property name="horizontalSpacing">
-           <number>45</number>
-          </property>
-          <property name="verticalSpacing">
-           <number>6</number>
-          </property>
-          <item row="0" column="0">
-           <widget class="QRadioButton" name="highPerformanceModeRadioButton">
-            <property name="text">
-             <string>&amp;High Performance</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QLabel" name="label_15">
-            <property name="minimumSize">
-             <size>
-              <width>26</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Maximum performance at the cost of heat and increased power consumption&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-            </property>
-            <property name="wordWrap">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QRadioButton" name="balancedModeRadioButton">
-            <property name="text">
-             <string>Balanced</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QLabel" name="label_16">
-            <property name="text">
-             <string>The middle spot between fan noise and power usage</string>
-            </property>
-            <property name="wordWrap">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="QRadioButton" name="silentModeRadioButton">
-            <property name="text">
-             <string>Silent</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QLabel" name="label_17">
-            <property name="text">
-             <string>Low fan noise and moderate power usage</string>
-            </property>
-            <property name="wordWrap">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="0">
-           <widget class="QRadioButton" name="superBatteryModeRadioButton">
-            <property name="text">
-             <string>Super Battery</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="1">
-           <widget class="QLabel" name="label_18">
-            <property name="text">
-             <string>Limits performance and turns off fans at lower temperatures</string>
-            </property>
-            <property name="wordWrap">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-         </layout>
+         <widget class="QWidget" name="modeFormWidget" native="true">
+          <layout class="QFormLayout" name="formLayout_5">
+           <property name="fieldGrowthPolicy">
+            <enum>QFormLayout::FieldGrowthPolicy::AllNonFixedFieldsGrow</enum>
+           </property>
+           <property name="rowWrapPolicy">
+            <enum>QFormLayout::RowWrapPolicy::WrapLongRows</enum>
+           </property>
+           <property name="labelAlignment">
+            <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
+           </property>
+           <property name="formAlignment">
+            <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
+           </property>
+           <property name="horizontalSpacing">
+            <number>45</number>
+           </property>
+           <property name="verticalSpacing">
+            <number>6</number>
+           </property>
+           <item row="0" column="0">
+            <widget class="QRadioButton" name="highPerformanceModeRadioButton">
+             <property name="text">
+              <string>&amp;High Performance</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLabel" name="label_15">
+             <property name="minimumSize">
+              <size>
+               <width>26</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Maximum performance at the cost of heat and increased power consumption&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QRadioButton" name="balancedModeRadioButton">
+             <property name="text">
+              <string>Balanced</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLabel" name="label_16">
+             <property name="text">
+              <string>The middle spot between fan noise and power usage</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QRadioButton" name="silentModeRadioButton">
+             <property name="text">
+              <string>Silent</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QLabel" name="label_17">
+             <property name="text">
+              <string>Low fan noise and moderate power usage</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QRadioButton" name="superBatteryModeRadioButton">
+             <property name="text">
+              <string>Super Battery</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QLabel" name="label_18">
+             <property name="text">
+              <string>Limits performance and turns off fans at lower temperatures</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
         </item>
         <item row="1" column="0" colspan="5">
          <widget class="Line" name="line_4">
