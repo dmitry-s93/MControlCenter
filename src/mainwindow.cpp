@@ -291,6 +291,7 @@ void MainWindow::updateBatteryThreshold() {
 
         switch (batteryThreshold) {
             case 0:
+            case 100:
                 ui->bestMobilityRadioButton->click();
                 batteryThreshold = 100;
                 break;
@@ -464,7 +465,7 @@ void MainWindow::updateFanSpeedSettings() {
 }
 
 void MainWindow::setBestMobility() {
-    operate.setBatteryThreshold(0);
+    operate.setBatteryThreshold(100);
     updateBatteryThreshold();
 }
 
