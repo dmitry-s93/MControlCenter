@@ -72,104 +72,212 @@
        <attribute name="title">
         <string>Overview</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout">
-        <item row="2" column="0" colspan="5">
-         <layout class="QFormLayout" name="formLayout_5">
-          <property name="fieldGrowthPolicy">
-           <enum>QFormLayout::FieldGrowthPolicy::AllNonFixedFieldsGrow</enum>
-          </property>
-          <property name="rowWrapPolicy">
-           <enum>QFormLayout::RowWrapPolicy::WrapLongRows</enum>
-          </property>
-          <property name="labelAlignment">
-           <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
-          </property>
-          <property name="formAlignment">
-           <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
-          </property>
-          <property name="horizontalSpacing">
-           <number>45</number>
-          </property>
-          <property name="verticalSpacing">
-           <number>6</number>
-          </property>
-          <item row="0" column="0">
-           <widget class="QRadioButton" name="highPerformanceModeRadioButton">
-            <property name="text">
-             <string>&amp;High Performance</string>
-            </property>
-           </widget>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
+           <layout class="QGridLayout" name="gridLayout_8">
+            <item row="0" column="0">
+             <widget class="QLabel" name="BatteryChargeLabel">
+              <property name="text">
+               <string>Battery charge:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QLabel" name="gpuTempValueLabel">
+              <property name="text">
+               <string notr="true">-</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QLabel" name="gpuTempLabel">
+              <property name="text">
+               <string>GPU temp:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QLabel" name="fan1ValueLabel">
+              <property name="text">
+               <string notr="true">-</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="0">
+             <widget class="QLabel" name="label_9">
+              <property name="text">
+               <string>GPU Fan:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QLabel" name="cpuTempValueLabel">
+              <property name="text">
+               <string notr="true">-</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLabel" name="batteryThresholdValueLabel">
+              <property name="text">
+               <string notr="true">-</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="cpuTempLabel">
+              <property name="text">
+               <string>CPU temp:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="1">
+             <widget class="QLabel" name="fan2ValueLabel">
+              <property name="text">
+               <string notr="true">-</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0">
+             <widget class="QLabel" name="label_8">
+              <property name="text">
+               <string>CPU Fan:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="batteryThresholdLabel">
+              <property name="text">
+               <string>Battery threshold:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLabel" name="BatteryChargeValueLabel">
+              <property name="text">
+               <string notr="true">-</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
-          <item row="0" column="1">
-           <widget class="QLabel" name="label_15">
+          <item>
+           <widget class="Line" name="line_6">
             <property name="minimumSize">
              <size>
-              <width>26</width>
+              <width>35</width>
               <height>0</height>
              </size>
             </property>
-            <property name="text">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Maximum performance at the cost of heat and increased power consumption&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-            </property>
-            <property name="wordWrap">
-             <bool>true</bool>
+            <property name="orientation">
+             <enum>Qt::Orientation::Vertical</enum>
             </property>
            </widget>
           </item>
-          <item row="1" column="0">
-           <widget class="QRadioButton" name="balancedModeRadioButton">
-            <property name="text">
-             <string>Balanced</string>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_2">
+            <property name="topMargin">
+             <number>1</number>
             </property>
-           </widget>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_5">
+              <item>
+               <widget class="QLabel" name="chargingStatusLabel">
+                <property name="text">
+                 <string>Charging status:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="chargingStatusValueLabel">
+                <property name="text">
+                 <string notr="true">-</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="usbPowerShareCheckBox">
+              <property name="text">
+               <string>USB Power</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="fnSuperSwapCheckBox">
+              <property name="toolTip">
+               <string>Swap FN and Super buttons</string>
+              </property>
+              <property name="text">
+               <string>FN ⇄ Meta</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="webCamCheckBox">
+              <property name="text">
+               <string>WebCam</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_2">
+              <item>
+               <widget class="QLabel" name="label_19">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="text">
+                 <string>Current fan Mode:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="fanModeValueLabel">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="text">
+                 <string notr="true">-</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="coolerBoostCheckBox">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Cooler Boost</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
-          <item row="1" column="1">
-           <widget class="QLabel" name="label_16">
-            <property name="text">
-             <string>The middle spot between fan noise and power usage</string>
+          <item>
+           <spacer name="horizontalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
             </property>
-            <property name="wordWrap">
-             <bool>true</bool>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>35</width>
+              <height>20</height>
+             </size>
             </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="QRadioButton" name="silentModeRadioButton">
-            <property name="text">
-             <string>Silent</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QLabel" name="label_17">
-            <property name="text">
-             <string>Low fan noise and moderate power usage</string>
-            </property>
-            <property name="wordWrap">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="0">
-           <widget class="QRadioButton" name="superBatteryModeRadioButton">
-            <property name="text">
-             <string>Super Battery</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="1">
-           <widget class="QLabel" name="label_18">
-            <property name="text">
-             <string>Limits performance and turns off fans at lower temperatures</string>
-            </property>
-            <property name="wordWrap">
-             <bool>true</bool>
-            </property>
-           </widget>
+           </spacer>
           </item>
          </layout>
         </item>
-        <item row="1" column="0" colspan="5">
+        <item>
          <widget class="Line" name="line_4">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
@@ -188,214 +296,102 @@
           </property>
          </widget>
         </item>
-        <item row="0" column="1">
-         <layout class="QGridLayout" name="gridLayout_8">
-          <item row="0" column="0">
-           <widget class="QLabel" name="BatteryChargeLabel">
-            <property name="text">
-             <string>Battery charge:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="1">
-           <widget class="QLabel" name="gpuTempValueLabel">
-            <property name="text">
-             <string notr="true">-</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="0">
-           <widget class="QLabel" name="gpuTempLabel">
-            <property name="text">
-             <string>GPU temp:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="1">
-           <widget class="QLabel" name="fan1ValueLabel">
-            <property name="text">
-             <string notr="true">-</string>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="0">
-           <widget class="QLabel" name="label_9">
-            <property name="text">
-             <string>GPU Fan:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QLabel" name="cpuTempValueLabel">
-            <property name="text">
-             <string notr="true">-</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QLabel" name="batteryThresholdValueLabel">
-            <property name="text">
-             <string notr="true">-</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="cpuTempLabel">
-            <property name="text">
-             <string>CPU temp:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="1">
-           <widget class="QLabel" name="fan2ValueLabel">
-            <property name="text">
-             <string notr="true">-</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="0">
-           <widget class="QLabel" name="label_8">
-            <property name="text">
-             <string>CPU Fan:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="batteryThresholdLabel">
-            <property name="text">
-             <string>Battery threshold:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QLabel" name="BatteryChargeValueLabel">
-            <property name="text">
-             <string notr="true">-</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item row="0" column="4">
-         <spacer name="horizontalSpacer_4">
-          <property name="orientation">
-           <enum>Qt::Orientation::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>35</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="0" column="3">
-         <layout class="QGridLayout" name="gridLayout_5">
-          <property name="leftMargin">
-           <number>0</number>
-          </property>
-          <property name="horizontalSpacing">
-           <number>0</number>
-          </property>
-          <property name="verticalSpacing">
-           <number>5</number>
-          </property>
-          <item row="0" column="0">
-           <widget class="QLabel" name="chargingStatusLabel">
-            <property name="text">
-             <string>Charging status:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QLabel" name="chargingStatusValueLabel">
-            <property name="text">
-             <string notr="true">-</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QCheckBox" name="usbPowerShareCheckBox">
-            <property name="text">
-             <string>USB Power</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="QCheckBox" name="fnSuperSwapCheckBox">
-            <property name="toolTip">
-             <string>Swap FN and Super buttons</string>
-            </property>
-            <property name="text">
-             <string>FN ⇄ Meta</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="0">
-           <widget class="QCheckBox" name="webCamCheckBox">
-            <property name="text">
-             <string>WebCam</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="0">
-           <widget class="QLabel" name="label_19">
-            <property name="enabled">
-             <bool>true</bool>
-            </property>
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string>Current fan Mode:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="1">
-           <widget class="QLabel" name="fanModeValueLabel">
-            <property name="enabled">
-             <bool>true</bool>
-            </property>
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string notr="true">-</string>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="0">
-           <widget class="QCheckBox" name="coolerBoostCheckBox">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>Cooler Boost</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item row="0" column="2">
-         <widget class="Line" name="line_6">
-          <property name="minimumSize">
-           <size>
-            <width>35</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="orientation">
-           <enum>Qt::Orientation::Vertical</enum>
-          </property>
+        <item>
+         <widget class="QWidget" name="modeFormWidget" native="true">
+          <layout class="QFormLayout" name="formLayout_5">
+           <property name="fieldGrowthPolicy">
+            <enum>QFormLayout::FieldGrowthPolicy::AllNonFixedFieldsGrow</enum>
+           </property>
+           <property name="rowWrapPolicy">
+            <enum>QFormLayout::RowWrapPolicy::WrapLongRows</enum>
+           </property>
+           <property name="labelAlignment">
+            <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
+           </property>
+           <property name="formAlignment">
+            <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
+           </property>
+           <property name="horizontalSpacing">
+            <number>45</number>
+           </property>
+           <property name="verticalSpacing">
+            <number>6</number>
+           </property>
+           <item row="0" column="0">
+            <widget class="QRadioButton" name="highPerformanceModeRadioButton">
+             <property name="text">
+              <string>&amp;High Performance</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLabel" name="label_15">
+             <property name="minimumSize">
+              <size>
+               <width>26</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Maximum performance at the cost of heat and increased power consumption&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QRadioButton" name="balancedModeRadioButton">
+             <property name="text">
+              <string>Balanced</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLabel" name="label_16">
+             <property name="text">
+              <string>The middle spot between fan noise and power usage</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QRadioButton" name="silentModeRadioButton">
+             <property name="text">
+              <string>Silent</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QLabel" name="label_17">
+             <property name="text">
+              <string>Low fan noise and moderate power usage</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QRadioButton" name="superBatteryModeRadioButton">
+             <property name="text">
+              <string>Super Battery</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QLabel" name="label_18">
+             <property name="text">
+              <string>Limits performance and turns off fans at lower temperatures</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
         </item>
        </layout>

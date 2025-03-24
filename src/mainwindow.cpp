@@ -175,6 +175,7 @@ void MainWindow::setUpdateDataError(bool error) {
 
 void MainWindow::setTabsEnabled(bool enabled) {
     ui->overviewTab->setEnabled(enabled);
+    ui->modeFormWidget->setEnabled(enabled);
     ui->batteryTab->setEnabled(enabled);
     ui->fanControlTab->setEnabled(enabled);
     ui->keyboardTab->setEnabled(enabled);
@@ -291,6 +292,7 @@ void MainWindow::updateBatteryThreshold() {
 
         switch (batteryThreshold) {
             case 0:
+            case 100:
                 ui->bestMobilityRadioButton->click();
                 batteryThreshold = 100;
                 break;
@@ -390,7 +392,7 @@ void MainWindow::updateUserMode() {
                 ui->superBatteryModeRadioButton->click();
                 break;
             default:
-                ui->overviewTab->setDisabled(true);
+                ui->modeFormWidget->setDisabled(true);
                 if (modeTrayMenu)
                     modeTrayMenu->setDisabled(true);
                 break;
@@ -464,7 +466,7 @@ void MainWindow::updateFanSpeedSettings() {
 }
 
 void MainWindow::setBestMobility() {
-    operate.setBatteryThreshold(0);
+    operate.setBatteryThreshold(100);
     updateBatteryThreshold();
 }
 
