@@ -5,27 +5,27 @@
     <name>MainWindow</name>
     <message>
         <source>EC Version:</source>
-        <translation>Phiên bản EC</translation>
+        <translation>Phiên bản EC:</translation>
     </message>
     <message>
         <source>EC Build:</source>
-        <translation>Bản dựng EC</translation>
+        <translation>Bản dựng EC:</translation>
     </message>
     <message>
         <source>Battery charge:</source>
-        <translation>Sạc pin</translation>
+        <translation>Sạc pin:</translation>
     </message>
     <message>
         <source>Battery threshold:</source>
-        <translation>Ngưỡng pin</translation>
+        <translation>Ngưỡng pin:</translation>
     </message>
     <message>
         <source>CPU temp:</source>
-        <translation>Nhiệt độ CPU</translation>
+        <translation>Nhiệt độ CPU:</translation>
     </message>
     <message>
         <source>GPU temp:</source>
-        <translation>Nhiệt độ GPU</translation>
+        <translation>Nhiệt độ GPU:</translation>
     </message>
     <message>
         <source>Cooler Boost</source>
@@ -237,7 +237,7 @@
     </message>
     <message>
         <source>Current fan Mode:</source>
-        <translation>Chế độ quạt hiện tại</translation>
+        <translation>Chế độ quạt hiện tại:</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If you mainly use your laptop with the charger plugged most of the time, it is recommended to set the charge capacity at a lower percentage (60% or 80%) to prolong your battery lifecycle.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
