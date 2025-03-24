@@ -120,10 +120,6 @@
         <translation>Chargé à 100 %</translation>
     </message>
     <message>
-        <source>Fully charged (Discharging)</source>
-        <translation>Chargé (en décharge)</translation>
-    </message>
-    <message>
         <source>rpm</source>
         <translation>rpm</translation>
     </message>
@@ -197,35 +193,35 @@
     </message>
     <message>
         <source>Overview</source>
-        <translation type="unfinished"></translation>
+        <translation>Aperçu</translation>
     </message>
     <message>
         <source>&amp;High Performance</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Performances élevées</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Maximum performance at the cost of heat and increased power consumption&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Performances maximales au prix de la chaleur et d&apos;une consommation électrique accrue&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>The middle spot between fan noise and power usage</source>
-        <translation type="unfinished"></translation>
+        <translation>Le juste milieu entre performances et économies d&apos;énergie</translation>
     </message>
     <message>
         <source>Low fan noise and moderate power usage</source>
-        <translation type="unfinished"></translation>
+        <translation>Ventilateurs réduits ou éteints et consommation d&apos;énergie modérée</translation>
     </message>
     <message>
         <source>Limits performance and turns off fans at lower temperatures</source>
-        <translation type="unfinished"></translation>
+        <translation>Limite les performances pour économiser la batterie et réduire la température</translation>
     </message>
     <message>
         <source>GPU Fan:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ventilateur du GPU :</translation>
     </message>
     <message>
         <source>CPU Fan:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ventilateur du CPU :</translation>
     </message>
     <message>
         <source>USB Power</source>
@@ -233,39 +229,39 @@
     </message>
     <message>
         <source>FN ⇄ Meta</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Current fan Mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>Mode des ventilateurs :</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If you mainly use your laptop with the charger plugged most of the time, it is recommended to set the charge capacity at a lower percentage (60% or 80%) to prolong your battery lifecycle.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Si vous utilisez principalement votre ordinateur avec le chargeur branché, il est recommandé de mettre la limite de charge à un pourcentage plus bas (60 % ou 80 %) pour prolonger la durée de vie de votre batterie.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Keyboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Clavier</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;MC&lt;/span&gt;ontrol&lt;span style=&quot; font-weight:700;&quot;&gt;C&lt;/span&gt;enter (MCC) is an application that allows you to change the settings of MSI laptops running Linux.&lt;/p&gt;&lt;p&gt;MCC acts as a graphical interface for the &lt;span style=&quot; font-weight:700;&quot;&gt;MSI-EC &lt;/span&gt;driver that already exist in the Linux kernel, if your device is not supported (grey buttons/limited in-app functionality), please visit the msi-ec github page to get help.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;MC&lt;/span&gt;ontrol&lt;span style=&quot; font-weight:700;&quot;&gt;C&lt;/span&gt;enter (MCC) est une application qui vous permet de changer les paramètres d&apos;ordinateurs portables MSI sous Linux.&lt;/p&gt;&lt;p&gt;MCC agit comme une interface graphique pour le pilôte &lt;span style=&quot; font-weight:700;&quot;&gt;MSI-EC &lt;/span&gt;présent dans le kernel Linux. Si votre ordinateur n&apos;est pas supporté (boutons grisés, fonctionnalités limités), merci de vous renseigner auprès de la page github de msi-ec.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>MCC GitHub:</source>
-        <translation type="unfinished"></translation>
+        <translation>MCC GitHub :</translation>
     </message>
     <message>
         <source>MCC Bug tracker:</source>
-        <translation type="unfinished"></translation>
+        <translation>MCC Bug tracker :</translation>
     </message>
     <message>
         <source>MSI-EC GitHub:</source>
-        <translation type="unfinished"></translation>
+        <translation>MSI-EC GitHub :</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/BeardOverflow/msi-ec&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#1ec974;&quot;&gt;https://github.com/BeardOverflow/msi-ec&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Warning&lt;/span&gt;: Writing the wrong values to the wrong addresses &lt;span style=&quot; font-weight:700;&quot;&gt;WILL BRICK YOUR DEVICE!&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Never write to EC memory without knowing how to do a proper BIOS/EC reset, keep in mind that a reset &lt;span style=&quot; font-weight:700;&quot;&gt;might not&lt;/span&gt; fix the device if the device got bricked/broken. &lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
