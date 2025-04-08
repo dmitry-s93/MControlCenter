@@ -394,7 +394,6 @@ void Operate::setUserMode(user_mode userMode) const {
             break;
         case user_mode::silent_mode:
             fanMode = fan_mode::silent_fan_mode;
-            fanModeValue = fanModeSilent;
             userModeStr = "silent_mode";
             break;
         case user_mode::super_battery_mode:
@@ -410,13 +409,11 @@ void Operate::setUserMode(user_mode userMode) const {
         msiEcHelper.setShiftMode(shiftMode);
     }
     
-    if (msiEcHelper.hasShiftMode()) {
+    if (msiEcHelper.hasFanMode()) {
         msiEcHelper.setFanMode(fanMode);
-    } else {
-        setFanMode(fanModeValue);
     }
 
-    if (msiEcHelper.hasBatteryMode()) {
+    if (msiEcHelper.hasSuperBattery()) {
         msiEcHelper.setSuperBattery(superBattery);
     }
 
