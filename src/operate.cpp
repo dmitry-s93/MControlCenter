@@ -80,8 +80,6 @@ const int fanModeSilent = 0x1D;
 const int fanModeBasic = 0x4D;
 const int fanModeAdvanced = 0x8D;
 
-const int superBatteryModeAddress = 0xEB;
-
 const QString settingsGroup = "Settings/";
 
 Operate::Operate() = default;
@@ -580,13 +578,6 @@ void Operate::handleWakeEvent() const {
     Settings s;
     if (s.isValueExist(settingsGroup + "fanModeAdvanced"))
         setFanModeAdvanced(s.getValue(settingsGroup + "fanModeAdvanced").toBool());
-}
-
-void Operate::putSuperBatteryModeValue(bool enabled) const {
-    if ((helper.getValue(superBatteryModeAddress) / 15 % 2 != 0) == enabled)
-        return;
-    int currValue = helper.getValue(superBatteryModeAddress);
-    helper.putValue(superBatteryModeAddress, currValue + (enabled ? 15 : -15));
 }
 
 int Operate::detectFan1Address() const {

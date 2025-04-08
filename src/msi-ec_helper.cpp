@@ -76,20 +76,6 @@ void MsiEcHelper::setFnWinSwap(bool swap) const {
     setValue<bool>("setFnWinSwap", swap);
 }
 
-//////////////// battery_mode ////////////////
-
-bool MsiEcHelper::hasBatteryMode() const {
-    return getValue<bool>("hasBatteryMode", false);
-}
-
-QString MsiEcHelper::getBatteryMode() const {
-    return getValue<QString>("getBatteryMode", "");
-}
-
-void MsiEcHelper::setBatteryMode(QString mode) const {
-    setValue<QString>("setBatteryMode", mode);
-}
-
 //////////////// cooler_boost ////////////////
 
 bool MsiEcHelper::hasCoolerBoost() const {
