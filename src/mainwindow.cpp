@@ -216,12 +216,17 @@ void MainWindow::realtimeUpdate() {
 }
 
 void MainWindow::updateData() {
-    if (!isUpdateDataError && !operate.getEcVersion().empty()) {
+    if (!isUpdateDataError && (operate.isMsiEcLoaded() || operate.isEcSysModuleLoaded())) {
         if (!isActive) {
             operate.doProbe();
             setTabsEnabled(true);
             loadConfigs();
             isActive = true;
+            if (operate.isMsiEcLoaded()) {
+            ui->MsiEcStatusLabel->setText("Loaded");
+            } else {
+                ui->MsiEcStatusLabel->setText("Fallback: Only ec_sys is loaded");
+            }
         }
         updateBatteryCharge();
         updateChargingStatus();
