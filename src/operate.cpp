@@ -497,7 +497,7 @@ bool Operate::isKeyboardBacklightModeSupport() const {
 bool Operate::isKeyboardBacklightSupport() const {
     if (msiEcHelper.hasKeyboardBacklightBrightness())
         return true;
-    return keyboardBacklightAddress != -1;
+    return false;
 }
 
 bool Operate::isUsbPowerShareSupport() const {
