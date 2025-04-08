@@ -70,7 +70,6 @@ void MsiEc::writeFileOnOff(QString path, bool on) const {
 
 bool MsiEc::isMsiEcModuleLoaded() const {
     if (QFile::exists(msi_ec_fw_version)) {
-        fprintf(stderr, "%s\n", qPrintable("The ec_sys kernel module is loaded"));
         return true;
     }
     fprintf(stderr, "%s\n", qPrintable("The msi_ec kernel module is not loaded"));
