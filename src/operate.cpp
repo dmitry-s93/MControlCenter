@@ -92,6 +92,10 @@ bool Operate::isEcSysModuleLoaded() const {
     return helper.isEcSysModuleLoaded();
 }
 
+bool Operate::isMsiEcLoaded() const {
+    return msiEcHelper.isMsiEcModuleLoaded();
+}
+
 bool Operate::loadEcSysModule() const {
     return helper.loadEcSysModule();
 }

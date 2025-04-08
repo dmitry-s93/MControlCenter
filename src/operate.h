@@ -60,6 +60,7 @@ public:
     Operate();
     void closeHelperApp() const;
     [[nodiscard]] bool isEcSysModuleLoaded() const;
+    [[nodiscard]] bool isMsiEcLoaded() const;
     [[nodiscard]] bool loadEcSysModule() const;
     [[nodiscard]] bool updateEcData() const;
     void updateEcDataAsync() const;
