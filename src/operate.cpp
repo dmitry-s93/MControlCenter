@@ -49,8 +49,6 @@ const int usbPowerShareOn = 0x28;
 
 const int coolerBoostAddress = 0x98;
 
-const int webCamAddress = 0x2E;
-
 const int fnSuperSwapAddress = 0xE8;
 
 int fan1Address;
@@ -259,8 +257,6 @@ bool Operate::getUsbPowerShareState() const {
 bool Operate::getWebCamState() const {
     if (msiEcHelper.hasWebcam())
         return msiEcHelper.getWebcam();
-    if (helper.getValue(webCamAddress) / 2 % 2 != 0)
-        return true;
     return false;
 }
 
@@ -378,10 +374,6 @@ void Operate::setUsbPowerShareState(bool enabled) const {
 void Operate::setWebCamState(bool enabled) const {
     if (msiEcHelper.hasWebcam())
         return msiEcHelper.setWebcam(enabled);
-    if (getWebCamState() == enabled)
-        return;
-    int value = helper.getValue(webCamAddress) + (enabled ? 2 : -2);
-    helper.putValue(webCamAddress, value);
 }
 
 void Operate::setFnSuperSwapState(bool enabled) const {
@@ -543,7 +535,9 @@ bool Operate::isUsbPowerShareSupport() const {
 }
 
 bool Operate::isWebCamOffSupport() const {
-    return helper.getValue(webCamAddress) > 0;
+    if (msiEcHelper.hasWebcamBlock())
+        return true;
+    return false;
 }
 
 void Operate::loadSettings() const {
