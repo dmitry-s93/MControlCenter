@@ -163,6 +163,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(&timerSleepWatcher, &QTimer::timeout, this, &MainWindow::timerSleepTimeout);
     timerSleepWatcher.setInterval(10 * 1000);
     timerSleepWatcher.start();
+
+    ui->QtVersionValue->setText(QT_VERSION_STR);
+    ui->versionValueLabel->setText(MControlCenter_VERSION);
 }
 
 MainWindow::~MainWindow() {

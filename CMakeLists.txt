@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
 
 project(MControlCenter VERSION 0.5.0 LANGUAGES CXX)
+project(MControlCenter VERSION 0.5.1 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
