@@ -423,6 +423,11 @@ void MainWindow::updateUserMode() {
             case user_mode::super_battery_mode:
                 ui->superBatteryModeRadioButton->click();
                 break;
+            case user_mode::unknown_mode:
+                ui->superBatteryModeRadioButton->setChecked(false);
+                ui->silentModeRadioButton->setChecked(false);
+                ui->balancedModeRadioButton->setChecked(false);
+                ui->highPerformanceModeRadioButton->setChecked(false);
             default:
                 ui->modeFormWidget->setDisabled(true);
                 if (modeTrayMenu)
