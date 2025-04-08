@@ -150,8 +150,16 @@ MainWindow::MainWindow(QWidget *parent)
     ui->tabWidget->setTabVisible(5, false);
     setTabsEnabled(false);
 
+    if (!operate.isMsiEcLoaded()) {
+        QMessageBox::critical(nullptr, this->windowTitle(), tr("The msi-ec module is not loaded/installed.\n"
+                                                               "Check the <About> page for more info."));
+        ui->MsiEcStatusLabel->setText("Not loaded: the driver couldn't be detected.");
+    }
+
     if (!operate.isEcSysModuleLoaded() && !operate.loadEcSysModule())
-        QMessageBox::critical(nullptr, this->windowTitle(), tr("Failed to load the ec_sys kernel module"));
+        QMessageBox::critical(nullptr, this->windowTitle(), tr("The ec_sys module couldn't be detected, it might be required as a fallback option."));
+
+
 
     if(operate.updateEcData())
         updateData();
