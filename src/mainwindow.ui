@@ -82,7 +82,7 @@
         </size>
        </property>
        <attribute name="icon">
-        <iconset theme="QIcon::ThemeIcon::Computer"/>
+        <iconset theme="computer"/>
        </attribute>
        <attribute name="title">
         <string>Overview</string>
@@ -413,7 +413,7 @@
       </widget>
       <widget class="QWidget" name="batteryTab">
        <attribute name="icon">
-        <iconset theme="QIcon::ThemeIcon::BatteryLow"/>
+        <iconset theme="battery-low"/>
        </attribute>
        <attribute name="title">
         <string>Battery</string>
@@ -591,7 +591,7 @@
       </widget>
       <widget class="QWidget" name="fanControlTab">
        <attribute name="icon">
-        <iconset theme="QIcon::ThemeIcon::DriveOptical"/>
+        <iconset theme="drive-optical"/>
        </attribute>
        <attribute name="title">
         <string>Fan control</string>
@@ -1431,7 +1431,7 @@
       </widget>
       <widget class="QWidget" name="keyboardTab">
        <attribute name="icon">
-        <iconset theme="QIcon::ThemeIcon::InputKeyboard"/>
+        <iconset theme="input-keyboard"/>
        </attribute>
        <attribute name="title">
         <string>Keyboard</string>
@@ -1542,7 +1542,7 @@
       </widget>
       <widget class="QWidget" name="aboutTab">
        <attribute name="icon">
-        <iconset theme="QIcon::ThemeIcon::FormatJustifyCenter"/>
+        <iconset theme="format-justify-center"/>
        </attribute>
        <attribute name="title">
         <string>About</string>
@@ -1724,7 +1724,7 @@
       </widget>
       <widget class="QWidget" name="debugTab">
        <attribute name="icon">
-        <iconset theme="QIcon::ThemeIcon::DialogWarning"/>
+        <iconset theme="dialog-warning"/>
        </attribute>
        <attribute name="title">
         <string>Debug</string>
