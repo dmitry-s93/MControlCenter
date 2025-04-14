@@ -271,10 +271,9 @@ void MainWindow::loadConfigs() {
 
     if (operate.isKeyboardBacklightSupport()) {
         updateKeyboardBrightness();
-        ui->keyboardBacklightInfo->setVisible(false);
     } else {
         ui->keyboardBrightnessSlider->setEnabled(false);
-        ui->keyboardBacklightInfo->setVisible(true);
+        ui->tabWidget->removeTab(3);
     }
 
     if (operate.isUsbPowerShareSupport()) {
