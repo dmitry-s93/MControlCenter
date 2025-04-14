@@ -222,11 +222,6 @@ void MainWindow::updateData() {
             setTabsEnabled(true);
             loadConfigs();
             isActive = true;
-            if (operate.isMsiEcLoaded()) {
-            ui->MsiEcStatusLabel->setText("Loaded");
-            } else {
-                ui->MsiEcStatusLabel->setText("Fallback: Only ec_sys is loaded");
-            }
         }
         updateBatteryCharge();
         updateChargingStatus();
@@ -237,8 +232,15 @@ void MainWindow::updateData() {
         updateFan2Speed();
         updateKeyboardBrightness();
         updateWebCamState();
+
+        if (operate.isMsiEcLoaded()) {
+            ui->MsiEcStatusLabel->setText("Loaded");
+        } else {
+            ui->MsiEcStatusLabel->setText("Fallback: Only ec_sys is loaded");
+        }
     } else {
         setTabsEnabled(false);
+        ui->MsiEcStatusLabel->setText("Failed to load both msi-ec/ec_sys");
         isActive = false;
     }
 }
