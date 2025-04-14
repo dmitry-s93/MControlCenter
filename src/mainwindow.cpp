@@ -146,6 +146,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     createTrayIcon();
 
+    ui->tabWidget->tabBar()->setExpanding(true);
     // Disable debug tab
     ui->tabWidget->setTabVisible(5, false);
     setTabsEnabled(false);
@@ -798,6 +799,7 @@ void MainWindow::createTrayIcon() {
     trayIcon->setContextMenu(trayIconMenu);
     auto icon = QIcon(":/images/AppIcon");
     trayIcon->setIcon(icon);
+    trayIcon->setToolTip("MControlCenter");
 
     trayIcon->show();
 
