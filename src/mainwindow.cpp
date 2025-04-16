@@ -154,11 +154,10 @@ MainWindow::MainWindow(QWidget *parent)
     if (!operate.isMsiEcLoaded()) {
         QMessageBox::critical(nullptr, this->windowTitle(), tr("The msi-ec module is not loaded/installed.\n"
                                                                "Check the <About> page for more info."));
-        ui->MsiEcStatusLabel->setText("Not loaded: the driver couldn't be detected.");
     }
 
     if (!operate.isEcSysModuleLoaded() && !operate.loadEcSysModule())
-        QMessageBox::critical(nullptr, this->windowTitle(), tr("The ec_sys module couldn't be detected, it might be required as a fallback option."));
+        QMessageBox::critical(nullptr, this->windowTitle(), tr("The ec_sys module couldn't be detected, it might be required to control the fans."));
 
 
 
@@ -235,13 +234,13 @@ void MainWindow::updateData() {
         updateWebCamState();
 
         if (operate.isMsiEcLoaded()) {
-            ui->MsiEcStatusLabel->setText("Loaded");
+            ui->MsiEcStatusLabel->setText(tr("Loaded"));
         } else {
-            ui->MsiEcStatusLabel->setText("Fallback: Only ec_sys is loaded");
+            ui->MsiEcStatusLabel->setText(tr("Fallback: Only ec_sys is loaded"));
         }
     } else {
         setTabsEnabled(false);
-        ui->MsiEcStatusLabel->setText("Failed to load both msi-ec/ec_sys");
+        ui->MsiEcStatusLabel->setText(tr("Failed to load both msi-ec/ec_sys"));
         isActive = false;
     }
 }
