@@ -40,10 +40,6 @@
         <translation>Лучше для мобильности</translation>
     </message>
     <message>
-        <source>Charge the battery to 100% all the time</source>
-        <translation>Всегда заряжать батарею до 100%</translation>
-    </message>
-    <message>
         <source>Balanced</source>
         <translation>Баланс</translation>
     </message>
@@ -62,10 +58,6 @@
     <message>
         <source>Custom</source>
         <translation>Пользовательский</translation>
-    </message>
-    <message>
-        <source>Keyboard Backlit</source>
-        <translation>Подсветка клавиатуры</translation>
     </message>
     <message>
         <source>Always on</source>
@@ -120,10 +112,6 @@
         <translation>Полностью заряжен</translation>
     </message>
     <message>
-        <source>Fully charged (Discharging)</source>
-        <translation>Полностью заряжен (Разряжается)</translation>
-    </message>
-    <message>
         <source>rpm</source>
         <translation>об/мин</translation>
     </message>
@@ -138,10 +126,6 @@
     <message>
         <source>Super Battery</source>
         <translation>Супер батарея</translation>
-    </message>
-    <message>
-        <source>Failed to load the ec_sys kernel module</source>
-        <translation>Не удалось загрузить модуль ядра ec_sys</translation>
     </message>
     <message>
         <source>Apply</source>
@@ -200,14 +184,6 @@
         <translation>Обзор</translation>
     </message>
     <message>
-        <source>&amp;High Performance</source>
-        <translation>&amp;Высокая производительность</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Maximum performance at the cost of heat and increased power consumption&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Максимальная производительность за счет увеличения тепловыделения и энергопотребления&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
         <source>The middle spot between fan noise and power usage</source>
         <translation>Среднее значение между шумом вентилятора и энергопотреблением</translation>
     </message>
@@ -229,7 +205,7 @@
     </message>
     <message>
         <source>USB Power</source>
-        <translation type="unfinished"></translation>
+        <translation>Питание USB устройств</translation>
     </message>
     <message>
         <source>FN ⇄ Meta</source>
@@ -238,10 +214,6 @@
     <message>
         <source>Current fan Mode:</source>
         <translation>Режим вентилятора:</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If you mainly use your laptop with the charger plugged most of the time, it is recommended to set the charge capacity at a lower percentage (60% or 80%) to prolong your battery lifecycle.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Если вы большую часть времени пользуетесь ноутбуком с подключенным зарядным устройством, рекомендуется установить меньший процент заряда (60% или 80%), чтобы продлить срок службы аккумулятора.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Keyboard</source>
@@ -256,20 +228,62 @@
         <translation>MCC GitHub:</translation>
     </message>
     <message>
-        <source>MCC Bug tracker:</source>
-        <translation>MCC Bug tracker:</translation>
-    </message>
-    <message>
         <source>MSI-EC GitHub:</source>
         <translation>MSI-EC GitHub:</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/BeardOverflow/msi-ec&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#1ec974;&quot;&gt;https://github.com/BeardOverflow/msi-ec&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/BeardOverflow/msi-ec&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#1ec974;&quot;&gt;https://github.com/BeardOverflow/msi-ec&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <source>Keyboard Backlight</source>
+        <translation>Подсветка клавиатуры</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Warning&lt;/span&gt;: Writing the wrong values to the wrong addresses &lt;span style=&quot; font-weight:700;&quot;&gt;WILL BRICK YOUR DEVICE!&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Never write to EC memory without knowing how to do a proper BIOS/EC reset, keep in mind that a reset &lt;span style=&quot; font-weight:700;&quot;&gt;might not&lt;/span&gt; fix the device if the device got bricked/broken. &lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <source>MCC Bug Tracker:</source>
+        <translation>MCC баг трекер:</translation>
+    </message>
+    <message>
+        <source>MSI-EC Status:</source>
+        <translation>Статус MSI-EC:</translation>
+    </message>
+    <message>
+        <source>Qt version:</source>
+        <translation>Версия Qt:</translation>
+    </message>
+    <message>
+        <source>-</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The msi-ec module is not loaded/installed.
+Check the &lt;About&gt; page for more info.</source>
+        <translation>Модуль msi-ec не загружен/не установлен.
+Проверьте страницу &lt;About&gt; для получения дополнительной информации.</translation>
+    </message>
+    <message>
+        <source>This mode unlocks Advanced fan mode</source>
+        <translation>Разблокирует расширенный режим вентилятора</translation>
+    </message>
+    <message>
+        <source>Charge the battery when under 90%, stop at 100%</source>
+        <translation>Заряжать батарею, если заряд ниже 90%, остановить на 100%</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Warning&lt;/span&gt;: Writing the wrong values to the wrong addresses &lt;span style=&quot; font-weight:700;&quot;&gt;WILL BRICK YOUR DEVICE!&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Never&lt;/span&gt; write to EC memory without knowing how to do a proper &lt;span style=&quot; font-weight:700;&quot;&gt;BIOS/EC&lt;/span&gt; reset, keep in mind that a reset &lt;span style=&quot; font-weight:700;&quot;&gt;might not&lt;/span&gt; fix the device if the device got bricked/broken. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;High Performance</source>
+        <translation>&amp;Высокая мощность</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Maximum performance at the cost of heat and increased power consumption&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Высокая производительность с повышенным нагревом и расходом энергии&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If you mainly use your laptop with the charger plugged most of the time, it is recommended to set the charge capacity at a lower percentage (60% or 80%) to prolong your battery lifecycle.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Если вы используете подключённый к электросети ноутбук, установите лимит заряда (60% или 80%) для продления срока службы аккумулятора.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>The ec_sys module couldn&apos;t be detected, it might be required as a fallback option.</source>
+        <translation>Модуль ec_sys не найден,может потребоваться как резервный вариант.</translation>
     </message>
 </context>
 </TS>
