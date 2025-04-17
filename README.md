@@ -2,7 +2,8 @@
 
 MControlCenter is a Free and Open Source GNU/Linux application that allows you to change the settings of MSI laptops.
 
-![Screenshots of MControlCenter](https://github.com/user-attachments/assets/e2ebacda-1c6b-48aa-8739-d4a88ee4af67)
+![Screen Shot of MCC](https://github.com/user-attachments/assets/1e1dcb9b-aa8e-4410-8c77-f9554c1840cb)
+
 
 
 
