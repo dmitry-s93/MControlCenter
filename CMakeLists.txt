@@ -13,7 +13,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_compile_options(-fPIC)
 
-find_package(Qt6 6.4 REQUIRED COMPONENTS Widgets Network LinguistTools DBus Network)
+find_package(Qt6 6.4 REQUIRED COMPONENTS Widgets Network LinguistTools DBus)
 
 set(PROJECT_SOURCES
     src/main.cpp
