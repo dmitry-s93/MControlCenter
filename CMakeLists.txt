@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.25)
 
-project(MControlCenter VERSION 0.5.0 LANGUAGES CXX)
+project(MControlCenter VERSION 0.5.1 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -13,8 +13,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_compile_options(-fPIC)
 
-find_package(QT NAMES Qt6 REQUIRED COMPONENTS Widgets Network)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools DBus Network)
+find_package(Qt6 6.4 REQUIRED COMPONENTS Widgets Network LinguistTools DBus)
 
 set(PROJECT_SOURCES
     src/main.cpp
@@ -62,8 +61,7 @@ foreach(_ts_file ${TS_FILES})
         COMMAND_ERROR_IS_FATAL ANY
     )
 endforeach()
-
-if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
+if(Qt6_FOUND)
     qt_add_executable(mcontrolcenter
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
@@ -93,3 +91,4 @@ install(TARGETS mcontrolcenter
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
 
 add_subdirectory(src/helper ${CMAKE_BINARY_DIR}/helper)
+add_definitions(-DMControlCenter_VERSION="${PROJECT_VERSION}")

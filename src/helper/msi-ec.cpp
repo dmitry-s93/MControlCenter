@@ -25,7 +25,6 @@ const QString msi_ec_webcam = msi_ec_path + "/webcam";
 const QString msi_ec_webcam_block = msi_ec_path + "/webcam_block";
 const QString msi_ec_fn_key = msi_ec_path + "/fn_key";
 const QString msi_ec_win_key = msi_ec_path + "/win_key";
-const QString msi_ec_battery_mode = msi_ec_path + "/battery_mode";
 const QString msi_ec_cooler_boost = msi_ec_path + "/cooler_boost";
 const QString msi_ec_available_shift_modes = msi_ec_path + "/available_shift_modes";
 const QString msi_ec_shift_mode = msi_ec_path + "/shift_mode";
@@ -71,7 +70,6 @@ void MsiEc::writeFileOnOff(QString path, bool on) const {
 
 bool MsiEc::isMsiEcModuleLoaded() const {
     if (QFile::exists(msi_ec_fw_version)) {
-        fprintf(stderr, "%s\n", qPrintable("The ec_sys kernel module is loaded"));
         return true;
     }
     fprintf(stderr, "%s\n", qPrintable("The msi_ec kernel module is not loaded"));
@@ -141,18 +139,6 @@ bool MsiEc::getFnWinSwap() const {
 }
 void MsiEc::setFnWinSwap(bool swap) const {
     setFnKey(swap ? "left" : "right");
-}
-
-//////////////// battery_mode ////////////////
-
-bool MsiEc::hasBatteryMode() const {
-    return QFile::exists(msi_ec_battery_mode);
-}
-QString MsiEc::getBatteryMode() const {
-    return readFile(msi_ec_battery_mode);
-}
-void MsiEc::setBatteryMode(QString mode) const {
-    return writeFile(msi_ec_battery_mode, mode);
 }
 
 //////////////// cooler_boost ////////////////

@@ -2,43 +2,61 @@
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>510</width>
+    <width>580</width>
     <height>480</height>
    </rect>
   </property>
   <property name="sizePolicy">
-   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
   <property name="minimumSize">
    <size>
-    <width>510</width>
+    <width>580</width>
     <height>480</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>510</width>
+    <width>580</width>
     <height>480</height>
    </size>
   </property>
   <property name="windowTitle">
    <string notr="true">MControlCenter</string>
   </property>
+  <property name="setWindowOpacity" stdset="0">
+   <string/>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <property name="enabled">
     <bool>true</bool>
    </property>
    <layout class="QGridLayout" name="gridLayout_3">
-    <item row="0" column="0">
+    <item row="0" column="1">
      <widget class="QTabWidget" name="tabWidget">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="baseSize">
        <size>
         <width>0</width>
         <height>0</height>
@@ -48,7 +66,10 @@
        <enum>Qt::LayoutDirection::LeftToRight</enum>
       </property>
       <property name="autoFillBackground">
-       <bool>false</bool>
+       <bool>true</bool>
+      </property>
+      <property name="tabPosition">
+       <enum>QTabWidget::TabPosition::North</enum>
       </property>
       <property name="tabShape">
        <enum>QTabWidget::TabShape::Rounded</enum>
@@ -57,6 +78,12 @@
        <number>0</number>
       </property>
       <property name="documentMode">
+       <bool>true</bool>
+      </property>
+      <property name="tabsClosable">
+       <bool>false</bool>
+      </property>
+      <property name="movable">
        <bool>true</bool>
       </property>
       <property name="tabBarAutoHide">
@@ -69,101 +96,122 @@
          <height>16777215</height>
         </size>
        </property>
+       <attribute name="icon">
+        <iconset theme="computer"/>
+       </attribute>
        <attribute name="title">
         <string>Overview</string>
        </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_3">
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_4">
-          <item>
+       <layout class="QGridLayout" name="gridLayout_11">
+        <item row="0" column="0">
+         <layout class="QGridLayout" name="gridLayout_12">
+          <item row="0" column="1">
            <layout class="QGridLayout" name="gridLayout_8">
-            <item row="0" column="0">
-             <widget class="QLabel" name="BatteryChargeLabel">
-              <property name="text">
-               <string>Battery charge:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="1">
-             <widget class="QLabel" name="gpuTempValueLabel">
-              <property name="text">
-               <string notr="true">-</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="0">
-             <widget class="QLabel" name="gpuTempLabel">
-              <property name="text">
-               <string>GPU temp:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="1">
-             <widget class="QLabel" name="fan1ValueLabel">
-              <property name="text">
-               <string notr="true">-</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="0">
-             <widget class="QLabel" name="label_9">
+            <item row="5" column="1">
+             <widget class="QLabel" name="gpuFanLabel">
               <property name="text">
                <string>GPU Fan:</string>
               </property>
              </widget>
             </item>
-            <item row="2" column="1">
+            <item row="2" column="2">
              <widget class="QLabel" name="cpuTempValueLabel">
               <property name="text">
                <string notr="true">-</string>
               </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QLabel" name="batteryThresholdValueLabel">
-              <property name="text">
-               <string notr="true">-</string>
+              <property name="alignment">
+               <set>Qt::AlignmentFlag::AlignCenter</set>
               </property>
              </widget>
             </item>
-            <item row="2" column="0">
-             <widget class="QLabel" name="cpuTempLabel">
-              <property name="text">
-               <string>CPU temp:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="1">
-             <widget class="QLabel" name="fan2ValueLabel">
-              <property name="text">
-               <string notr="true">-</string>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="0">
-             <widget class="QLabel" name="label_8">
+            <item row="4" column="1">
+             <widget class="QLabel" name="cpuFanLabel">
               <property name="text">
                <string>CPU Fan:</string>
               </property>
              </widget>
             </item>
-            <item row="1" column="0">
+            <item row="4" column="2">
+             <widget class="QLabel" name="fan1ValueLabel">
+              <property name="text">
+               <string notr="true">-</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignmentFlag::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QLabel" name="BatteryChargeValueLabel">
+              <property name="text">
+               <string notr="true">-</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignmentFlag::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
              <widget class="QLabel" name="batteryThresholdLabel">
               <property name="text">
                <string>Battery threshold:</string>
               </property>
              </widget>
             </item>
-            <item row="0" column="1">
-             <widget class="QLabel" name="BatteryChargeValueLabel">
+            <item row="1" column="2">
+             <widget class="QLabel" name="batteryThresholdValueLabel">
               <property name="text">
                <string notr="true">-</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignmentFlag::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QLabel" name="cpuTempLabel">
+              <property name="text">
+               <string>CPU temp:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="2">
+             <widget class="QLabel" name="gpuTempValueLabel">
+              <property name="text">
+               <string notr="true">-</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignmentFlag::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLabel" name="BatteryChargeLabel">
+              <property name="text">
+               <string>Battery charge:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="2">
+             <widget class="QLabel" name="fan2ValueLabel">
+              <property name="text">
+               <string notr="true">-</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignmentFlag::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QLabel" name="gpuTempLabel">
+              <property name="text">
+               <string>GPU temp:</string>
               </property>
              </widget>
             </item>
            </layout>
           </item>
-          <item>
+          <item row="0" column="3">
            <widget class="Line" name="line_6">
             <property name="minimumSize">
              <size>
@@ -171,12 +219,54 @@
               <height>0</height>
              </size>
             </property>
+            <property name="frameShadow">
+             <enum>QFrame::Shadow::Sunken</enum>
+            </property>
             <property name="orientation">
              <enum>Qt::Orientation::Vertical</enum>
             </property>
            </widget>
           </item>
-          <item>
+          <item row="0" column="6">
+           <spacer name="horizontalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>58</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="0" column="4">
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="0" column="2">
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="0" column="5">
            <layout class="QVBoxLayout" name="verticalLayout_2">
             <property name="topMargin">
              <number>1</number>
@@ -194,6 +284,9 @@
                <widget class="QLabel" name="chargingStatusValueLabel">
                 <property name="text">
                  <string notr="true">-</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignmentFlag::AlignJustify|Qt::AlignmentFlag::AlignVCenter</set>
                 </property>
                </widget>
               </item>
@@ -243,6 +336,9 @@
                 <property name="text">
                  <string notr="true">-</string>
                 </property>
+                <property name="alignment">
+                 <set>Qt::AlignmentFlag::AlignJustify|Qt::AlignmentFlag::AlignVCenter</set>
+                </property>
                </widget>
               </item>
              </layout>
@@ -262,14 +358,14 @@
             </item>
            </layout>
           </item>
-          <item>
-           <spacer name="horizontalSpacer_4">
+          <item row="0" column="0">
+           <spacer name="horizontalSpacer_5">
             <property name="orientation">
              <enum>Qt::Orientation::Horizontal</enum>
             </property>
             <property name="sizeHint" stdset="0">
              <size>
-              <width>35</width>
+              <width>40</width>
               <height>20</height>
              </size>
             </property>
@@ -277,26 +373,7 @@
           </item>
          </layout>
         </item>
-        <item>
-         <widget class="Line" name="line_4">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>30</height>
-           </size>
-          </property>
-          <property name="orientation">
-           <enum>Qt::Orientation::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-        <item>
+        <item row="2" column="0">
          <widget class="QWidget" name="modeFormWidget" native="true">
           <layout class="QFormLayout" name="formLayout_5">
            <property name="fieldGrowthPolicy">
@@ -315,12 +392,27 @@
             <number>45</number>
            </property>
            <property name="verticalSpacing">
-            <number>6</number>
+            <number>10</number>
+           </property>
+           <property name="leftMargin">
+            <number>10</number>
+           </property>
+           <property name="topMargin">
+            <number>10</number>
+           </property>
+           <property name="rightMargin">
+            <number>10</number>
+           </property>
+           <property name="bottomMargin">
+            <number>10</number>
            </property>
            <item row="0" column="0">
             <widget class="QRadioButton" name="highPerformanceModeRadioButton">
+             <property name="toolTip">
+              <string>This mode unlocks Advanced fan mode</string>
+             </property>
              <property name="text">
-              <string>&amp;High Performance</string>
+              <string>High Performance</string>
              </property>
             </widget>
            </item>
@@ -333,7 +425,10 @@
               </size>
              </property>
              <property name="text">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Maximum performance at the cost of heat and increased power consumption&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              <string>Maximum performance at the cost of heat and increased power consumption</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignmentFlag::AlignCenter</set>
              </property>
              <property name="wordWrap">
               <bool>true</bool>
@@ -352,6 +447,9 @@
              <property name="text">
               <string>The middle spot between fan noise and power usage</string>
              </property>
+             <property name="alignment">
+              <set>Qt::AlignmentFlag::AlignCenter</set>
+             </property>
              <property name="wordWrap">
               <bool>true</bool>
              </property>
@@ -368,6 +466,9 @@
             <widget class="QLabel" name="label_17">
              <property name="text">
               <string>Low fan noise and moderate power usage</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignmentFlag::AlignCenter</set>
              </property>
              <property name="wordWrap">
               <bool>true</bool>
@@ -386,6 +487,9 @@
              <property name="text">
               <string>Limits performance and turns off fans at lower temperatures</string>
              </property>
+             <property name="alignment">
+              <set>Qt::AlignmentFlag::AlignCenter</set>
+             </property>
              <property name="wordWrap">
               <bool>true</bool>
              </property>
@@ -394,17 +498,45 @@
           </layout>
          </widget>
         </item>
+        <item row="1" column="0">
+         <widget class="Line" name="line_4">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Shadow::Sunken</enum>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Orientation::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="batteryTab">
+       <attribute name="icon">
+        <iconset theme="battery"/>
+       </attribute>
        <attribute name="title">
         <string>Battery</string>
        </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout">
-        <item>
+       <layout class="QGridLayout" name="gridLayout_13">
+        <item row="0" column="0">
          <widget class="QLabel" name="label_5">
           <property name="text">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If you mainly use your laptop with the charger plugged most of the time, it is recommended to set the charge capacity at a lower percentage (60% or 80%) to prolong your battery lifecycle.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           <string>If you mainly use your laptop with the charger plugged most of the time, it is recommended to set the charge capacity at a lower percentage (60% or 80%) to prolong your battery lifecycle.</string>
+          </property>
+          <property name="scaledContents">
+           <bool>false</bool>
           </property>
           <property name="alignment">
            <set>Qt::AlignmentFlag::AlignJustify|Qt::AlignmentFlag::AlignVCenter</set>
@@ -412,28 +544,43 @@
           <property name="wordWrap">
            <bool>true</bool>
           </property>
+          <property name="margin">
+           <number>0</number>
+          </property>
+          <property name="textInteractionFlags">
+           <set>Qt::TextInteractionFlag::NoTextInteraction</set>
+          </property>
          </widget>
         </item>
-        <item>
+        <item row="1" column="0">
          <widget class="Line" name="line">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>10</height>
+           </size>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Shadow::Sunken</enum>
+          </property>
           <property name="orientation">
            <enum>Qt::Orientation::Horizontal</enum>
           </property>
          </widget>
         </item>
-        <item>
-         <layout class="QFormLayout" name="formLayout_2">
-          <property name="fieldGrowthPolicy">
-           <enum>QFormLayout::FieldGrowthPolicy::AllNonFixedFieldsGrow</enum>
+        <item row="2" column="0">
+         <layout class="QGridLayout" name="gridLayout_10">
+          <property name="leftMargin">
+           <number>10</number>
           </property>
-          <property name="rowWrapPolicy">
-           <enum>QFormLayout::RowWrapPolicy::WrapLongRows</enum>
+          <property name="topMargin">
+           <number>0</number>
           </property>
-          <property name="labelAlignment">
-           <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
+          <property name="rightMargin">
+           <number>10</number>
           </property>
-          <property name="formAlignment">
-           <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
+          <property name="bottomMargin">
+           <number>0</number>
           </property>
           <property name="horizontalSpacing">
            <number>10</number>
@@ -441,6 +588,19 @@
           <property name="verticalSpacing">
            <number>6</number>
           </property>
+          <item row="0" column="1">
+           <widget class="QLabel" name="label_4">
+            <property name="text">
+             <string>Charge the battery when under 90%, stop at 100%</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignmentFlag::AlignCenter</set>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
           <item row="0" column="0">
            <widget class="QRadioButton" name="bestMobilityRadioButton">
             <property name="text">
@@ -451,54 +611,16 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="1">
-           <widget class="QLabel" name="label_4">
-            <property name="text">
-             <string>Charge the battery to 100% all the time</string>
-            </property>
-            <property name="wordWrap">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QRadioButton" name="balancedBatteryRadioButton">
-            <property name="text">
-             <string>Balanced</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QLabel" name="label_6">
-            <property name="text">
-             <string>Charge the battery when under 70%, stop at 80%</string>
-            </property>
-            <property name="wordWrap">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="QRadioButton" name="bestBatteryRadioButton">
-            <property name="text">
-             <string>Best for battery</string>
-            </property>
-           </widget>
-          </item>
           <item row="2" column="1">
            <widget class="QLabel" name="label_7">
             <property name="text">
              <string>Charge the battery when under 50%, stop at 60%</string>
             </property>
+            <property name="alignment">
+             <set>Qt::AlignmentFlag::AlignCenter</set>
+            </property>
             <property name="wordWrap">
              <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="0">
-           <widget class="QRadioButton" name="customBatteryThresholdRadioButton">
-            <property name="text">
-             <string>Custom</string>
             </property>
            </widget>
           </item>
@@ -507,6 +629,19 @@
             <property name="sizeConstraint">
              <enum>QLayout::SizeConstraint::SetMinimumSize</enum>
             </property>
+            <item>
+             <spacer name="horizontalSpacer_8">
+              <property name="orientation">
+               <enum>Qt::Orientation::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
             <item>
              <widget class="QSpinBox" name="customBatteryThresholdSpinBox">
               <property name="enabled">
@@ -554,17 +689,51 @@
             </item>
            </layout>
           </item>
+          <item row="3" column="0">
+           <widget class="QRadioButton" name="customBatteryThresholdRadioButton">
+            <property name="text">
+             <string>Custom</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLabel" name="label_6">
+            <property name="text">
+             <string>Charge the battery when under 70%, stop at 80%</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignmentFlag::AlignCenter</set>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QRadioButton" name="balancedBatteryRadioButton">
+            <property name="text">
+             <string>Balanced</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QRadioButton" name="bestBatteryRadioButton">
+            <property name="text">
+             <string>Best for battery</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
-        <item>
-         <spacer name="verticalSpacer_5">
+        <item row="3" column="0">
+         <spacer name="verticalSpacer_4">
           <property name="orientation">
            <enum>Qt::Orientation::Vertical</enum>
           </property>
           <property name="sizeHint" stdset="0">
            <size>
             <width>20</width>
-            <height>40</height>
+            <height>195</height>
            </size>
           </property>
          </spacer>
@@ -589,8 +758,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>474</width>
-             <height>391</height>
+             <width>556</width>
+             <height>424</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_7">
@@ -609,8 +778,14 @@
               <property name="styleSheet">
                <string notr="true"/>
               </property>
+              <property name="tabShape">
+               <enum>QTabWidget::TabShape::Rounded</enum>
+              </property>
               <property name="currentIndex">
                <number>0</number>
+              </property>
+              <property name="documentMode">
+               <bool>false</bool>
               </property>
               <widget class="QWidget" name="tabWidgetPage1">
                <attribute name="title">
@@ -1409,32 +1584,37 @@
        </layout>
       </widget>
       <widget class="QWidget" name="keyboardTab">
+       <attribute name="icon">
+        <iconset theme="input-keyboard"/>
+       </attribute>
        <attribute name="title">
         <string>Keyboard</string>
        </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_4">
-        <item>
-         <widget class="QLabel" name="keyboardBacklitLabel">
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="0" column="0">
+         <widget class="QLabel" name="keyboardBacklightLabel">
           <property name="text">
-           <string>Keyboard Backlit</string>
+           <string>Keyboard Backlight</string>
           </property>
          </widget>
         </item>
-        <item>
-         <widget class="QComboBox" name="keyboardBacklightModeComboBox">
-          <item>
-           <property name="text">
-            <string>Always on</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Auto turn off in 10 sec</string>
-           </property>
-          </item>
+        <item row="3" column="0" colspan="2">
+         <widget class="Line" name="line_2">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>10</height>
+           </size>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Shadow::Sunken</enum>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Orientation::Horizontal</enum>
+          </property>
          </widget>
         </item>
-        <item>
+        <item row="2" column="0" colspan="2">
          <widget class="QSlider" name="keyboardBrightnessSlider">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -1459,14 +1639,7 @@
           </property>
          </widget>
         </item>
-        <item>
-         <widget class="Line" name="line_2">
-          <property name="orientation">
-           <enum>Qt::Orientation::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-        <item>
+        <item row="4" column="0" colspan="2">
          <spacer name="verticalSpacer">
           <property name="orientation">
            <enum>Qt::Orientation::Vertical</enum>
@@ -1479,37 +1652,31 @@
           </property>
          </spacer>
         </item>
+        <item row="1" column="0" colspan="2">
+         <widget class="QComboBox" name="keyboardBacklightModeComboBox">
+          <item>
+           <property name="text">
+            <string>Always on</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Auto turn off in 10 sec</string>
+           </property>
+          </item>
+         </widget>
+        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="aboutTab">
+       <attribute name="icon">
+        <iconset theme="help-about"/>
+       </attribute>
        <attribute name="title">
         <string>About</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout_2">
-        <item row="2" column="1" colspan="3">
-         <widget class="Line" name="line_3">
-          <property name="orientation">
-           <enum>Qt::Orientation::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="3">
-         <spacer name="horizontalSpacer_2">
-          <property name="orientation">
-           <enum>Qt::Orientation::Horizontal</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Policy::MinimumExpanding</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>0</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="0" column="0" colspan="4">
+       <layout class="QGridLayout" name="gridLayout_5">
+        <item row="0" column="0" colspan="3">
          <widget class="QLabel" name="label_3">
           <property name="text">
            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;MC&lt;/span&gt;ontrol&lt;span style=&quot; font-weight:700;&quot;&gt;C&lt;/span&gt;enter (MCC) is an application that allows you to change the settings of MSI laptops running Linux.&lt;/p&gt;&lt;p&gt;MCC acts as a graphical interface for the &lt;span style=&quot; font-weight:700;&quot;&gt;MSI-EC &lt;/span&gt;driver that already exist in the Linux kernel, if your device is not supported (grey buttons/limited in-app functionality), please visit the msi-ec github page to get help.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -1522,24 +1689,91 @@
           </property>
          </widget>
         </item>
-        <item row="4" column="2">
-         <spacer name="verticalSpacer_4">
-          <property name="orientation">
-           <enum>Qt::Orientation::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
+        <item row="1" column="0" colspan="3">
+         <widget class="Line" name="line_3">
+          <property name="minimumSize">
            <size>
-            <width>20</width>
-            <height>40</height>
+            <width>0</width>
+            <height>10</height>
            </size>
           </property>
-         </spacer>
-        </item>
-        <item row="3" column="2">
-         <layout class="QFormLayout" name="aboutTabFormLayout">
-          <property name="rowWrapPolicy">
-           <enum>QFormLayout::RowWrapPolicy::WrapLongRows</enum>
+          <property name="frameShadow">
+           <enum>QFrame::Shadow::Sunken</enum>
           </property>
+          <property name="orientation">
+           <enum>Qt::Orientation::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <layout class="QGridLayout" name="gridLayout">
+          <property name="leftMargin">
+           <number>10</number>
+          </property>
+          <property name="topMargin">
+           <number>10</number>
+          </property>
+          <property name="rightMargin">
+           <number>10</number>
+          </property>
+          <property name="bottomMargin">
+           <number>10</number>
+          </property>
+          <property name="horizontalSpacing">
+           <number>70</number>
+          </property>
+          <property name="verticalSpacing">
+           <number>10</number>
+          </property>
+          <item row="1" column="1">
+           <widget class="QLabel" name="QtVersionValue">
+            <property name="text">
+             <string>-</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="bugTrackerLabel">
+            <property name="text">
+             <string>MCC Bug Tracker:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="0">
+           <widget class="QLabel" name="ecVersionLabel">
+            <property name="text">
+             <string>EC Version:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_13">
+            <property name="text">
+             <string>Qt version:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="label_11">
+            <property name="text">
+             <string>MSI-EC GitHub:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="gitHubLabel">
+            <property name="text">
+             <string>MCC GitHub:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1">
+           <widget class="QLabel" name="ecVersionValueLabel">
+            <property name="text">
+             <string notr="true">-</string>
+            </property>
+           </widget>
+          </item>
           <item row="0" column="0">
            <widget class="QLabel" name="versionLabel">
             <property name="text">
@@ -1547,24 +1781,10 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="1">
-           <widget class="QLabel" name="versionValueLabel">
+          <item row="5" column="1">
+           <widget class="QLabel" name="MsiEcGitHubLabel">
             <property name="text">
-             <string notr="true">0.5.0</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="gitHubLabel">
-            <property name="text">
-             <string>MCC GitHub:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QLabel" name="gitHubValueLabel">
-            <property name="text">
-             <string notr="true">&lt;a href=&quot;https://github.com/dmitry-s93/MControlCenter&quot;&gt;https://github.com/dmitry-s93/MControlCenter&lt;/a&gt;</string>
+             <string notr="true">&lt;a href=&quot;https://github.com/BeardOverflow/msi-ec&quot;&gt;https://github.com/BeardOverflow/msi-ec&lt;/a&gt;</string>
             </property>
             <property name="openExternalLinks">
              <bool>true</bool>
@@ -1574,14 +1794,7 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="bugTrackerLabel">
-            <property name="text">
-             <string>MCC Bug tracker:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
+          <item row="4" column="1">
            <widget class="QLabel" name="bugTrackerValueLabel">
             <property name="text">
              <string notr="true">&lt;a href=&quot;https://github.com/dmitry-s93/MControlCenter/issues&quot;&gt;https://github.com/dmitry-s93/MControlCenter/issues&lt;/a&gt;</string>
@@ -1594,46 +1807,49 @@
             </property>
            </widget>
           </item>
-          <item row="4" column="0">
-           <widget class="QLabel" name="ecVersionLabel">
+          <item row="0" column="1">
+           <widget class="QLabel" name="versionValueLabel">
             <property name="text">
-             <string>EC Version:</string>
+             <string notr="true">-</string>
             </property>
            </widget>
           </item>
-          <item row="5" column="0">
+          <item row="3" column="1">
+           <widget class="QLabel" name="gitHubValueLabel">
+            <property name="text">
+             <string notr="true">&lt;a href=&quot;https://github.com/dmitry-s93/MControlCenter&quot;&gt;https://github.com/dmitry-s93/MControlCenter&lt;/a&gt;</string>
+            </property>
+            <property name="openExternalLinks">
+             <bool>true</bool>
+            </property>
+            <property name="textInteractionFlags">
+             <set>Qt::TextInteractionFlag::TextBrowserInteraction</set>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="0">
            <widget class="QLabel" name="ecBuildLabel">
             <property name="text">
              <string>EC Build:</string>
             </property>
            </widget>
           </item>
-          <item row="5" column="1">
-           <widget class="QLabel" name="ecBuildValueLabel">
-            <property name="text">
-             <string notr="true">-</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="0">
-           <widget class="QLabel" name="label_11">
-            <property name="text">
-             <string>MSI-EC GitHub:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="1">
+          <item row="2" column="0">
            <widget class="QLabel" name="label_12">
             <property name="text">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/BeardOverflow/msi-ec&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#1ec974;&quot;&gt;https://github.com/BeardOverflow/msi-ec&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-            </property>
-            <property name="textFormat">
-             <enum>Qt::TextFormat::AutoText</enum>
+             <string>MSI-EC Status:</string>
             </property>
            </widget>
           </item>
-          <item row="4" column="1">
-           <widget class="QLabel" name="ecVersionValueLabel">
+          <item row="2" column="1">
+           <widget class="QLabel" name="MsiEcStatusLabel">
+            <property name="text">
+             <string>Unknown</string>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="1">
+           <widget class="QLabel" name="ecBuildValueLabel">
             <property name="text">
              <string notr="true">-</string>
             </property>
@@ -1641,18 +1857,15 @@
           </item>
          </layout>
         </item>
-        <item row="1" column="0" rowspan="3" colspan="2">
-         <spacer name="horizontalSpacer">
+        <item row="3" column="1">
+         <spacer name="verticalSpacer_3">
           <property name="orientation">
-           <enum>Qt::Orientation::Horizontal</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Policy::MinimumExpanding</enum>
+           <enum>Qt::Orientation::Vertical</enum>
           </property>
           <property name="sizeHint" stdset="0">
            <size>
-            <width>0</width>
-            <height>20</height>
+            <width>20</width>
+            <height>105</height>
            </size>
           </property>
          </spacer>
@@ -1660,92 +1873,123 @@
        </layout>
       </widget>
       <widget class="QWidget" name="debugTab">
+       <attribute name="icon">
+        <iconset theme="dialog-warning"/>
+       </attribute>
        <attribute name="title">
         <string>Debug</string>
        </attribute>
-       <widget class="QLabel" name="label_10">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>10</y>
-          <width>491</width>
-          <height>121</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Warning&lt;/span&gt;: Writing the wrong values to the wrong addresses &lt;span style=&quot; font-weight:700;&quot;&gt;WILL BRICK YOUR DEVICE!&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Never write to EC memory without knowing how to do a proper BIOS/EC reset, keep in mind that a reset &lt;span style=&quot; font-weight:700;&quot;&gt;might not&lt;/span&gt; fix the device if the device got bricked/broken. &lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-        </property>
-        <property name="wordWrap">
-         <bool>true</bool>
-        </property>
-       </widget>
-       <widget class="QWidget" name="layoutWidget">
-        <property name="geometry">
-         <rect>
-          <x>140</x>
-          <y>190</y>
-          <width>213</width>
-          <height>109</height>
-         </rect>
-        </property>
-        <layout class="QGridLayout" name="gridLayout_6">
-         <item row="2" column="0">
-          <widget class="QPushButton" name="ReadValueButton">
-           <property name="text">
-            <string notr="true">Read Value</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="QPushButton" name="WriteValueButton">
-           <property name="text">
-            <string notr="true">Write Value</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QLineEdit" name="addressEdit"/>
-         </item>
-         <item row="1" column="1">
-          <widget class="QSpinBox" name="ValueSpinBox">
-           <property name="maximum">
-            <number>255</number>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QLabel" name="label_2">
-           <property name="text">
-            <string notr="true">Value</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="0">
-          <widget class="QLabel" name="label">
-           <property name="text">
-            <string notr="true">Address</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
+       <layout class="QGridLayout" name="gridLayout_14">
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_10">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Warning&lt;/span&gt;: Writing the wrong values to the wrong addresses &lt;span style=&quot; font-weight:700;&quot;&gt;WILL BRICK YOUR DEVICE!&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Never&lt;/span&gt; write to EC memory without knowing how to do a proper &lt;span style=&quot; font-weight:700;&quot;&gt;BIOS/EC&lt;/span&gt; reset, keep in mind that a reset &lt;span style=&quot; font-weight:700;&quot;&gt;might not&lt;/span&gt; fix the device if the device got bricked/broken. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="Line" name="line_5">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>10</height>
+           </size>
+          </property>
+          <property name="baseSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="lineWidth">
+           <number>1</number>
+          </property>
+          <property name="midLineWidth">
+           <number>0</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Orientation::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <layout class="QGridLayout" name="gridLayout_6">
+          <property name="leftMargin">
+           <number>160</number>
+          </property>
+          <property name="rightMargin">
+           <number>174</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <property name="horizontalSpacing">
+           <number>30</number>
+          </property>
+          <property name="verticalSpacing">
+           <number>5</number>
+          </property>
+          <item row="2" column="0">
+           <widget class="QPushButton" name="ReadValueButton">
+            <property name="text">
+             <string notr="true">Read Value</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QPushButton" name="WriteValueButton">
+            <property name="text">
+             <string notr="true">Write Value</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLineEdit" name="addressEdit"/>
+          </item>
+          <item row="1" column="1">
+           <widget class="QSpinBox" name="ValueSpinBox">
+            <property name="maximum">
+             <number>255</number>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string notr="true">Value</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string notr="true">Address</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="3" column="0">
+         <spacer name="verticalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Orientation::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>239</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
       </widget>
      </widget>
     </item>
    </layout>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>510</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="acceptDrops">
-    <bool>true</bool>
-   </property>
   </widget>
  </widget>
  <tabstops>

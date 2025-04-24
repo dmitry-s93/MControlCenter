@@ -2,7 +2,8 @@
 
 MControlCenter is a Free and Open Source GNU/Linux application that allows you to change the settings of MSI laptops.
 
-![Screenshots of MControlCenter](https://github.com/user-attachments/assets/e2ebacda-1c6b-48aa-8739-d4a88ee4af67)
+![Screen Shot of MCC](https://github.com/user-attachments/assets/1e1dcb9b-aa8e-4410-8c77-f9554c1840cb)
+
 
 
 
@@ -49,6 +50,38 @@ If the `ec_sys` kernel module is not included in your distribution's kernel, you
 3. Open terminal in unpacked directory
 4. Run the script `sudo ./install`
 
+**Note:** if your distribution ships old versions of Qt (older than 6.8) like ubuntu/Linux mint (Qt 6.4), you might need to build from source, continue reading.
+
+## Building from source
+After installing the main package (```qt6-base``` or ```libqt6widgets6```), you'll need to install other packages to build the app.
+
+For ubuntru/Linux mint:
+```qt6-base-dev``` and/or ```qt6-tools-dev```
+
+For Arch ```qt6-tools``` And for fedora ```qt6-qttools```
+
+After you install the packages:
+
+Make sure the app is completely closed if it was installed before (check if there is a system tray icon and close it).
+
+Download the source code and extract the zip file.
+
+Open the ```scripts``` folder.
+
+Open a terminal inside the folder, then run these scripts in order:
+
+1. ```build```
+2. ```create installer```
+
+If things went well, you should see a compressed file,
+
+4. Extract it.
+5. Open a terminal inside the new folder
+6. Run the **UNINSTALL** script as *sudo*, it might fail if you don't have MCC installed. thats fine.
+7. Run the **INSTALL** script as *sudo*, the last line should be a confirmation that the install was successful.
+8. Check your apps, McontrolCenter should be there.
+
+If the installation was successful but the app fails to run, open a terminal and type ```mcontrolcenter```, copy the output and open an issue (**IF** there isn't one already).
 ### Installation from the repository
 
 #### openSUSE Tumbleweed:

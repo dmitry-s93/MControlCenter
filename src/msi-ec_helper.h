@@ -45,11 +45,6 @@ public:
     [[nodiscard]] bool getFnWinSwap() const;
     Q_NOREPLY void setFnWinSwap(bool swap) const;
 
-    // battery_mode
-    [[nodiscard]] bool hasBatteryMode() const;
-    [[nodiscard]] QString getBatteryMode() const;
-    Q_NOREPLY void setBatteryMode(QString mode) const;
-
     // cooler_boost
     [[nodiscard]] bool hasCoolerBoost() const;
     [[nodiscard]] bool getCoolerBoost() const;

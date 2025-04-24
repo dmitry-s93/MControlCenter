@@ -49,8 +49,6 @@ const int usbPowerShareOn = 0x28;
 
 const int coolerBoostAddress = 0x98;
 
-const int webCamAddress = 0x2E;
-
 const int fnSuperSwapAddress = 0xE8;
 
 int fan1Address;
@@ -65,13 +63,6 @@ const int fan1TempSettingStartAddress = 0x6A;
 const int fan2TempSettingStartAddress = 0x82;
 const int fanTempSettingsCount = fanSpeedSettingsCount - 1;
 
-
-// Modes
-const int shiftModeAddress = 0xD2;
-const int shiftMode0 = 0xC0;
-const int shiftMode1 = 0xC1;
-const int shiftMode2 = 0xC2;
-
 int fanModeAddress;
 const int fanModeAddress_0xD4 = 0xD4;
 const int fanModeAddress_0xF4 = 0xF4;
@@ -79,8 +70,6 @@ const int fanModeAuto = 0x0D;
 const int fanModeSilent = 0x1D;
 const int fanModeBasic = 0x4D;
 const int fanModeAdvanced = 0x8D;
-
-const int superBatteryModeAddress = 0xEB;
 
 const QString settingsGroup = "Settings/";
 
@@ -92,6 +81,10 @@ void Operate::closeHelperApp() const {
 
 bool Operate::isEcSysModuleLoaded() const {
     return helper.isEcSysModuleLoaded();
+}
+
+bool Operate::isMsiEcLoaded() const {
+    return msiEcHelper.isMsiEcModuleLoaded();
 }
 
 bool Operate::loadEcSysModule() const {
@@ -257,8 +250,6 @@ bool Operate::getUsbPowerShareState() const {
 bool Operate::getWebCamState() const {
     if (msiEcHelper.hasWebcam())
         return msiEcHelper.getWebcam();
-    if (helper.getValue(webCamAddress) / 2 % 2 != 0)
-        return true;
     return false;
 }
 
@@ -292,25 +283,14 @@ user_mode Operate::getUserMode() const {
                     return user_mode::balanced_mode;
             }
             case shift_mode::sport_mode: // ?
+                return user_mode::balanced_mode;
             case shift_mode::turbo_mode:
                 return user_mode::performance_mode;
             default:
                 return user_mode::unknown_mode;
         }
     }
-
-    switch (helper.getValue(shiftModeAddress)) {
-        case shiftMode0:
-            return user_mode::performance_mode;
-        case shiftMode1:
-            if (helper.getValue(fanModeAddress) == fanModeSilent)
-                return user_mode::silent_mode;
-            return user_mode::balanced_mode;
-        case shiftMode2:
-            return user_mode::super_battery_mode;
-        default:
-            return user_mode::unknown_mode;
-    }
+    return user_mode::unknown_mode;
 }
 
 fan_mode Operate::getFanMode() const {
@@ -376,10 +356,6 @@ void Operate::setUsbPowerShareState(bool enabled) const {
 void Operate::setWebCamState(bool enabled) const {
     if (msiEcHelper.hasWebcam())
         return msiEcHelper.setWebcam(enabled);
-    if (getWebCamState() == enabled)
-        return;
-    int value = helper.getValue(webCamAddress) + (enabled ? 2 : -2);
-    helper.putValue(webCamAddress, value);
 }
 
 void Operate::setFnSuperSwapState(bool enabled) const {
@@ -404,9 +380,7 @@ void Operate::setCoolerBoostState(bool enabled) const {
 
 void Operate::setUserMode(user_mode userMode) const {
     shift_mode shiftMode = shift_mode::comfort_mode;
-    int shiftModeValue = shiftMode1;
     fan_mode fanMode = fan_mode::auto_fan_mode;
-    int fanModeValue = fanModeAuto;
     bool superBattery = false;
     QString userModeStr;
 
@@ -416,17 +390,14 @@ void Operate::setUserMode(user_mode userMode) const {
             break;
         case user_mode::performance_mode:
             shiftMode = shift_mode::turbo_mode; // sport on some devices?
-            shiftModeValue = shiftMode0;
             userModeStr = "performance_mode";
             break;
         case user_mode::silent_mode:
             fanMode = fan_mode::silent_fan_mode;
-            fanModeValue = fanModeSilent;
             userModeStr = "silent_mode";
             break;
         case user_mode::super_battery_mode:
             shiftMode = shift_mode::eco_mode;
-            shiftModeValue = shiftMode2;
             superBattery = true;
             userModeStr = "super_battery_mode";
             break;
@@ -436,20 +407,14 @@ void Operate::setUserMode(user_mode userMode) const {
 
     if (msiEcHelper.hasShiftMode()) {
         msiEcHelper.setShiftMode(shiftMode);
-    } else {
-        helper.putValue(shiftModeAddress, shiftModeValue);
     }
     
-    if (msiEcHelper.hasShiftMode()) {
+    if (msiEcHelper.hasFanMode()) {
         msiEcHelper.setFanMode(fanMode);
-    } else {
-        setFanMode(fanModeValue);
     }
 
-    if (msiEcHelper.hasBatteryMode()) {
+    if (msiEcHelper.hasSuperBattery()) {
         msiEcHelper.setSuperBattery(superBattery);
-    } else {
-        putSuperBatteryModeValue(true);
     }
 
     Settings::setValue(settingsGroup + "UserMode", userModeStr);
@@ -532,7 +497,7 @@ bool Operate::isKeyboardBacklightModeSupport() const {
 bool Operate::isKeyboardBacklightSupport() const {
     if (msiEcHelper.hasKeyboardBacklightBrightness())
         return true;
-    return keyboardBacklightAddress != -1;
+    return false;
 }
 
 bool Operate::isUsbPowerShareSupport() const {
@@ -541,7 +506,9 @@ bool Operate::isUsbPowerShareSupport() const {
 }
 
 bool Operate::isWebCamOffSupport() const {
-    return helper.getValue(webCamAddress) > 0;
+    if (msiEcHelper.hasWebcamBlock())
+        return true;
+    return false;
 }
 
 void Operate::loadSettings() const {
@@ -580,13 +547,6 @@ void Operate::handleWakeEvent() const {
     Settings s;
     if (s.isValueExist(settingsGroup + "fanModeAdvanced"))
         setFanModeAdvanced(s.getValue(settingsGroup + "fanModeAdvanced").toBool());
-}
-
-void Operate::putSuperBatteryModeValue(bool enabled) const {
-    if ((helper.getValue(superBatteryModeAddress) / 15 % 2 != 0) == enabled)
-        return;
-    int currValue = helper.getValue(superBatteryModeAddress);
-    helper.putValue(superBatteryModeAddress, currValue + (enabled ? 15 : -15));
 }
 
 int Operate::detectFan1Address() const {

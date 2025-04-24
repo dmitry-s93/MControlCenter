@@ -146,12 +146,20 @@ MainWindow::MainWindow(QWidget *parent)
 
     createTrayIcon();
 
+    ui->tabWidget->tabBar()->setExpanding(true);
     // Disable debug tab
     ui->tabWidget->setTabVisible(5, false);
     setTabsEnabled(false);
 
+    if (!operate.isMsiEcLoaded()) {
+        QMessageBox::critical(nullptr, this->windowTitle(), tr("The msi-ec module is not loaded/installed.\n"
+                                                               "Check the <About> page for more info."));
+    }
+
     if (!operate.isEcSysModuleLoaded() && !operate.loadEcSysModule())
-        QMessageBox::critical(nullptr, this->windowTitle(), tr("Failed to load the ec_sys kernel module"));
+        QMessageBox::critical(nullptr, this->windowTitle(), tr("The ec_sys module couldn't be detected, it might be required to control the fans."));
+
+
 
     if(operate.updateEcData())
         updateData();
@@ -163,6 +171,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(&timerSleepWatcher, &QTimer::timeout, this, &MainWindow::timerSleepTimeout);
     timerSleepWatcher.setInterval(10 * 1000);
     timerSleepWatcher.start();
+
+    ui->QtVersionValue->setText(QT_VERSION_STR);
+    ui->versionValueLabel->setText(MControlCenter_VERSION);
 }
 
 MainWindow::~MainWindow() {
@@ -205,7 +216,7 @@ void MainWindow::realtimeUpdate() {
 }
 
 void MainWindow::updateData() {
-    if (!isUpdateDataError && !operate.getEcVersion().empty()) {
+    if (!isUpdateDataError && (operate.isMsiEcLoaded() || operate.isEcSysModuleLoaded())) {
         if (!isActive) {
             operate.doProbe();
             setTabsEnabled(true);
@@ -221,8 +232,15 @@ void MainWindow::updateData() {
         updateFan2Speed();
         updateKeyboardBrightness();
         updateWebCamState();
+
+        if (operate.isMsiEcLoaded()) {
+            ui->MsiEcStatusLabel->setText(tr("Loaded"));
+        } else {
+            ui->MsiEcStatusLabel->setText(tr("Fallback: Only ec_sys is loaded"));
+        }
     } else {
         setTabsEnabled(false);
+        ui->MsiEcStatusLabel->setText(tr("Failed to load both msi-ec/ec_sys"));
         isActive = false;
     }
 }
@@ -255,6 +273,7 @@ void MainWindow::loadConfigs() {
         updateKeyboardBrightness();
     } else {
         ui->keyboardBrightnessSlider->setEnabled(false);
+        ui->tabWidget->removeTab(3);
     }
 
     if (operate.isUsbPowerShareSupport()) {
@@ -340,7 +359,14 @@ void MainWindow::updateCpuTemp() {
 }
 
 void MainWindow::updateGpuTemp() {
-    ui->gpuTempValueLabel->setText(intToQString(operate.getGpuTemp()) + " °C");
+    if (operate.getGpuTemp() != 0) {
+        ui->gpuTempValueLabel->setVisible(true);
+        ui->gpuTempLabel->setVisible(true);
+        ui->gpuTempValueLabel->setText(intToQString(operate.getGpuTemp()) + " °C");
+    } else {
+        ui->gpuTempValueLabel->setVisible(false);
+        ui->gpuTempLabel->setVisible(false);
+    }
 }
 
 void MainWindow::updateFan1Speed() {
@@ -348,7 +374,14 @@ void MainWindow::updateFan1Speed() {
 }
 
 void MainWindow::updateFan2Speed() {
-    ui->fan2ValueLabel->setText(intToQString(operate.getFan2Speed()) + " " + tr("rpm"));
+    if (operate.getFan2Speed() != 0) {
+        ui->fan2ValueLabel->setVisible(true);
+        ui->gpuFanLabel->setVisible(true);
+        ui->fan2ValueLabel->setText(intToQString(operate.getFan2Speed()) + " " + tr("rpm"));
+    } else {
+        ui->fan2ValueLabel->setVisible(false);
+        ui->gpuFanLabel->setVisible(false);
+    }
 }
 
 void MainWindow::updateKeyboardBacklightMode() {
@@ -391,6 +424,11 @@ void MainWindow::updateUserMode() {
             case user_mode::super_battery_mode:
                 ui->superBatteryModeRadioButton->click();
                 break;
+            case user_mode::unknown_mode:
+                ui->superBatteryModeRadioButton->setChecked(false);
+                ui->silentModeRadioButton->setChecked(false);
+                ui->balancedModeRadioButton->setChecked(false);
+                ui->highPerformanceModeRadioButton->setChecked(false);
             default:
                 ui->modeFormWidget->setDisabled(true);
                 if (modeTrayMenu)
@@ -760,6 +798,7 @@ void MainWindow::createTrayIcon() {
     trayIcon->setContextMenu(trayIconMenu);
     auto icon = QIcon(":/images/AppIcon");
     trayIcon->setIcon(icon);
+    trayIcon->setToolTip("MControlCenter");
 
     trayIcon->show();
 
