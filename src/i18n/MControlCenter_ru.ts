@@ -270,20 +270,32 @@ Check the &lt;About&gt; page for more info.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;High Performance</source>
-        <translation>&amp;Высокая мощность</translation>
+        <source>High Performance</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Maximum performance at the cost of heat and increased power consumption&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Высокая производительность с повышенным нагревом и расходом энергии&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <source>Maximum performance at the cost of heat and increased power consumption</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If you mainly use your laptop with the charger plugged most of the time, it is recommended to set the charge capacity at a lower percentage (60% or 80%) to prolong your battery lifecycle.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Если вы используете подключённый к электросети ноутбук, установите лимит заряда (60% или 80%) для продления срока службы аккумулятора.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <source>If you mainly use your laptop with the charger plugged most of the time, it is recommended to set the charge capacity at a lower percentage (60% or 80%) to prolong your battery lifecycle.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The ec_sys module couldn&apos;t be detected, it might be required as a fallback option.</source>
-        <translation>Модуль ec_sys не найден,может потребоваться как резервный вариант.</translation>
+        <source>The ec_sys module couldn&apos;t be detected, it might be required to control the fans.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Loaded</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fallback: Only ec_sys is loaded</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to load both msi-ec/ec_sys</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

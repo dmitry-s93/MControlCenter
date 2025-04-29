@@ -19,11 +19,11 @@
 #ifndef OPERATE_H
 #define OPERATE_H
 
-
 #include <string>
 #include <QVector>
 
-enum class charging_state {
+enum class charging_state
+{
     battery_charging,
     battery_discharging,
     battery_not_charging,
@@ -31,7 +31,8 @@ enum class charging_state {
     battery_unknown
 };
 
-enum class shift_mode {
+enum class shift_mode
+{
     eco_mode,
     comfort_mode,
     sport_mode,
@@ -39,7 +40,8 @@ enum class shift_mode {
     unknown_mode
 };
 
-enum class user_mode {
+enum class user_mode
+{
     performance_mode,
     balanced_mode,
     silent_mode,
@@ -47,7 +49,8 @@ enum class user_mode {
     unknown_mode
 };
 
-enum class fan_mode {
+enum class fan_mode
+{
     auto_fan_mode,
     silent_fan_mode,
     basic_fan_mode,
@@ -55,7 +58,8 @@ enum class fan_mode {
     unknown_fan_mode
 };
 
-class Operate {
+class Operate
+{
 public:
     Operate();
     void closeHelperApp() const;
@@ -116,6 +120,12 @@ public:
     void handleWakeEvent() const;
 
     void putSuperBatteryModeValue(bool enabled) const;
+    bool isTurboModeSupported() const;
+    bool isEcoModeSupported() const;
+    bool isSilentModeSupported() const;
+    bool isPerformanceModeSupported() const;
+    bool isSuperBatteryModeSupported() const;
+
 private:
     int detectFan1Address() const;
     int detectBatteryThresholdAddress() const;

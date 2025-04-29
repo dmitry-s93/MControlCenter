@@ -1,0 +1,155 @@
+{
+	"BUILD_DIR" : "/home/nagendra/code/opensource/MControlCenter/build/helper/mcontrolcenter-helper_autogen",
+	"CMAKE_BINARY_DIR" : "/home/nagendra/code/opensource/MControlCenter/build",
+	"CMAKE_CURRENT_BINARY_DIR" : "/home/nagendra/code/opensource/MControlCenter/build/helper",
+	"CMAKE_CURRENT_SOURCE_DIR" : "/home/nagendra/code/opensource/MControlCenter/src/helper",
+	"CMAKE_EXECUTABLE" : "/usr/bin/cmake",
+	"CMAKE_LIST_FILES" : 
+	[
+		"/home/nagendra/code/opensource/MControlCenter/src/helper/CMakeLists.txt",
+		"/usr/lib64/cmake/Qt6/Qt6ConfigVersion.cmake",
+		"/usr/lib64/cmake/Qt6/Qt6ConfigVersionImpl.cmake",
+		"/usr/lib64/cmake/Qt6/Qt6Config.cmake",
+		"/usr/lib64/cmake/Qt6/Qt6ConfigExtras.cmake",
+		"/usr/lib64/cmake/Qt6/QtPublicCMakeVersionHelpers.cmake",
+		"/usr/lib64/cmake/Qt6/QtPublicCMakeHelpers.cmake",
+		"/usr/lib64/cmake/Qt6/QtInstallPaths.cmake",
+		"/usr/lib64/cmake/Qt6/Qt6Targets.cmake",
+		"/usr/lib64/cmake/Qt6/Qt6VersionlessAliasTargets.cmake",
+		"/usr/lib64/cmake/Qt6/QtFeature.cmake",
+		"/usr/share/cmake/Modules/CheckCXXCompilerFlag.cmake",
+		"/usr/lib64/cmake/Qt6/QtFeatureCommon.cmake",
+		"/usr/lib64/cmake/Qt6/QtPublicAppleHelpers.cmake",
+		"/usr/lib64/cmake/Qt6/QtPublicCMakeHelpers.cmake",
+		"/usr/lib64/cmake/Qt6/QtPublicCMakeVersionHelpers.cmake",
+		"/usr/lib64/cmake/Qt6/QtPublicDependencyHelpers.cmake",
+		"/usr/lib64/cmake/Qt6/QtPublicExternalProjectHelpers.cmake",
+		"/usr/lib64/cmake/Qt6/QtPublicFinalizerHelpers.cmake",
+		"/usr/lib64/cmake/Qt6/QtPublicFindPackageHelpers.cmake",
+		"/usr/lib64/cmake/Qt6/QtPublicGitHelpers.cmake",
+		"/usr/lib64/cmake/Qt6/QtPublicPluginHelpers.cmake",
+		"/usr/lib64/cmake/Qt6/QtPublicSbomAttributionHelpers.cmake",
+		"/usr/lib64/cmake/Qt6/QtPublicSbomCpeHelpers.cmake",
+		"/usr/lib64/cmake/Qt6/QtPublicSbomDepHelpers.cmake",
+		"/usr/lib64/cmake/Qt6/QtPublicSbomFileHelpers.cmake",
+		"/usr/lib64/cmake/Qt6/QtPublicSbomGenerationHelpers.cmake",
+		"/usr/lib64/cmake/Qt6/QtPublicSbomHelpers.cmake",
+		"/usr/lib64/cmake/Qt6/QtPublicSbomLicenseHelpers.cmake",
+		"/usr/lib64/cmake/Qt6/QtPublicSbomOpsHelpers.cmake",
+		"/usr/lib64/cmake/Qt6/QtPublicSbomPurlHelpers.cmake",
+		"/usr/lib64/cmake/Qt6/QtPublicSbomPythonHelpers.cmake",
+		"/usr/lib64/cmake/Qt6/QtPublicSbomSystemDepHelpers.cmake",
+		"/usr/lib64/cmake/Qt6/QtPublicTargetHelpers.cmake",
+		"/usr/lib64/cmake/Qt6/QtPublicTestHelpers.cmake",
+		"/usr/lib64/cmake/Qt6/QtPublicToolHelpers.cmake",
+		"/usr/lib64/cmake/Qt6/QtPublicWalkLibsHelpers.cmake",
+		"/usr/share/cmake/Modules/CMakeFindDependencyMacro.cmake",
+		"/usr/lib64/cmake/Qt6/Qt6Dependencies.cmake"
+	],
+	"CMAKE_SOURCE_DIR" : "/home/nagendra/code/opensource/MControlCenter",
+	"CROSS_CONFIG" : false,
+	"DEP_FILE" : "/home/nagendra/code/opensource/MControlCenter/build/helper/mcontrolcenter-helper_autogen/deps",
+	"DEP_FILE_RULE_NAME" : "mcontrolcenter-helper_autogen/timestamp",
+	"HEADERS" : 
+	[
+		[
+			"/home/nagendra/code/opensource/MControlCenter/src/helper/helper.h",
+			"MU",
+			"EWIEGA46WW/moc_helper.cpp",
+			null
+		],
+		[
+			"/home/nagendra/code/opensource/MControlCenter/src/helper/msi-ec.h",
+			"MU",
+			"EWIEGA46WW/moc_msi-ec.cpp",
+			null
+		],
+		[
+			"/home/nagendra/code/opensource/MControlCenter/src/helper/readwrite.h",
+			"MU",
+			"EWIEGA46WW/moc_readwrite.cpp",
+			null
+		]
+	],
+	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
+	"INCLUDE_DIR" : "/home/nagendra/code/opensource/MControlCenter/build/helper/mcontrolcenter-helper_autogen/include",
+	"MOC_COMPILATION_FILE" : "/home/nagendra/code/opensource/MControlCenter/build/helper/mcontrolcenter-helper_autogen/mocs_compilation.cpp",
+	"MOC_DEFINITIONS" : [ "QT_CORE_LIB", "QT_DBUS_LIB", "QT_NO_DEBUG" ],
+	"MOC_DEPEND_FILTERS" : 
+	[
+		[
+			"Q_PLUGIN_METADATA",
+			"[\n][ \t]*Q_PLUGIN_METADATA[ \t]*\\([^\\)]*FILE[ \t]*\"([^\"]+)\""
+		]
+	],
+	"MOC_INCLUDES" : 
+	[
+		"/home/nagendra/code/opensource/MControlCenter/build/helper",
+		"/home/nagendra/code/opensource/MControlCenter/src/helper",
+		"/usr/include/qt6/QtCore",
+		"/usr/include/qt6",
+		"/usr/lib64/qt6/mkspecs/linux-g++",
+		"/usr/include/qt6/QtDBus",
+		"/usr/include/c++/14",
+		"/usr/include/c++/14/x86_64-redhat-linux",
+		"/usr/include/c++/14/backward",
+		"/usr/lib/gcc/x86_64-redhat-linux/14/include",
+		"/usr/local/include",
+		"/usr/include"
+	],
+	"MOC_MACRO_NAMES" : 
+	[
+		"Q_OBJECT",
+		"Q_GADGET",
+		"Q_NAMESPACE",
+		"Q_NAMESPACE_EXPORT",
+		"Q_GADGET_EXPORT",
+		"Q_ENUM_NS"
+	],
+	"MOC_OPTIONS" : [],
+	"MOC_PATH_PREFIX" : false,
+	"MOC_PREDEFS_CMD" : 
+	[
+		"/usr/bin/c++",
+		"-std=gnu++20",
+		"-dM",
+		"-E",
+		"-c",
+		"/usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp"
+	],
+	"MOC_PREDEFS_FILE" : "/home/nagendra/code/opensource/MControlCenter/build/helper/mcontrolcenter-helper_autogen/moc_predefs.h",
+	"MOC_RELAXED_MODE" : false,
+	"MOC_SKIP" : [],
+	"MULTI_CONFIG" : false,
+	"PARALLEL" : 6,
+	"PARSE_CACHE_FILE" : "/home/nagendra/code/opensource/MControlCenter/build/helper/CMakeFiles/mcontrolcenter-helper_autogen.dir/ParseCache.txt",
+	"QT_MOC_EXECUTABLE" : "/usr/lib64/qt6/libexec/moc",
+	"QT_UIC_EXECUTABLE" : "/usr/lib64/qt6/libexec/uic",
+	"QT_VERSION_MAJOR" : 6,
+	"QT_VERSION_MINOR" : 8,
+	"SETTINGS_FILE" : "/home/nagendra/code/opensource/MControlCenter/build/helper/CMakeFiles/mcontrolcenter-helper_autogen.dir/AutogenUsed.txt",
+	"SOURCES" : 
+	[
+		[
+			"/home/nagendra/code/opensource/MControlCenter/src/helper/helper.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/nagendra/code/opensource/MControlCenter/src/helper/msi-ec.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/nagendra/code/opensource/MControlCenter/src/helper/readwrite.cpp",
+			"MU",
+			null
+		]
+	],
+	"UIC_OPTIONS" : [],
+	"UIC_SEARCH_PATHS" : [],
+	"UIC_SKIP" : [],
+	"UIC_UI_FILES" : [],
+	"USE_BETTER_GRAPH" : true,
+	"VERBOSITY" : 0
+}
