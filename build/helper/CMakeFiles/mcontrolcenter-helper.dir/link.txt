@@ -1,0 +1,1 @@
+/usr/bin/c++ "CMakeFiles/mcontrolcenter-helper.dir/mcontrolcenter-helper_autogen/mocs_compilation.cpp.o" "CMakeFiles/mcontrolcenter-helper.dir/helper.cpp.o" "CMakeFiles/mcontrolcenter-helper.dir/readwrite.cpp.o" "CMakeFiles/mcontrolcenter-helper.dir/msi-ec.cpp.o" -o mcontrolcenter-helper  /usr/lib64/libQt6DBus.so.6.8.2 /usr/lib64/libQt6Core.so.6.8.2

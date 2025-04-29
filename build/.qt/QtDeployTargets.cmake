@@ -1,0 +1,4 @@
+set(__QT_DEPLOY_TARGET_mcontrolcenter-helper_FILE /home/nagendra/code/opensource/MControlCenter/build/helper/mcontrolcenter-helper)
+set(__QT_DEPLOY_TARGET_mcontrolcenter-helper_TYPE EXECUTABLE)
+set(__QT_DEPLOY_TARGET_mcontrolcenter_FILE /home/nagendra/code/opensource/MControlCenter/build/mcontrolcenter)
+set(__QT_DEPLOY_TARGET_mcontrolcenter_TYPE EXECUTABLE)

@@ -40,10 +40,6 @@
         <translation>Tốt nhất cho di động</translation>
     </message>
     <message>
-        <source>Charge the battery to 100% all the time</source>
-        <translation>Luôn sạc pin đến 100%</translation>
-    </message>
-    <message>
         <source>Balanced</source>
         <translation>Cân bằng</translation>
     </message>
@@ -62,10 +58,6 @@
     <message>
         <source>Custom</source>
         <translation>Tùy chỉnh</translation>
-    </message>
-    <message>
-        <source>Keyboard Backlit</source>
-        <translation>Đèn nền bàn phím</translation>
     </message>
     <message>
         <source>Always on</source>
@@ -120,10 +112,6 @@
         <translation>Đã sạc đầy</translation>
     </message>
     <message>
-        <source>Fully charged (Discharging)</source>
-        <translation>Đã sạc đầy (ngắt sạc)</translation>
-    </message>
-    <message>
         <source>rpm</source>
         <translation>vòng/phút</translation>
     </message>
@@ -138,10 +126,6 @@
     <message>
         <source>Super Battery</source>
         <translation>Siêu tiết kiệm pin</translation>
-    </message>
-    <message>
-        <source>Failed to load the ec_sys kernel module</source>
-        <translation>Thất bại khi tải module kernel ec_sys</translation>
     </message>
     <message>
         <source>Apply</source>
@@ -200,14 +184,6 @@
         <translation>Tổng quan</translation>
     </message>
     <message>
-        <source>&amp;High Performance</source>
-        <translation>&amp;Hiệu năng cao</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Maximum performance at the cost of heat and increased power consumption&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Hiệu năng tối đa với nhiệt độ và năng lượng tiêu thụ tăng&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
         <source>The middle spot between fan noise and power usage</source>
         <translation>Cân bằng giữa tiếng ổn quạt và năng lượng sử dụng</translation>
     </message>
@@ -240,10 +216,6 @@
         <translation>Chế độ quạt hiện tại:</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If you mainly use your laptop with the charger plugged most of the time, it is recommended to set the charge capacity at a lower percentage (60% or 80%) to prolong your battery lifecycle.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Nếu bạn chủ yếu dùng laptop cùng sạc, thì khuyến khích bạn cài đặt công suất sạc ở mức thấp (60% hoặc 80%) để kéo dài vòng đời của pin của bạn.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
         <source>Keyboard</source>
         <translation>Bàn phím</translation>
     </message>
@@ -256,20 +228,73 @@
         <translation>MCC Github:</translation>
     </message>
     <message>
-        <source>MCC Bug tracker:</source>
-        <translation>MCC theo dõi bug:</translation>
-    </message>
-    <message>
         <source>MSI-EC GitHub:</source>
         <translation>MSI-EC Github:</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/BeardOverflow/msi-ec&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#1ec974;&quot;&gt;https://github.com/BeardOverflow/msi-ec&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/BeardOverflow/msi-ec&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#1ec974;&quot;&gt;https://github.com/BeardOverflow/msi-ec&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <source>This mode unlocks Advanced fan mode</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Warning&lt;/span&gt;: Writing the wrong values to the wrong addresses &lt;span style=&quot; font-weight:700;&quot;&gt;WILL BRICK YOUR DEVICE!&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Never write to EC memory without knowing how to do a proper BIOS/EC reset, keep in mind that a reset &lt;span style=&quot; font-weight:700;&quot;&gt;might not&lt;/span&gt; fix the device if the device got bricked/broken. &lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Cảnh báo&lt;/span&gt;: Viết sai giá trị vào sai địa chỉ &lt;span style=&quot; font-weight:700;&quot;&gt;SẼ BIẾN THIẾT BỊ CỦA BẠN THÀNH CỤC GẠCH!&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Không bao giờ viết vào bộ nhớ EC mà không hiểu cách thiết đặt lại BIOS/EC, hãy nhớ rằng thiết lập lại &lt;span style=&quot; font-weight:700;&quot;&gt;có thể không&lt;/span&gt; sửa thiết bị cũa bạn nếu thiết bị của bạn thành cục gạch &lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <source>High Performance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maximum performance at the cost of heat and increased power consumption</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If you mainly use your laptop with the charger plugged most of the time, it is recommended to set the charge capacity at a lower percentage (60% or 80%) to prolong your battery lifecycle.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Charge the battery when under 90%, stop at 100%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Keyboard Backlight</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>-</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MCC Bug Tracker:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Qt version:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MSI-EC Status:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Warning&lt;/span&gt;: Writing the wrong values to the wrong addresses &lt;span style=&quot; font-weight:700;&quot;&gt;WILL BRICK YOUR DEVICE!&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Never&lt;/span&gt; write to EC memory without knowing how to do a proper &lt;span style=&quot; font-weight:700;&quot;&gt;BIOS/EC&lt;/span&gt; reset, keep in mind that a reset &lt;span style=&quot; font-weight:700;&quot;&gt;might not&lt;/span&gt; fix the device if the device got bricked/broken. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The msi-ec module is not loaded/installed.
+Check the &lt;About&gt; page for more info.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The ec_sys module couldn&apos;t be detected, it might be required to control the fans.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Loaded</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fallback: Only ec_sys is loaded</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to load both msi-ec/ec_sys</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
