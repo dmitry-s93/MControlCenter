@@ -425,14 +425,18 @@ void MainWindow::updateUserMode() {
                 ui->superBatteryModeRadioButton->click();
                 break;
             case user_mode::unknown_mode:
-                ui->superBatteryModeRadioButton->setChecked(false);
-                ui->silentModeRadioButton->setChecked(false);
-                ui->balancedModeRadioButton->setChecked(false);
-                ui->highPerformanceModeRadioButton->setChecked(false);
+                //fall to default, happens on some models after booting
             default:
-                ui->modeFormWidget->setDisabled(true);
-                if (modeTrayMenu)
-                    modeTrayMenu->setDisabled(true);
+                if (!operate.isMsiEcLoaded()){
+                    ui->modeFormWidget->setDisabled(true);
+                    if (modeTrayMenu)
+                        modeTrayMenu->setDisabled(true);
+                } else {
+                    ui->superBatteryModeRadioButton->setChecked(false);
+                    ui->silentModeRadioButton->setChecked(false);
+                    ui->balancedModeRadioButton->setChecked(false);
+                    ui->highPerformanceModeRadioButton->setChecked(false);
+                }
                 break;
         }
     }
