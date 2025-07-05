@@ -5,27 +5,27 @@
     <name>MainWindow</name>
     <message>
         <source>EC Version:</source>
-        <translation>EC Version :</translation>
+        <translation>Version EC&#xa0;:</translation>
     </message>
     <message>
         <source>EC Build:</source>
-        <translation>EC Build :</translation>
+        <translation>Build EC&#xa0;:</translation>
     </message>
     <message>
         <source>Battery charge:</source>
-        <translation>Charge de la batterie :</translation>
+        <translation>Charge de la batterie&#xa0;:</translation>
     </message>
     <message>
         <source>Battery threshold:</source>
-        <translation>Seuil de charge maximum :</translation>
+        <translation>Seuil de charge maximum&#xa0;:</translation>
     </message>
     <message>
         <source>CPU temp:</source>
-        <translation>Température CPU :</translation>
+        <translation>Température CPU&#xa0;:</translation>
     </message>
     <message>
         <source>GPU temp:</source>
-        <translation>Température GPU :</translation>
+        <translation>Température GPU&#xa0;:</translation>
     </message>
     <message>
         <source>Cooler Boost</source>
@@ -45,7 +45,7 @@
     </message>
     <message>
         <source>Charge the battery when under 70%, stop at 80%</source>
-        <translation>Charge la batterie en-dessous de 70%, jusqu&apos;à 80%</translation>
+        <translation>Charge la batterie en-dessous de 70&#xa0;%, arrête à 80&#xa0;%</translation>
     </message>
     <message>
         <source>Best for battery</source>
@@ -53,11 +53,11 @@
     </message>
     <message>
         <source>Charge the battery when under 50%, stop at 60%</source>
-        <translation>Charge la batterie en-dessous de 50%, stoppe à 60%</translation>
+        <translation>Charge la batterie en-dessous de 50&#xa0;%, arrête à 60&#xa0;%</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation>Personalisé</translation>
+        <translation>Personnalisé</translation>
     </message>
     <message>
         <source>Always on</source>
@@ -65,11 +65,11 @@
     </message>
     <message>
         <source>Auto turn off in 10 sec</source>
-        <translation>S&apos;éteint après 10 sec</translation>
+        <translation>S&apos;éteint après 10 secondes</translation>
     </message>
     <message>
         <source>WebCam</source>
-        <translation>Webcam</translation>
+        <translation>Caméra</translation>
     </message>
     <message>
         <source>Debug</source>
@@ -81,11 +81,11 @@
     </message>
     <message>
         <source>Version:</source>
-        <translation>Version :</translation>
+        <translation>Version&#xa0;:</translation>
     </message>
     <message>
         <source>Charging status:</source>
-        <translation>État de charge :</translation>
+        <translation>État de charge&#xa0;:</translation>
     </message>
     <message>
         <source>Charging</source>
@@ -109,7 +109,7 @@
     </message>
     <message>
         <source>Fully charged</source>
-        <translation>Chargé à 100 %</translation>
+        <translation>Chargé à 100&#xa0;%</translation>
     </message>
     <message>
         <source>rpm</source>
@@ -125,7 +125,7 @@
     </message>
     <message>
         <source>Super Battery</source>
-        <translation>Economie de batterie</translation>
+        <translation>Économie de batterie</translation>
     </message>
     <message>
         <source>Apply</source>
@@ -169,7 +169,7 @@
     </message>
     <message>
         <source>Reset</source>
-        <translation>Reset</translation>
+        <translation>Annuler les changements</translation>
     </message>
     <message>
         <source>Fan control</source>
@@ -197,11 +197,11 @@
     </message>
     <message>
         <source>GPU Fan:</source>
-        <translation>Ventilateur du GPU :</translation>
+        <translation>Ventilateur du GPU&#xa0;:</translation>
     </message>
     <message>
         <source>CPU Fan:</source>
-        <translation>Ventilateur du CPU :</translation>
+        <translation>Ventilateur du CPU&#xa0;:</translation>
     </message>
     <message>
         <source>USB Power</source>
@@ -213,7 +213,7 @@
     </message>
     <message>
         <source>Current fan Mode:</source>
-        <translation>Mode des ventilateurs :</translation>
+        <translation>Mode des ventilateurs&#xa0;:</translation>
     </message>
     <message>
         <source>Keyboard</source>
@@ -225,11 +225,11 @@
     </message>
     <message>
         <source>MCC GitHub:</source>
-        <translation>MCC GitHub :</translation>
+        <translation>MCC GitHub&#xa0;:</translation>
     </message>
     <message>
         <source>MSI-EC GitHub:</source>
-        <translation>MSI-EC GitHub :</translation>
+        <translation>MSI-EC GitHub&#xa0;:</translation>
     </message>
     <message>
         <source>This mode unlocks Advanced fan mode</source>
@@ -245,11 +245,11 @@
     </message>
     <message>
         <source>If you mainly use your laptop with the charger plugged most of the time, it is recommended to set the charge capacity at a lower percentage (60% or 80%) to prolong your battery lifecycle.</source>
-        <translation>Si vous utilisez principalement votre ordinateur avec le chargeur branché, il est recommandé de mettre la limite de charge à un pourcentage plus bas (60% ou 80 %) pour prolonger la durée de vie de votre batterie.</translation>
+        <translation>Si vous utilisez principalement votre ordinateur avec le chargeur branché, il est recommandé de mettre la limite de charge à un pourcentage plus bas (60&#xa0;% ou 80&#xa0;%) pour prolonger la durée de vie de votre batterie.</translation>
     </message>
     <message>
         <source>Charge the battery when under 90%, stop at 100%</source>
-        <translation>Charge la batterie en-dessous de 90%, stoppe à 100%</translation>
+        <translation>Charge la batterie en-dessous de 90&#xa0;%, arrête à 100&#xa0;%</translation>
     </message>
     <message>
         <source>Keyboard Backlight</source>
@@ -261,15 +261,15 @@
     </message>
     <message>
         <source>MCC Bug Tracker:</source>
-        <translation>MCC Bug Tracker :</translation>
+        <translation>MCC Bug Tracker&#xa0;:</translation>
     </message>
     <message>
         <source>Qt version:</source>
-        <translation>Version Qt :</translation>
+        <translation>Version Qt&#xa0;:</translation>
     </message>
     <message>
         <source>MSI-EC Status:</source>
-        <translation>État MSI-EC :</translation>
+        <translation>État MSI-EC&#xa0;:</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Warning&lt;/span&gt;: Writing the wrong values to the wrong addresses &lt;span style=&quot; font-weight:700;&quot;&gt;WILL BRICK YOUR DEVICE!&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Never&lt;/span&gt; write to EC memory without knowing how to do a proper &lt;span style=&quot; font-weight:700;&quot;&gt;BIOS/EC&lt;/span&gt; reset, keep in mind that a reset &lt;span style=&quot; font-weight:700;&quot;&gt;might not&lt;/span&gt; fix the device if the device got bricked/broken. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -291,7 +291,7 @@ Regardez la page &lt;À propos&gt; pour plus d&apos;informations.</translation>
     </message>
     <message>
         <source>Fallback: Only ec_sys is loaded</source>
-        <translation>Attention : Seul ec_sys est détecté</translation>
+        <translation>Attention&#xa0;: Seul ec_sys est détecté</translation>
     </message>
     <message>
         <source>Failed to load both msi-ec/ec_sys</source>
