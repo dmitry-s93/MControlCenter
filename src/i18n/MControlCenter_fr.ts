@@ -237,7 +237,7 @@
     </message>
     <message>
         <source>High Performance</source>
-        <translation>High Performance</translation>
+        <translation>Performances élevées</translation>
     </message>
     <message>
         <source>Maximum performance at the cost of heat and increased power consumption</source>
