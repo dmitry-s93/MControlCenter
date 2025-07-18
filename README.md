@@ -23,40 +23,49 @@ MControlCenter is a Free and Open Source GNU/Linux application that allows you t
 ## TODO
 
 - Saving multiple fan speed profiles
+- Automatically change performance mode on charger connect/disconnect
 
 ## Supported devices
 
 With version 0.5.0 the app uses the msi-ec driver that comes with the linux kernel (you might need to reinstall the driver), so device support depends on whether the kernel driver supports your device or not.
 
-[List of tested devices by msi-ec](https://github.com/BeardOverflow/msi-ec/blob/main/docs/supported_devices.md)
+[**List of tested devices by msi-ec**](https://github.com/BeardOverflow/msi-ec/discussions/277)
 
-If your device is not on the list, follow the steps on the `msi-ec` github page to add support for your device.
+If your device is not on the list, follow the steps on the `msi-ec` github page and open an issue there to add support for your device.
 
 ## Installation
 
-This is a Qt6 application. You need to install `libqt6widgets6` or its equivalent on your distribution (```qt6-base``` for example). **the application will fail to open without it!** 
+### Pre-Installation
 
-Check the output of ```cat /sys/devices/platform/msi-ec/shift_mode``` in your terminal, if it says ```No such file or directory``` it means that you need to install or reinstall (uninstall first then install) the [msi-ec driver](https://github.com/BeardOverflow/msi-ec?tab=readme-ov-file#installation). or the application will open **but it wont have any effect!**  
+- Check the output of ```cat /sys/devices/platform/msi-ec/shift_mode``` in your terminal, if it says ```No such file or directory``` it means that you need to install or reinstall (uninstall first then install) the [msi-ec driver](https://github.com/BeardOverflow/msi-ec?tab=readme-ov-file#installation). or the application will open **but will have limited functionality!**  
 
-Also, McontrolCenter requires the `ec_sys` module with option `write_support=1` to run.
-
-If the `ec_sys` kernel module is not included in your distribution's kernel, you can use the `acpi_ec` kernel module.
+- If you're not installing from the packages, You'll need to install `libqt6widgets6` or its equivalent on your distribution (```qt6-base``` for example). **the application will fail to open without it!** 
 
 
-### Installation from the archive
 
-1. Download `MControlCenter-x.x.x.tar.gz` from the releases page
+-  to get temperature and fan curve support, you'll need to install `ec_sys`, which comes installed on most distributions, or `acpi_sys` (fedora) with `write_support=1`. the app can still work with only `msi-ec` installed.
+
+### Installation from packages
+
+1. Download the correct package for your distribution from the [releases page](https://github.com/dmitry-s93/MControlCenter/releases/)
+2. Double click to open it in the software manager (ex. Discover or GNOME software)
+3. Install
+
+### If your distribution is not listed, use the generic installer:
+
+1. Download MControlCenter-x.x.x.tar.gz from the [releases page](https://github.com/dmitry-s93/MControlCenter/releases/)
 2. Unpack the archive with the program
-3. Open terminal in unpacked directory
+3. Open a terminal in the unpacked directory
 4. Run the script `sudo ./install`
+5. (Optional) `sudo ./uninstall` to uninstall
 
-**Note:** if your distribution ships old versions of Qt (older than 6.8) like ubuntu/Linux mint (Qt 6.4), you might need to build from source, continue reading.
+**Note:** Below are the steps for compiling, usually needed if your distrobution ships old versions of Qt6
 
 ## Building from source
 After installing the main package (```qt6-base``` or ```libqt6widgets6```), you'll need to install other packages to build the app.
 
 For ubuntru/Linux mint:
-```qt6-base-dev``` and/or ```qt6-tools-dev```
+```qt6-base-dev``` and/or ```qt6-tools-dev``` also ```build-essential```
 
 For Arch ```qt6-tools``` And for fedora ```qt6-qttools```
 
@@ -82,33 +91,8 @@ If things went well, you should see a compressed file,
 8. Check your apps, McontrolCenter should be there.
 
 If the installation was successful but the app fails to run, open a terminal and type ```mcontrolcenter```, copy the output and open an issue (**IF** there isn't one already).
-### Installation from the repository
 
-#### openSUSE Tumbleweed:
-
-```sh
-zypper addrepo https://download.opensuse.org/repositories/home:dmitry-s/openSUSE_Tumbleweed/home:dmitry-s.repo
-zypper refresh
-zypper install mcontrolcenter
-```
-
-#### openSUSE Leap 15.5
-
-```sh
-zypper addrepo https://download.opensuse.org/repositories/home:dmitry-s/openSUSE_Leap_15.5/home:dmitry-s.repo
-zypper refresh
-zypper install mcontrolcenter
-```
-
-#### openSUSE Leap 15.4:
-
-```sh
-zypper addrepo https://download.opensuse.org/repositories/home:dmitry-s/15.4/home:dmitry-s.repo
-zypper refresh
-zypper install mcontrolcenter
-```
-
-### Launch MControlCenter on session startup
+## Launch MControlCenter on session startup
 
 To restore settings after a reboot, add MControlCenter to startup.
 
@@ -122,6 +106,6 @@ You can help translate the MControlCenter app into your native language
 
 1. Copy `/src/i18n/MControlCenter_en.ts` to `src/i18n/MControlCenter_xx.ts` where xx is language code into which the translation is being made.
 2. Open `MControlCenter_xx.ts` in text editor and change `language="en_US"` to your language code.
-3. Translate strings into your language directly in a text editor or use the QT Linguist app.
+3. Translate strings into your language directly in a text editor or use the QT Linguist app or Lokalize.
 4. Translate `GenericName` in app shortcut `resources/mcontrolcenter.desktop`. To do this, add the line `GenericName[xx]=translated generic name`.
-5. Send pull request on github.
+5. Open a pull request on github.

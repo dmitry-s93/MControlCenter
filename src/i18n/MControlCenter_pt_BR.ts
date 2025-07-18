@@ -40,10 +40,6 @@
         <translation>Melhor para Mobilidade</translation>
     </message>
     <message>
-        <source>Charge the battery to 100% all the time</source>
-        <translation>Carregar sempre a bateria a 100%</translation>
-    </message>
-    <message>
         <source>Balanced</source>
         <translation>Equilibrado</translation>
     </message>
@@ -62,10 +58,6 @@
     <message>
         <source>Custom</source>
         <translation>Personalizado</translation>
-    </message>
-    <message>
-        <source>Keyboard Backlit</source>
-        <translation>Retroiluminação do Teclado</translation>
     </message>
     <message>
         <source>Always on</source>
@@ -120,10 +112,6 @@
         <translation>Totalmente carregada</translation>
     </message>
     <message>
-        <source>Fully charged (Discharging)</source>
-        <translation>Totalmente carregada (a descarregar)</translation>
-    </message>
-    <message>
         <source>rpm</source>
         <translation>rpm</translation>
     </message>
@@ -138,10 +126,6 @@
     <message>
         <source>Super Battery</source>
         <translation>Super Bateria</translation>
-    </message>
-    <message>
-        <source>Failed to load the ec_sys kernel module</source>
-        <translation>O carregamento do módulo do kernel ec_sys falhou</translation>
     </message>
     <message>
         <source>Apply</source>
@@ -200,14 +184,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;High Performance</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Maximum performance at the cost of heat and increased power consumption&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The middle spot between fan noise and power usage</source>
         <translation type="unfinished"></translation>
     </message>
@@ -240,10 +216,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If you mainly use your laptop with the charger plugged most of the time, it is recommended to set the charge capacity at a lower percentage (60% or 80%) to prolong your battery lifecycle.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Keyboard</source>
         <translation type="unfinished"></translation>
     </message>
@@ -256,19 +228,72 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>MCC Bug tracker:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>MSI-EC GitHub:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/BeardOverflow/msi-ec&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#1ec974;&quot;&gt;https://github.com/BeardOverflow/msi-ec&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <source>This mode unlocks Advanced fan mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Warning&lt;/span&gt;: Writing the wrong values to the wrong addresses &lt;span style=&quot; font-weight:700;&quot;&gt;WILL BRICK YOUR DEVICE!&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Never write to EC memory without knowing how to do a proper BIOS/EC reset, keep in mind that a reset &lt;span style=&quot; font-weight:700;&quot;&gt;might not&lt;/span&gt; fix the device if the device got bricked/broken. &lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <source>High Performance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maximum performance at the cost of heat and increased power consumption</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If you mainly use your laptop with the charger plugged most of the time, it is recommended to set the charge capacity at a lower percentage (60% or 80%) to prolong your battery lifecycle.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Charge the battery when under 90%, stop at 100%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Keyboard Backlight</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>-</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MCC Bug Tracker:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Qt version:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MSI-EC Status:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Warning&lt;/span&gt;: Writing the wrong values to the wrong addresses &lt;span style=&quot; font-weight:700;&quot;&gt;WILL BRICK YOUR DEVICE!&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Never&lt;/span&gt; write to EC memory without knowing how to do a proper &lt;span style=&quot; font-weight:700;&quot;&gt;BIOS/EC&lt;/span&gt; reset, keep in mind that a reset &lt;span style=&quot; font-weight:700;&quot;&gt;might not&lt;/span&gt; fix the device if the device got bricked/broken. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The msi-ec module is not loaded/installed.
+Check the &lt;About&gt; page for more info.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The ec_sys module couldn&apos;t be detected, it might be required to control the fans.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Loaded</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fallback: Only ec_sys is loaded</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to load both msi-ec/ec_sys</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

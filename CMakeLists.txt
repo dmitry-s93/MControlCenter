@@ -31,6 +31,7 @@ set(TS_FILES
     MControlCenter_en.ts
     MControlCenter_es.ts
     MControlCenter_eu.ts
+    MControlCenter_fi_FI.ts
     MControlCenter_fr.ts
     MControlCenter_hu.ts
     MControlCenter_it.ts
