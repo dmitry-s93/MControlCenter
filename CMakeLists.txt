@@ -13,7 +13,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_compile_options(-fPIC)
 
-find_package(Qt6 6.4 REQUIRED COMPONENTS Widgets Network LinguistTools DBus)
+find_package(Qt6 6.4 REQUIRED COMPONENTS Widgets LinguistTools DBus)
 
 set(PROJECT_SOURCES
     src/main.cpp
@@ -85,7 +85,7 @@ else()
     endif()
 endif()
 
-target_link_libraries(mcontrolcenter PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::DBus Qt${QT_VERSION_MAJOR}::Network)
+target_link_libraries(mcontrolcenter PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::DBus)
 
 install(TARGETS mcontrolcenter
     BUNDLE DESTINATION .
