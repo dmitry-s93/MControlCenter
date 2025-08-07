@@ -22,7 +22,7 @@
 #include <QDBusConnectionInterface>
 
 int main(int argc, char *argv[]) {
-    const QString serviceName = "org.MControl.Center";
+    const QString serviceName = "io.github.dmitry_s93.MControlCenter";
 
     if (QDBusConnection::sessionBus().interface()->isServiceRegistered(serviceName)) {
         fprintf(stderr, "Another instance of the application is already running\n");
