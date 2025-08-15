@@ -33,6 +33,7 @@
 
 # Generated files
 src/i18n/*
+.cache/
 
 # Generated build files
 compile_commands.json
