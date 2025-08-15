@@ -27,7 +27,7 @@ public:
     CLI();
     ~CLI();
 
-    void setCoolerBoost(Options::State on);
+    void setCoolerBoost(Options::State state);
 };
 
 #endif // CLI_H

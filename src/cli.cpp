@@ -53,6 +53,8 @@ void CLI::setCoolerBoost(Options::State state){
     if(operate.getCoolerBoostState() != on){
         fprintf(stdout, "%s Cooler Boost\n", ( on ? "Enabling" : "Disabling" ));
         operate.setCoolerBoostState(on);
-        operate.updateEcData();
+        if(!operate.updateEcData()) {
+            fprintf(stderr, "Failed to update EC data for Cooler Boost\n");
+        }
     }
 }
