@@ -83,7 +83,7 @@ void CLI::changeUserMode(Options::Mode mode){
 
             case user_mode::unknown_mode:
                 change_mode = Options::Mode::PERFORMANCE;
-                fprintf(stderr, "Unknown user mode detected\n");
+                fprintf(stderr, "Unknown User Mode detected\n");
         }
     }
 
@@ -93,28 +93,28 @@ void CLI::changeUserMode(Options::Mode mode){
     switch (change_mode){
         case Options::Mode::PERFORMANCE:
             user_mode = user_mode::performance_mode;
-            text_mode = "performance";
+            text_mode = "Performance";
             break;
         
         case Options::Mode::BALANCED:
             user_mode = user_mode::balanced_mode;
-            text_mode = "balanced";
+            text_mode = "Balanced";
             break;
         
         case Options::Mode::SILENT:
             user_mode = user_mode::silent_mode;
-            text_mode = "silent";
+            text_mode = "Silent";
             break;
         
         case Options::Mode::BATTERY:
             user_mode = user_mode::super_battery_mode;
-            text_mode = "super battery";
+            text_mode = "Super Battery";
             break;
     }
 
-    fprintf(stdout, "Changing user mode to %s mode\n", ( text_mode.c_str() ));
+    fprintf(stdout, "Changing User Mode to %s Mode\n", ( text_mode.c_str() ));
     operate.setUserMode(user_mode);
     if(!operate.updateEcData()) {
-        fprintf(stderr, "Failed to update EC data for user mode\n");
+        fprintf(stderr, "Failed to update EC data for User Mode\n");
     }
 }
