@@ -79,22 +79,22 @@ void Options::process_args(int argc, char** argv)
             case 'M':
                 cli = true;
 
-                if(strcmp(optarg, "BALANCED") == 0){
+                if(std::string(optarg) == "BALANCED"){
                     user_mode = std::optional<Options::Mode>{Options::Mode::BALANCED};
                 }
-                else if(strcmp(optarg, "PERFORMANCE") == 0)
+                else if(std::string(optarg) == "PERFORMANCE")
                 {
                     user_mode = std::optional<Options::Mode>{Options::Mode::PERFORMANCE};
                 }
-                else if(strcmp(optarg, "SILENT") == 0)
+                else if(std::string(optarg) == "SILENT")
                 {
                     user_mode = std::optional<Options::Mode>{Options::Mode::SILENT};
                 }
-                else if(strcmp(optarg, "BATTERY") == 0)
+                else if(std::string(optarg) == "BATTERY")
                 {
                     user_mode = std::optional<Options::Mode>{Options::Mode::BATTERY};
                 }
-                else if(strcmp(optarg, "NEXT") == 0)
+                else if(std::string(optarg) == "NEXT")
                 {
                     user_mode = std::optional<Options::Mode>{Options::Mode::NEXT};
                 }
