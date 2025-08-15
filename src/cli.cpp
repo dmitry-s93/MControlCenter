@@ -60,7 +60,6 @@ void CLI::setCoolerBoost(Options::State state){
 }
 
 void CLI::changeUserMode(Options::Mode mode){
-    bool mode_found = true;
     Options::Mode change_mode = mode;
 
     if(mode == Options::Mode::NEXT){
@@ -82,9 +81,9 @@ void CLI::changeUserMode(Options::Mode mode){
                 change_mode = Options::Mode::PERFORMANCE;
                 break;
 
-            default:
+            case user_mode::unknown_mode:
                 change_mode = Options::Mode::PERFORMANCE;
-                mode_found = false;
+                fprintf(stderr, "Unknown user mode detected\n");
         }
     }
 
@@ -113,10 +112,9 @@ void CLI::changeUserMode(Options::Mode mode){
             break;
     }
 
-    if (!mode_found) {
-        fprintf(stdout, "Can't get current mode..");
-    }
     fprintf(stdout, "Changing user mode to %s mode\n", ( text_mode.c_str() ));
     operate.setUserMode(user_mode);
-    operate.updateEcData();
+    if(!operate.updateEcData()) {
+        fprintf(stderr, "Failed to update EC data for user mode\n");
+    }
 }
