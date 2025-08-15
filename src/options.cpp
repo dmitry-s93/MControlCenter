@@ -17,8 +17,6 @@
  */
 #include "options.h"
 
-#include <cstring>
-
 Options::Options()
     :cli(false), cooler_boost(std::nullopt)
 {}
@@ -58,14 +56,14 @@ void Options::process_args(int argc, char** argv)
             case 'B':
                 cli = true;
 
-                if(std::strcmp(optarg,"ON") == 0){
+                if(std::string(optarg) =="ON"){
                     cooler_boost = std::optional<Options::State>{Options::State::ON};
                 }
-                else if(std::strcmp(optarg,"OFF") == 0)
+                else if(std::string(optarg) == "OFF")
                 {
                     cooler_boost = std::optional<Options::State>{Options::State::OFF};
                 }
-                else if(std::strcmp(optarg,"TOGGLE") == 0)
+                else if(std::string(optarg) == "TOGGLE")
                 {
                     cooler_boost = std::optional<Options::State>{Options::State::TOGGLE};
                 }

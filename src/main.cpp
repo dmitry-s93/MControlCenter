@@ -25,7 +25,6 @@
 #include <QLocalSocket>
 #include <QLocalServer>
 
-
 int main(int argc, char *argv[]) {
 
     Options options;
@@ -80,10 +79,10 @@ int main(int argc, char *argv[]) {
         QLocalSocket* socket = server.nextPendingConnection();
         if(socket->waitForConnected() && socket->waitForReadyRead()){
             QByteArray data = socket->readAll();
-            if(std::strcmp(data.data(), "show") == 0){
+            if(std::string(data.data()) == "show"){
                 w.show();
             }
-            else if(std::strcmp(data.data(), "update") == 0){
+            else if(std::string(data.data()) == "update"){
                 w.externalUpdate();
             }
         }
