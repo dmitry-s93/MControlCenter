@@ -34,17 +34,27 @@ public:
         TOGGLE = 2
     };
 
+    enum Mode {
+        PERFORMANCE = 0,
+        BALANCED = 1,
+        SILENT = 2,
+        BATTERY = 3,
+        NEXT = 4
+    };
+
     bool cli;
     std::optional<State> cooler_boost;
+    std::optional<Mode> user_mode;
 
     void process_args(int argc, char** argv);
 
 private:
-    static constexpr std::string_view const short_opts = "B:h";
+    static constexpr std::string_view const short_opts = "B:M:h";
     static constexpr option long_opts[] = {
         {"coolerboost", required_argument, nullptr, 'B'},
-        {"help",        no_argument, nullptr, 'h'},
-        {nullptr,       no_argument, nullptr, 0}
+        {"usermode",    required_argument, nullptr, 'M'},
+        {"help",        no_argument,       nullptr, 'h'},
+        {nullptr,       no_argument,       nullptr, 0}
     };
 
     void print_help(std::string program_name);

@@ -27,10 +27,12 @@ void Options::print_help(std::string program_name)
 Syntax: %s [options]
 
     -B, --coolerboost STATE             toggle fan cooler boost
+    -M, --usermode MODE                 change user mode
     -h                                  show help
 
 Arguments:
     STATE: can be 'ON', 'OFF' or 'TOGGLE'
+    MODE: can be 'PERFORMANCE', 'BALANCED', 'SILENT', 'BATTERY', 'NEXT'
 )", program_name.c_str());
     exit(1);
 }
@@ -71,6 +73,36 @@ void Options::process_args(int argc, char** argv)
                     fprintf(stderr, "Wrong TOGGLE value for coolerboost option.\n");
                     print_help(argv[0]);
                 }
+            
+            break;
+            
+            case 'M':
+                cli = true;
+
+                if(std::string(optarg) == "BALANCED"){
+                    user_mode = std::optional<Options::Mode>{Options::Mode::BALANCED};
+                }
+                else if(std::string(optarg) == "PERFORMANCE")
+                {
+                    user_mode = std::optional<Options::Mode>{Options::Mode::PERFORMANCE};
+                }
+                else if(std::string(optarg) == "SILENT")
+                {
+                    user_mode = std::optional<Options::Mode>{Options::Mode::SILENT};
+                }
+                else if(std::string(optarg) == "BATTERY")
+                {
+                    user_mode = std::optional<Options::Mode>{Options::Mode::BATTERY};
+                }
+                else if(std::string(optarg) == "NEXT")
+                {
+                    user_mode = std::optional<Options::Mode>{Options::Mode::NEXT};
+                }
+                else{
+                    fprintf(stderr, "Wrong MODE value for usermode option.\n");
+                    print_help(argv[0]);
+                }
+
             break;
 
             case 'h': // -h or --help
