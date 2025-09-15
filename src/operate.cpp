@@ -184,7 +184,7 @@ std::optional<int> Operate::getFan2Speed() const {
     int value = (value1.value() << 8) | value0.value();
     if (value > 0)
         return 470000 / value;
-    return std::nullopt;
+    return value;
 }
 
 QVector<int> Operate::getFan1SpeedSettings() const {
