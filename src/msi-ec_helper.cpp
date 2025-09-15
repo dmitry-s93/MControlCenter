@@ -269,8 +269,8 @@ bool MsiEcHelper::hasGPURealtimeTemperature() const {
     return getValue<bool>("hasGPURealtimeTemperature", false);
 }
 
-int MsiEcHelper::getGPURealtimeTemperature() const {
-    return getValue<int>("getGPURealtimeTemperature", -1);
+std::optional<int> MsiEcHelper::getGPURealtimeTemperature() const {
+    return getOptionalValue<int>("getGPURealtimeTemperature");
 }
 
 // gpu/realtime_fan_speed 0-100 (percent)
@@ -278,8 +278,8 @@ bool MsiEcHelper::hasGPURealtimeFanSpeed() const {
     return getValue<bool>("hasGPURealtimeFanSpeed", false);
 }
 
-int MsiEcHelper::getGPURealtimeFanSpeed() const {
-    return getValue<int>("getGPURealtimeFanSpeed", -1);
+std::optional<int> MsiEcHelper::getGPURealtimeFanSpeed() const {
+    return getOptionalValue<int>("getGPURealtimeFanSpeed");
 }
 
 //////////////// Charge control ////////////////
@@ -351,11 +351,16 @@ void MsiEcHelper::printError(QDBusError const &error) const {
 }
 
 template <typename T>
-inline T MsiEcHelper::getValue(QString method, T defaultValue) const {
+inline std::optional<T> MsiEcHelper::getOptionalValue(QString method) const {
     if (QDBusReply<T> reply = iface->call(method); reply.isValid())
         return reply.value();
     printError(iface->lastError());
-    return defaultValue;
+    return std::nullopt;
+}
+
+template <typename T>
+inline T MsiEcHelper::getValue(QString method, T defaultValue) const {
+    return getOptionalValue<T>(method).value_or(defaultValue);
 }
 
 template <typename T>

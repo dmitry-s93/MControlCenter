@@ -159,10 +159,10 @@ int Operate::getCpuTemp() const {
     return helper.getValue(cpuTempAddress);
 }
 
-int Operate::getGpuTemp() const {
+std::optional<int> Operate::getGpuTemp() const {
     if (msiEcHelper.hasGPURealtimeTemperature())
         return msiEcHelper.getGPURealtimeTemperature();
-    return helper.getValue(gpuTempAddress);
+    return helper.getOptionalValue(gpuTempAddress);
 }
 
 int Operate::getFan1Speed() const {
@@ -175,14 +175,16 @@ int Operate::getFan1Speed() const {
     return value;
 }
 
-int Operate::getFan2Speed() const {
+std::optional<int> Operate::getFan2Speed() const {
     // Read 2 bytes (big-endian)
-    int value0 = helper.getValue(fan2Address);
-    int value1 = helper.getValue(fan2Address - 1);
-    int value = (value1 << 8) | value0;
+    auto value0 = helper.getOptionalValue(fan2Address);
+    auto value1 = helper.getOptionalValue(fan2Address - 1);
+    if (!value0.has_value() || !value1.has_value())
+        return std::nullopt;
+    int value = (value1.value() << 8) | value0.value();
     if (value > 0)
         return 470000 / value;
-    return value;
+    return std::nullopt;
 }
 
 QVector<int> Operate::getFan1SpeedSettings() const {
