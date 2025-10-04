@@ -71,8 +71,10 @@ public:
     [[nodiscard]] int getBatteryThreshold() const;
     [[nodiscard]] charging_state getChargingStatus() const;
     [[nodiscard]] int getCpuTemp() const;
+    [[nodiscard]] bool hasGpuTemp() const;
     [[nodiscard]] int getGpuTemp() const;
     [[nodiscard]] int getFan1Speed() const;
+    [[nodiscard]] bool hasGpuFanSpeed() const;
     [[nodiscard]] int getFan2Speed() const;
     [[nodiscard]] QVector<int> getFan1SpeedSettings() const;
     [[nodiscard]] QVector<int> getFan2SpeedSettings() const;

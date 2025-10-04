@@ -359,10 +359,12 @@ void MainWindow::updateCpuTemp() {
 }
 
 void MainWindow::updateGpuTemp() {
-    if (operate.getGpuTemp() != 0) {
-        ui->gpuTempValueLabel->setVisible(true);
-        ui->gpuTempLabel->setVisible(true);
-        ui->gpuTempValueLabel->setText(intToQString(operate.getGpuTemp()) + " °C");
+    if (operate.hasGpuTemp()) {
+        if (operate.getGpuTemp() != 0) {
+            ui->gpuTempValueLabel->setText(intToQString(operate.getGpuTemp()) + " °C");
+        } else {
+            ui->gpuTempValueLabel->setText(tr("OFF"));
+        }
     } else {
         ui->gpuTempValueLabel->setVisible(false);
         ui->gpuTempLabel->setVisible(false);
@@ -374,9 +376,7 @@ void MainWindow::updateFan1Speed() {
 }
 
 void MainWindow::updateFan2Speed() {
-    if (operate.getFan2Speed() != 0) {
-        ui->fan2ValueLabel->setVisible(true);
-        ui->gpuFanLabel->setVisible(true);
+    if (operate.hasGpuFanSpeed()) {
         ui->fan2ValueLabel->setText(intToQString(operate.getFan2Speed()) + " " + tr("rpm"));
     } else {
         ui->fan2ValueLabel->setVisible(false);

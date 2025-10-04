@@ -159,10 +159,22 @@ int Operate::getCpuTemp() const {
     return helper.getValue(cpuTempAddress);
 }
 
+bool Operate::hasGpuTemp() const {
+    if (msiEcHelper.hasGPURealtimeTemperature())
+        return true;
+    return false;
+}
+
 int Operate::getGpuTemp() const {
     if (msiEcHelper.hasGPURealtimeTemperature())
         return msiEcHelper.getGPURealtimeTemperature();
     return helper.getValue(gpuTempAddress);
+}
+
+bool Operate::hasGpuFanSpeed() const {
+    if (msiEcHelper.hasGPURealtimeFanSpeed())
+        return true;
+    return false;
 }
 
 int Operate::getFan1Speed() const {
