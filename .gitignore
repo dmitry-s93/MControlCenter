@@ -30,3 +30,8 @@
 *.exe
 *.out
 *.app
+
+*.user
+/build/
+/scripts/*.tar.gz
+/scripts/MControlCenter-*-bin/
