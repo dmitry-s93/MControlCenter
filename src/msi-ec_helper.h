@@ -85,10 +85,10 @@ public:
 
     // gpu/realtime_temperature 0-100 (celsius scale)
     [[nodiscard]] bool hasGPURealtimeTemperature() const;
-    [[nodiscard]] int getGPURealtimeTemperature() const;
+    [[nodiscard]] std::optional<int> getGPURealtimeTemperature() const;
     // gpu/realtime_fan_speed 0-100 (percent)
     [[nodiscard]] bool hasGPURealtimeFanSpeed() const;
-    [[nodiscard]] int getGPURealtimeFanSpeed() const;
+    [[nodiscard]] std::optional<int> getGPURealtimeFanSpeed() const;
 
     // BAT1/charge_control_start_threshold 0-100 (percent)
     [[nodiscard]] bool hasBatteryStartThreshold() const;
@@ -117,6 +117,8 @@ private:
     QDBusInterface *iface;
     void printError(QDBusError const &error) const;
 
+    template <typename T>
+    [[nodiscard]] std::optional<T> getOptionalValue(QString method) const;
     template <typename T>
     [[nodiscard]] T getValue(QString method, T defaultValue) const;
     template <typename T>

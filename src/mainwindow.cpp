@@ -359,10 +359,14 @@ void MainWindow::updateCpuTemp() {
 }
 
 void MainWindow::updateGpuTemp() {
-    if (operate.getGpuTemp() != 0) {
+    std::optional<int> temp = operate.getGpuTemp();
+    if (temp.has_value()) {
         ui->gpuTempValueLabel->setVisible(true);
         ui->gpuTempLabel->setVisible(true);
-        ui->gpuTempValueLabel->setText(intToQString(operate.getGpuTemp()) + " °C");
+        if (temp.value() != 0)
+            ui->gpuTempValueLabel->setText(intToQString(temp.value()) + " °C");
+        else
+            ui->gpuTempValueLabel->setText(tr("OFF"));
     } else {
         ui->gpuTempValueLabel->setVisible(false);
         ui->gpuTempLabel->setVisible(false);
@@ -374,10 +378,14 @@ void MainWindow::updateFan1Speed() {
 }
 
 void MainWindow::updateFan2Speed() {
-    if (operate.getFan2Speed() != 0) {
+    std::optional<int> speed = operate.getFan2Speed();
+    if (speed.has_value()) {
         ui->fan2ValueLabel->setVisible(true);
         ui->gpuFanLabel->setVisible(true);
-        ui->fan2ValueLabel->setText(intToQString(operate.getFan2Speed()) + " " + tr("rpm"));
+        if (speed.value() != 0)
+            ui->fan2ValueLabel->setText(intToQString(speed.value()) + " " + tr("rpm"));
+        else
+            ui->fan2ValueLabel->setText(tr("OFF"));
     } else {
         ui->fan2ValueLabel->setVisible(false);
         ui->gpuFanLabel->setVisible(false);

@@ -33,6 +33,7 @@ public:
     bool loadEcSysModule();
     bool updateData();
     void updateDataAsync();
+    std::optional<int> getOptionalValue(int address) const;
     int getValue(int address) const;
     QByteArray getValues(int startAddress, int size) const;
     void putValue(int address, int value);
