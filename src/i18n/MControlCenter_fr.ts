@@ -297,5 +297,9 @@ Regardez la page &lt;À propos&gt; pour plus d&apos;informations.</translation>
         <source>Failed to load both msi-ec/ec_sys</source>
         <translation>Impossible de détecter msi-ec ou ec_sys</translation>
     </message>
+    <message>
+        <source>OFF</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

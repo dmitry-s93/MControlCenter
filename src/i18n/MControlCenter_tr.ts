@@ -299,5 +299,9 @@ Check the &lt;About&gt; page for more info.</source>
         <source>Failed to load both msi-ec/ec_sys</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>OFF</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

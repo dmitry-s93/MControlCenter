@@ -297,5 +297,9 @@ Weitere Informationen finden Sie auf der Seite &lt;Über&gt;.</translation>
         <source>If you mainly use your laptop with the charger plugged most of the time, it is recommended to set the charge capacity at a lower percentage (60% or 80%) to prolong your battery lifecycle.</source>
         <translation>Wenn Sie Ihren Laptop überwiegend mit angeschlossenem Ladegerät verwenden, empfiehlt es sich, die Ladekapazität auf einen niedrigeren Prozentsatz (60 % oder 80 %) einzustellen, um die Lebensdauer Ihres Akkus zu verlängern.</translation>
     </message>
+    <message>
+        <source>OFF</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>
