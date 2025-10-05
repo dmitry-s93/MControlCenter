@@ -160,9 +160,13 @@ int Operate::getCpuTemp() const {
 }
 
 std::optional<int> Operate::getGpuTemp() const {
-    if (!msiEcHelper.hasGPURealtimeTemperature())
-        return std::nullopt;
-    return msiEcHelper.getGPURealtimeTemperature();
+    if (msiEcHelper.isMsiEcModuleLoaded())
+        if (!msiEcHelper.hasGPURealtimeTemperature())
+            return std::nullopt;
+        else
+            return msiEcHelper.getGPURealtimeTemperature();
+    else
+        return helper.getValue(gpuTempAddress);
 }
 
 int Operate::getFan1Speed() const {
@@ -176,7 +180,7 @@ int Operate::getFan1Speed() const {
 }
 
 std::optional<int> Operate::getFan2Speed() const {
-    if (!msiEcHelper.hasGPURealtimeFanSpeed())
+    if (msiEcHelper.isMsiEcModuleLoaded() && !msiEcHelper.hasGPURealtimeFanSpeed())
         return std::nullopt;
     // Read 2 bytes (big-endian)
     auto value0 = helper.getOptionalValue(fan2Address);
