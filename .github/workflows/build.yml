@@ -1,0 +1,65 @@
+
+name: MControlCenter Dispatch
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v6
+        with:
+          submodules: true
+
+      - name: Install Qt6 and build dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y \
+            qt6-base-dev \
+            qt6-tools-dev \
+            build-essential \
+            ccache
+            
+      - name: Configure ccache
+        run: |
+          echo "max_size = 2G" | sudo tee /etc/ccache.conf
+          ccache --zero-stats
+
+      - name: Restore ccache cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ccache
+          key: ccache-${{ github.ref }}-${{ github.sha }}
+          restore-keys: |
+            ccache-${{ github.ref }}
+            ccache-
+
+      - name: Run build script
+        working-directory: scripts
+        run: |
+          chmod +x build.sh
+          ./build.sh
+
+      - name: Run create installer script
+        working-directory: scripts
+        run: |
+          chmod +x create_installer.sh
+          ./create_installer.sh
+
+      - name: Show ccache stats
+        run: ccache --show-stats
+
+      - name: Find generated tar.gz
+        id: find_tar
+        run: |
+          FILE=$(find . -type f -name "*.tar.gz" | head -n 1)
+          echo "file=$FILE" >> $GITHUB_OUTPUT
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: MControlCenter-${{ github.sha }}
+          path: ${{ steps.find_tar.outputs.file }}
