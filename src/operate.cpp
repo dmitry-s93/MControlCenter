@@ -392,6 +392,11 @@ void Operate::setUserMode(user_mode userMode) const {
     bool superBattery = false;
     QString userModeStr;
 
+    Settings s;
+    if (s.getValue(settingsGroup + "fanModeAdvanced", false).toBool()) {
+        fanMode = fan_mode::advanced_fan_mode;
+    }
+
     switch (userMode) {
         case user_mode::balanced_mode:
             userModeStr = "balanced_mode";
