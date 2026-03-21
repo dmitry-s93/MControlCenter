@@ -393,7 +393,7 @@ void Operate::setUserMode(user_mode userMode) const {
     QString userModeStr;
 
     Settings s;
-    if (s.getValue(settingsGroup + "fanModeAdvanced", false).toBool()) {
+    if (s.getValue(settingsGroup + "fanModeAdvanced").toBool()) {
         fanMode = fan_mode::advanced_fan_mode;
     }
 

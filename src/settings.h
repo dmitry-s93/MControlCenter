@@ -25,7 +25,6 @@
 class Settings {
 public:
     QVariant getValue(const QString &key);
-    QVariant getValue(const QString &key, const QVariant &defaultValue);
     QVector<int> getValueVector(const QString &key);
     static void setValue(const QString &key, const QVariant &value);
     static void setValue(const QString &key, const QVector<int> &value);

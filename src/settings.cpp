@@ -26,10 +26,6 @@ QVariant Settings::getValue(const QString &key) {
     return settings.value(key);
 }
 
-QVariant Settings::getValue(const QString &key, const QVariant &defaultValue) {
-    return settings.value(key, defaultValue);
-}
-
 QVector<int> Settings::getValueVector(const QString &key) {
     QVector<int> value;
     std::stringstream string_stream(settings.value(key).toString().toStdString());
