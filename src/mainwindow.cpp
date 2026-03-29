@@ -24,6 +24,7 @@
 #include <QMessageBox>
 
 Operate operate;
+PowerMonitor powerMonitor;
 
 bool isActive = false;
 bool isUpdateDataError = false;
@@ -136,6 +137,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->fanSpeedResetButton, &QPushButton::clicked, this, &MainWindow::updateFanSpeedSettings);
     connect(ui->fanSpeedApplyButton, &QPushButton::clicked, this, &MainWindow::setFanSpeedSettings);
+    connect(&powerMonitor, &PowerMonitor::currentChargerState, this, &MainWindow::on_ChargerStateChange);
+    connect(&powerMonitor, &PowerMonitor::currentPowerProfile, this, &MainWindow::on_PowerProfileChange);
 
     connect(qApp, &QGuiApplication::saveStateRequest, this, &MainWindow::saveStateRequest);
 
@@ -174,6 +177,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->QtVersionValue->setText(QT_VERSION_STR);
     ui->versionValueLabel->setText(MControlCenter_VERSION);
+    ui->autoAcDcProfilesGroupBox->setChecked(s.getValue("Settings/autoAcDcProfilesState").toBool());
+    ui->userModeOnBatteryComboBox->setCurrentIndex(s.getValue("Settings/UserModeOnBattery").toInt());
+    ui->userModeOnChargerComboBox->setCurrentIndex(s.getValue("Settings/UserModeOnCharger").toInt());
+    ui->autoPPDCheckBox->setChecked(s.getValue("Settings/autoPPDstate").toBool());
 }
 
 MainWindow::~MainWindow() {
@@ -679,6 +686,65 @@ void MainWindow::timerSleepTimeout() {
     }
 }
 
+void MainWindow::setModeFromSelection(PowerProfile profile) {
+    switch (profile) {
+    case PowerProfile::Performance:
+        setHighPerformanceMode();
+        break;
+    case PowerProfile::Balanced:
+        setBalancedMode();
+        break;
+    case PowerProfile::Silent:
+        setSilentMode();
+        break;
+    case PowerProfile::PowerSaver:
+        setSuperBatteryMode();
+        break;
+    case PowerProfile::Unknown:
+    default:;
+    }
+}
+
+void MainWindow::on_ChargerStateChange(bool isCharging) {
+    if (ui->autoAcDcProfilesGroupBox->isChecked()) {
+        Settings s;
+        int SelectedModeOnBattery = s.getValue("Settings/UserModeOnBattery").toInt();
+        int SelectedModeOnCharger = s.getValue("Settings/UserModeOnCharger").toInt();
+
+        PowerProfile batteryProfile = static_cast<PowerProfile>(SelectedModeOnBattery);
+        PowerProfile chargerProfile = static_cast<PowerProfile>(SelectedModeOnCharger);
+
+        if (isCharging) {
+            setModeFromSelection(chargerProfile);
+        } else {
+            setModeFromSelection(batteryProfile);
+        }
+    } else {
+        ui->autoPPDCheckBox->setEnabled(1);
+    }
+}
+
+void MainWindow::on_PowerProfileChange(const PowerProfile profile) {
+    if (ui->autoPPDCheckBox->isChecked()) {
+        switch (profile) {
+        case PowerProfile::Performance:
+            setHighPerformanceMode();
+            ui->highPerformanceModeRadioButton->setChecked(true);
+            break;
+        case PowerProfile::Balanced:
+            setBalancedMode();
+            ui->balancedModeRadioButton->setChecked(true);
+            break;
+        case PowerProfile::PowerSaver:
+            setSuperBatteryMode();
+            ui->superBatteryModeRadioButton->setChecked(true);
+            break;
+        case PowerProfile::Unknown:
+            default:;
+        }
+    }
+}
+
 void MainWindow::on_bestMobilityRadioButton_toggled(bool checked) {
     if (checked)
         setBestMobility();
@@ -754,6 +820,66 @@ void MainWindow::on_keyboardBrightnessSlider_valueChanged(int value) const {
 
 void MainWindow::on_keyboardBacklightModeComboBox_currentIndexChanged(int index) const {
     operate.setKeyboardBacklightMode(index);
+}
+
+void MainWindow::on_userModeOnBatteryComboBox_currentIndexChanged(int index) const {
+    Settings::setValue("Settings/UserModeOnBattery", index);
+    powerMonitor.queryChargerState();
+}
+
+void MainWindow::on_userModeOnChargerComboBox_currentIndexChanged(int index) const {
+    Settings::setValue("Settings/UserModeOnCharger", index);
+    powerMonitor.queryChargerState();
+}
+
+void MainWindow::on_autoAcDcProfilesGroupBox_toggled(bool checked) {
+    if(checked) {
+        if (!powerMonitor.connectToUpower()) {
+            QMessageBox::critical(nullptr, this->windowTitle(), tr("Couldn't connect to UPower to get charger status.\n"
+                                                                   "Make sure that UPower is installed and running then restart the system."));
+            ui->autoAcDcProfilesGroupBox->setChecked(0);
+            ui->autoAcDcProfilesGroupBox->setEnabled(0);
+            return;
+        }
+
+        powerMonitor.disconnectFromPowerProfiles();
+        ui->autoPPDCheckBox->setChecked(0);
+        ui->autoPPDCheckBox->setEnabled(0);
+        powerMonitor.queryChargerState();
+    } else {
+        ui->autoPPDCheckBox->setEnabled(1);
+        powerMonitor.disconnectFromUpower();
+    }
+
+    Settings::setValue("Settings/autoAcDcProfilesState", checked);
+}
+
+void MainWindow::on_autoPPDCheckBox_toggled(bool checked) {
+    if (checked) {
+
+        if (!powerMonitor.connectToPowerProfiles()) {
+            QMessageBox::critical(nullptr, this->windowTitle(), tr("Couldn't connect to Power Profiles Daemon.\n"
+                                                                   "Make sure that either Power Profiles Daemon or TuneD is installed and restart the system."));
+            ui->autoPPDCheckBox->setChecked(0);
+            return;
+        }
+
+        powerMonitor.disconnectFromUpower();
+        ui->highPerformanceModeRadioButton->setEnabled(0);
+        ui->balancedModeRadioButton->setEnabled(0);
+        ui->silentModeRadioButton->setEnabled(0);
+        ui->superBatteryModeRadioButton->setEnabled(0);
+        ui->autoAcDcProfilesGroupBox->setChecked(0);
+        ui->autoAcDcProfilesGroupBox->setEnabled(0);
+        powerMonitor.queryPowerProfile();
+    } else {
+        ui->highPerformanceModeRadioButton->setEnabled(1);
+        ui->balancedModeRadioButton->setEnabled(1);
+        ui->silentModeRadioButton->setEnabled(1);
+        ui->superBatteryModeRadioButton->setEnabled(1);
+        ui->autoAcDcProfilesGroupBox->setEnabled(1);
+    }
+    Settings::setValue("Settings/autoPPDstate", checked);
 }
 
 void MainWindow::on_highPerformanceModeRadioButton_toggled(bool checked) {
