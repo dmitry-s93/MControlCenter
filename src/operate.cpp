@@ -552,9 +552,7 @@ void Operate::loadSettings() const {
 }
 
 void Operate::handleWakeEvent() const {
-    Settings s;
-    if (s.isValueExist(settingsGroup + "fanModeAdvanced"))
-        setFanModeAdvanced(s.getValue(settingsGroup + "fanModeAdvanced").toBool());
+    loadSettings();
 }
 
 int Operate::detectFan1Address() const {
