@@ -522,7 +522,7 @@ bool Operate::isWebCamOffSupport() const {
 void Operate::loadSettings() const {
     Settings s;
 
-    if (getUserMode() != user_mode::unknown_mode && s.isValueExist(settingsGroup + "UserMode")) {
+    if (msiEcHelper.hasShiftMode() && s.isValueExist(settingsGroup + "UserMode")) {
         QString value = s.getValue(settingsGroup + "UserMode").toString();
         if (value == "balanced_mode")
             setUserMode(user_mode::balanced_mode);
