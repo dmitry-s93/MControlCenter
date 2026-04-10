@@ -857,17 +857,15 @@ void MainWindow::on_autoAcDcProfilesGroupBox_toggled(bool checked) {
 
 void MainWindow::on_autoPPDCheckBox_toggled(bool checked) {
     if (checked) {
-
-        if (!powerMonitor.connectToPowerProfiles()) {
-            if (!powerMonitor.connectToSystem76Power()) {
-                QMessageBox::critical(nullptr, this->windowTitle(), tr("Couldn't connect to a power profile service.\n"
-                                                                       "Make sure that Power Profiles Daemon, TuneD, or system76-power is installed and restart the system."));
-                ui->autoPPDCheckBox->setChecked(0);
-                return;
-            }
+        if (powerMonitor.connectToSystem76Power()) {
             powerMonitor.querySystem76Profile();
-        } else {
+        } else if (powerMonitor.connectToPowerProfiles()) {
             powerMonitor.queryPowerProfile();
+        } else {
+            QMessageBox::critical(nullptr, this->windowTitle(), tr("Couldn't connect to a power profile service.\n"
+                                                                   "Make sure that Power Profiles Daemon, TuneD, or system76-power is installed and restart the system."));
+            ui->autoPPDCheckBox->setChecked(0);
+            return;
         }
 
         powerMonitor.disconnectFromUpower();
