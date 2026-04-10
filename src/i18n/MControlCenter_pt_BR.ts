@@ -9,15 +9,15 @@
     </message>
     <message>
         <source>EC Build:</source>
-        <translation>Compilação do EC:</translation>
+        <translation>Build do EC:</translation>
     </message>
     <message>
         <source>Battery charge:</source>
-        <translation>Carga da bateria:</translation>
+        <translation>Carregando:</translation>
     </message>
     <message>
         <source>Battery threshold:</source>
-        <translation>Limite da bateria:</translation>
+        <translation>Limitador de carga da bateria:</translation>
     </message>
     <message>
         <source>CPU temp:</source>
@@ -29,7 +29,7 @@
     </message>
     <message>
         <source>Cooler Boost</source>
-        <translation>Impulsionar Ventoinha</translation>
+        <translation>Ventoinha com Esteróides</translation>
     </message>
     <message>
         <source>Battery</source>
@@ -69,7 +69,7 @@
     </message>
     <message>
         <source>WebCam</source>
-        <translation>Câmara de Web</translation>
+        <translation>Câmara</translation>
     </message>
     <message>
         <source>Debug</source>
@@ -89,15 +89,15 @@
     </message>
     <message>
         <source>Charging</source>
-        <translation>A carregar</translation>
+        <translation>Carregando</translation>
     </message>
     <message>
         <source>Discharging</source>
-        <translation>A descarregar</translation>
+        <translation>Descarregando</translation>
     </message>
     <message>
         <source>Not charging</source>
-        <translation>Não está a carregar</translation>
+        <translation>Não está carregando</translation>
     </message>
     <message>
         <source>Unknown</source>
@@ -169,136 +169,165 @@
     </message>
     <message>
         <source>Reset</source>
-        <translation>Repor</translation>
+        <translation>Resetar</translation>
     </message>
     <message>
         <source>Fan control</source>
-        <translation>Controlo da ventoinha</translation>
+        <translation>Controle da ventoinha</translation>
     </message>
     <message>
         <source>Enable advanced fan control</source>
-        <translation>Habilitar controlo avançado da ventoinha</translation>
+        <translation>Habilitar controle avançado da ventoinha</translation>
     </message>
     <message>
         <source>Overview</source>
-        <translation type="unfinished"></translation>
+        <translation>Resumo</translation>
     </message>
     <message>
         <source>The middle spot between fan noise and power usage</source>
-        <translation type="unfinished"></translation>
+        <translation>O equilíbrio entre consumo e barulho da ventoinha</translation>
     </message>
     <message>
         <source>Low fan noise and moderate power usage</source>
-        <translation type="unfinished"></translation>
+        <translation>Baixo barulho da ventoinha e consumo moderado</translation>
     </message>
     <message>
         <source>Limits performance and turns off fans at lower temperatures</source>
-        <translation type="unfinished"></translation>
+        <translation>Limita a performance e desliga as ventoinhas em baixas temperaturas</translation>
     </message>
     <message>
         <source>GPU Fan:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ventoinha da GPU</translation>
     </message>
     <message>
         <source>CPU Fan:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ventoinha da CPU</translation>
     </message>
     <message>
         <source>USB Power</source>
-        <translation type="unfinished"></translation>
+        <translation>USB Power</translation>
     </message>
     <message>
         <source>FN ⇄ Meta</source>
-        <translation type="unfinished"></translation>
+        <translation>FN ⇄ Meta</translation>
     </message>
     <message>
         <source>Current fan Mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>Modo atual da ventoinha</translation>
     </message>
     <message>
         <source>Keyboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Teclado</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;MC&lt;/span&gt;ontrol&lt;span style=&quot; font-weight:700;&quot;&gt;C&lt;/span&gt;enter (MCC) is an application that allows you to change the settings of MSI laptops running Linux.&lt;/p&gt;&lt;p&gt;MCC acts as a graphical interface for the &lt;span style=&quot; font-weight:700;&quot;&gt;MSI-EC &lt;/span&gt;driver that already exist in the Linux kernel, if your device is not supported (grey buttons/limited in-app functionality), please visit the msi-ec github page to get help.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;MC&lt;/span&gt;ontrol&lt;span style=&quot; font-weight:700;&quot;&gt;C&lt;/span&gt;enter (MCC) é uma aplicação que permite alterar as configurações de notebooks MSI rodando Linux.&lt;/p&gt;&lt;p&gt;O MCC atua como uma interface gráfica para o driver &lt;span style=&quot; font-weight:700;&quot;&gt;MSI-EC&lt;/span&gt; que já existe no kernel Linux. Se o seu dispositivo não for suportado (botões cinza/funcionalidade limitada), visite a página do msi-ec no GitHub para obter ajuda.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>MCC GitHub:</source>
-        <translation type="unfinished"></translation>
+        <translation>MCC GitHub:</translation>
     </message>
     <message>
         <source>MSI-EC GitHub:</source>
-        <translation type="unfinished"></translation>
+        <translation>MSI-EC GitHub:</translation>
     </message>
     <message>
         <source>This mode unlocks Advanced fan mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Este modo desbloqueia o modo Avançado de ventoinha</translation>
     </message>
     <message>
         <source>High Performance</source>
-        <translation type="unfinished"></translation>
+        <translation>Alta Performance</translation>
     </message>
     <message>
         <source>Maximum performance at the cost of heat and increased power consumption</source>
-        <translation type="unfinished"></translation>
+        <translation>Performance máxima ao custo de aquecimento e maior consumo de energia</translation>
     </message>
     <message>
         <source>If you mainly use your laptop with the charger plugged most of the time, it is recommended to set the charge capacity at a lower percentage (60% or 80%) to prolong your battery lifecycle.</source>
-        <translation type="unfinished"></translation>
+        <translation>Se você utiliza seu notebook com o carregador conectado na maior parte do tempo, é recomendado definir a capacidade de carga em uma porcentagem menor (60% ou 80%) para prolongar a vida útil da bateria.</translation>
     </message>
     <message>
         <source>Charge the battery when under 90%, stop at 100%</source>
-        <translation type="unfinished"></translation>
+        <translation>Carregar a bateria quando estiver abaixo de 90%, parar a 100%</translation>
     </message>
     <message>
         <source>Keyboard Backlight</source>
-        <translation type="unfinished"></translation>
+        <translation>Luz de Fundo do Teclado</translation>
     </message>
     <message>
         <source>-</source>
-        <translation type="unfinished"></translation>
+        <translation>-</translation>
     </message>
     <message>
         <source>MCC Bug Tracker:</source>
-        <translation type="unfinished"></translation>
+        <translation>MCC Bug Tracker:</translation>
     </message>
     <message>
         <source>Qt version:</source>
-        <translation type="unfinished"></translation>
+        <translation>Versão Qt:</translation>
     </message>
     <message>
         <source>MSI-EC Status:</source>
-        <translation type="unfinished"></translation>
+        <translation>Status MSI-EC:</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Warning&lt;/span&gt;: Writing the wrong values to the wrong addresses &lt;span style=&quot; font-weight:700;&quot;&gt;WILL BRICK YOUR DEVICE!&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Never&lt;/span&gt; write to EC memory without knowing how to do a proper &lt;span style=&quot; font-weight:700;&quot;&gt;BIOS/EC&lt;/span&gt; reset, keep in mind that a reset &lt;span style=&quot; font-weight:700;&quot;&gt;might not&lt;/span&gt; fix the device if the device got bricked/broken. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Aviso&lt;/span&gt;: Escrever valores errados nos endereços errados &lt;span style=&quot; font-weight:700;&quot;&gt;VAI BRICKAR SEU DISPOSITIVO!&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Nunca&lt;/span&gt; escreva na memória do EC sem saber como fazer um reset adequado de &lt;span style=&quot; font-weight:700;&quot;&gt;BIOS/EC&lt;/span&gt;. Tenha em mente que um reset &lt;span style=&quot; font-weight:700;&quot;&gt;pode não&lt;/span&gt; corrigir o dispositivo se ele foi brickado/danificado.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>The msi-ec module is not loaded/installed.
 Check the &lt;About&gt; page for more info.</source>
-        <translation type="unfinished"></translation>
+        <translation>O módulo msi-ec não está carregado/instalado.
+Verifique a página &lt;Sobre&gt; para mais informações.</translation>
     </message>
     <message>
         <source>The ec_sys module couldn&apos;t be detected, it might be required to control the fans.</source>
-        <translation type="unfinished"></translation>
+        <translation>O módulo ec_sys não foi detectado, ele pode ser necessário para controlar as ventoinhas.</translation>
     </message>
     <message>
         <source>Loaded</source>
-        <translation type="unfinished"></translation>
+        <translation>Carregado</translation>
     </message>
     <message>
         <source>Fallback: Only ec_sys is loaded</source>
-        <translation type="unfinished"></translation>
+        <translation>Fallback: Apenas ec_sys está carregado</translation>
     </message>
     <message>
         <source>Failed to load both msi-ec/ec_sys</source>
-        <translation type="unfinished"></translation>
+        <translation>Falha ao carregar msi-ec/ec_sys</translation>
     </message>
     <message>
         <source>OFF</source>
-        <translation type="unfinished"></translation>
+        <translation>DESLIGADO</translation>
+    </message>
+    <message>
+        <source>Follow system&apos;s power profile</source>
+        <translation>Seguir o perfil de energia do sistema</translation>
+    </message>
+    <message>
+        <source>Automatic Profile Switching</source>
+        <translation>Troca Automática de Perfil</translation>
+    </message>
+    <message>
+        <source>On Charger:</source>
+        <translation>Carregando:</translation>
+    </message>
+    <message>
+        <source>On Battery:</source>
+        <translation>Descarregando:</translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t connect to UPower to get charger status.
+Make sure that UPower is installed and running then restart the system.</source>
+        <translation>Não foi possível conectar ao UPower para obter o estado do carregador.
+Certifique-se de que o UPower está instalado e em execução e reinicie o sistema.</translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t connect to a power profile service.
+Make sure that Power Profiles Daemon, TuneD, or system76-power is installed and restart the system.</source>
+        <translation>Não foi possível conectar a um serviço de perfil de energia.
+Certifique-se de que o Power Profiles Daemon, TuneD ou system76-power está instalado e reinicie o sistema.</translation>
     </message>
 </context>
 </TS>
