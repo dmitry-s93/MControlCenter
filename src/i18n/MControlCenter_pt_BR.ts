@@ -29,7 +29,7 @@
     </message>
     <message>
         <source>Cooler Boost</source>
-        <translation>Ventoinha com Esteróides</translation>
+        <translation>Ventoinha com Esteroides</translation>
     </message>
     <message>
         <source>Battery</source>
@@ -69,7 +69,7 @@
     </message>
     <message>
         <source>WebCam</source>
-        <translation>Câmara</translation>
+        <translation>Câmera</translation>
     </message>
     <message>
         <source>Debug</source>
@@ -273,7 +273,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Warning&lt;/span&gt;: Writing the wrong values to the wrong addresses &lt;span style=&quot; font-weight:700;&quot;&gt;WILL BRICK YOUR DEVICE!&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Never&lt;/span&gt; write to EC memory without knowing how to do a proper &lt;span style=&quot; font-weight:700;&quot;&gt;BIOS/EC&lt;/span&gt; reset, keep in mind that a reset &lt;span style=&quot; font-weight:700;&quot;&gt;might not&lt;/span&gt; fix the device if the device got bricked/broken. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Aviso&lt;/span&gt;: Escrever valores errados nos endereços errados &lt;span style=&quot; font-weight:700;&quot;&gt;VAI BRICKAR SEU DISPOSITIVO!&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Nunca&lt;/span&gt; escreva na memória do EC sem saber como fazer um reset adequado de &lt;span style=&quot; font-weight:700;&quot;&gt;BIOS/EC&lt;/span&gt;. Tenha em mente que um reset &lt;span style=&quot; font-weight:700;&quot;&gt;pode não&lt;/span&gt; corrigir o dispositivo se ele foi brickado/danificado.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Aviso&lt;/span&gt;: Escrever valores errados nos endereços errados &lt;span style=&quot; font-weight:700;&quot;&gt;VAI QUEBRAR SEU DISPOSITIVO!&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Nunca&lt;/span&gt; escrever na memória do EC sem saber como fazer um reset adequado de &lt;span style=&quot; font-weight:700;&quot;&gt;BIOS/EC&lt;/span&gt;. Tenha em mente que um reset &lt;span style=&quot; font-weight:700;&quot;&gt;pode não&lt;/span&gt; corrigir o dispositivo se ele foi quebrado/danificado.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>The msi-ec module is not loaded/installed.
@@ -320,7 +320,7 @@ Verifique a página &lt;Sobre&gt; para mais informações.</translation>
     <message>
         <source>Couldn&apos;t connect to UPower to get charger status.
 Make sure that UPower is installed and running then restart the system.</source>
-        <translation>Não foi possível conectar ao UPower para obter o estado do carregador.
+        <translation>Não foi possível conectar ao UPower para obter o estado de carregamento.
 Certifique-se de que o UPower está instalado e em execução e reinicie o sistema.</translation>
     </message>
     <message>
