@@ -19,6 +19,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "powermonitor.h"
 #include <QMainWindow>
 #include <QCloseEvent>
 #include <QSystemTrayIcon>
@@ -45,6 +46,7 @@ private:
     void startRealtimeUpdate() const;
     void stopRealtimeUpdate() const;
     void setUpdateInterval(int msec) const;
+    void setModeFromSelection(PowerProfile profile);
     void realtimeUpdate();
     void loadConfigs();
 
@@ -120,6 +122,9 @@ private:
     QAction *quitAction = nullptr;
 
 private slots:
+    void on_ChargerStateChange(bool isCharging);
+    void on_PowerProfileChange(const PowerProfile profile);
+
     void on_bestMobilityRadioButton_toggled(bool checked);
     void on_balancedBatteryRadioButton_toggled(bool checked);
     void on_bestBatteryRadioButton_toggled(bool checked);
@@ -140,6 +145,11 @@ private slots:
     void on_keyboardBrightnessSlider_valueChanged(int value) const;
 
     void on_keyboardBacklightModeComboBox_currentIndexChanged(int index) const;
+
+    void on_userModeOnBatteryComboBox_currentIndexChanged(int index) const;
+    void on_userModeOnChargerComboBox_currentIndexChanged(int index) const;
+    void on_autoPPDCheckBox_toggled(bool checked);
+    void on_autoAcDcProfilesGroupBox_toggled(bool active);
 
     void on_highPerformanceModeRadioButton_toggled(bool checked);
     void on_balancedModeRadioButton_toggled(bool checked);
