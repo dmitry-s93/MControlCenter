@@ -418,7 +418,11 @@ void Operate::setUserMode(user_mode userMode) const {
     }
     
     if (msiEcHelper.hasFanMode()) {
-        msiEcHelper.setFanMode(fanMode);
+        Settings s;
+        bool advancedActive = s.isValueExist(settingsGroup + "fanModeAdvanced") &&
+                              s.getValue(settingsGroup + "fanModeAdvanced").toBool();
+        if (!advancedActive)
+            msiEcHelper.setFanMode(fanMode);
     }
 
     if (msiEcHelper.hasSuperBattery()) {
