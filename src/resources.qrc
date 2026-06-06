@@ -1,6 +1,7 @@
 <RCC>
     <qresource prefix="/images">
-        <file alias="AppIcon">images/mcontrolcenter.png</file>
+        <file alias="AppIcon">../resources/mcontrolcenter.svg</file>
+        <file alias="AppIconSymbolic">../resources/mcontrolcenter-symbolic.svg</file>
     </qresource>
     <qresource prefix="/translations">
         <file alias="lang_de_DE">i18n/MControlCenter_de_DE.qm</file>
