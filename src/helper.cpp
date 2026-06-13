@@ -29,15 +29,20 @@
 
 QByteArray ecData;
 
-Helper::Helper() {
+Helper::Helper() : iface(nullptr) {}
+
+void Helper::init() const {
+    if (iface) return;
     if (!QDBusConnection::systemBus().isConnected()) {
-        fprintf(stderr, "Cannot connect to the D-Bus system bus");
+        fprintf(stderr, "Cannot connect to the D-Bus system bus\n");
         return;
     }
     iface = new QDBusInterface(SERVICE_NAME, "/", INTERFACE_NAME, QDBusConnection::systemBus());
 }
 
 bool Helper::isEcSysModuleLoaded() {
+    init();
+    if (!iface) return false;
     if (QDBusReply<bool> reply = iface->call("isEcSysModuleLoaded"); reply.isValid())
         return reply.value();
     printError(iface->lastError());
@@ -45,6 +50,8 @@ bool Helper::isEcSysModuleLoaded() {
 }
 
 bool Helper::loadEcSysModule() {
+    init();
+    if (!iface) return false;
     if (QDBusReply<bool> reply = iface->call("loadEcSysModule"); reply.isValid())
         return reply.value();
     printError(iface->lastError());
@@ -52,6 +59,8 @@ bool Helper::loadEcSysModule() {
 }
 
 bool Helper::updateData() {
+    init();
+    if (!iface) return false;
     if (QDBusReply<QByteArray> reply = iface->call("getData"); reply.isValid() &&
                                                                reply.value().size() == EC_SPACE_SIZE) {
         ecData = reply.value();
@@ -62,6 +71,8 @@ bool Helper::updateData() {
 }
 
 void Helper::updateDataAsync() {
+    init();
+    if (!iface) return;
     QDBusPendingCall async = iface->asyncCall("getData");
     QDBusPendingCallWatcher const *watcher = new QDBusPendingCallWatcher(async, this);
 
@@ -95,6 +106,8 @@ QByteArray Helper::getValues(int startAddress, int size) const {
 }
 
 void Helper::putValue(int address, int value) {
+    init();
+    if (!iface) return;
     if (getValue(address) == value)
         return;
     iface->call("putValue", address, value);
@@ -102,6 +115,8 @@ void Helper::putValue(int address, int value) {
 }
 
 void Helper::quit() {
+    init();
+    if (!iface) return;
     iface->call("quit");
     printError(iface->lastError());
 }

@@ -22,9 +22,12 @@
 
 #include <QDBusReply>
 
-MsiEcHelper::MsiEcHelper() {
+MsiEcHelper::MsiEcHelper() : iface(nullptr) {}
+
+void MsiEcHelper::init() const {
+    if (iface) return;
     if (!QDBusConnection::systemBus().isConnected()) {
-        fprintf(stderr, "Cannot connect to the D-Bus system bus");
+        fprintf(stderr, "Cannot connect to the D-Bus system bus\n");
         return;
     }
     iface = new QDBusInterface(SERVICE_NAME, "/msi_ec", INTERFACE_NAME_MSI_EC, QDBusConnection::systemBus());
@@ -343,6 +346,38 @@ void MsiEcHelper::setKeyboardBacklightBrightness(int value) const {
     return setValue<int>("setKeyboardBacklightBrightness", value);
 }
 
+bool MsiEcHelper::updateData() {
+    init();
+    if (!iface) return false;
+    QDBusReply<QVariantMap> reply = iface->call("getRealtimeData");
+    if (reply.isValid()) {
+        m_realtimeData = reply.value();
+        return true;
+    }
+    printError(iface->lastError());
+    return false;
+}
+
+void MsiEcHelper::updateDataAsync() {
+    init();
+    if (!iface) return;
+    QDBusPendingCall async = iface->asyncCall("getRealtimeData");
+    QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(async, this);
+    connect(watcher, &QDBusPendingCallWatcher::finished, this, &MsiEcHelper::callFinishedSlot);
+}
+
+void MsiEcHelper::callFinishedSlot(QDBusPendingCallWatcher *call) {
+    QDBusPendingReply<QVariantMap> reply = *call;
+    if (reply.isError()) {
+        printError(reply.error());
+        MainWindow::setUpdateDataError(true);
+    } else {
+        m_realtimeData = reply.value();
+        MainWindow::setUpdateDataError(false);
+    }
+    call->deleteLater();
+}
+
 ////////////////////////////////
 
 void MsiEcHelper::printError(QDBusError const &error) const {
@@ -352,6 +387,8 @@ void MsiEcHelper::printError(QDBusError const &error) const {
 
 template <typename T>
 inline std::optional<T> MsiEcHelper::getOptionalValue(QString method) const {
+    init();
+    if (!iface) return std::nullopt;
     if (QDBusReply<T> reply = iface->call(method); reply.isValid())
         return reply.value();
     printError(iface->lastError());
@@ -360,11 +397,65 @@ inline std::optional<T> MsiEcHelper::getOptionalValue(QString method) const {
 
 template <typename T>
 inline T MsiEcHelper::getValue(QString method, T defaultValue) const {
+    if (method.startsWith("has") || method.startsWith("is") || method.startsWith("getAvailable") || method.startsWith("getFW")) {
+        if (!m_cache.contains(method)) {
+            auto val = getOptionalValue<T>(method);
+            if (val.has_value()) {
+                m_cache[method] = val.value();
+            } else {
+                return defaultValue;
+            }
+        }
+        return m_cache[method].value<T>();
+    }
+
+    QString key;
+    if (method == "getWebcam") key = "webcam";
+    else if (method == "getWebcamBlock") key = "webcam_block";
+    else if (method == "getFnWinSwap") key = "fn_win_swap";
+    else if (method == "getCoolerBoost") key = "cooler_boost";
+    else if (method == "getShiftMode") key = "shift_mode";
+    else if (method == "getSuperBattery") key = "super_battery";
+    else if (method == "getFanMode") key = "fan_mode";
+    else if (method == "getCPURealtimeTemperature") key = "cpu_temp";
+    else if (method == "getCPURealtimeFanSpeed") key = "cpu_fan_speed";
+    else if (method == "getCPUBasicFanSpeed") key = "cpu_basic_fan_speed";
+    else if (method == "getGPURealtimeTemperature") key = "gpu_temp";
+    else if (method == "getGPURealtimeFanSpeed") key = "gpu_fan_speed";
+    else if (method == "getBatteryStartThreshold") key = "battery_start_threshold";
+    else if (method == "getBatteryEndThreshold") key = "battery_end_threshold";
+    else if (method == "getBatteryCapacity") key = "battery_capacity";
+    else if (method == "getBatteryStatus") key = "battery_status";
+    else if (method == "getKeyboardBacklightBrightness") key = "keyboard_brightness";
+
+    if (!key.isEmpty() && m_realtimeData.contains(key)) {
+        return m_realtimeData[key].value<T>();
+    }
+
     return getOptionalValue<T>(method).value_or(defaultValue);
 }
 
 template <typename T>
 void MsiEcHelper::setValue(QString method, T value) const {
+    init();
+    if (!iface) return;
     iface->call(method, value);
     printError(iface->lastError());
+
+    QString key;
+    if (method == "setWebcam") key = "webcam";
+    else if (method == "setWebcamBlock") key = "webcam_block";
+    else if (method == "setFnWinSwap") key = "fn_win_swap";
+    else if (method == "setCoolerBoost") key = "cooler_boost";
+    else if (method == "setShiftMode") key = "shift_mode";
+    else if (method == "setSuperBattery") key = "super_battery";
+    else if (method == "setFanMode") key = "fan_mode";
+    else if (method == "setCPUBasicFanSpeed") key = "cpu_basic_fan_speed";
+    else if (method == "setBatteryStartThreshold") key = "battery_start_threshold";
+    else if (method == "setBatteryEndThreshold") key = "battery_end_threshold";
+    else if (method == "setKeyboardBacklightBrightness") key = "keyboard_brightness";
+
+    if (!key.isEmpty()) {
+        const_cast<MsiEcHelper*>(this)->m_realtimeData[key] = QVariant::fromValue(value);
+    }
 }

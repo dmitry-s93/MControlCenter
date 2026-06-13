@@ -22,11 +22,16 @@
 #include "operate.h"
 #include <QtCore/QObject>
 #include <QtDBus/QDBusInterface>
+#include <QtDBus/QDBusPendingCallWatcher>
+#include <QVariantMap>
 
 class MsiEcHelper : public QObject {
     Q_OBJECT
 public:
     MsiEcHelper();
+
+    bool updateData();
+    void updateDataAsync();
 
     [[nodiscard]] bool isMsiEcModuleLoaded();
 
@@ -113,9 +118,16 @@ public:
     [[nodiscard]] int getKeyboardBacklightBrightness() const;
     Q_NOREPLY void setKeyboardBacklightBrightness(int value) const;
 
+private slots:
+    void callFinishedSlot(QDBusPendingCallWatcher *call);
+
 private:
-    QDBusInterface *iface;
+    void init() const;
+    mutable QDBusInterface *iface;
     void printError(QDBusError const &error) const;
+
+    mutable QVariantMap m_cache;
+    mutable QVariantMap m_realtimeData;
 
     template <typename T>
     [[nodiscard]] std::optional<T> getOptionalValue(QString method) const;

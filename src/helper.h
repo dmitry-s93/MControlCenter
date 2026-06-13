@@ -28,6 +28,7 @@ class Helper : public QObject {
 Q_OBJECT
 public:
     Helper();
+    void init() const;
 
     bool isEcSysModuleLoaded();
     bool loadEcSysModule();
@@ -38,7 +39,7 @@ public:
     QByteArray getValues(int startAddress, int size) const;
     void putValue(int address, int value);
     void quit();
-    QDBusInterface *iface;
+    mutable QDBusInterface *iface;
 private:
     void printError(QDBusError const & error) const;
 private slots:

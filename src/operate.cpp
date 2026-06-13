@@ -92,11 +92,19 @@ bool Operate::loadEcSysModule() const {
 }
 
 bool Operate::updateEcData() const {
-    return helper.updateData();
+    bool res1 = helper.updateData();
+    bool res2 = true;
+    if (msiEcHelper.isMsiEcModuleLoaded()) {
+        res2 = msiEcHelper.updateData();
+    }
+    return res1 && res2;
 }
 
 void Operate::updateEcDataAsync() const {
     helper.updateDataAsync();
+    if (msiEcHelper.isMsiEcModuleLoaded()) {
+        msiEcHelper.updateDataAsync();
+    }
 }
 
 bool Operate::doProbe() const {
@@ -522,7 +530,10 @@ bool Operate::isWebCamOffSupport() const {
 void Operate::loadSettings() const {
     Settings s;
 
-    if (getUserMode() != user_mode::unknown_mode && s.isValueExist(settingsGroup + "UserMode")) {
+    bool autoPPD = s.getValue(settingsGroup + "autoPPDstate").toBool();
+    bool autoAcDc = s.getValue(settingsGroup + "autoAcDcProfilesState").toBool();
+
+    if (!autoPPD && !autoAcDc && getUserMode() != user_mode::unknown_mode && s.isValueExist(settingsGroup + "UserMode")) {
         QString value = s.getValue(settingsGroup + "UserMode").toString();
         if (value == "balanced_mode")
             setUserMode(user_mode::balanced_mode);

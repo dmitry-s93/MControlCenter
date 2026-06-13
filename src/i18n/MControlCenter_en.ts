@@ -116,16 +116,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Couldn&apos;t connect to UPower to get charger status.
-Make sure that UPower is installed and running then restart the app.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Couldn&apos;t connect to Power Profiles Daemon.
-Make sure that either Power Profiles Daemon or TuneD is installed and restart the app.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Mode</source>
         <translation type="unfinished"></translation>
     </message>
@@ -163,6 +153,16 @@ Make sure that either Power Profiles Daemon or TuneD is installed and restart th
     </message>
     <message>
         <source>Advanced</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t connect to UPower to get charger status.
+Make sure that UPower is installed and running then restart the system.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t connect to Power Profiles Daemon.
+Make sure that either Power Profiles Daemon or TuneD is installed and restart the system.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

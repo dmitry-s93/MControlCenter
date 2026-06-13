@@ -430,21 +430,30 @@ void MainWindow::updateCoolerBoostState() const {
 
 void MainWindow::updateUserMode() {
     if (operate.updateEcData()) {
+        ui->balancedModeRadioButton->blockSignals(true);
+        ui->highPerformanceModeRadioButton->blockSignals(true);
+        ui->silentModeRadioButton->blockSignals(true);
+        ui->superBatteryModeRadioButton->blockSignals(true);
+        balancedMode->blockSignals(true);
+        highPerformanceMode->blockSignals(true);
+        silentMode->blockSignals(true);
+        superBatteryMode->blockSignals(true);
+
         switch (operate.getUserMode()) {
             case user_mode::balanced_mode:
-                ui->balancedModeRadioButton->click();
+                ui->balancedModeRadioButton->setChecked(true);
                 balancedMode->setChecked(true);
                 break;
             case user_mode::performance_mode:
-                ui->highPerformanceModeRadioButton->click();
+                ui->highPerformanceModeRadioButton->setChecked(true);
                 highPerformanceMode->setChecked(true);
                 break;
             case user_mode::silent_mode:
-                ui->silentModeRadioButton->click();
+                ui->silentModeRadioButton->setChecked(true);
                 silentMode->setChecked(true);
                 break;
             case user_mode::super_battery_mode:
-                ui->superBatteryModeRadioButton->click();
+                ui->superBatteryModeRadioButton->setChecked(true);
                 superBatteryMode->setChecked(true);
                 break;
             case user_mode::unknown_mode:
@@ -462,6 +471,15 @@ void MainWindow::updateUserMode() {
                 }
                 break;
         }
+
+        ui->balancedModeRadioButton->blockSignals(false);
+        ui->highPerformanceModeRadioButton->blockSignals(false);
+        ui->silentModeRadioButton->blockSignals(false);
+        ui->superBatteryModeRadioButton->blockSignals(false);
+        balancedMode->blockSignals(false);
+        highPerformanceMode->blockSignals(false);
+        silentMode->blockSignals(false);
+        superBatteryMode->blockSignals(false);
     }
 }
 
@@ -548,21 +566,33 @@ void MainWindow::setBestBattery() {
 void MainWindow::setHighPerformanceMode() {
     operate.setUserMode(user_mode::performance_mode);
     updateUserMode();
+    if (ui->autoPPDCheckBox->isChecked()) {
+        powerMonitor.setPowerProfile(PowerProfile::Performance);
+    }
 }
 
 void MainWindow::setBalancedMode() {
     operate.setUserMode(user_mode::balanced_mode);
     updateUserMode();
+    if (ui->autoPPDCheckBox->isChecked()) {
+        powerMonitor.setPowerProfile(PowerProfile::Balanced);
+    }
 }
 
 void MainWindow::setSilentMode() {
     operate.setUserMode(user_mode::silent_mode);
     updateUserMode();
+    if (ui->autoPPDCheckBox->isChecked()) {
+        powerMonitor.setPowerProfile(PowerProfile::PowerSaver);
+    }
 }
 
 void MainWindow::setSuperBatteryMode() {
     operate.setUserMode(user_mode::super_battery_mode);
     updateUserMode();
+    if (ui->autoPPDCheckBox->isChecked()) {
+        powerMonitor.setPowerProfile(PowerProfile::PowerSaver);
+    }
 }
 
 void MainWindow::setCoolerBoostState(bool enabled) const {
@@ -735,10 +765,22 @@ void MainWindow::on_PowerProfileChange(const PowerProfile profile) {
             setBalancedMode();
             ui->balancedModeRadioButton->setChecked(true);
             break;
-        case PowerProfile::PowerSaver:
-            setSuperBatteryMode();
-            ui->superBatteryModeRadioButton->setChecked(true);
+        case PowerProfile::PowerSaver: {
+            user_mode currentMode = operate.getUserMode();
+            if (currentMode != user_mode::silent_mode && currentMode != user_mode::super_battery_mode) {
+                setSuperBatteryMode();
+                ui->superBatteryModeRadioButton->setChecked(true);
+            } else {
+                if (currentMode == user_mode::silent_mode) {
+                    ui->silentModeRadioButton->setChecked(true);
+                    if (silentMode) silentMode->setChecked(true);
+                } else {
+                    ui->superBatteryModeRadioButton->setChecked(true);
+                    if (superBatteryMode) superBatteryMode->setChecked(true);
+                }
+            }
             break;
+        }
         case PowerProfile::Unknown:
             default:;
         }
@@ -865,10 +907,6 @@ void MainWindow::on_autoPPDCheckBox_toggled(bool checked) {
         }
 
         powerMonitor.disconnectFromUpower();
-        ui->highPerformanceModeRadioButton->setEnabled(0);
-        ui->balancedModeRadioButton->setEnabled(0);
-        ui->silentModeRadioButton->setEnabled(0);
-        ui->superBatteryModeRadioButton->setEnabled(0);
         ui->autoAcDcProfilesGroupBox->setChecked(0);
         ui->autoAcDcProfilesGroupBox->setEnabled(0);
         powerMonitor.queryPowerProfile();

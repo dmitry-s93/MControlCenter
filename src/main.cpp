@@ -17,11 +17,33 @@
  */
 
 #include "mainwindow.h"
+#include "operate.h"
 #include <QApplication>
 #include <QTranslator>
 #include <QDBusConnectionInterface>
+#include <iostream>
 
 int main(int argc, char *argv[]) {
+    if (argc > 1 && strcmp(argv[1], "--test") == 0) {
+        QCoreApplication a(argc, argv);
+        Operate op;
+        op.doProbe();
+        op.updateEcData(); // Synchronous update
+        
+        std::cout << "--- MControlCenter Test Stats ---" << std::endl;
+        std::cout << "msi-ec loaded: " << op.isMsiEcLoaded() << std::endl;
+        std::cout << "ec_sys loaded: " << op.isEcSysModuleLoaded() << std::endl;
+        std::cout << "CPU Temp: " << op.getCpuTemp() << " C" << std::endl;
+        auto gpuTemp = op.getGpuTemp();
+        std::cout << "GPU Temp: " << (gpuTemp.has_value() ? gpuTemp.value() : -1) << " C" << std::endl;
+        std::cout << "Fan 1 Speed: " << op.getFan1Speed() << " RPM" << std::endl;
+        auto fan2 = op.getFan2Speed();
+        std::cout << "Fan 2 Speed: " << (fan2.has_value() ? fan2.value() : -1) << " RPM" << std::endl;
+        std::cout << "Battery Charge: " << op.getBatteryCharge() << "%" << std::endl;
+        std::cout << "Webcam active: " << op.getWebCamState() << std::endl;
+        return 0;
+    }
+
     const QString serviceName = "io.github.dmitry_s93.MControlCenter";
 
     if (QDBusConnection::sessionBus().interface()->isServiceRegistered(serviceName)) {

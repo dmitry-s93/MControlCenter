@@ -24,6 +24,7 @@
 #include <QtCore/QObject>
 #include <QtDBus/QDBusAbstractAdaptor>
 #include <QtDBus/QDBusVariant>
+#include <QVariantMap>
 
 /**
  * Interface for [msi-ec by BeardOverflow](https://github.com/BeardOverflow/msi-ec/)
@@ -133,6 +134,8 @@ public slots:
     [[nodiscard]] bool hasKeyboardBacklightBrightness() const;
     [[nodiscard]] int getKeyboardBacklightBrightness() const;
     Q_NOREPLY void setKeyboardBacklightBrightness(int value) const;
+
+    [[nodiscard]] QVariantMap getRealtimeData() const;
 };
 
 #endif // MSI_EC_H

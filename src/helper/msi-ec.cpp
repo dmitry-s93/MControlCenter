@@ -308,3 +308,25 @@ int MsiEc::getKeyboardBacklightBrightness() const {
 void MsiEc::setKeyboardBacklightBrightness(int value) const {
     writeFile(msi_ec_kbd_backlight_brightness, QString::number(value));
 }
+
+QVariantMap MsiEc::getRealtimeData() const {
+    QVariantMap map;
+    if (hasWebcam()) map["webcam"] = getWebcam();
+    if (hasWebcamBlock()) map["webcam_block"] = getWebcamBlock();
+    if (hasFnWinSwap()) map["fn_win_swap"] = getFnWinSwap();
+    if (hasCoolerBoost()) map["cooler_boost"] = getCoolerBoost();
+    if (hasShiftMode()) map["shift_mode"] = getShiftMode();
+    if (hasSuperBattery()) map["super_battery"] = getSuperBattery();
+    if (hasFanMode()) map["fan_mode"] = getFanMode();
+    if (hasCPURealtimeTemperature()) map["cpu_temp"] = getCPURealtimeTemperature();
+    if (hasCPURealtimeFanSpeed()) map["cpu_fan_speed"] = getCPURealtimeFanSpeed();
+    if (hasCPUBasicFanSpeed()) map["cpu_basic_fan_speed"] = getCPUBasicFanSpeed();
+    if (hasGPURealtimeTemperature()) map["gpu_temp"] = getGPURealtimeTemperature();
+    if (hasGPURealtimeFanSpeed()) map["gpu_fan_speed"] = getGPURealtimeFanSpeed();
+    if (hasBatteryStartThreshold()) map["battery_start_threshold"] = getBatteryStartThreshold();
+    if (hasBatteryEndThreshold()) map["battery_end_threshold"] = getBatteryEndThreshold();
+    if (hasBatteryCapacity()) map["battery_capacity"] = getBatteryCapacity();
+    if (hasBatteryStatus()) map["battery_status"] = getBatteryStatus();
+    if (hasKeyboardBacklightBrightness()) map["keyboard_brightness"] = getKeyboardBacklightBrightness();
+    return map;
+}

@@ -40,6 +40,7 @@ public:
     void disconnectFromPowerProfiles();
     void queryChargerState();
     void queryPowerProfile();
+    void setPowerProfile(const PowerProfile profile);
 
     Q_ENUM(PowerProfile)
 
@@ -49,6 +50,7 @@ private:
 
     bool isUPowerConnected = false;
     bool isPowerProfileConnected = false;
+    PowerProfile m_currentProfile = PowerProfile::Unknown;
 
 signals:
     void currentChargerState(bool isOnline);

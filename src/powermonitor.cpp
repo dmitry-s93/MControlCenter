@@ -18,6 +18,7 @@
 
 #include "powermonitor.h"
 #include <QDBusInterface>
+#include <QDBusVariant>
 #include <qdbusconnectioninterface.h>
 
 PowerMonitor::PowerMonitor() = default;
@@ -34,7 +35,7 @@ bool PowerMonitor::connectToUpower() {
     }
 
     bool ok = bus.connect(
-        "org.freedesktop.UPower",
+        "",
         "/org/freedesktop/UPower/devices/DisplayDevice",
         "org.freedesktop.DBus.Properties",
         "PropertiesChanged",
@@ -48,7 +49,7 @@ bool PowerMonitor::connectToUpower() {
 void PowerMonitor::disconnectFromUpower() {
     if(isUPowerConnected) {
         QDBusConnection::systemBus().disconnect(
-            "org.freedesktop.UPower",
+            "",
             "/org/freedesktop/UPower/devices/DisplayDevice",
             "org.freedesktop.DBus.Properties",
             "PropertiesChanged",
@@ -64,18 +65,17 @@ void PowerMonitor::queryChargerState() {
         QDBusInterface iface(
             "org.freedesktop.UPower",
             "/org/freedesktop/UPower/devices/DisplayDevice",
-            "org.freedesktop.DBus.Properties",
+            "org.freedesktop.UPower.Device",
             QDBusConnection::systemBus()
             );
 
-        QDBusReply<QVariant> reply =
-            iface.call("Get", "org.freedesktop.UPower.Device", "State");
-
-        if (!reply.isValid()) {
-            return;
+        QVariant val = iface.property("State");
+        uint state = 0;
+        if (val.canConvert<QDBusVariant>()) {
+            state = val.value<QDBusVariant>().variant().toUInt();
+        } else {
+            state = val.toUInt();
         }
-
-        uint state = reply.value().toUInt();
         bool connected = parseChargerState(state);
 
         emit currentChargerState(connected);
@@ -94,7 +94,13 @@ void PowerMonitor::onChargerStateChanged(
     if (!changedProps.contains("State"))
         return;
 
-    uint state = changedProps.value("State").toUInt();
+    QVariant val = changedProps.value("State");
+    uint state = 0;
+    if (val.canConvert<QDBusVariant>()) {
+        state = val.value<QDBusVariant>().variant().toUInt();
+    } else {
+        state = val.toUInt();
+    }
     bool connected = parseChargerState(state);
 
     emit currentChargerState(connected);
@@ -127,7 +133,7 @@ bool PowerMonitor::connectToPowerProfiles() {
     }
 
     bool ok = bus.connect(
-        "net.hadess.PowerProfiles",
+        "",
         "/org/freedesktop/UPower/PowerProfiles",
         "org.freedesktop.DBus.Properties",
         "PropertiesChanged",
@@ -142,7 +148,7 @@ bool PowerMonitor::connectToPowerProfiles() {
 void PowerMonitor::disconnectFromPowerProfiles() {
     if (isPowerProfileConnected) {
         QDBusConnection::systemBus().disconnect(
-            "net.hadess.PowerProfiles",
+            "",
             "/org/freedesktop/UPower/PowerProfiles",
             "org.freedesktop.DBus.Properties",
             "PropertiesChanged",
@@ -158,20 +164,20 @@ void PowerMonitor::queryPowerProfile() {
         QDBusInterface iface(
             "net.hadess.PowerProfiles",
             "/org/freedesktop/UPower/PowerProfiles",
-            "org.freedesktop.DBus.Properties",
+            "org.freedesktop.UPower.PowerProfiles",
             QDBusConnection::systemBus()
             );
 
-        QDBusReply<QVariant> reply =
-            iface.call("Get", "org.freedesktop.UPower.PowerProfiles", "ActiveProfile");
-
-        if (!reply.isValid()) {
-            return;
+        QVariant val = iface.property("ActiveProfile");
+        QString ProfileName;
+        if (val.canConvert<QDBusVariant>()) {
+            ProfileName = val.value<QDBusVariant>().variant().toString();
+        } else {
+            ProfileName = val.toString();
         }
 
-        const QString ProfileName = reply.value().toString();
-
         PowerProfile profile = parsePowerProfile(ProfileName);
+        m_currentProfile = profile;
 
         emit currentPowerProfile(profile);
     }
@@ -189,9 +195,16 @@ void PowerMonitor::onPowerProfileChanged(
     if (!changed.contains("ActiveProfile"))
         return;
 
-    const QString ProfileName = changed.value("ActiveProfile").toString();
+    QVariant val = changed.value("ActiveProfile");
+    QString ProfileName;
+    if (val.canConvert<QDBusVariant>()) {
+        ProfileName = val.value<QDBusVariant>().variant().toString();
+    } else {
+        ProfileName = val.toString();
+    }
 
     PowerProfile profile = parsePowerProfile(ProfileName);
+    m_currentProfile = profile;
 
     emit currentPowerProfile(profile);
 }
@@ -204,4 +217,34 @@ PowerProfile PowerMonitor::parsePowerProfile(const QString &profile) {
     if (profile == "power-saver")
         return PowerProfile::PowerSaver;
     return PowerProfile::Unknown;
+}
+
+void PowerMonitor::setPowerProfile(const PowerProfile profile) {
+    if (isPowerProfileConnected && profile != m_currentProfile) {
+        QDBusInterface iface(
+            "net.hadess.PowerProfiles",
+            "/org/freedesktop/UPower/PowerProfiles",
+            "org.freedesktop.UPower.PowerProfiles",
+            QDBusConnection::systemBus()
+            );
+
+        QString profileStr;
+        switch (profile) {
+            case PowerProfile::Performance:
+                profileStr = "performance";
+                break;
+            case PowerProfile::Balanced:
+                profileStr = "balanced";
+                break;
+            case PowerProfile::PowerSaver:
+            case PowerProfile::Silent:
+                profileStr = "power-saver";
+                break;
+            default:
+                return;
+        }
+
+        iface.setProperty("ActiveProfile", profileStr);
+        m_currentProfile = profile;
+    }
 }
