@@ -1,4 +1,6 @@
-# List of tested devices
+# List of tested devices (Outdated)
+
+**Old list, device support relies on msi-ec module support, check the [new list](https://github.com/BeardOverflow/msi-ec/discussions/277)**
 
 | Device                        | EC Version              | Functions                                                                    | Settings                                                                                                                      |
 |-------------------------------|-------------------------|------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
