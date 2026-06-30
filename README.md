@@ -73,7 +73,7 @@ Open your terminal, and run these commands:
 1. `sudo dnf copr enable teackot/msi`
 2. `sudo dnf install mcontrolcenter`
 
-However, fedora doesn't come with `ec_sys` module by default, so some extra steps are needed:
+However, if you didn't follow the above method (built from source or used the generic installer), some extra steps are needed because fedora doesn't come with `ec_sys` module by default:
 
 1. Open a terminal, then install dkms and make:
    
