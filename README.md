@@ -105,7 +105,23 @@ Current packages are built using [OBS](https://build.opensuse.org/package/show/h
 4. Run the script `sudo ./install`
 5. (Optional) `sudo ./uninstall` to uninstall
 
-**Note:** Below are the steps for compiling, usually needed if your distrobution ships old versions of Qt6
+**Note:** In some cases, building from source can be a good option too, steps for it can be found further down.
+
+## Extra tweaks
+### Nvidia dedicated GPUs
+For laptops with a dedicated Nvidia graphics card, the power limits won't react to performance mode changes.
+To fix this, you need to be using the Nvidia proprietary driver.
+
+Enable and start the `nvidia-powerd` service:
+1. `sudo systemctl enable --now nvidia-powerd`
+2. Reboot.
+
+Laptops with AMD dGPUs (usually AMD Advantage models) don't need any steps, as power limits and smartshift functionality work correctly with each performance mode.
+
+### MUX switching
+
+For laptops with a dGPU **AND** a mux switch, there is a workaround for switching modes:
+Install [supergfxctl](https://gitlab.com/asus-linux/supergfxctl) and couple it with a widget like [supergfxctl-plasmoid](https://gitlab.com/Jhyub/supergfxctl-plasmoid) for KDE, or [supergfxctl-gex](https://extensions.gnome.org/extension/5344/supergfxctl-gex/) for GNOME.
 
 ## Building from source
 
