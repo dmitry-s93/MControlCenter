@@ -171,4 +171,4 @@ You can help translate the MControlCenter app into your native language
 2. Open `MControlCenter_xx.ts` in text editor and change `language="en_US"` to your language code.
 3. Translate strings into your language directly in a text editor or use the QT Linguist app or Lokalize.
 4. Translate `GenericName` in app shortcut `resources/mcontrolcenter.desktop`. To do this, add the line `GenericName[xx]=translated generic name`.
-5. Open a pull request on github.
+5. Open a pull request on github with a screenshot of the UI using the new language.
