@@ -156,6 +156,16 @@
         <translation>Avancé</translation>
     </message>
     <message>
+        <source>Couldn&apos;t connect to UPower to get charger status.
+Make sure that UPower is installed and running then restart the system.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t connect to a power profile service.
+Make sure that Power Profiles Daemon, TuneD, or system76-power is installed and restart the system.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Cooling</source>
         <translation>Refroidissement</translation>
     </message>
@@ -244,8 +254,24 @@
         <translation>Performances maximales au prix de la chaleur et d&apos;une consommation électrique accrue</translation>
     </message>
     <message>
+        <source>Follow system&apos;s power profile</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>If you mainly use your laptop with the charger plugged most of the time, it is recommended to set the charge capacity at a lower percentage (60% or 80%) to prolong your battery lifecycle.</source>
         <translation>Si vous utilisez principalement votre ordinateur avec le chargeur branché, il est recommandé de mettre la limite de charge à un pourcentage plus bas (60&#xa0;% ou 80&#xa0;%) pour prolonger la durée de vie de votre batterie.</translation>
+    </message>
+    <message>
+        <source>Automatic Profile Switching</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>On Charger:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>On Battery:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Charge the battery when under 90%, stop at 100%</source>

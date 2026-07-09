@@ -36,19 +36,24 @@ public:
 
     bool connectToUpower();
     bool connectToPowerProfiles();
+    bool connectToSystem76Power();
     void disconnectFromUpower();
     void disconnectFromPowerProfiles();
+    void disconnectFromSystem76Power();
     void queryChargerState();
     void queryPowerProfile();
+    void querySystem76Profile();
 
     Q_ENUM(PowerProfile)
 
 private:
     bool parseChargerState(uint state) const;
     PowerProfile parsePowerProfile(const QString &profile);
+    PowerProfile parseSystem76Profile(const QString &profile);
 
     bool isUPowerConnected = false;
     bool isPowerProfileConnected = false;
+    bool isSystem76Connected = false;
 
 signals:
     void currentChargerState(bool isOnline);
@@ -62,6 +67,8 @@ private slots:
     void onPowerProfileChanged(const QString &interface,
                                const QVariantMap &changed,
                                const QStringList &invalidatedProps);
+
+    void onSystem76ProfileChanged(const QString &profile);
 };
 
 #endif // POWERMONITOR_H

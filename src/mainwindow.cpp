@@ -843,6 +843,7 @@ void MainWindow::on_autoAcDcProfilesGroupBox_toggled(bool checked) {
         }
 
         powerMonitor.disconnectFromPowerProfiles();
+        powerMonitor.disconnectFromSystem76Power();
         ui->autoPPDCheckBox->setChecked(0);
         ui->autoPPDCheckBox->setEnabled(0);
         powerMonitor.queryChargerState();
@@ -856,10 +857,13 @@ void MainWindow::on_autoAcDcProfilesGroupBox_toggled(bool checked) {
 
 void MainWindow::on_autoPPDCheckBox_toggled(bool checked) {
     if (checked) {
-
-        if (!powerMonitor.connectToPowerProfiles()) {
-            QMessageBox::critical(nullptr, this->windowTitle(), tr("Couldn't connect to Power Profiles Daemon.\n"
-                                                                   "Make sure that either Power Profiles Daemon or TuneD is installed and restart the system."));
+        if (powerMonitor.connectToSystem76Power()) {
+            powerMonitor.querySystem76Profile();
+        } else if (powerMonitor.connectToPowerProfiles()) {
+            powerMonitor.queryPowerProfile();
+        } else {
+            QMessageBox::critical(nullptr, this->windowTitle(), tr("Couldn't connect to a power profile service.\n"
+                                                                   "Make sure that Power Profiles Daemon, TuneD, or system76-power is installed and restart the system."));
             ui->autoPPDCheckBox->setChecked(0);
             return;
         }
@@ -871,13 +875,14 @@ void MainWindow::on_autoPPDCheckBox_toggled(bool checked) {
         ui->superBatteryModeRadioButton->setEnabled(0);
         ui->autoAcDcProfilesGroupBox->setChecked(0);
         ui->autoAcDcProfilesGroupBox->setEnabled(0);
-        powerMonitor.queryPowerProfile();
     } else {
         ui->highPerformanceModeRadioButton->setEnabled(1);
         ui->balancedModeRadioButton->setEnabled(1);
         ui->silentModeRadioButton->setEnabled(1);
         ui->superBatteryModeRadioButton->setEnabled(1);
         ui->autoAcDcProfilesGroupBox->setEnabled(1);
+        powerMonitor.disconnectFromPowerProfiles();
+        powerMonitor.disconnectFromSystem76Power();
     }
     Settings::setValue("Settings/autoPPDstate", checked);
 }

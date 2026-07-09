@@ -205,3 +205,78 @@ PowerProfile PowerMonitor::parsePowerProfile(const QString &profile) {
         return PowerProfile::PowerSaver;
     return PowerProfile::Unknown;
 }
+
+bool PowerMonitor::connectToSystem76Power() {
+    if(isSystem76Connected) {
+        return true;
+    }
+
+    auto bus = QDBusConnection::systemBus();
+
+    if (!bus.interface()->isServiceRegistered("com.system76.PowerDaemon")) {
+        return false;
+    }
+
+    bool ok = bus.connect(
+        "com.system76.PowerDaemon",
+        "/com/system76/PowerDaemon",
+        "com.system76.PowerDaemon",
+        "PowerProfileSwitch",
+        this,
+        SLOT(onSystem76ProfileChanged(QString))
+        );
+
+    isSystem76Connected = ok;
+    return ok;
+}
+
+void PowerMonitor::disconnectFromSystem76Power() {
+    if (isSystem76Connected) {
+        QDBusConnection::systemBus().disconnect(
+            "com.system76.PowerDaemon",
+            "/com/system76/PowerDaemon",
+            "com.system76.PowerDaemon",
+            "PowerProfileSwitch",
+            this,
+            SLOT(onSystem76ProfileChanged(QString))
+            );
+        isSystem76Connected = false;
+    }
+}
+
+void PowerMonitor::querySystem76Profile() {
+    if (isSystem76Connected) {
+        QDBusInterface iface(
+            "com.system76.PowerDaemon",
+            "/com/system76/PowerDaemon",
+            "com.system76.PowerDaemon",
+            QDBusConnection::systemBus()
+            );
+
+        QDBusReply<QString> reply = iface.call("GetProfile");
+
+        if (!reply.isValid()) {
+            return;
+        }
+
+        const QString profileName = reply.value();
+
+        PowerProfile profile = parseSystem76Profile(profileName);
+
+        emit currentPowerProfile(profile);
+    }
+}
+
+void PowerMonitor::onSystem76ProfileChanged(const QString &profile) {
+    emit currentPowerProfile(parseSystem76Profile(profile));
+}
+
+PowerProfile PowerMonitor::parseSystem76Profile(const QString &profile) {
+    if (profile == "Performance")
+        return PowerProfile::Performance;
+    if (profile == "Balanced")
+        return PowerProfile::Balanced;
+    if (profile == "Battery")
+        return PowerProfile::PowerSaver;
+    return PowerProfile::Unknown;
+}
