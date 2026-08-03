@@ -20,6 +20,7 @@
 #define MSI_EC_HELPER_H
 
 #include "operate.h"
+#include "fan_curve.h"
 #include <QtCore/QObject>
 #include <QtDBus/QDBusInterface>
 
@@ -43,7 +44,7 @@ public:
     // fn_win_swap swap/no swap
     [[nodiscard]] bool hasFnWinSwap() const;
     [[nodiscard]] bool getFnWinSwap() const;
-    Q_NOREPLY void setFnWinSwap(bool swap) const;
+    [[nodiscard]] bool setFnWinSwap(bool swap) const;
 
     // cooler_boost
     [[nodiscard]] bool hasCoolerBoost() const;
@@ -54,18 +55,23 @@ public:
     [[nodiscard]] bool hasShiftMode() const;
     [[nodiscard]] QList<shift_mode> getAvailableShiftModes() const;
     [[nodiscard]] shift_mode getShiftMode() const;
-    Q_NOREPLY void setShiftMode(shift_mode mode) const;
+    [[nodiscard]] bool setShiftMode(shift_mode mode) const;
 
     // super_battery
     [[nodiscard]] bool hasSuperBattery() const;
     [[nodiscard]] bool getSuperBattery() const;
-    Q_NOREPLY void setSuperBattery(bool enable) const;
+    [[nodiscard]] bool setSuperBattery(bool enable) const;
 
     // fan_mode & available_fan_modes
     [[nodiscard]] bool hasFanMode() const;
     [[nodiscard]] QList<fan_mode> getAvailableFanModes() const;
     [[nodiscard]] fan_mode getFanMode() const;
-    Q_NOREPLY void setFanMode(fan_mode mode) const;
+    [[nodiscard]] bool setFanMode(fan_mode mode) const;
+
+    // Complete fan-curve ABI. Advanced mode alone is not sufficient.
+    [[nodiscard]] FanCurveCapability getFanCurveCapability() const;
+    [[nodiscard]] std::optional<FanCurveProfile> getFanCurveProfile() const;
+    [[nodiscard]] FanCurveResult applyFanCurveTransaction(const FanCurveProfile &profile) const;
 
     // fw_version
     [[nodiscard]] QString getFWVersion() const;
@@ -75,7 +81,7 @@ public:
     // cpu/realtime_temperature 0-100 (celsius scale)
     [[nodiscard]] bool hasCPURealtimeTemperature() const;
     [[nodiscard]] int getCPURealtimeTemperature() const;
-    // cpu/realtime_fan_speed 0-100 (percent)
+    // cpu/realtime_fan_speed: driver-reported fan level (not RPM)
     [[nodiscard]] bool hasCPURealtimeFanSpeed() const;
     [[nodiscard]] int getCPURealtimeFanSpeed() const;
     // cpu/basic_fan_speed 0-100 (percent)
@@ -86,7 +92,7 @@ public:
     // gpu/realtime_temperature 0-100 (celsius scale)
     [[nodiscard]] bool hasGPURealtimeTemperature() const;
     [[nodiscard]] std::optional<int> getGPURealtimeTemperature() const;
-    // gpu/realtime_fan_speed 0-100 (percent)
+    // gpu/realtime_fan_speed: driver-reported fan level (not RPM)
     [[nodiscard]] bool hasGPURealtimeFanSpeed() const;
     [[nodiscard]] std::optional<int> getGPURealtimeFanSpeed() const;
 
@@ -114,7 +120,7 @@ public:
     Q_NOREPLY void setKeyboardBacklightBrightness(int value) const;
 
 private:
-    QDBusInterface *iface;
+    QDBusInterface *iface = nullptr;
     void printError(QDBusError const &error) const;
 
     template <typename T>
@@ -122,7 +128,7 @@ private:
     template <typename T>
     [[nodiscard]] T getValue(QString method, T defaultValue) const;
     template <typename T>
-    Q_NOREPLY void setValue(QString method, T value) const;
+    [[nodiscard]] bool setValue(QString method, T value) const;
 };
 
 #endif // MSI_EC_HELPER_H

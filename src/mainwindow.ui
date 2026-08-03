@@ -915,6 +915,16 @@
               </property>
              </widget>
             </item>
+            <item row="0" column="1">
+             <widget class="QLabel" name="fanCurveStatusLabel">
+              <property name="text">
+               <string>Checking fan curve capability…</string>
+              </property>
+              <property name="wordWrap">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
             <item row="1" column="0">
              <widget class="QTabWidget" name="fanControlTabWidget">
               <property name="enabled">
@@ -974,7 +984,7 @@
                    </sizepolicy>
                   </property>
                   <property name="text">
-                   <string notr="true">0%</string>
+                   <string notr="true">fan level 0</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -1074,7 +1084,7 @@
                    </sizepolicy>
                   </property>
                   <property name="text">
-                   <string notr="true">0%</string>
+                   <string notr="true">fan level 0</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -1090,7 +1100,7 @@
                    </sizepolicy>
                   </property>
                   <property name="text">
-                   <string notr="true">0%</string>
+                   <string notr="true">fan level 0</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -1106,7 +1116,7 @@
                    </sizepolicy>
                   </property>
                   <property name="text">
-                   <string notr="true">0%</string>
+                   <string notr="true">fan level 0</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -1150,7 +1160,7 @@
                    </sizepolicy>
                   </property>
                   <property name="text">
-                   <string notr="true">0%</string>
+                   <string notr="true">fan level 0</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -1166,7 +1176,7 @@
                    </sizepolicy>
                   </property>
                   <property name="text">
-                   <string notr="true">0%</string>
+                   <string notr="true">fan level 0</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -1210,7 +1220,7 @@
                    </sizepolicy>
                   </property>
                   <property name="text">
-                   <string notr="true">0%</string>
+                   <string notr="true">fan level 0</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -1349,7 +1359,7 @@
                    </sizepolicy>
                   </property>
                   <property name="text">
-                   <string notr="true">0%</string>
+                   <string notr="true">fan level 0</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -1365,7 +1375,7 @@
                    </sizepolicy>
                   </property>
                   <property name="text">
-                   <string notr="true">0%</string>
+                   <string notr="true">fan level 0</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -1447,7 +1457,7 @@
                    </sizepolicy>
                   </property>
                   <property name="text">
-                   <string notr="true">0%</string>
+                   <string notr="true">fan level 0</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -1485,7 +1495,7 @@
                    </sizepolicy>
                   </property>
                   <property name="text">
-                   <string notr="true">0%</string>
+                   <string notr="true">fan level 0</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -1545,7 +1555,7 @@
                    </sizepolicy>
                   </property>
                   <property name="text">
-                   <string notr="true">0%</string>
+                   <string notr="true">fan level 0</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -1561,7 +1571,7 @@
                    </sizepolicy>
                   </property>
                   <property name="text">
-                   <string notr="true">0%</string>
+                   <string notr="true">fan level 0</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -1599,7 +1609,7 @@
                    </sizepolicy>
                   </property>
                   <property name="text">
-                   <string notr="true">0%</string>
+                   <string notr="true">fan level 0</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -2084,13 +2094,6 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="1">
-           <widget class="QPushButton" name="WriteValueButton">
-            <property name="text">
-             <string notr="true">Write Value</string>
-            </property>
-           </widget>
-          </item>
           <item row="1" column="0">
            <widget class="QLineEdit" name="addressEdit"/>
           </item>
@@ -2164,7 +2167,6 @@
   <tabstop>ValueSpinBox</tabstop>
   <tabstop>addressEdit</tabstop>
   <tabstop>ReadValueButton</tabstop>
-  <tabstop>WriteValueButton</tabstop>
   <tabstop>balancedBatteryRadioButton</tabstop>
   <tabstop>customBatteryApplyButton</tabstop>
  </tabstops>

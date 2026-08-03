@@ -41,7 +41,7 @@ If your device is not on the list, follow the steps on the `msi-ec` github page 
 
 - If you're not installing from the packages, You'll need to install `libqt6widgets6` or its equivalent on your distribution (`qt6-base` for example). **the application will fail to open without it!** 
 
-- To get temperature and fan curve support, you'll need to install `ec_sys`, which comes installed on most distributions, or `acpi_sys` (fedora) with `write_support=1`. the app can still work with only `msi-ec` installed.
+- Fan control and performance modes use the typed `msi-ec` driver ABI. Keep raw EC write support disabled: the optional `ec_sys`/`acpi_ec` interface is used only for read-only legacy temperature and RPM diagnostics. The application can work with only `msi-ec` installed.
 
 ### Installation from packages
 <details open>

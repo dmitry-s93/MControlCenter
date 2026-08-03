@@ -36,9 +36,7 @@ public:
     std::optional<int> getOptionalValue(int address) const;
     int getValue(int address) const;
     QByteArray getValues(int startAddress, int size) const;
-    void putValue(int address, int value);
-    void quit();
-    QDBusInterface *iface;
+    QDBusInterface *iface = nullptr;
 private:
     void printError(QDBusError const & error) const;
 private slots:

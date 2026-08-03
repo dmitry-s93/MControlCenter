@@ -18,6 +18,7 @@
 
 #include "msi-ec_helper.h"
 #include "helper/service.h"
+#include "helper/authorization.h"
 #include "mainwindow.h"
 
 #include <QDBusReply>
@@ -27,7 +28,12 @@ MsiEcHelper::MsiEcHelper() {
         fprintf(stderr, "Cannot connect to the D-Bus system bus");
         return;
     }
-    iface = new QDBusInterface(SERVICE_NAME, "/msi_ec", INTERFACE_NAME_MSI_EC, QDBusConnection::systemBus());
+    iface = new QDBusInterface(SERVICE_NAME, "/msi_ec", INTERFACE_NAME_MSI_EC,
+                               QDBusConnection::systemBus(), this);
+    iface->setTimeout(FAN_DBUS_TIMEOUT_MS);
+    // Authentication dialogs are owned by the client-side pkcheck preflight,
+    // never by a privileged helper D-Bus call.
+    iface->setInteractiveAuthorizationAllowed(false);
 }
 
 bool MsiEcHelper::isMsiEcModuleLoaded() {
@@ -45,7 +51,7 @@ bool MsiEcHelper::getWebcam() const {
 }
 
 void MsiEcHelper::setWebcam(bool enabled) const {
-    setValue<bool>("setWebcam", enabled);
+    (void)setValue<bool>("setWebcam", enabled);
 }
 
 //////////////// webcam_block ////////////////
@@ -59,7 +65,7 @@ bool MsiEcHelper::getWebcamBlock() const {
 }
 
 void MsiEcHelper::setWebcamBlock(bool enabled) const {
-    setValue<bool>("setWebcamBlock", enabled);
+    (void)setValue<bool>("setWebcamBlock", enabled);
 }
 
 //////////////// fn_win_swap ////////////////
@@ -72,8 +78,13 @@ bool MsiEcHelper::getFnWinSwap() const {
     return getValue<bool>("getFnWinSwap", false);
 }
 
-void MsiEcHelper::setFnWinSwap(bool swap) const {
-    setValue<bool>("setFnWinSwap", swap);
+bool MsiEcHelper::setFnWinSwap(bool swap) const {
+    if (!iface || !preauthorizeHardwareMutation())
+        return false;
+    if (QDBusReply<bool> reply = iface->call("setFnWinSwap", swap); reply.isValid())
+        return reply.value();
+    printError(iface->lastError());
+    return false;
 }
 
 //////////////// cooler_boost ////////////////
@@ -87,7 +98,7 @@ bool MsiEcHelper::getCoolerBoost() const {
 }
 
 void MsiEcHelper::setCoolerBoost(bool enable) const {
-    setValue<bool>("setCoolerBoost", enable);
+    (void)setValue<bool>("setCoolerBoost", enable);
 }
 
 //////////////// shift_mode ////////////////
@@ -125,7 +136,7 @@ shift_mode MsiEcHelper::getShiftMode() const {
         return shift_mode::unknown_mode;
 }
 
-void MsiEcHelper::setShiftMode(shift_mode mode) const {
+bool MsiEcHelper::setShiftMode(shift_mode mode) const {
     QString modeStr;
     switch(mode) {
         case shift_mode::eco_mode:
@@ -141,9 +152,14 @@ void MsiEcHelper::setShiftMode(shift_mode mode) const {
             modeStr = "turbo";
             break;
         case shift_mode::unknown_mode:
-            return;
+            return false;
         }
-    setValue<QString>("setShiftMode", modeStr);
+    if (!iface || !preauthorizeHardwareMutation())
+        return false;
+    if (QDBusReply<bool> reply = iface->call("setShiftMode", modeStr); reply.isValid())
+        return reply.value();
+    printError(iface->lastError());
+    return false;
 }
 
 //////////////// super_battery ////////////////
@@ -156,8 +172,13 @@ bool MsiEcHelper::getSuperBattery() const {
     return getValue<bool>("getSuperBattery", false);
 }
 
-void MsiEcHelper::setSuperBattery(bool enable) const {
-    setValue<bool>("setSuperBattery", enable);
+bool MsiEcHelper::setSuperBattery(bool enable) const {
+    if (!iface || !preauthorizeHardwareMutation())
+        return false;
+    if (QDBusReply<bool> reply = iface->call("setSuperBattery", enable); reply.isValid())
+        return reply.value();
+    printError(iface->lastError());
+    return false;
 }
 
 //////////////// fan_mode ////////////////
@@ -196,7 +217,7 @@ fan_mode MsiEcHelper::getFanMode() const {
         return fan_mode::unknown_fan_mode;
 }
 
-void MsiEcHelper::setFanMode(fan_mode mode) const {
+bool MsiEcHelper::setFanMode(fan_mode mode) const {
     QString modeStr;
     switch (mode) {
         case fan_mode::auto_fan_mode:
@@ -212,9 +233,61 @@ void MsiEcHelper::setFanMode(fan_mode mode) const {
             modeStr = "advanced";
             break;
         default:
-            return;
+            return false;
     }
-    setValue<QString>("setFanMode", modeStr);
+    if (!iface || !preauthorizeHardwareMutation())
+        return false;
+    if (QDBusReply<bool> reply = iface->call("setFanMode", modeStr); reply.isValid())
+        return reply.value();
+    printError(iface->lastError());
+    return false;
+}
+
+FanCurveCapability MsiEcHelper::getFanCurveCapability() const {
+    if (!iface)
+        return {};
+    if (QDBusReply<QVariantMap> reply = iface->call("getFanCurveCapability"); reply.isValid())
+        return fanCurveCapabilityFromMap(reply.value());
+    printError(iface->lastError());
+    return {};
+}
+
+std::optional<FanCurveProfile> MsiEcHelper::getFanCurveProfile() const {
+    if (!iface)
+        return std::nullopt;
+    if (QDBusReply<QVariantMap> reply = iface->call("getFanCurveProfile"); reply.isValid()) {
+        const QVariantMap map = reply.value();
+        if (!map.value(QStringLiteral("readable"), map.value(QStringLiteral("valid"))).toBool())
+            return std::nullopt;
+        FanCurveProfile profile;
+        if (fanCurveProfileFromMap(map, &profile))
+            return profile;
+        return std::nullopt;
+    }
+    printError(iface->lastError());
+    return std::nullopt;
+}
+
+FanCurveResult MsiEcHelper::applyFanCurveTransaction(const FanCurveProfile &profile) const {
+    FanCurveResult result;
+    if (!iface || !preauthorizeHardwareMutation()) {
+        result.error = QStringLiteral("hardware authorization unavailable");
+        switch (getFanMode()) {
+        case fan_mode::auto_fan_mode: result.effectiveMode = QStringLiteral("auto"); break;
+        case fan_mode::silent_fan_mode: result.effectiveMode = QStringLiteral("silent"); break;
+        case fan_mode::basic_fan_mode: result.effectiveMode = QStringLiteral("basic"); break;
+        case fan_mode::advanced_fan_mode: result.effectiveMode = QStringLiteral("advanced"); break;
+        default: result.effectiveMode = QStringLiteral("unknown"); break;
+        }
+        result.rollbackStatus = QStringLiteral("not-attempted");
+        return result;
+    }
+    if (QDBusReply<QVariantMap> reply = iface->call("applyFanCurveTransaction", fanCurveProfileToMap(profile)); reply.isValid())
+        return fanCurveResultFromMap(reply.value());
+    printError(iface->lastError());
+    result.error = QStringLiteral("fan transaction D-Bus call failed");
+    result.rollbackStatus = QStringLiteral("not-attempted");
+    return result;
 }
 
 //////////////// fw_version ////////////////
@@ -240,7 +313,7 @@ int MsiEcHelper::getCPURealtimeTemperature() const {
     return getValue<int>("getCPURealtimeTemperature", -1);
 }
 
-// cpu/realtime_fan_speed 0-100 (percent)
+// cpu/realtime_fan_speed: driver-reported fan level (not RPM)
 bool MsiEcHelper::hasCPURealtimeFanSpeed() const {
     return getValue<bool>("hasCPURealtimeFanSpeed", false);
 }
@@ -259,7 +332,7 @@ int MsiEcHelper::getCPUBasicFanSpeed() const {
 }
 
 void MsiEcHelper::setCPUBasicFanSpeed(int value) const {
-    setValue<int>("setCPUBasicFanSpeed", value);
+    (void)setValue<int>("setCPUBasicFanSpeed", value);
 }
 
 //////////////// GPU ////////////////
@@ -273,7 +346,7 @@ std::optional<int> MsiEcHelper::getGPURealtimeTemperature() const {
     return getOptionalValue<int>("getGPURealtimeTemperature");
 }
 
-// gpu/realtime_fan_speed 0-100 (percent)
+// gpu/realtime_fan_speed: driver-reported fan level (not RPM)
 bool MsiEcHelper::hasGPURealtimeFanSpeed() const {
     return getValue<bool>("hasGPURealtimeFanSpeed", false);
 }
@@ -294,7 +367,7 @@ int MsiEcHelper::getBatteryStartThreshold() const {
 }
 
 void MsiEcHelper::setBatteryStartThreshold(int value) const {
-    return setValue<int>("setBatteryStartThreshold", value);
+    (void)setValue<int>("setBatteryStartThreshold", value);
 }
 
 // BAT1/charge_control_end_threshold 0-100 (percent)
@@ -307,7 +380,7 @@ int MsiEcHelper::getBatteryEndThreshold() const {
 }
 
 void MsiEcHelper::setBatteryEndThreshold(int value) const {
-    return setValue<int>("setBatteryEndThreshold", value);
+    (void)setValue<int>("setBatteryEndThreshold", value);
 }
 
 // BAT1/capacity 0-100 (percent)
@@ -340,7 +413,7 @@ int MsiEcHelper::getKeyboardBacklightBrightness() const {
 }
 
 void MsiEcHelper::setKeyboardBacklightBrightness(int value) const {
-    return setValue<int>("setKeyboardBacklightBrightness", value);
+    (void)setValue<int>("setKeyboardBacklightBrightness", value);
 }
 
 ////////////////////////////////
@@ -352,6 +425,8 @@ void MsiEcHelper::printError(QDBusError const &error) const {
 
 template <typename T>
 inline std::optional<T> MsiEcHelper::getOptionalValue(QString method) const {
+    if (!iface)
+        return std::nullopt;
     if (QDBusReply<T> reply = iface->call(method); reply.isValid())
         return reply.value();
     printError(iface->lastError());
@@ -364,7 +439,10 @@ inline T MsiEcHelper::getValue(QString method, T defaultValue) const {
 }
 
 template <typename T>
-void MsiEcHelper::setValue(QString method, T value) const {
+bool MsiEcHelper::setValue(QString method, T value) const {
+    if (!iface || !preauthorizeHardwareMutation())
+        return false;
     iface->call(method, value);
     printError(iface->lastError());
+    return !iface->lastError().isValid();
 }

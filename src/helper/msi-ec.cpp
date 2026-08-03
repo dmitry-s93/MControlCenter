@@ -17,7 +17,9 @@
  */
 
 #include "msi-ec.h"
+#include "authorization.h"
 #include <QFile>
+#include <utility>
 
 // Available entries: https://github.com/BeardOverflow/msi-ec?tab=readme-ov-file#usage
 const QString msi_ec_path = "/sys/devices/platform/msi-ec";
@@ -46,6 +48,10 @@ const QString msi_ec_bat1_status = msi_ec_bat1 + "/status";
 // /sys/class/leds/platform::<led_name>/brightness
 const QString msi_ec_kbd_backlight_brightness = "/sys/class/leds/msiacpi::kbd_backlight/brightness";
 
+MsiEc::MsiEc(DBusContextObject &parent, QString sysfsRoot)
+    : QDBusAbstractAdaptor(&parent), context(parent),
+      fanCurveBackend(sysfsRoot.isEmpty() ? QStringLiteral("/sys/devices/platform/msi-ec") : std::move(sysfsRoot)) {}
+
 QString MsiEc::readFile(QString path) const {
     if (QFile file(path); file.exists() && file.open(QIODevice::ReadOnly)) {
         // Remove only the last '\n'
@@ -58,10 +64,12 @@ bool MsiEc::readFileOnOff(QString path) const {
     return readFile(path) == "on";
 }
 
-void MsiEc::writeFile(QString path, QString value) const {
-    if (QFile file(path); file.exists() && file.open(QIODevice::WriteOnly)) {
-        file.write(value.toUtf8());
-    }
+bool MsiEc::writeFile(QString path, QString value) const {
+    if (!authorizeHardwareMutation(context.callContext()))
+        return false;
+    if (QFile file(path); file.exists() && file.open(QIODevice::WriteOnly))
+        return file.write(value.toUtf8()) == value.toUtf8().size();
+    return false;
 }
 
 void MsiEc::writeFileOnOff(QString path, bool on) const {
@@ -108,8 +116,12 @@ bool MsiEc::hasFnKey() const {
 QString MsiEc::getFnKey() const {
     return readFile(msi_ec_fn_key);
 }
-void MsiEc::setFnKey(QString side) const {
-    writeFile(msi_ec_fn_key, side);
+bool MsiEc::setFnKey(QString side) const {
+    if (side != QStringLiteral("left") && side != QStringLiteral("right")) {
+        context.sendCallError(QDBusError::InvalidArgs, QStringLiteral("invalid Fn key side"));
+        return false;
+    }
+    return writeFile(msi_ec_fn_key, side);
 }
 
 //////////////// win_key ////////////////
@@ -137,8 +149,10 @@ bool MsiEc::getFnWinSwap() const {
     // (e.g. with a file fn_win_swap)
     return getFnKey() == "left";
 }
-void MsiEc::setFnWinSwap(bool swap) const {
-    setFnKey(swap ? "left" : "right");
+bool MsiEc::setFnWinSwap(bool swap) const {
+    if (!setFnKey(swap ? QStringLiteral("left") : QStringLiteral("right")))
+        return false;
+    return getFnWinSwap() == swap;
 }
 
 //////////////// cooler_boost ////////////////
@@ -164,8 +178,15 @@ QString MsiEc::getAvailableShiftModes() const {
 QString MsiEc::getShiftMode() const {
     return readFile(msi_ec_shift_mode);
 }
-void MsiEc::setShiftMode(QString mode) const {
-    writeFile(msi_ec_shift_mode, mode);
+bool MsiEc::setShiftMode(QString mode) const {
+    if (mode != QStringLiteral("eco") && mode != QStringLiteral("comfort") &&
+        mode != QStringLiteral("sport") && mode != QStringLiteral("turbo")) {
+        context.sendCallError(QDBusError::InvalidArgs, QStringLiteral("invalid shift mode"));
+        return false;
+    }
+    if (!writeFile(msi_ec_shift_mode, mode))
+        return false;
+    return getShiftMode() == mode;
 }
 
 //////////////// super_battery ////////////////
@@ -176,8 +197,10 @@ bool MsiEc::hasSuperBattery() const {
 bool MsiEc::getSuperBattery() const {
     return readFileOnOff(msi_ec_super_battery);
 }
-void MsiEc::setSuperBattery(bool enable) const {
-    writeFileOnOff(msi_ec_super_battery, enable);
+bool MsiEc::setSuperBattery(bool enable) const {
+    if (!writeFile(msi_ec_super_battery, enable ? QStringLiteral("on") : QStringLiteral("off")))
+        return false;
+    return getSuperBattery() == enable;
 }
 
 //////////////// fan_mode ////////////////
@@ -191,8 +214,67 @@ QString MsiEc::getAvailableFanModes() const {
 QString MsiEc::getFanMode() const {
     return readFile(msi_ec_fan_mode);
 }
-void MsiEc::setFanMode(QString mode) const {
-    writeFile(msi_ec_fan_mode, mode);
+bool MsiEc::setFanMode(QString mode) const {
+    // Reject malformed requests before any PolicyKit invocation. An invalid
+    // D-Bus call must not trigger authentication UI or consume the helper's
+    // authorization timeout.
+    if (mode != QStringLiteral("auto") && mode != QStringLiteral("silent") &&
+        mode != QStringLiteral("basic") && mode != QStringLiteral("advanced")) {
+        context.sendCallError(QDBusError::InvalidArgs, QStringLiteral("invalid fan mode"));
+        return false;
+    }
+    if (!authorizeHardwareMutation(context.callContext())) {
+        context.sendCallError(QDBusError::AccessDenied,
+                              QStringLiteral("PolicyKit authorization required"));
+        return false;
+    }
+    QString error;
+    if (!writeFanModeVerified(fanCurveBackend, mode, &error))
+        return false;
+    return true;
+}
+
+//////////////// fan curve ////////////////
+
+QVariantMap MsiEc::getFanCurveCapability() const {
+    return fanCurveCapabilityToMap(fanCurveBackend.capability());
+}
+
+QVariantMap MsiEc::getFanCurveProfile() const {
+    FanCurveProfile profile;
+    QString error;
+    const FanCurveCapability capability = fanCurveBackend.capability();
+    if (!capability.complete() || !fanCurveBackend.readProfile(&profile, &error))
+        return {{QStringLiteral("readable"), false}, {QStringLiteral("error"), error}};
+    // Readability is distinct from strict validity. A complete device profile
+    // remains available for repair even when values are out of range or badly
+    // ordered; Apply performs the strict validation.
+    QVariantMap result = fanCurveProfileToMap(profile);
+    result.insert(QStringLiteral("readable"), true);
+    result.insert(QStringLiteral("valid"), validateFanCurve(capability, profile).isEmpty());
+    if (const QString validationError = validateFanCurve(capability, profile); !validationError.isEmpty())
+        result.insert(QStringLiteral("error"), validationError);
+    return result;
+}
+
+QVariantMap MsiEc::applyFanCurveTransaction(const QVariantMap &profileMap) const {
+    if (!authorizeHardwareMutation(context.callContext())) {
+        FanCurveResult denied;
+        denied.error = QStringLiteral("PolicyKit authorization required");
+        denied.rollbackStatus = QStringLiteral("not-attempted");
+        denied.effectiveMode = fanCurveBackend.readMode();
+        return fanCurveResultToMap(denied);
+    }
+    FanCurveProfile profile;
+    FanCurveResult result;
+    if (!fanCurveProfileFromMap(profileMap, &profile)) {
+        result.error = QStringLiteral("malformed fan curve profile");
+        result.effectiveMode = fanCurveBackend.readMode();
+        result.rollbackStatus = QStringLiteral("not-attempted");
+        return fanCurveResultToMap(result);
+    }
+    FanCurveTransaction transaction(fanCurveBackend);
+    return fanCurveResultToMap(transaction.apply(profile));
 }
 
 //////////////// fw_version ////////////////
@@ -217,7 +299,7 @@ int MsiEc::getCPURealtimeTemperature() const {
     return readFile(msi_ec_cpu_realtime_temperature).toInt();
 }
 
-// cpu/realtime_fan_speed 0-100 (percent)
+// cpu/realtime_fan_speed: driver-reported fan level (not RPM)
 bool MsiEc::hasCPURealtimeFanSpeed() const {
     return QFile::exists(msi_ec_cpu_realtime_fan_speed);
 }
@@ -246,7 +328,7 @@ int MsiEc::getGPURealtimeTemperature() const {
     return readFile(msi_ec_gpu_realtime_temperature).toInt();
 }
 
-// gpu/realtime_fan_speed 0-100 (percent)
+// gpu/realtime_fan_speed: driver-reported fan level (not RPM)
 bool MsiEc::hasGPURealtimeFanSpeed() const {
     return QFile::exists(msi_ec_gpu_realtime_fan_speed);
 }

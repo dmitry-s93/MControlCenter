@@ -31,15 +31,13 @@ class Helper : public QDBusAbstractAdaptor {
 Q_OBJECT
     Q_CLASSINFO("D-Bus Interface", INTERFACE_NAME)
 public:
-    explicit Helper(QObject *obj) : QDBusAbstractAdaptor(obj) {}
+    explicit Helper(DBusContextObject &obj) : QDBusAbstractAdaptor(&obj), context(obj) {}
 
-signals:
-    void aboutToQuit();
+private:
+    DBusContextObject &context;
 
 public slots:
-    Q_NOREPLY void quit() const;
     [[nodiscard]] QByteArray getData() const;
-    Q_NOREPLY void putValue(const int &address, const int &value) const;
     [[nodiscard]] bool isEcSysModuleLoaded() const;
     [[nodiscard]] bool loadEcSysModule() const;
 };

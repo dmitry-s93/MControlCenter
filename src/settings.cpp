@@ -17,7 +17,6 @@
  */
 
 #include <QSettings>
-#include <sstream>
 #include "settings.h"
 
 QSettings settings("MControlCenter");
@@ -26,15 +25,8 @@ QVariant Settings::getValue(const QString &key) {
     return settings.value(key);
 }
 
-QVector<int> Settings::getValueVector(const QString &key) {
-    QVector<int> value;
-    std::stringstream string_stream(settings.value(key).toString().toStdString());
-    while (string_stream.good()) {
-        std::string a;
-        getline(string_stream, a, '|');
-        value.append(std::stoi(a));
-    }
-    return value;
+QVector<int> Settings::getValueVector(const QString &key, bool *ok) {
+    return parseValueVector(settings.value(key).toString(), ok);
 }
 
 void Settings::setValue(const QString &key, const QVariant &value) {

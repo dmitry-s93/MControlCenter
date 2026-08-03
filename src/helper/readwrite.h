@@ -26,7 +26,6 @@ class ReadWrite {
 public:
     ReadWrite();
     QByteArray readFromFile() const;
-    void writeToFile(int pos, BYTE value) const;
     bool isAcpiEc() const;
     bool isEcSys() const;
 };

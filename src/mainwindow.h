@@ -84,16 +84,12 @@ private:
     QVector<int> getFan1TempValues() const;
     QVector<int> getFan2TempValues() const;
     void setFanSpeedSettings();
-    void setFanModeAdvanced(bool enabled) const;
+    void setFanModeAdvanced(bool enabled);
     void checkFanSettingsChanged() const;
 
     void showEvent(QShowEvent *event);
     void closeEvent(QCloseEvent *event);
     void quitApp() const;
-
-    QTimer timerSleepWatcher;
-    qint64 timeLastWatcherInterval = 0;
-    void timerSleepTimeout();
 
     void createTrayIcon();
     void createActions();
@@ -124,7 +120,7 @@ private:
 private slots:
     void on_ChargerStateChange(bool isCharging);
     void on_PowerProfileChange(const PowerProfile profile);
-
+    void onPrepareForSleep(bool sleeping);
     void on_bestMobilityRadioButton_toggled(bool checked);
     void on_balancedBatteryRadioButton_toggled(bool checked);
     void on_bestBatteryRadioButton_toggled(bool checked);
@@ -132,8 +128,6 @@ private slots:
     void on_customBatteryThresholdSpinBox_valueChanged(int arg1);
     void on_customBatteryApplyButton_clicked();
     void on_ReadValueButton_clicked();
-
-    void on_WriteValueButton_clicked() const;
 
     void on_usbPowerShareCheckBox_clicked(bool checked) const;
     void on_webCamCheckBox_clicked(bool checked) const;

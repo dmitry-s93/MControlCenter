@@ -17,6 +17,7 @@
  */
 
 #include "helper/service.h"
+#include "helper/authorization.h"
 #include "helper.h"
 #include "mainwindow.h"
 
@@ -34,10 +35,15 @@ Helper::Helper() {
         fprintf(stderr, "Cannot connect to the D-Bus system bus");
         return;
     }
-    iface = new QDBusInterface(SERVICE_NAME, "/", INTERFACE_NAME, QDBusConnection::systemBus());
+    iface = new QDBusInterface(SERVICE_NAME, "/", INTERFACE_NAME,
+                               QDBusConnection::systemBus(), this);
+    iface->setTimeout(FAN_DBUS_TIMEOUT_MS);
+    iface->setInteractiveAuthorizationAllowed(false);
 }
 
 bool Helper::isEcSysModuleLoaded() {
+    if (!iface)
+        return false;
     if (QDBusReply<bool> reply = iface->call("isEcSysModuleLoaded"); reply.isValid())
         return reply.value();
     printError(iface->lastError());
@@ -45,6 +51,8 @@ bool Helper::isEcSysModuleLoaded() {
 }
 
 bool Helper::loadEcSysModule() {
+    if (!iface || !preauthorizeHardwareMutation())
+        return false;
     if (QDBusReply<bool> reply = iface->call("loadEcSysModule"); reply.isValid())
         return reply.value();
     printError(iface->lastError());
@@ -52,6 +60,8 @@ bool Helper::loadEcSysModule() {
 }
 
 bool Helper::updateData() {
+    if (!iface)
+        return false;
     if (QDBusReply<QByteArray> reply = iface->call("getData"); reply.isValid() &&
                                                                reply.value().size() == EC_SPACE_SIZE) {
         ecData = reply.value();
@@ -62,6 +72,8 @@ bool Helper::updateData() {
 }
 
 void Helper::updateDataAsync() {
+    if (!iface)
+        return;
     QDBusPendingCall async = iface->asyncCall("getData");
     QDBusPendingCallWatcher const *watcher = new QDBusPendingCallWatcher(async, this);
 
@@ -92,18 +104,6 @@ int Helper::getValue(int address) const {
 
 QByteArray Helper::getValues(int startAddress, int size) const {
     return ecData.mid(startAddress, size);
-}
-
-void Helper::putValue(int address, int value) {
-    if (getValue(address) == value)
-        return;
-    iface->call("putValue", address, value);
-    printError(iface->lastError());
-}
-
-void Helper::quit() {
-    iface->call("quit");
-    printError(iface->lastError());
 }
 
 void Helper::printError(QDBusError const & error) const {

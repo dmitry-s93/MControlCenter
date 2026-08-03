@@ -16,6 +16,33 @@
  * with MControlCenter. If not, see <https://www.gnu.org/licenses/>.
  */
 
+#ifndef MCONTROL_CENTER_SERVICE_H
+#define MCONTROL_CENTER_SERVICE_H
+
+#include <QObject>
+#include <QtDBus/QDBusContext>
+#include <QtDBus/QDBusError>
+
 #define SERVICE_NAME "mcontrolcenter.helper"
 #define INTERFACE_NAME "dmitry_s93.MControlCenter"
 #define INTERFACE_NAME_MSI_EC "BeardOverflow.msi_ec"
+
+// Qt attaches QDBusContext to the QObject registered with registerObject(),
+// not to a QDBusAbstractAdaptor attached to that object. Adaptors must use
+// this registered owner's context for caller identity and error replies.
+class DBusContextObject final : public QObject, protected QDBusContext {
+    Q_OBJECT
+public:
+    explicit DBusContextObject(QObject *parent = nullptr) : QObject(parent) {}
+
+    [[nodiscard]] const QDBusContext &callContext() const noexcept { return *this; }
+
+    bool sendCallError(QDBusError::ErrorType type, const QString &message) const {
+        if (!calledFromDBus())
+            return false;
+        sendErrorReply(type, message);
+        return true;
+    }
+};
+
+#endif // MCONTROL_CENTER_SERVICE_H

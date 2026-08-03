@@ -19,27 +19,16 @@
 #include "helper.h"
 #include "msi-ec.h"
 #include "readwrite.h"
+#include "authorization.h"
 #include <QCoreApplication>
 #include <QDBusConnection>
 #include <QDBusError>
 #include <QProcess>
-#include <QTimer>
 
 ReadWrite rw;
 
-void Helper::quit() const {
-    QTimer::singleShot(0, QCoreApplication::instance(), &QCoreApplication::quit);
-}
-
 QByteArray Helper::getData() const {
     return rw.readFromFile();
-}
-
-void Helper::putValue(const int &address, const int &value) const {
-    if (value >= 0 && value <= 255)
-        rw.writeToFile(address, value);
-    else
-        fprintf(stderr, "tried to input invalid value. Address: %d, value: %d\n", address, value);
 }
 
 bool Helper::isEcSysModuleLoaded() const {
@@ -55,9 +44,16 @@ bool Helper::isEcSysModuleLoaded() const {
 }
 
 bool Helper::loadEcSysModule() const {
+    if (!authorizeHardwareMutation(context.callContext())) {
+        context.sendCallError(QDBusError::AccessDenied,
+                              QStringLiteral("PolicyKit authorization required"));
+        return false;
+    }
     fprintf(stderr, "%s\n", qPrintable("Trying to load the ec_sys kernel module"));
     auto *process = new QProcess();
-    process->start("sh", QStringList() << "-c" << "/usr/sbin/modprobe ec_sys write_support=1 2>&1");
+    // Raw EC writes are intentionally unavailable. Load ec_sys read-only so
+    // diagnostics can continue without enabling any debugfs write support.
+    process->start("/usr/sbin/modprobe", QStringList() << "ec_sys");
     process->waitForFinished(1000);
     if (QByteArray output = process->readAllStandardOutput(); output != "")
         fprintf(stderr, "%s", qPrintable(output));
@@ -69,14 +65,13 @@ bool Helper::loadEcSysModule() const {
 int main(int argc, char *argv[]) {
     QCoreApplication a(argc, argv);
 
-    QObject obj;
-    auto *helper = new Helper(&obj);
-    QObject::connect(&a, &QCoreApplication::aboutToQuit, helper, &Helper::aboutToQuit);
+    DBusContextObject obj;
+    auto *helper = new Helper(obj);
     helper->setProperty("value", "initial value");
     QDBusConnection::systemBus().registerObject("/", &obj);
 
-    QObject objMsiEc;
-    auto *helperMsiEc = new MsiEc(&objMsiEc);
+    DBusContextObject objMsiEc;
+    auto *helperMsiEc = new MsiEc(objMsiEc);
     QDBusConnection::systemBus().registerObject("/msi_ec", &objMsiEc);
 
     if (!QDBusConnection::systemBus().registerService(SERVICE_NAME)) {

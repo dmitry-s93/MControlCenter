@@ -20,7 +20,10 @@
 #define OPERATE_H
 
 
+#include "fan_curve.h"
+#include "user_mode_policy.h"
 #include <string>
+#include <optional>
 #include <QVector>
 
 enum class charging_state {
@@ -39,14 +42,6 @@ enum class shift_mode {
     unknown_mode
 };
 
-enum class user_mode {
-    performance_mode,
-    balanced_mode,
-    silent_mode,
-    super_battery_mode,
-    unknown_mode
-};
-
 enum class fan_mode {
     auto_fan_mode,
     silent_fan_mode,
@@ -58,7 +53,6 @@ enum class fan_mode {
 class Operate {
 public:
     Operate();
-    void closeHelperApp() const;
     [[nodiscard]] bool isEcSysModuleLoaded() const;
     [[nodiscard]] bool isMsiEcLoaded() const;
     [[nodiscard]] bool loadEcSysModule() const;
@@ -72,12 +66,17 @@ public:
     [[nodiscard]] charging_state getChargingStatus() const;
     [[nodiscard]] int getCpuTemp() const;
     [[nodiscard]] std::optional<int> getGpuTemp() const;
-    [[nodiscard]] int getFan1Speed() const;
+    [[nodiscard]] std::optional<int> getFan1Speed() const;
     [[nodiscard]] std::optional<int> getFan2Speed() const;
     [[nodiscard]] QVector<int> getFan1SpeedSettings() const;
     [[nodiscard]] QVector<int> getFan2SpeedSettings() const;
     [[nodiscard]] QVector<int> getFan1TempSettings() const;
     [[nodiscard]] QVector<int> getFan2TempSettings() const;
+    [[nodiscard]] FanCurveCapability getFanCurveCapability() const;
+    [[nodiscard]] std::optional<FanCurveProfile> getFanCurveProfile() const;
+    [[nodiscard]] FanCurveResult applyFanCurve(const FanCurveProfile &profile) const;
+    [[nodiscard]] bool hasVerifiedSavedFanCurve() const;
+    [[nodiscard]] std::optional<FanCurveResult> reconcileFanCurvePreference() const;
 
     [[nodiscard]] int getKeyboardBacklightMode() const;
     [[nodiscard]] int getKeyboardBrightness() const;
@@ -93,30 +92,33 @@ public:
     void setKeyboardBrightness(int value) const;
     void setUsbPowerShareState(bool enabled) const;
     void setWebCamState(bool enabled) const;
-    void setFnSuperSwapState(bool enabled) const;
+    [[nodiscard]] bool setFnSuperSwapState(bool enabled) const;
     void setCoolerBoostState(bool enabled) const;
-    void setUserMode(user_mode userMode) const;
+    bool setUserMode(user_mode userMode) const;
     void setFan1SpeedSettings(QVector<int> value) const;
     void setFan2SpeedSettings(QVector<int> value) const;
     void setFan1TempSettings(QVector<int> value) const;
     void setFan2TempSettings(QVector<int> value) const;
     void setFanMode(int value) const;
-    void setFanModeAdvanced(bool enabled) const;
+    bool setFanModeAdvanced(bool enabled) const;
 
     [[nodiscard]] int getValue(int address) const;
-    void setValue(int address, int value) const;
 
     [[nodiscard]] bool isBatteryThresholdSupport() const;
     [[nodiscard]] bool isKeyboardBacklightModeSupport() const;
     [[nodiscard]] bool isKeyboardBacklightSupport() const;
     [[nodiscard]] bool isUsbPowerShareSupport() const;
     [[nodiscard]] bool isWebCamOffSupport() const;
+    [[nodiscard]] bool isFnSuperSwapSupport() const;
+    [[nodiscard]] bool isCoolerBoostSupport() const;
 
-    void loadSettings() const;
-    void handleWakeEvent() const;
+    [[nodiscard]] std::optional<FanCurveResult> loadSettings() const;
+    [[nodiscard]] std::optional<FanCurveResult> handleWakeEvent() const;
 
     void putSuperBatteryModeValue(bool enabled) const;
 private:
+    [[nodiscard]] bool readVerifiedSavedFanCurve(FanCurveProfile *profile) const;
+    [[nodiscard]] QString savedFanCurveKey(const QString &suffix) const;
     int detectFan1Address() const;
     int detectBatteryThresholdAddress() const;
     int detectFanModeAddress() const;

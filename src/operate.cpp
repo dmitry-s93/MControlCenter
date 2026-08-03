@@ -72,12 +72,21 @@ const int fanModeBasic = 0x4D;
 const int fanModeAdvanced = 0x8D;
 
 const QString settingsGroup = "Settings/";
+const QString fanCurveSettingsGroup = "Settings/FanCurve/";
+
+namespace {
+QString fanModeString(fan_mode mode) {
+    switch (mode) {
+    case fan_mode::auto_fan_mode: return QStringLiteral("auto");
+    case fan_mode::silent_fan_mode: return QStringLiteral("silent");
+    case fan_mode::basic_fan_mode: return QStringLiteral("basic");
+    case fan_mode::advanced_fan_mode: return QStringLiteral("advanced");
+    default: return QStringLiteral("unknown");
+    }
+}
+}
 
 Operate::Operate() = default;
-
-void Operate::closeHelperApp() const {
-    helper.quit();
-}
 
 bool Operate::isEcSysModuleLoaded() const {
     return helper.isEcSysModuleLoaded();
@@ -92,11 +101,15 @@ bool Operate::loadEcSysModule() const {
 }
 
 bool Operate::updateEcData() const {
-    return helper.updateData();
+    if (helper.isEcSysModuleLoaded())
+        return helper.updateData() || msiEcHelper.isMsiEcModuleLoaded();
+    // Typed msi_ec controls remain fully usable without raw EC diagnostics.
+    return msiEcHelper.isMsiEcModuleLoaded();
 }
 
 void Operate::updateEcDataAsync() const {
-    helper.updateDataAsync();
+    if (helper.isEcSysModuleLoaded())
+        helper.updateDataAsync();
 }
 
 bool Operate::doProbe() const {
@@ -169,18 +182,23 @@ std::optional<int> Operate::getGpuTemp() const {
         return helper.getValue(gpuTempAddress);
 }
 
-int Operate::getFan1Speed() const {
-    // Read 2 bytes (big-endian)
-    int value0 = helper.getValue(fan1Address);
-    int value1 = helper.getValue(fan1Address - 1);
-    int value = (value1 << 8) | value0;
-    if (value > 0)
-        return 480000 / value;
-    return value;
+std::optional<int> Operate::getFan1Speed() const {
+    // msi-ec realtime_fan_speed is a level-like byte, not RPM. The RPM UI is
+    // populated only by the optional read-only EC tachometer diagnostics.
+    if (!helper.isEcSysModuleLoaded())
+        return std::nullopt;
+    const auto value0 = helper.getOptionalValue(fan1Address);
+    const auto value1 = helper.getOptionalValue(fan1Address - 1);
+    if (!value0.has_value() || !value1.has_value())
+        return std::nullopt;
+    const int value = (value1.value() << 8) | value0.value();
+    return value > 0 ? std::optional<int>(480000 / value) : std::optional<int>(value);
 }
 
 std::optional<int> Operate::getFan2Speed() const {
-    if (msiEcHelper.isMsiEcModuleLoaded() && !msiEcHelper.hasGPURealtimeFanSpeed())
+    // msi-ec realtime_fan_speed is not RPM; use only optional raw EC
+    // tachometer diagnostics when ec_sys/acpi_ec is actually available.
+    if (!helper.isEcSysModuleLoaded())
         return std::nullopt;
     // Read 2 bytes (big-endian)
     auto value0 = helper.getOptionalValue(fan2Address);
@@ -194,35 +212,27 @@ std::optional<int> Operate::getFan2Speed() const {
 }
 
 QVector<int> Operate::getFan1SpeedSettings() const {
-    QVector<int> a;
-    for (int i = 0; i < fanSpeedSettingsCount; i++) {
-        a.push_back(helper.getValue(fan1SpeedSettingStartAddress + i));
-    }
-    return a;
+    if (const auto profile = getFanCurveProfile(); profile.has_value())
+        return profile->cpuLevels;
+    return {};
 }
 
 QVector<int> Operate::getFan2SpeedSettings() const {
-    QVector<int> a;
-    for (int i = 0; i < fanSpeedSettingsCount; i++) {
-        a.push_back(helper.getValue(fan2SpeedSettingStartAddress + i));
-    }
-    return a;
+    if (const auto profile = getFanCurveProfile(); profile.has_value())
+        return profile->gpuLevels;
+    return {};
 }
 
 QVector<int> Operate::getFan1TempSettings() const {
-    QVector<int> a;
-    for (int i = 0; i < fanTempSettingsCount; i++) {
-        a.push_back(helper.getValue(fan1TempSettingStartAddress + i));
-    }
-    return a;
+    if (const auto profile = getFanCurveProfile(); profile.has_value())
+        return profile->cpuThresholds;
+    return {};
 }
 
 QVector<int> Operate::getFan2TempSettings() const {
-    QVector<int> a;
-    for (int i = 0; i < fanTempSettingsCount; i++) {
-        a.push_back(helper.getValue(fan2TempSettingStartAddress + i));
-    }
-    return a;
+    if (const auto profile = getFanCurveProfile(); profile.has_value())
+        return profile->gpuThresholds;
+    return {};
 }
 
 int Operate::getKeyboardBacklightMode() const {
@@ -318,47 +328,91 @@ fan_mode Operate::getFanMode() const {
     }
 }
 
+FanCurveCapability Operate::getFanCurveCapability() const {
+    if (!msiEcHelper.isMsiEcModuleLoaded())
+        return {};
+    return msiEcHelper.getFanCurveCapability();
+}
+
+std::optional<FanCurveProfile> Operate::getFanCurveProfile() const {
+    if (!getFanCurveCapability().complete())
+        return std::nullopt;
+    return msiEcHelper.getFanCurveProfile();
+}
+
+FanCurveResult Operate::applyFanCurve(const FanCurveProfile &profile) const {
+    FanCurveResult result;
+    const FanCurveCapability capability = getFanCurveCapability();
+    if (const QString error = validateFanCurve(capability, profile); !error.isEmpty()) {
+        result.error = error;
+        result.effectiveMode = fanModeString(getFanMode());
+        result.rollbackStatus = QStringLiteral("not-attempted");
+        return result;
+    }
+    result = msiEcHelper.applyFanCurveTransaction(profile);
+    if (result.success) {
+        Settings::setValue(fanCurveSettingsGroup + QStringLiteral("Verified"), true);
+        Settings::setValue(fanCurveSettingsGroup + QStringLiteral("FirmwareVersion"),
+                           QString::fromStdString(getEcVersion()));
+        Settings::setValue(fanCurveSettingsGroup + QStringLiteral("FirmwareDate"),
+                           QString::fromStdString(getEcBuild()));
+        Settings::setValue(fanCurveSettingsGroup + QStringLiteral("CpuThresholds"), profile.cpuThresholds);
+        Settings::setValue(fanCurveSettingsGroup + QStringLiteral("CpuLevels"), profile.cpuLevels);
+        Settings::setValue(fanCurveSettingsGroup + QStringLiteral("GpuThresholds"), profile.gpuThresholds);
+        Settings::setValue(fanCurveSettingsGroup + QStringLiteral("GpuLevels"), profile.gpuLevels);
+        Settings::setValue(fanCurveSettingsGroup + QStringLiteral("Advanced"), true);
+    }
+    return result;
+}
+
+QString Operate::savedFanCurveKey(const QString &suffix) const {
+    return fanCurveSettingsGroup + suffix;
+}
+
+bool Operate::readVerifiedSavedFanCurve(FanCurveProfile *profile) const {
+    Settings settings;
+    if (!profile || !settings.getValue(savedFanCurveKey(QStringLiteral("Verified"))).toBool())
+        return false;
+    const QString savedVersion = settings.getValue(savedFanCurveKey(QStringLiteral("FirmwareVersion"))).toString();
+    const QString savedDate = settings.getValue(savedFanCurveKey(QStringLiteral("FirmwareDate"))).toString();
+    if (!fanCurveFirmwareMatches(savedVersion, savedDate,
+                                 QString::fromStdString(getEcVersion()),
+                                 QString::fromStdString(getEcBuild())))
+        return false;
+    auto readVector = [&](const QString &key, QVector<int> *values) {
+        bool ok = false;
+        *values = settings.getValueVector(key, &ok);
+        return ok;
+    };
+    return readVector(savedFanCurveKey(QStringLiteral("CpuThresholds")), &profile->cpuThresholds) &&
+           readVector(savedFanCurveKey(QStringLiteral("CpuLevels")), &profile->cpuLevels) &&
+           readVector(savedFanCurveKey(QStringLiteral("GpuThresholds")), &profile->gpuThresholds) &&
+           readVector(savedFanCurveKey(QStringLiteral("GpuLevels")), &profile->gpuLevels) &&
+           validateFanCurve(getFanCurveCapability(), *profile).isEmpty();
+}
+
+bool Operate::hasVerifiedSavedFanCurve() const {
+    FanCurveProfile profile;
+    return readVerifiedSavedFanCurve(&profile);
+}
+
 void Operate::setBatteryThreshold(int value) const {
     if (msiEcHelper.hasBatteryEndThreshold())
         return msiEcHelper.setBatteryEndThreshold(value);
-    if (value != getBatteryThreshold())
-        helper.putValue(batteryThresholdAddress, value + 128);
 }
 
 void Operate::setKeyboardBacklightMode(int value) const {
-    int resValue = keyboardBacklightAlwaysOn;
-    if (value == 1)
-        resValue = keyboardBacklightAutoTurnOff;
-    helper.putValue(keyboardBacklightModeAddress, resValue);
+    Q_UNUSED(value); // raw EC writes are intentionally unavailable
 }
 
 void Operate::setKeyboardBrightness(int value) const {
     if (msiEcHelper.hasKeyboardBacklightBrightness())
         return msiEcHelper.setKeyboardBacklightBrightness(value);
-    int resValue;
-    switch (value) {
-        case 0:
-            resValue = keyboardBacklight0ff;
-            break;
-        case 1:
-            resValue = keyboardBacklightLow;
-            break;
-        case 2:
-            resValue = keyboardBacklightMid;
-            break;
-        case 3:
-            resValue = keyboardBacklightHigh;
-            break;
-        default:
-            resValue = keyboardBacklight0ff;
-    }
-    helper.putValue(keyboardBacklightAddress, resValue);
+    Q_UNUSED(value); // unsupported without a typed msi-ec sysfs node
 }
 
 void Operate::setUsbPowerShareState(bool enabled) const {
-    int value = enabled ? usbPowerShareOn : usbPowerShareOff;
-    helper.putValue(usbPowerShareAddress, value);
-    Settings::setValue(settingsGroup + "UsbPowerShare", enabled);
+    Q_UNUSED(enabled); // arbitrary raw EC writes are unavailable
 }
 
 void Operate::setWebCamState(bool enabled) const {
@@ -366,27 +420,22 @@ void Operate::setWebCamState(bool enabled) const {
         return msiEcHelper.setWebcam(enabled);
 }
 
-void Operate::setFnSuperSwapState(bool enabled) const {
-    Settings::setValue(settingsGroup + "FnSuperSwap", enabled);
-    if (msiEcHelper.hasFnWinSwap())
-        return msiEcHelper.setFnWinSwap(enabled);
-    if (getFnSuperSwapState() == enabled)
-        return;
-    int value = helper.getValue(fnSuperSwapAddress) + (enabled ? 16 : -16);
-    helper.putValue(fnSuperSwapAddress, value);
+bool Operate::setFnSuperSwapState(bool enabled) const {
+    if (!msiEcHelper.hasFnWinSwap())
+        return false;
+    const bool verified = msiEcHelper.setFnWinSwap(enabled);
+    if (verified)
+        Settings::setValue(settingsGroup + QStringLiteral("FnSuperSwap"), enabled);
+    return verified;
 }
 
 void Operate::setCoolerBoostState(bool enabled) const {
     if (msiEcHelper.hasCoolerBoost())
         return msiEcHelper.setCoolerBoost(enabled);
-    int value = helper.getValue(coolerBoostAddress);
-    if (enabled && (value < 128))
-        helper.putValue(coolerBoostAddress, value + 128);
-    if (!enabled && (value > 127))
-        helper.putValue(coolerBoostAddress, value - 128);
+    Q_UNUSED(enabled); // unsupported without a typed msi-ec sysfs node
 }
 
-void Operate::setUserMode(user_mode userMode) const {
+bool Operate::setUserMode(user_mode userMode) const {
     shift_mode shiftMode = shift_mode::comfort_mode;
     fan_mode fanMode = fan_mode::auto_fan_mode;
     bool superBattery = false;
@@ -410,72 +459,79 @@ void Operate::setUserMode(user_mode userMode) const {
             userModeStr = "super_battery_mode";
             break;
         default:
-            return;
+            return false;
     }
 
-    if (msiEcHelper.hasShiftMode()) {
-        msiEcHelper.setShiftMode(shiftMode);
-    }
-    
-    if (msiEcHelper.hasFanMode()) {
-        msiEcHelper.setFanMode(fanMode);
-    }
+    bool verified = true;
+    if (msiEcHelper.hasShiftMode())
+        verified = msiEcHelper.setShiftMode(shiftMode) && verified;
+    if (msiEcHelper.hasFanMode())
+        verified = msiEcHelper.setFanMode(fanMode) && verified;
+    if (msiEcHelper.hasSuperBattery())
+        verified = msiEcHelper.setSuperBattery(superBattery) && verified;
 
-    if (msiEcHelper.hasSuperBattery()) {
-        msiEcHelper.setSuperBattery(superBattery);
-    }
+    Settings::setValue(settingsGroup + QStringLiteral("FanModeSetError"), !verified);
+    if (!verified)
+        return false;
 
-    Settings::setValue(settingsGroup + "UserMode", userModeStr);
+    Settings::setValue(settingsGroup + QStringLiteral("UserMode"), userModeStr);
+    // Silent and Super Battery must not inherit a stale Advanced preference.
+    if (userMode == user_mode::silent_mode || userMode == user_mode::super_battery_mode)
+        Settings::setValue(fanCurveSettingsGroup + QStringLiteral("Advanced"), false);
+    return true;
+}
+
+std::optional<FanCurveResult> Operate::reconcileFanCurvePreference() const {
+    Settings settings;
+    if (!settings.getValue(savedFanCurveKey(QStringLiteral("Advanced"))).toBool())
+        return std::nullopt;
+    FanCurveProfile profile;
+    if (!readVerifiedSavedFanCurve(&profile)) {
+        FanCurveResult result;
+        result.error = QStringLiteral("saved fan curve is unavailable or firmware-bound validation failed");
+        result.effectiveMode = QStringLiteral("unknown");
+        result.rollbackStatus = QStringLiteral("not-attempted");
+        return result;
+    }
+    return applyFanCurve(profile);
 }
 
 void Operate::setFan1SpeedSettings(QVector<int> value) const {
-    if (value.size() != fanSpeedSettingsCount)
-        return;
-    for (int i = 0; i < value.size(); i++) {
-        helper.putValue(fan1SpeedSettingStartAddress + i, value[i]);
-    }
-    Settings::setValue(settingsGroup + QString("fan1SpeedSettings"), value);
+    Q_UNUSED(value); // use applyFanCurve for one transactional operation
 }
 
 void Operate::setFan2SpeedSettings(QVector<int> value) const {
-    if (value.size() != fanSpeedSettingsCount)
-        return;
-    for (int i = 0; i < value.size(); i++) {
-        helper.putValue(fan2SpeedSettingStartAddress + i, value[i]);
-    }
-    Settings::setValue(settingsGroup + QString("fan2SpeedSettings"), value);
+    Q_UNUSED(value);
 }
 
 void Operate::setFan1TempSettings(QVector<int> value) const {
-    if (value.size() != fanTempSettingsCount)
-        return;
-    for (int i = 0; i < value.size(); i++) {
-        helper.putValue(fan1TempSettingStartAddress + i, value[i]);
-    }
-    Settings::setValue(settingsGroup + QString("fan1TempSettings"), value);
+    Q_UNUSED(value);
 }
 
 void Operate::setFan2TempSettings(QVector<int> value) const {
-    if (value.size() != fanTempSettingsCount)
-        return;
-    for (int i = 0; i < value.size(); i++) {
-        helper.putValue(fan2TempSettingStartAddress + i, value[i]);
-    }
-    Settings::setValue(settingsGroup + QString("fan2TempSettings"), value);
+    Q_UNUSED(value);
 }
 
 void Operate::setFanMode(int value) const {
-    if (helper.getValue(fanModeAddress) == fanModeAdvanced)
-        return;
-    helper.putValue(fanModeAddress, value);
+    Q_UNUSED(value); // raw EC fan mode writes are intentionally unavailable
 }
 
-void Operate::setFanModeAdvanced(bool enabled) const {
-    if (enabled)
-        helper.putValue(fanModeAddress, fanModeAdvanced);
-    else
-        helper.putValue(fanModeAddress, fanModeAuto);
-    Settings::setValue(settingsGroup + "fanModeAdvanced", enabled);
+bool Operate::setFanModeAdvanced(bool enabled) const {
+    if (!msiEcHelper.hasFanMode())
+        return false;
+    if (!enabled) {
+        if (!msiEcHelper.setFanMode(fan_mode::auto_fan_mode) ||
+            getFanMode() != fan_mode::auto_fan_mode)
+            return false;
+        Settings::setValue(fanCurveSettingsGroup + QStringLiteral("Advanced"), false);
+        return true;
+    }
+    FanCurveProfile profile;
+    if (const auto current = getFanCurveProfile(); current.has_value())
+        profile = *current;
+    else if (!readVerifiedSavedFanCurve(&profile))
+        return false;
+    return applyFanCurve(profile).success;
 }
 
 int Operate::getValue(int address) const {
@@ -483,22 +539,12 @@ int Operate::getValue(int address) const {
     return helper.getValue(address);
 }
 
-void Operate::setValue(int address, int value) const {
-    helper.putValue(address, value);
-}
-
 bool Operate::isBatteryThresholdSupport() const {
-    return msiEcHelper.hasBatteryEndThreshold() || batteryThresholdAddress != 0;
+    return msiEcHelper.hasBatteryEndThreshold();
 }
 
 bool Operate::isKeyboardBacklightModeSupport() const {
-    // Backlight mode is not available for all keyboard with backlight
-    
-    // Keep the same behaviour for devices with brightness at 0xD3
-    if (keyboardBacklightAddress == keyboardBacklightAddress_0xD3)
-        return true;
-    
-    // By security, we concider that devices with brightness at 0xF3 don't have backlight mode
+    // The old raw EC fallback is intentionally unavailable.
     return false;
 }
 
@@ -509,52 +555,91 @@ bool Operate::isKeyboardBacklightSupport() const {
 }
 
 bool Operate::isUsbPowerShareSupport() const {
-    return (helper.getValue(usbPowerShareAddress) == usbPowerShareOff ||
-            helper.getValue(usbPowerShareAddress) == usbPowerShareOn);
-}
-
-bool Operate::isWebCamOffSupport() const {
-    if (msiEcHelper.hasWebcamBlock())
-        return true;
+    // No typed msi-ec node exists in this ABI; do not expose a control that
+    // would silently attempt a removed raw EC write.
     return false;
 }
 
-void Operate::loadSettings() const {
-    Settings s;
-
-    if (getUserMode() != user_mode::unknown_mode && s.isValueExist(settingsGroup + "UserMode")) {
-        QString value = s.getValue(settingsGroup + "UserMode").toString();
-        if (value == "balanced_mode")
-            setUserMode(user_mode::balanced_mode);
-        else if (value == "performance_mode")
-            setUserMode(user_mode::performance_mode);
-        else if (value == "silent_mode")
-            setUserMode(user_mode::silent_mode);
-        else if (value == "super_battery_mode")
-            setUserMode(user_mode::super_battery_mode);
-    }
-
-    if (s.isValueExist(settingsGroup + "FnSuperSwap"))
-        setFnSuperSwapState(s.getValue(settingsGroup + "FnSuperSwap").toBool());
-    if (isUsbPowerShareSupport() && s.isValueExist(settingsGroup + "UsbPowerShare"))
-        setUsbPowerShareState(s.getValue(settingsGroup + "UsbPowerShare").toBool());
-
-    if (s.isValueExist(settingsGroup + "fan1SpeedSettings"))
-        setFan1SpeedSettings(s.getValueVector(settingsGroup + "fan1SpeedSettings"));
-    if (s.isValueExist(settingsGroup + "fan2SpeedSettings"))
-        setFan2SpeedSettings(s.getValueVector(settingsGroup + "fan2SpeedSettings"));
-    if (s.isValueExist(settingsGroup + "fan1TempSettings"))
-        setFan1TempSettings(s.getValueVector(settingsGroup + "fan1TempSettings"));
-    if (s.isValueExist(settingsGroup + "fan2TempSettings"))
-        setFan2TempSettings(s.getValueVector(settingsGroup + "fan2TempSettings"));
-    if (s.isValueExist(settingsGroup + "fanModeAdvanced"))
-        setFanModeAdvanced(s.getValue(settingsGroup + "fanModeAdvanced").toBool());
+bool Operate::isWebCamOffSupport() const {
+    // This checkbox controls the typed webcam state node used by the setter.
+    return msiEcHelper.hasWebcam();
 }
 
-void Operate::handleWakeEvent() const {
+bool Operate::isFnSuperSwapSupport() const {
+    return msiEcHelper.hasFnWinSwap();
+}
+
+bool Operate::isCoolerBoostSupport() const {
+    return msiEcHelper.hasCoolerBoost();
+}
+
+namespace {
+FanCurveResult preferenceFailure(const QString &error,
+                                 const QString &effectiveMode = QStringLiteral("unknown")) {
+    FanCurveResult result;
+    result.error = error;
+    result.effectiveMode = effectiveMode;
+    result.rollbackStatus = QStringLiteral("not-attempted");
+    return result;
+}
+}
+
+std::optional<FanCurveResult> Operate::loadSettings() const {
     Settings s;
-    if (s.isValueExist(settingsGroup + "fanModeAdvanced"))
-        setFanModeAdvanced(s.getValue(settingsGroup + "fanModeAdvanced").toBool());
+    std::optional<user_mode> savedMode;
+    const QString savedModeKey = settingsGroup + QStringLiteral("UserMode");
+
+    // Apply a validated saved mode first, even when firmware currently reports
+    // Unknown. A readback-verified setter is the source of truth. An absent
+    // mode does not prevent independent settings from being restored.
+    if (s.isValueExist(savedModeKey)) {
+        savedMode = parseSavedUserMode(s.getValue(savedModeKey).toString());
+        if (!savedMode.has_value())
+            return preferenceFailure(QStringLiteral("saved user mode is invalid"));
+        if (!setUserMode(*savedMode))
+            return preferenceFailure(QStringLiteral("saved user mode could not be verified"));
+    }
+
+    if (s.isValueExist(settingsGroup + QStringLiteral("FnSuperSwap")) &&
+        !setFnSuperSwapState(s.getValue(settingsGroup + QStringLiteral("FnSuperSwap")).toBool()))
+        return preferenceFailure(QStringLiteral("saved Fn/Super swap state could not be verified"));
+    if (isUsbPowerShareSupport() && s.isValueExist(settingsGroup + QStringLiteral("UsbPowerShare")))
+        setUsbPowerShareState(s.getValue(settingsGroup + QStringLiteral("UsbPowerShare")).toBool());
+
+    const bool advancedRequested = s.getValue(savedFanCurveKey(QStringLiteral("Advanced"))).toBool();
+    // Silent/Super Battery clear Advanced in setUserMode. Balanced/Performance
+    // may restore a complete, firmware-bound verified profile.
+    if (!advancedRequested || !savedMode.has_value() || !userModeMayOwnAdvanced(*savedMode))
+        return std::nullopt;
+    return reconcileFanCurvePreference();
+}
+
+std::optional<FanCurveResult> Operate::handleWakeEvent() const {
+    Settings s;
+    const QString savedModeKey = settingsGroup + QStringLiteral("UserMode");
+    if (!s.isValueExist(savedModeKey))
+        return std::nullopt;
+    const auto savedMode = parseSavedUserMode(s.getValue(savedModeKey).toString());
+    if (!savedMode.has_value())
+        return preferenceFailure(QStringLiteral("resume saved user mode is invalid"));
+
+    // The base mode owns resume. Restore and verify it before inspecting or
+    // applying any optional curve so Silent/Super Battery cannot be overridden.
+    if (!setUserMode(*savedMode))
+        return preferenceFailure(QStringLiteral("resume user mode could not be verified"));
+
+    const bool advancedRequested =
+        s.getValue(savedFanCurveKey(QStringLiteral("Advanced"))).toBool();
+    if (!advancedRequested || !userModeMayOwnAdvanced(*savedMode))
+        return std::nullopt;
+
+    FanCurveProfile profile;
+    if (!readVerifiedSavedFanCurve(&profile)) {
+        return preferenceFailure(
+            QStringLiteral("saved fan curve is unavailable or firmware-bound validation failed"),
+            fanModeString(getFanMode()));
+    }
+    return applyFanCurve(profile);
 }
 
 int Operate::detectFan1Address() const {

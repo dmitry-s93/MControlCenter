@@ -24,6 +24,7 @@
 #include <QtCore/QObject>
 #include <QtDBus/QDBusAbstractAdaptor>
 #include <QtDBus/QDBusVariant>
+#include "fan-curve.h"
 
 /**
  * Interface for [msi-ec by BeardOverflow](https://github.com/BeardOverflow/msi-ec/)
@@ -32,12 +33,14 @@ class MsiEc : public QDBusAbstractAdaptor {
     Q_OBJECT
     Q_CLASSINFO("D-Bus Interface", INTERFACE_NAME_MSI_EC)
 public:
-    explicit MsiEc(QObject *parent) : QDBusAbstractAdaptor(parent) {}
+    explicit MsiEc(DBusContextObject &parent, QString sysfsRoot = {});
 
 private:
+    DBusContextObject &context;
+    mutable SysfsFanCurveBackend fanCurveBackend;
     QString readFile(QString path) const;
     bool readFileOnOff(QString path) const;
-    void writeFile(QString path, QString value) const;
+    bool writeFile(QString path, QString value) const;
     void writeFileOnOff(QString path, bool on) const;
 
 public slots:
@@ -56,7 +59,7 @@ public slots:
     // fn_key left/right
     [[nodiscard]] bool hasFnKey() const;
     [[nodiscard]] QString getFnKey() const;
-    Q_NOREPLY void setFnKey(QString side) const;
+    [[nodiscard]] bool setFnKey(QString side) const;
     // win_key left/right
     [[nodiscard]] bool hasWinKey() const;
     [[nodiscard]] QString getWinKey() const;
@@ -64,7 +67,7 @@ public slots:
     // fn_win_swap swap/no swap
     [[nodiscard]] bool hasFnWinSwap() const;
     [[nodiscard]] bool getFnWinSwap() const;
-    Q_NOREPLY void setFnWinSwap(bool swap) const;
+    [[nodiscard]] bool setFnWinSwap(bool swap) const;
 
     // cooler_boost
     [[nodiscard]] bool hasCoolerBoost() const;
@@ -75,18 +78,23 @@ public slots:
     [[nodiscard]] bool hasShiftMode() const;
     [[nodiscard]] QString getAvailableShiftModes() const;
     [[nodiscard]] QString getShiftMode() const;
-    Q_NOREPLY void setShiftMode(QString mode) const;
+    [[nodiscard]] bool setShiftMode(QString mode) const;
 
     // super_battery
     [[nodiscard]] bool hasSuperBattery() const;
     [[nodiscard]] bool getSuperBattery() const;
-    Q_NOREPLY void setSuperBattery(bool enable) const;
+    [[nodiscard]] bool setSuperBattery(bool enable) const;
 
     // fan_mode & available_fan_modes
     [[nodiscard]] bool hasFanMode() const;
     [[nodiscard]] QString getAvailableFanModes() const;
     [[nodiscard]] QString getFanMode() const;
-    Q_NOREPLY void setFanMode(QString mode) const;
+    [[nodiscard]] bool setFanMode(QString mode) const;
+
+    // Complete fan-curve ABI. Advanced mode alone is not sufficient.
+    [[nodiscard]] QVariantMap getFanCurveCapability() const;
+    [[nodiscard]] QVariantMap getFanCurveProfile() const;
+    [[nodiscard]] QVariantMap applyFanCurveTransaction(const QVariantMap &profile) const;
 
     // fw_version
     [[nodiscard]] QString getFWVersion() const;
@@ -96,7 +104,7 @@ public slots:
     // cpu/realtime_temperature 0-100 (celsius scale)
     [[nodiscard]] bool hasCPURealtimeTemperature() const;
     [[nodiscard]] int getCPURealtimeTemperature() const;
-    // cpu/realtime_fan_speed 0-100 (percent)
+    // cpu/realtime_fan_speed: driver-reported fan level (not RPM)
     [[nodiscard]] bool hasCPURealtimeFanSpeed() const;
     [[nodiscard]] int getCPURealtimeFanSpeed() const;
     // cpu/basic_fan_speed 0-100 (percent)
@@ -107,7 +115,7 @@ public slots:
     // gpu/realtime_temperature 0-100 (celsius scale)
     [[nodiscard]] bool hasGPURealtimeTemperature() const;
     [[nodiscard]] int getGPURealtimeTemperature() const;
-    // gpu/realtime_fan_speed 0-100 (percent)
+    // gpu/realtime_fan_speed: driver-reported fan level (not RPM)
     [[nodiscard]] bool hasGPURealtimeFanSpeed() const;
     [[nodiscard]] int getGPURealtimeFanSpeed() const;
 

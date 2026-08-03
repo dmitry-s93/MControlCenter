@@ -22,6 +22,8 @@
 #include "settings.h"
 #include <QTimer>
 #include <QMessageBox>
+#include <QSignalBlocker>
+#include <QDBusConnection>
 
 Operate operate;
 PowerMonitor powerMonitor;
@@ -38,31 +40,31 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->advancedFanControlCheckBox, &QCheckBox::toggled, this, &MainWindow::setFanModeAdvanced);
 
     connect(ui->fan1Speed1Slider, &QSlider::valueChanged, this, [this]() {
-        ui->fan1Speed1Label->setText(QString("%1%").arg(ui->fan1Speed1Slider->value()));
+        ui->fan1Speed1Label->setText(QString(tr("fan level %1")).arg(ui->fan1Speed1Slider->value()));
         checkFanSettingsChanged();
     });
     connect(ui->fan1Speed2Slider, &QSlider::valueChanged, this, [this]() {
-        ui->fan1Speed2Label->setText(QString("%1%").arg(ui->fan1Speed2Slider->value()));
+        ui->fan1Speed2Label->setText(QString(tr("fan level %1")).arg(ui->fan1Speed2Slider->value()));
         checkFanSettingsChanged();
     });
     connect(ui->fan1Speed3Slider, &QSlider::valueChanged, this, [this]() {
-        ui->fan1Speed3Label->setText(QString("%1%").arg(ui->fan1Speed3Slider->value()));
+        ui->fan1Speed3Label->setText(QString(tr("fan level %1")).arg(ui->fan1Speed3Slider->value()));
         checkFanSettingsChanged();
     });
     connect(ui->fan1Speed4Slider, &QSlider::valueChanged, this, [this]() {
-        ui->fan1Speed4Label->setText(QString("%1%").arg(ui->fan1Speed4Slider->value()));
+        ui->fan1Speed4Label->setText(QString(tr("fan level %1")).arg(ui->fan1Speed4Slider->value()));
         checkFanSettingsChanged();
     });
     connect(ui->fan1Speed5Slider, &QSlider::valueChanged, this, [this]() {
-        ui->fan1Speed5Label->setText(QString("%1%").arg(ui->fan1Speed5Slider->value()));
+        ui->fan1Speed5Label->setText(QString(tr("fan level %1")).arg(ui->fan1Speed5Slider->value()));
         checkFanSettingsChanged();
     });
     connect(ui->fan1Speed6Slider, &QSlider::valueChanged, this, [this]() {
-        ui->fan1Speed6Label->setText(QString("%1%").arg(ui->fan1Speed6Slider->value()));
+        ui->fan1Speed6Label->setText(QString(tr("fan level %1")).arg(ui->fan1Speed6Slider->value()));
         checkFanSettingsChanged();
     });
     connect(ui->fan1Speed7Slider, &QSlider::valueChanged, this, [this]() {
-        ui->fan1Speed7Label->setText(QString("%1%").arg(ui->fan1Speed7Slider->value()));
+        ui->fan1Speed7Label->setText(QString(tr("fan level %1")).arg(ui->fan1Speed7Slider->value()));
         checkFanSettingsChanged();
     });
 
@@ -87,31 +89,31 @@ MainWindow::MainWindow(QWidget *parent)
     });
 
     connect(ui->fan2Speed1Slider, &QSlider::valueChanged, this, [this]() {
-        ui->fan2Speed1Label->setText(QString("%1%").arg(ui->fan2Speed1Slider->value()));
+        ui->fan2Speed1Label->setText(QString(tr("fan level %1")).arg(ui->fan2Speed1Slider->value()));
         checkFanSettingsChanged();
     });
     connect(ui->fan2Speed2Slider, &QSlider::valueChanged, this, [this]() {
-        ui->fan2Speed2Label->setText(QString("%1%").arg(ui->fan2Speed2Slider->value()));
+        ui->fan2Speed2Label->setText(QString(tr("fan level %1")).arg(ui->fan2Speed2Slider->value()));
         checkFanSettingsChanged();
     });
     connect(ui->fan2Speed3Slider, &QSlider::valueChanged, this, [this]() {
-        ui->fan2Speed3Label->setText(QString("%1%").arg(ui->fan2Speed3Slider->value()));
+        ui->fan2Speed3Label->setText(QString(tr("fan level %1")).arg(ui->fan2Speed3Slider->value()));
         checkFanSettingsChanged();
     });
     connect(ui->fan2Speed4Slider, &QSlider::valueChanged, this, [this]() {
-        ui->fan2Speed4Label->setText(QString("%1%").arg(ui->fan2Speed4Slider->value()));
+        ui->fan2Speed4Label->setText(QString(tr("fan level %1")).arg(ui->fan2Speed4Slider->value()));
         checkFanSettingsChanged();
     });
     connect(ui->fan2Speed5Slider, &QSlider::valueChanged, this, [this]() {
-        ui->fan2Speed5Label->setText(QString("%1%").arg(ui->fan2Speed5Slider->value()));
+        ui->fan2Speed5Label->setText(QString(tr("fan level %1")).arg(ui->fan2Speed5Slider->value()));
         checkFanSettingsChanged();
     });
     connect(ui->fan2Speed6Slider, &QSlider::valueChanged, this, [this]() {
-        ui->fan2Speed6Label->setText(QString("%1%").arg(ui->fan2Speed6Slider->value()));
+        ui->fan2Speed6Label->setText(QString(tr("fan level %1")).arg(ui->fan2Speed6Slider->value()));
         checkFanSettingsChanged();
     });
     connect(ui->fan2Speed7Slider, &QSlider::valueChanged, this, [this]() {
-        ui->fan2Speed7Label->setText(QString("%1%").arg(ui->fan2Speed7Slider->value()));
+        ui->fan2Speed7Label->setText(QString(tr("fan level %1")).arg(ui->fan2Speed7Slider->value()));
         checkFanSettingsChanged();
     });
 
@@ -159,8 +161,10 @@ MainWindow::MainWindow(QWidget *parent)
                                                                "Check the <About> page for more info."));
     }
 
-    if (!operate.isEcSysModuleLoaded() && !operate.loadEcSysModule())
-        QMessageBox::critical(nullptr, this->windowTitle(), tr("The ec_sys module couldn't be detected, it might be required to control the fans."));
+    // ec_sys/acpi_ec is optional read-only RPM diagnostics. Never autoload it
+    // when typed msi_ec is already active; msi_ec-only systems stay usable.
+    if (!operate.isMsiEcLoaded() && !operate.isEcSysModuleLoaded() && !operate.loadEcSysModule())
+        QMessageBox::critical(nullptr, this->windowTitle(), tr("The optional ec_sys module couldn't be detected; raw RPM diagnostics are unavailable."));
 
 
 
@@ -170,10 +174,13 @@ MainWindow::MainWindow(QWidget *parent)
     connect(realtimeUpdateTimer, &QTimer::timeout, this, &MainWindow::realtimeUpdate);
     setUpdateInterval(1000);
 
-    // Timer to detect sleep and reapply Advanced Mode Fan if necessary
-    connect(&timerSleepWatcher, &QTimer::timeout, this, &MainWindow::timerSleepTimeout);
-    timerSleepWatcher.setInterval(10 * 1000);
-    timerSleepWatcher.start();
+    // logind emits this signal across suspend/resume; timer-gap heuristics can
+    // miss short sleeps and do not identify firmware changes.
+    QDBusConnection::systemBus().connect(QStringLiteral("org.freedesktop.login1"),
+                                         QStringLiteral("/org/freedesktop/login1"),
+                                         QStringLiteral("org.freedesktop.login1.Manager"),
+                                         QStringLiteral("PrepareForSleep"), this,
+                                         SLOT(onPrepareForSleep(bool)));
 
     ui->QtVersionValue->setText(QT_VERSION_STR);
     ui->versionValueLabel->setText(MControlCenter_VERSION);
@@ -218,12 +225,14 @@ void MainWindow::setUpdateInterval(int msec) const {
 }
 
 void MainWindow::realtimeUpdate() {
-    operate.updateEcDataAsync();
+    // Do not issue raw EC reads when ec_sys/acpi_ec is absent.
+    if (operate.isEcSysModuleLoaded())
+        operate.updateEcDataAsync();
     updateData();
 }
 
 void MainWindow::updateData() {
-    if (!isUpdateDataError && (operate.isMsiEcLoaded() || operate.isEcSysModuleLoaded())) {
+    if (operate.isMsiEcLoaded() || (!isUpdateDataError && operate.isEcSysModuleLoaded())) {
         if (!isActive) {
             operate.doProbe();
             setTabsEnabled(true);
@@ -256,9 +265,15 @@ void MainWindow::loadConfigs() {
     ui->ecVersionValueLabel->setText(QString::fromStdString(operate.getEcVersion()));
     ui->ecBuildValueLabel->setText(QString::fromStdString(operate.getEcBuild()));
 
-    operate.loadSettings();
+    const auto restoreResult = operate.loadSettings();
     updateUserMode();
-    updateCoolerBoostState();
+    if (operate.isCoolerBoostSupport())
+        updateCoolerBoostState();
+    else {
+        ui->coolerBoostCheckBox->setEnabled(false);
+        if (coolerBoostAction)
+            coolerBoostAction->setEnabled(false);
+    }
 
     if (operate.isBatteryThresholdSupport()) {
         updateBatteryThreshold();
@@ -269,6 +284,8 @@ void MainWindow::loadConfigs() {
     }
 
     updateFanSpeedSettings();
+    if (restoreResult.has_value() && !restoreResult->success)
+        ui->fanCurveStatusLabel->setText(tr("Failed to restore fan preference: %1").arg(restoreResult->error));
 
     if (operate.isKeyboardBacklightModeSupport()) {
         updateKeyboardBacklightMode();
@@ -295,7 +312,10 @@ void MainWindow::loadConfigs() {
         ui->webCamCheckBox->setEnabled(false);
     }
 
-    updateFnSuperSwapState();
+    if (operate.isFnSuperSwapSupport())
+        updateFnSuperSwapState();
+    else
+        ui->fnSuperSwapCheckBox->setEnabled(false);
 }
 
 QString MainWindow::intToQString(int value) const {
@@ -316,26 +336,31 @@ void MainWindow::updateBatteryThreshold() {
         else
             ui->batteryThresholdValueLabel->setText(QString::number(batteryThreshold) + " %");
 
-        switch (batteryThreshold) {
-            case 0:
-            case 100:
-                ui->bestMobilityRadioButton->click();
-                batteryThreshold = 100;
-                break;
-            case 60:
-                ui->bestBatteryRadioButton->click();
-                break;
-            case 80:
-                ui->balancedBatteryRadioButton->click();
-                break;
-            default:
-                ui->customBatteryThresholdRadioButton->click();
-                ui->customBatteryApplyButton->setEnabled(
-                        batteryThreshold != ui->customBatteryThresholdSpinBox->value());
-                break;
+        {
+            const QSignalBlocker bestMobilityBlocker(ui->bestMobilityRadioButton);
+            const QSignalBlocker bestBatteryBlocker(ui->bestBatteryRadioButton);
+            const QSignalBlocker balancedBatteryBlocker(ui->balancedBatteryRadioButton);
+            const QSignalBlocker customBlocker(ui->customBatteryThresholdRadioButton);
+            switch (batteryThreshold) {
+                case 0:
+                case 100:
+                    ui->bestMobilityRadioButton->setChecked(true);
+                    batteryThreshold = 100;
+                    break;
+                case 60:
+                    ui->bestBatteryRadioButton->setChecked(true);
+                    break;
+                case 80:
+                    ui->balancedBatteryRadioButton->setChecked(true);
+                    break;
+                default:
+                    ui->customBatteryThresholdRadioButton->setChecked(true);
+                    ui->customBatteryApplyButton->setEnabled(
+                            batteryThreshold != ui->customBatteryThresholdSpinBox->value());
+                    break;
+            }
+            ui->customBatteryThresholdSpinBox->setValue(batteryThreshold);
         }
-
-        ui->customBatteryThresholdSpinBox->setValue(batteryThreshold);
     }
 }
 
@@ -381,9 +406,11 @@ void MainWindow::updateGpuTemp() {
 }
 
 void MainWindow::updateFan1Speed() {
-    int speed = operate.getFan1Speed();
-    if (speed != 0)
-        ui->fan1ValueLabel->setText(intToQString(speed) + " " + tr("rpm"));
+    const std::optional<int> speed = operate.getFan1Speed();
+    if (!speed.has_value())
+        ui->fan1ValueLabel->setText(tr("Unavailable"));
+    else if (speed.value() != 0)
+        ui->fan1ValueLabel->setText(intToQString(speed.value()) + " " + tr("rpm"));
     else
         ui->fan1ValueLabel->setText(tr("OFF"));
 }
@@ -431,21 +458,25 @@ void MainWindow::updateCoolerBoostState() const {
 
 void MainWindow::updateUserMode() {
     if (operate.updateEcData()) {
+        const QSignalBlocker balancedBlocker(ui->balancedModeRadioButton);
+        const QSignalBlocker performanceBlocker(ui->highPerformanceModeRadioButton);
+        const QSignalBlocker silentBlocker(ui->silentModeRadioButton);
+        const QSignalBlocker superBatteryBlocker(ui->superBatteryModeRadioButton);
         switch (operate.getUserMode()) {
             case user_mode::balanced_mode:
-                ui->balancedModeRadioButton->click();
+                ui->balancedModeRadioButton->setChecked(true);
                 balancedMode->setChecked(true);
                 break;
             case user_mode::performance_mode:
-                ui->highPerformanceModeRadioButton->click();
+                ui->highPerformanceModeRadioButton->setChecked(true);
                 highPerformanceMode->setChecked(true);
                 break;
             case user_mode::silent_mode:
-                ui->silentModeRadioButton->click();
+                ui->silentModeRadioButton->setChecked(true);
                 silentMode->setChecked(true);
                 break;
             case user_mode::super_battery_mode:
-                ui->superBatteryModeRadioButton->click();
+                ui->superBatteryModeRadioButton->setChecked(true);
                 superBatteryMode->setChecked(true);
                 break;
             case user_mode::unknown_mode:
@@ -489,12 +520,84 @@ void MainWindow::updateFanMode() {
 }
 
 void MainWindow::updateFanSpeedSettings() {
+    const FanCurveCapability capability = operate.getFanCurveCapability();
+    const bool curveSupported = capability.complete();
+    ui->advancedFanControlCheckBox->setEnabled(curveSupported);
+    ui->advancedFanControlCheckBox->setToolTip(
+        curveSupported ? tr("Uses the complete msi-ec fan curve ABI")
+                       : tr("Fan curves are unavailable: the driver does not expose the complete verified ABI"));
+    // Editing is allowed in Auto as well: a malformed existing curve must be
+    // repairable before Advanced is activated by the transaction.
+    ui->fanControlTabWidget->setEnabled(curveSupported);
+    if (!curveSupported) {
+        ui->fanCurveStatusLabel->setText(
+            tr("Unsupported: complete msi-ec fan curve ABI is unavailable"));
+        ui->fanSpeedApplyButton->setEnabled(false);
+        ui->fanSpeedResetButton->setEnabled(false);
+        return;
+    }
+    for (QSlider *slider : {ui->fan1Speed1Slider, ui->fan1Speed2Slider, ui->fan1Speed3Slider,
+                            ui->fan1Speed4Slider, ui->fan1Speed5Slider, ui->fan1Speed6Slider,
+                            ui->fan1Speed7Slider, ui->fan2Speed1Slider, ui->fan2Speed2Slider,
+                            ui->fan2Speed3Slider, ui->fan2Speed4Slider, ui->fan2Speed5Slider,
+                            ui->fan2Speed6Slider, ui->fan2Speed7Slider})
+        slider->setRange(capability.levelMin, capability.levelMax);
+    for (QSpinBox *spin : {ui->fan1Speed2TempSpinBox, ui->fan1Speed3TempSpinBox,
+                           ui->fan1Speed4TempSpinBox, ui->fan1Speed5TempSpinBox,
+                           ui->fan1Speed6TempSpinBox, ui->fan1Speed7TempSpinBox,
+                           ui->fan2Speed2TempSpinBox, ui->fan2Speed3TempSpinBox,
+                           ui->fan2Speed4TempSpinBox, ui->fan2Speed5TempSpinBox,
+                           ui->fan2Speed6TempSpinBox, ui->fan2Speed7TempSpinBox})
+        spin->setRange(capability.thresholdMin, capability.thresholdMax);
+
+    const QSignalBlocker advancedBlocker(ui->advancedFanControlCheckBox);
+    const QSignalBlocker fan1Slider1Blocker(ui->fan1Speed1Slider);
+    const QSignalBlocker fan1Slider2Blocker(ui->fan1Speed2Slider);
+    const QSignalBlocker fan1Slider3Blocker(ui->fan1Speed3Slider);
+    const QSignalBlocker fan1Slider4Blocker(ui->fan1Speed4Slider);
+    const QSignalBlocker fan1Slider5Blocker(ui->fan1Speed5Slider);
+    const QSignalBlocker fan1Slider6Blocker(ui->fan1Speed6Slider);
+    const QSignalBlocker fan1Slider7Blocker(ui->fan1Speed7Slider);
+    const QSignalBlocker fan2Slider1Blocker(ui->fan2Speed1Slider);
+    const QSignalBlocker fan2Slider2Blocker(ui->fan2Speed2Slider);
+    const QSignalBlocker fan2Slider3Blocker(ui->fan2Speed3Slider);
+    const QSignalBlocker fan2Slider4Blocker(ui->fan2Speed4Slider);
+    const QSignalBlocker fan2Slider5Blocker(ui->fan2Speed5Slider);
+    const QSignalBlocker fan2Slider6Blocker(ui->fan2Speed6Slider);
+    const QSignalBlocker fan2Slider7Blocker(ui->fan2Speed7Slider);
+    const QSignalBlocker fan1Temp2Blocker(ui->fan1Speed2TempSpinBox);
+    const QSignalBlocker fan1Temp3Blocker(ui->fan1Speed3TempSpinBox);
+    const QSignalBlocker fan1Temp4Blocker(ui->fan1Speed4TempSpinBox);
+    const QSignalBlocker fan1Temp5Blocker(ui->fan1Speed5TempSpinBox);
+    const QSignalBlocker fan1Temp6Blocker(ui->fan1Speed6TempSpinBox);
+    const QSignalBlocker fan1Temp7Blocker(ui->fan1Speed7TempSpinBox);
+    const QSignalBlocker fan2Temp2Blocker(ui->fan2Speed2TempSpinBox);
+    const QSignalBlocker fan2Temp3Blocker(ui->fan2Speed3TempSpinBox);
+    const QSignalBlocker fan2Temp4Blocker(ui->fan2Speed4TempSpinBox);
+    const QSignalBlocker fan2Temp5Blocker(ui->fan2Speed5TempSpinBox);
+    const QSignalBlocker fan2Temp6Blocker(ui->fan2Speed6TempSpinBox);
+    const QSignalBlocker fan2Temp7Blocker(ui->fan2Speed7TempSpinBox);
     ui->advancedFanControlCheckBox->setChecked(operate.getFanMode() == fan_mode::advanced_fan_mode);
 
-    QVector fan1SpeedSettings = operate.getFan1SpeedSettings();
-    QVector fan1TempSettings = operate.getFan1TempSettings();
-    QVector fan2SpeedSettings = operate.getFan2SpeedSettings();
-    QVector fan2TempSettings = operate.getFan2TempSettings();
+    const auto currentProfile = operate.getFanCurveProfile();
+    if (!currentProfile.has_value()) {
+        ui->fanCurveStatusLabel->setText(tr("Failed: driver fan curve readback is unavailable"));
+        ui->fanSpeedApplyButton->setEnabled(false);
+        ui->fanSpeedResetButton->setEnabled(false);
+        return;
+    }
+    const bool currentCurveValid = validateFanCurve(capability, *currentProfile).isEmpty();
+    const QVector<int> fan1SpeedSettings = currentProfile->cpuLevels;
+    const QVector<int> fan1TempSettings = currentProfile->cpuThresholds;
+    const QVector<int> fan2SpeedSettings = currentProfile->gpuLevels;
+    const QVector<int> fan2TempSettings = currentProfile->gpuThresholds;
+    if (fan1SpeedSettings.size() != 7 || fan2SpeedSettings.size() != 7 ||
+        fan1TempSettings.size() != 6 || fan2TempSettings.size() != 6) {
+        ui->fanCurveStatusLabel->setText(tr("Failed: driver fan curve readback is unavailable"));
+        ui->fanSpeedApplyButton->setEnabled(false);
+        ui->fanSpeedResetButton->setEnabled(false);
+        return;
+    }
 
     ui->fan1Speed1Slider->setValue(fan1SpeedSettings[0]);
     ui->fan1Speed2Slider->setValue(fan1SpeedSettings[1]);
@@ -529,6 +632,11 @@ void MainWindow::updateFanSpeedSettings() {
     ui->fan2Speed7TempSpinBox->setValue(fan2TempSettings[5]);
 
     checkFanSettingsChanged();
+    if (!currentCurveValid) {
+        ui->fanCurveStatusLabel->setText(
+            tr("Warning: current driver curve has an invalid range or ordering; repair it before applying"));
+        ui->fanSpeedApplyButton->setEnabled(true);
+    }
 }
 
 void MainWindow::setBestMobility() {
@@ -546,24 +654,79 @@ void MainWindow::setBestBattery() {
     updateBatteryThreshold();
 }
 
+namespace {
+void showModeResult(const std::optional<FanCurveResult> &result, QLabel *statusLabel,
+                    const QString &actualMode) {
+    if (!result.has_value()) {
+        statusLabel->setText(QObject::tr("Mode applied: %1").arg(actualMode));
+    } else if (result->success) {
+        statusLabel->setText(result->effectiveMode == QStringLiteral("advanced")
+                                 ? QObject::tr("Applied (advanced)")
+                                 : QObject::tr("Mode applied: %1").arg(result->effectiveMode));
+    } else {
+        statusLabel->setText(QObject::tr("Failed to reconcile fan preference: %1").arg(result->error));
+    }
+}
+}
+
 void MainWindow::setHighPerformanceMode() {
-    operate.setUserMode(user_mode::performance_mode);
+    const bool modeOk = operate.setUserMode(user_mode::performance_mode);
     updateUserMode();
+    updateFanMode();
+    if (!modeOk) {
+        ui->fanCurveStatusLabel->setText(tr("Failed to verify Performance mode; pending fan edits preserved"));
+        return;
+    }
+    const auto result = operate.reconcileFanCurvePreference();
+    updateFanMode();
+    showModeResult(result, ui->fanCurveStatusLabel, ui->fanModeValueLabel->text());
+    if (!result.has_value() || result->success)
+        updateFanSpeedSettings();
 }
 
 void MainWindow::setBalancedMode() {
-    operate.setUserMode(user_mode::balanced_mode);
+    const bool modeOk = operate.setUserMode(user_mode::balanced_mode);
     updateUserMode();
+    updateFanMode();
+    if (!modeOk) {
+        ui->fanCurveStatusLabel->setText(tr("Failed to verify Balanced mode; pending fan edits preserved"));
+        return;
+    }
+    const auto result = operate.reconcileFanCurvePreference();
+    updateFanMode();
+    showModeResult(result, ui->fanCurveStatusLabel, ui->fanModeValueLabel->text());
+    if (!result.has_value() || result->success)
+        updateFanSpeedSettings();
 }
 
 void MainWindow::setSilentMode() {
-    operate.setUserMode(user_mode::silent_mode);
+    const bool modeOk = operate.setUserMode(user_mode::silent_mode);
     updateUserMode();
+    updateFanMode();
+    if (!modeOk) {
+        ui->fanCurveStatusLabel->setText(tr("Failed to verify Silent mode; pending fan edits preserved"));
+        return;
+    }
+    const auto result = operate.reconcileFanCurvePreference();
+    updateFanMode();
+    showModeResult(result, ui->fanCurveStatusLabel, ui->fanModeValueLabel->text());
+    if (!result.has_value() || result->success)
+        updateFanSpeedSettings();
 }
 
 void MainWindow::setSuperBatteryMode() {
-    operate.setUserMode(user_mode::super_battery_mode);
+    const bool modeOk = operate.setUserMode(user_mode::super_battery_mode);
     updateUserMode();
+    updateFanMode();
+    if (!modeOk) {
+        ui->fanCurveStatusLabel->setText(tr("Failed to verify Super Battery mode; pending fan edits preserved"));
+        return;
+    }
+    const auto result = operate.reconcileFanCurvePreference();
+    updateFanMode();
+    showModeResult(result, ui->fanCurveStatusLabel, ui->fanModeValueLabel->text());
+    if (!result.has_value() || result->success)
+        updateFanSpeedSettings();
 }
 
 void MainWindow::setCoolerBoostState(bool enabled) const {
@@ -627,26 +790,96 @@ QVector<int> MainWindow::getFan2TempValues() const {
 }
 
 void MainWindow::setFanSpeedSettings() {
-    operate.setFan1SpeedSettings(getFan1SpeedValues());
-    operate.setFan1TempSettings(getFan1TempValues());
-    operate.setFan2SpeedSettings(getFan2SpeedValues());
-    operate.setFan2TempSettings(getFan2TempValues());
-    if (operate.updateEcData())
+    const FanCurveCapability capability = operate.getFanCurveCapability();
+    if (!capability.complete()) {
+        ui->fanCurveStatusLabel->setText(tr("Unsupported: complete msi-ec fan curve ABI is unavailable"));
+        return;
+    }
+    ui->fanCurveStatusLabel->setText(tr("Applying…"));
+    qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
+    FanCurveProfile profile;
+    profile.cpuLevels = getFan1SpeedValues();
+    profile.cpuThresholds = getFan1TempValues();
+    profile.gpuLevels = getFan2SpeedValues();
+    profile.gpuThresholds = getFan2TempValues();
+    const FanCurveResult result = operate.applyFanCurve(profile);
+    if (result.success) {
+        ui->fanCurveStatusLabel->setText(tr("Applied (advanced)"));
+        updateFanSpeedSettings();
+    } else {
+        // Keep the editor's pending values intact on failure while reconciling
+        // only actual mode/status.
+        {
+            const QSignalBlocker blocker(ui->advancedFanControlCheckBox);
+            ui->advancedFanControlCheckBox->setChecked(result.effectiveMode == QStringLiteral("advanced"));
+        }
+        updateFanMode();
+        ui->fanCurveStatusLabel->setText(
+            tr("Failed: %1 (rollback: %2)").arg(result.error, result.rollbackStatus));
         checkFanSettingsChanged();
+    }
 }
 
-void MainWindow::setFanModeAdvanced(bool enabled) const {
-    operate.setFanModeAdvanced(enabled);
-    ui->fanControlTabWidget->setEnabled(enabled);
+void MainWindow::setFanModeAdvanced(bool enabled) {
+    if (!operate.getFanCurveCapability().complete()) {
+        ui->fanCurveStatusLabel->setText(tr("Unsupported: complete msi-ec fan curve ABI is unavailable"));
+        return;
+    }
+    if (enabled) {
+        ui->fanCurveStatusLabel->setText(tr("Applying…"));
+        qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
+    }
+    if (!enabled) {
+        if (!operate.setFanModeAdvanced(false)) {
+            {
+                const QSignalBlocker blocker(ui->advancedFanControlCheckBox);
+                ui->advancedFanControlCheckBox->setChecked(
+                    operate.getFanMode() == fan_mode::advanced_fan_mode);
+            }
+            ui->fanCurveStatusLabel->setText(tr("Failed: could not verify Auto mode; pending fan edits preserved"));
+            updateFanMode();
+            checkFanSettingsChanged();
+            return;
+        }
+    }
+    ui->fanControlTabWidget->setEnabled(operate.getFanCurveCapability().complete());
     ui->fanSpeedResetButton->setEnabled(enabled);
     ui->fanSpeedApplyButton->setEnabled(enabled);
+    if (enabled) {
+        const FanCurveResult result = operate.applyFanCurve(
+            FanCurveProfile{getFan1TempValues(), getFan1SpeedValues(),
+                             getFan2TempValues(), getFan2SpeedValues()});
+        if (result.success) {
+            ui->fanCurveStatusLabel->setText(tr("Applied (advanced)"));
+            updateFanSpeedSettings();
+        } else {
+            const QSignalBlocker blocker(ui->advancedFanControlCheckBox);
+            ui->advancedFanControlCheckBox->setChecked(result.effectiveMode == QStringLiteral("advanced"));
+            ui->fanCurveStatusLabel->setText(
+                tr("Failed: %1 (rollback: %2); pending fan edits preserved")
+                    .arg(result.error, result.rollbackStatus));
+            checkFanSettingsChanged();
+        }
+    } else {
+        ui->fanCurveStatusLabel->setText(tr("Auto"));
+    }
 }
 
 void MainWindow::checkFanSettingsChanged() const {
-    bool fanSettingChanged = (getFan1SpeedValues() != operate.getFan1SpeedSettings() ||
-                              getFan2SpeedValues() != operate.getFan2SpeedSettings() ||
-                              getFan1TempValues() != operate.getFan1TempSettings() ||
-                              getFan2TempValues() != operate.getFan2TempSettings());
+    const FanCurveCapability capability = operate.getFanCurveCapability();
+    if (!capability.complete()) {
+        ui->fanSpeedApplyButton->setEnabled(false);
+        ui->fanSpeedResetButton->setEnabled(false);
+        return;
+    }
+    const auto currentProfile = operate.getFanCurveProfile();
+    const bool currentCurveInvalid = !currentProfile.has_value() ||
+                                     !validateFanCurve(capability, *currentProfile).isEmpty();
+    bool fanSettingChanged = currentCurveInvalid ||
+                             (getFan1SpeedValues() != currentProfile->cpuLevels ||
+                              getFan2SpeedValues() != currentProfile->gpuLevels ||
+                              getFan1TempValues() != currentProfile->cpuThresholds ||
+                              getFan2TempValues() != currentProfile->gpuThresholds);
     ui->fanSpeedApplyButton->setEnabled(fanSettingChanged);
     ui->fanSpeedResetButton->setEnabled(fanSettingChanged);
 }
@@ -667,23 +900,24 @@ void MainWindow::closeEvent(QCloseEvent *event) {
 }
 
 void MainWindow::quitApp() const {
-    operate.closeHelperApp();
     Settings::setValue("MainWindow/Width", MainWindow::width());
     Settings::setValue("MainWindow/Height", MainWindow::height());
     (void) QCoreApplication::quit();
 }
 
-void MainWindow::timerSleepTimeout() {
-    qint64 timeNow = QDateTime::currentMSecsSinceEpoch();
-    if (timeLastWatcherInterval == 0) {
-        timeLastWatcherInterval = timeNow;
+void MainWindow::onPrepareForSleep(bool sleeping) {
+    if (sleeping)
         return;
-    }
-    qint64 msecsSinceTimeout = timeNow - timeLastWatcherInterval;
-    timeLastWatcherInterval = timeNow;
-    if (msecsSinceTimeout > timerSleepWatcher.interval() + 5000) {
-        // Went to sleep for at least 5 seconds
-        operate.handleWakeEvent();
+    const auto result = operate.handleWakeEvent();
+    if (result.has_value() && !result->success) {
+        ui->fanCurveStatusLabel->setText(
+            tr("Failed to reconcile after resume: %1; pending fan edits preserved").arg(result->error));
+        updateUserMode();
+        updateFanMode();
+    } else if (result.has_value() && result->success) {
+        updateUserMode();
+        updateFanMode();
+        updateFanSpeedSettings();
     }
 }
 
@@ -730,15 +964,12 @@ void MainWindow::on_PowerProfileChange(const PowerProfile profile) {
         switch (profile) {
         case PowerProfile::Performance:
             setHighPerformanceMode();
-            ui->highPerformanceModeRadioButton->setChecked(true);
             break;
         case PowerProfile::Balanced:
             setBalancedMode();
-            ui->balancedModeRadioButton->setChecked(true);
             break;
         case PowerProfile::PowerSaver:
             setSuperBatteryMode();
-            ui->superBatteryModeRadioButton->setChecked(true);
             break;
         case PowerProfile::Unknown:
             default:;
@@ -786,12 +1017,6 @@ void MainWindow::on_ReadValueButton_clicked() {
     ui->ValueSpinBox->setValue(value);
 }
 
-void MainWindow::on_WriteValueButton_clicked() const {
-    QString text = ui->addressEdit->displayText();
-    int address = text.toInt();
-    operate.setValue(address, ui->ValueSpinBox->value());
-}
-
 void MainWindow::on_usbPowerShareCheckBox_clicked(bool checked) const {
     operate.setUsbPowerShareState(checked);
 }
@@ -804,7 +1029,11 @@ void MainWindow::on_webCamCheckBox_clicked(bool checked) const {
 }
 
 void MainWindow::on_fnSuperSwapCheckBox_clicked(bool checked) const {
-    operate.setFnSuperSwapState(checked);
+    if (operate.setFnSuperSwapState(checked))
+        return;
+    const QSignalBlocker blocker(ui->fnSuperSwapCheckBox);
+    ui->fnSuperSwapCheckBox->setChecked(operate.getFnSuperSwapState());
+    ui->fanCurveStatusLabel->setText(tr("Failed to verify Fn/Super swap; setting was not persisted"));
 }
 
 void MainWindow::on_coolerBoostCheckBox_clicked(bool checked) const {

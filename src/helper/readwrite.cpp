@@ -17,8 +17,6 @@
  */
 
 #include "readwrite.h"
-#include <fstream>
-
 #include <QFile>
 
 const QString acpi_ec_file = "/dev/ec";
@@ -31,14 +29,6 @@ QByteArray ReadWrite::readFromFile() const {
     if (QFile file(ioFile); file.open(QIODevice::ReadOnly))
         return file.readAll();
     return {};
-}
-
-void ReadWrite::writeToFile(const int pos, BYTE value) const {
-    std::ofstream file(ioFile.toStdString(), std::ios::in | std::ios::out | std::ios::binary);
-    if (file.is_open()) {
-        file.seekp(pos);
-        file << value;
-    }
 }
 
 bool ReadWrite::isAcpiEc() const {

@@ -23,7 +23,11 @@ set(PROJECT_SOURCES
     src/powermonitor.cpp src/powermonitor.h
     src/helper.cpp src/helper.h
     src/msi-ec_helper.cpp src/msi-ec_helper.h
+    src/fan_curve.cpp src/fan_curve.h
+    src/helper/authorization.cpp src/helper/authorization.h
     src/settings.cpp src/settings.h
+    src/settings_parse.cpp
+    src/user_mode_policy.cpp src/user_mode_policy.h
     src/resources.qrc
 )
 
@@ -91,6 +95,36 @@ target_link_libraries(mcontrolcenter PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${
 install(TARGETS mcontrolcenter
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
+
+include(CTest)
+if(BUILD_TESTING)
+    find_package(Qt6 6.4 REQUIRED COMPONENTS Test)
+    add_executable(fan-curve-tests
+        tests/test_fan_curve.cpp
+        src/fan_curve.cpp
+        src/settings_parse.cpp
+        src/user_mode_policy.cpp
+        src/helper/fan-curve.cpp
+        src/helper/authorization.cpp
+    )
+    target_include_directories(fan-curve-tests PRIVATE src src/helper)
+    target_compile_definitions(fan-curve-tests PRIVATE FAN_SOURCE_DIR="${CMAKE_SOURCE_DIR}")
+    target_link_libraries(fan-curve-tests PRIVATE Qt6::Core Qt6::DBus Qt6::Test)
+    add_test(NAME fan-curve-tests COMMAND fan-curve-tests)
+
+    find_program(DBUS_RUN_SESSION_EXECUTABLE dbus-run-session REQUIRED)
+    add_executable(dbus-context-tests
+        tests/test_dbus_context.cpp
+        src/fan_curve.cpp
+        src/helper/fan-curve.cpp
+        src/helper/msi-ec.cpp src/helper/msi-ec.h
+        src/helper/service.h
+    )
+    target_include_directories(dbus-context-tests PRIVATE src src/helper)
+    target_link_libraries(dbus-context-tests PRIVATE Qt6::Core Qt6::DBus Qt6::Test)
+    add_test(NAME dbus-context-tests
+        COMMAND ${DBUS_RUN_SESSION_EXECUTABLE} -- $<TARGET_FILE:dbus-context-tests>)
+endif()
 
 add_subdirectory(src/helper ${CMAKE_BINARY_DIR}/helper)
 add_definitions(-DMControlCenter_VERSION="${PROJECT_VERSION}")
