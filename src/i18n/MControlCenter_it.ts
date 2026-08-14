@@ -77,7 +77,7 @@
     </message>
     <message>
         <source>About</source>
-        <translation>About</translation>
+        <translation>Info</translation>
     </message>
     <message>
         <source>Version:</source>
@@ -156,6 +156,18 @@
         <translation>Avanzato</translation>
     </message>
     <message>
+        <source>Couldn&apos;t connect to UPower to get charger status.
+Make sure that UPower is installed and running then restart the system.</source>
+        <translation>Impossibile connettersi a UPower per ottenere lo stato dell&apos;alimentazione.
+Assicurarsi che UPower sia installato e in esecuzione, quindi riavviare il sistema.</translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t connect to Power Profiles Daemon.
+Make sure that either Power Profiles Daemon or TuneD is installed and restart the system.</source>
+        <translation>Impossibile connettersi a Power Profiles Daemon.
+Assicurarsi che Power Profiles Daemon oppure TuneD sia installato, quindi riavviare il sistema.</translation>
+    </message>
+    <message>
         <source>Cooling</source>
         <translation>Raffreddamento</translation>
     </message>
@@ -181,124 +193,141 @@
     </message>
     <message>
         <source>Overview</source>
-        <translation type="unfinished"></translation>
+        <translation>Panoramica</translation>
     </message>
     <message>
         <source>The middle spot between fan noise and power usage</source>
-        <translation type="unfinished"></translation>
+        <translation>Il punto intermedio tra rumore delle ventole e consumo energetico</translation>
     </message>
     <message>
         <source>Low fan noise and moderate power usage</source>
-        <translation type="unfinished"></translation>
+        <translation>Basso rumore delle ventole e moderato consumo energetico</translation>
     </message>
     <message>
         <source>Limits performance and turns off fans at lower temperatures</source>
-        <translation type="unfinished"></translation>
+        <translation>Limita le prestazioni e spegne le ventole a temperature inferiori</translation>
     </message>
     <message>
         <source>GPU Fan:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ventola GPU:</translation>
     </message>
     <message>
         <source>CPU Fan:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ventola CPU:</translation>
     </message>
     <message>
         <source>USB Power</source>
-        <translation type="unfinished"></translation>
+        <translation>Alimentazione USB</translation>
     </message>
     <message>
         <source>FN ⇄ Meta</source>
-        <translation type="unfinished"></translation>
+        <translation>FN ⇄ Meta</translation>
     </message>
     <message>
         <source>Current fan Mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>Modalità ventole attuale:</translation>
     </message>
     <message>
         <source>Keyboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Tastiera</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;MC&lt;/span&gt;ontrol&lt;span style=&quot; font-weight:700;&quot;&gt;C&lt;/span&gt;enter (MCC) is an application that allows you to change the settings of MSI laptops running Linux.&lt;/p&gt;&lt;p&gt;MCC acts as a graphical interface for the &lt;span style=&quot; font-weight:700;&quot;&gt;MSI-EC &lt;/span&gt;driver that already exist in the Linux kernel, if your device is not supported (grey buttons/limited in-app functionality), please visit the msi-ec github page to get help.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;MC&lt;/span&gt;ontrol&lt;span style=&quot; font-weight:700;&quot;&gt;C&lt;/span&gt;enter (MCC) è un&apos;applicazione che ti consente di modificare le impostazioni dei laptop MSI in esecuzione su Linux.&lt;/p&gt;&lt;p&gt;MCC funge da interfaccia grafica per il driver &lt;span style=&quot; font-weight:700;&quot;&gt;MSI-EC &lt;/span&gt;che esiste già nel kernel Linux; se il tuo dispositivo non è supportato (pulsanti grigi/funzionalità limitata nell&apos;app), visita la pagina github di msi-ec per ricevere aiuto.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>MCC GitHub:</source>
-        <translation type="unfinished"></translation>
+        <translation>GitHub MCC:</translation>
     </message>
     <message>
         <source>MSI-EC GitHub:</source>
-        <translation type="unfinished"></translation>
+        <translation>GitHub MSI-EC:</translation>
     </message>
     <message>
         <source>This mode unlocks Advanced fan mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Questa modalità sblocca la modalità ventole Avanzata</translation>
     </message>
     <message>
         <source>High Performance</source>
-        <translation type="unfinished"></translation>
+        <translation>Alte prestazioni</translation>
     </message>
     <message>
         <source>Maximum performance at the cost of heat and increased power consumption</source>
-        <translation type="unfinished"></translation>
+        <translation>Massime prestazioni a costo di più calore e maggiore consumo energetico</translation>
+    </message>
+    <message>
+        <source>Follow system&apos;s power profile</source>
+        <translation>Segui il profilo energetico del sistema</translation>
     </message>
     <message>
         <source>If you mainly use your laptop with the charger plugged most of the time, it is recommended to set the charge capacity at a lower percentage (60% or 80%) to prolong your battery lifecycle.</source>
-        <translation type="unfinished"></translation>
+        <translation>Se usi principalmente il tuo laptop con l&apos;alimentatore collegato la maggior parte del tempo, si consiglia di impostare la capacità di carica su una percentuale inferiore (60% o 80%) per prolungare il ciclo di vita della batteria.</translation>
+    </message>
+    <message>
+        <source>Automatic Profile Switching</source>
+        <translation>Cambio automatico del profilo</translation>
+    </message>
+    <message>
+        <source>On Charger:</source>
+        <translation>Alimentatore:</translation>
+    </message>
+    <message>
+        <source>On Battery:</source>
+        <translation>Batteria:</translation>
     </message>
     <message>
         <source>Charge the battery when under 90%, stop at 100%</source>
-        <translation type="unfinished"></translation>
+        <translation>Carica la batteria quando è sotto il 90%, fermati al 100%</translation>
     </message>
     <message>
         <source>Keyboard Backlight</source>
-        <translation type="unfinished"></translation>
+        <translation>Retroilluminazione Tastiera</translation>
     </message>
     <message>
         <source>-</source>
-        <translation type="unfinished"></translation>
+        <translation>-</translation>
     </message>
     <message>
         <source>MCC Bug Tracker:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tracciatore bug MCC:</translation>
     </message>
     <message>
         <source>Qt version:</source>
-        <translation type="unfinished"></translation>
+        <translation>Versione Qt:</translation>
     </message>
     <message>
         <source>MSI-EC Status:</source>
-        <translation type="unfinished"></translation>
+        <translation>Stato MSI-EC:</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Warning&lt;/span&gt;: Writing the wrong values to the wrong addresses &lt;span style=&quot; font-weight:700;&quot;&gt;WILL BRICK YOUR DEVICE!&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Never&lt;/span&gt; write to EC memory without knowing how to do a proper &lt;span style=&quot; font-weight:700;&quot;&gt;BIOS/EC&lt;/span&gt; reset, keep in mind that a reset &lt;span style=&quot; font-weight:700;&quot;&gt;might not&lt;/span&gt; fix the device if the device got bricked/broken. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Attenzione&lt;/span&gt;: Scrivere valori errati negli indirizzi sbagliati &lt;span style=&quot; font-weight:700;&quot;&gt;DISTRUGGERÀ IL VOSTRO DISPOSITIVO!&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Non&lt;/span&gt; scrivere nella memoria EC senza sapere come eseguire un corretto reset del &lt;span style=&quot; font-weight:700;&quot;&gt;BIOS/EC&lt;/span&gt;, tieni presente che un ripristino &lt;span style=&quot; font-weight:700;&quot;&gt;potrebbe non&lt;/span&gt; riparare il dispositivo se questo è stato bruciato/danneggiato. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>The msi-ec module is not loaded/installed.
 Check the &lt;About&gt; page for more info.</source>
-        <translation type="unfinished"></translation>
+        <translation>Il modulo msi-ec non è caricato/installato.
+Controlla la pagina Info per maggiori dettagli.</translation>
     </message>
     <message>
         <source>The ec_sys module couldn&apos;t be detected, it might be required to control the fans.</source>
-        <translation type="unfinished"></translation>
+        <translation>Non è stato possibile rilevare il modulo ec_sys; potrebbe essere necessario per controllare le ventole.</translation>
     </message>
     <message>
         <source>Loaded</source>
-        <translation type="unfinished"></translation>
+        <translation>Caricato</translation>
     </message>
     <message>
         <source>Fallback: Only ec_sys is loaded</source>
-        <translation type="unfinished"></translation>
+        <translation>Riserva: Caricato solo ec_sys</translation>
     </message>
     <message>
         <source>Failed to load both msi-ec/ec_sys</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile caricare sia msi-ec che ec_sys</translation>
     </message>
     <message>
         <source>OFF</source>
-        <translation type="unfinished"></translation>
+        <translation>SPENTO</translation>
     </message>
 </context>
 </TS>
