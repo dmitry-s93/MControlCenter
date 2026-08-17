@@ -31,6 +31,8 @@ bool isUpdateDataError = false;
 
 QTimer *realtimeUpdateTimer = new QTimer;
 
+const QString hideMsiEcWarningSettingKey = "Settings/HideMsiEcWarning";
+
 MainWindow::MainWindow(QWidget *parent)
         : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
@@ -154,10 +156,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->tabWidget->setTabVisible(5, false);
     setTabsEnabled(false);
 
-    if (!operate.isMsiEcLoaded()) {
-        QMessageBox::critical(nullptr, this->windowTitle(), tr("The msi-ec module is not loaded/installed.\n"
-                                                               "Check the <About> page for more info."));
-    }
+    showMsiEcWarningIfNeeded();
 
     if (!operate.isEcSysModuleLoaded() && !operate.loadEcSysModule())
         QMessageBox::critical(nullptr, this->windowTitle(), tr("The ec_sys module couldn't be detected, it might be required to control the fans."));
@@ -185,6 +184,28 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow() {
     delete ui;
+}
+
+void MainWindow::showMsiEcWarningIfNeeded() {
+    Settings settings;
+    if (operate.isMsiEcLoaded() || settings.getValue(hideMsiEcWarningSettingKey).toBool())
+        return;
+
+    QMessageBox messageBox(this);
+    messageBox.setIcon(QMessageBox::Critical);
+    messageBox.setWindowTitle(this->windowTitle());
+    messageBox.setText(tr("The msi-ec module is not loaded/installed.\n"
+                          "Check the <About> page for more info."));
+
+    QPushButton *okButton = messageBox.addButton(tr("Ok"), QMessageBox::AcceptRole);
+    QPushButton *doNotShowAgainButton = messageBox.addButton(tr("Do not show again"), QMessageBox::ActionRole);
+
+    messageBox.exec();
+
+    if (messageBox.clickedButton() == doNotShowAgainButton)
+        Settings::setValue(hideMsiEcWarningSettingKey, true);
+    else if (messageBox.clickedButton() == okButton)
+        Settings::setValue(hideMsiEcWarningSettingKey, false);
 }
 
 void MainWindow::setUpdateDataError(bool error) {

@@ -49,6 +49,7 @@ private:
     void setModeFromSelection(PowerProfile profile);
     void realtimeUpdate();
     void loadConfigs();
+    void showMsiEcWarningIfNeeded();
 
     [[nodiscard]] QString intToQString(int value) const;
     void updateBatteryCharge();
