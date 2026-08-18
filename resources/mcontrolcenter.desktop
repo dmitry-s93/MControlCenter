@@ -3,6 +3,7 @@ Categories=System;Settings;Utility;
 Encoding=UTF-8
 Name=MControlCenter
 GenericName=Change MSI Laptop Settings
+GenericName[ar]=غيِّر إعدادات لابتوب MSI
 GenericName[ru]=Изменение настроек ноутбука MSI
 GenericName[pt]=Alterar Definições de Portáteis MSI
 GenericName[es]=Modifica los ajustos de portátiles MSI
