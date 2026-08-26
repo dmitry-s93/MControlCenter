@@ -14,6 +14,10 @@ mkdir $APP_DIR
 
 cp ../build/mcontrolcenter $APP_DIR
 cp ../build/helper/mcontrolcenter-helper $APP_DIR
+
+strip --strip-unneeded $APP_DIR/mcontrolcenter
+strip --strip-unneeded $APP_DIR/mcontrolcenter-helper
+
 cp ../src/helper/mcontrolcenter-helper.conf ../src/helper/mcontrolcenter.helper.service $APP_DIR
 cp ../resources/mcontrolcenter.desktop ../resources/mcontrolcenter.svg $APP_DIR
 
