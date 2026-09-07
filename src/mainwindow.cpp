@@ -147,7 +147,8 @@ MainWindow::MainWindow(QWidget *parent)
     if (s.isValueExist("MainWindow/Width") && s.isValueExist("MainWindow/Height"))
         MainWindow::resize(s.getValue("MainWindow/Width").toInt(), s.getValue("MainWindow/Height").toInt());
 
-    createTrayIcon();
+    bool useSymbolicIcon = s.getValue("Settings/symbolicTrayIcon").toBool();
+    createTrayIcon(useSymbolicIcon);
 
     ui->tabWidget->tabBar()->setExpanding(true);
     // Disable debug tab
@@ -181,6 +182,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->userModeOnBatteryComboBox->setCurrentIndex(s.getValue("Settings/UserModeOnBattery").toInt());
     ui->userModeOnChargerComboBox->setCurrentIndex(s.getValue("Settings/UserModeOnCharger").toInt());
     ui->autoPPDCheckBox->setChecked(s.getValue("Settings/autoPPDstate").toBool());
+    ui->symbolicTrayIconCheckBox->setChecked(s.getValue("Settings/symbolicTrayIcon").toBool());
 }
 
 MainWindow::~MainWindow() {
@@ -903,6 +905,16 @@ void MainWindow::on_superBatteryModeRadioButton_toggled(bool checked) {
         setSuperBatteryMode();
 }
 
+void MainWindow::on_symbolicTrayIconCheckBox_toggled(bool checked) {
+    Settings::setValue("Settings/symbolicTrayIcon", checked);
+    if (trayIcon) {
+        if (checked)
+            trayIcon->setIcon(QIcon(":/images/AppIconSymbolic"));
+        else
+            trayIcon->setIcon(QIcon(":/images/AppIcon"));
+    }
+}
+
 void MainWindow::iconActivated(QSystemTrayIcon::ActivationReason reason) {
     switch (reason) {
         case QSystemTrayIcon::Trigger:
@@ -919,7 +931,7 @@ void MainWindow::iconActivated(QSystemTrayIcon::ActivationReason reason) {
     }
 }
 
-void MainWindow::createTrayIcon() {
+void MainWindow::createTrayIcon(bool useSymbolicIcon) {
     createActions();
 
     modeTrayMenu = new QMenu(tr("Mode"));
@@ -956,8 +968,7 @@ void MainWindow::createTrayIcon() {
 
     trayIcon = new QSystemTrayIcon(this);
     trayIcon->setContextMenu(trayIconMenu);
-    auto icon = QIcon(":/images/AppIcon");
-    trayIcon->setIcon(icon);
+    trayIcon->setIcon(useSymbolicIcon ? QIcon(":/images/AppIconSymbolic") : QIcon(":/images/AppIcon"));
     trayIcon->setToolTip("MControlCenter");
 
     trayIcon->show();

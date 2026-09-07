@@ -298,6 +298,10 @@ Make sure that either Power Profiles Daemon or TuneD is installed and restart th
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Symbolic tray icon:</source>
+        <translation>Symbolic tray icon:</translation>
+    </message>
+    <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Warning&lt;/span&gt;: Writing the wrong values to the wrong addresses &lt;span style=&quot; font-weight:700;&quot;&gt;WILL BRICK YOUR DEVICE!&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Never&lt;/span&gt; write to EC memory without knowing how to do a proper &lt;span style=&quot; font-weight:700;&quot;&gt;BIOS/EC&lt;/span&gt; reset, keep in mind that a reset &lt;span style=&quot; font-weight:700;&quot;&gt;might not&lt;/span&gt; fix the device if the device got bricked/broken. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
