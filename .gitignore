@@ -26,6 +26,9 @@
 *.a
 *.lib
 
+# Compiled linguistic files
+*.qm
+
 # Executables
 *.exe
 *.out

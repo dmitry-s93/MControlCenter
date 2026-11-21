@@ -1994,15 +1994,29 @@
            </widget>
           </item>
           <item row="7" column="1">
-           <widget class="QLabel" name="ecBuildValueLabel">
-            <property name="text">
-             <string notr="true">-</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item row="3" column="1">
+            <widget class="QLabel" name="ecBuildValueLabel">
+             <property name="text">
+              <string notr="true">-</string>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="0">
+            <widget class="QLabel" name="symbolicTrayIconLabel">
+             <property name="text">
+              <string>Symbolic tray icon:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="1">
+            <widget class="QCheckBox" name="symbolicTrayIconCheckBox">
+             <property name="text">
+              <string />
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item row="3" column="1">
          <spacer name="verticalSpacer_3">
           <property name="orientation">
            <enum>Qt::Orientation::Vertical</enum>

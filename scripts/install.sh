@@ -11,6 +11,7 @@ APP_DIR='./app/'
 
 APP_BIN='mcontrolcenter'
 SVG_ICON='mcontrolcenter.svg'
+SVG_ICON_MC='mcontrolcenter-symbolic.svg'
 SHORTCUT='mcontrolcenter.desktop'
 HELPER_BIN='mcontrolcenter-helper'
 DBUS_CONF='mcontrolcenter-helper.conf'
@@ -24,6 +25,7 @@ rm -fv /home/$SUDO_USER/.local/share/applications/$SHORTCUT
 install -vDm644 $APP_DIR$SHORTCUT $SHORTCUTS_PATH$SHORTCUT
 
 install -vDm644 $APP_DIR$SVG_ICON $SCALABLE_ICONS_PATH$SVG_ICON
+install -vDm644 $APP_DIR$SVG_ICON_MC $SCALABLE_ICONS_PATH$SVG_ICON_MC
 
 install -vDm755 $APP_DIR$HELPER_BIN $LIB_EXEC_PATH$HELPER_BIN
 
@@ -32,4 +34,3 @@ install -vDm644 $APP_DIR$DBUS_CONF $DBUS_SYSTEM_PATH$DBUS_CONF
 install -vDm644 $APP_DIR$DBUS_SERVICE $DBUS_SERVICES_PATH$DBUS_SERVICE
 
 echo "Installation was successful"
-

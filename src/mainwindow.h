@@ -95,7 +95,7 @@ private:
     qint64 timeLastWatcherInterval = 0;
     void timerSleepTimeout();
 
-    void createTrayIcon();
+    void createTrayIcon(bool useSymbolicIcon);
     void createActions();
     void iconActivated(QSystemTrayIcon::ActivationReason reason);
     void saveStateRequest(QSessionManager &sessionManager);
@@ -125,6 +125,7 @@ private slots:
     void on_ChargerStateChange(bool isCharging);
     void on_PowerProfileChange(const PowerProfile profile);
 
+    void on_symbolicTrayIconCheckBox_toggled(bool checked);
     void on_bestMobilityRadioButton_toggled(bool checked);
     void on_balancedBatteryRadioButton_toggled(bool checked);
     void on_bestBatteryRadioButton_toggled(bool checked);
