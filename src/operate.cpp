@@ -416,8 +416,16 @@ void Operate::setUserMode(user_mode userMode) const {
     if (msiEcHelper.hasShiftMode()) {
         msiEcHelper.setShiftMode(shiftMode);
     }
-    
-    if (msiEcHelper.hasFanMode()) {
+
+    // Custom fan curve (advanced mode) is orthogonal to the shift/user mode.
+    // Don't stomp it back to auto here - the UI resyncs the mode radio buttons
+    // (MainWindow::updateUserMode) right after settings are restored on startup,
+    // which re-enters this function and would otherwise silently drop advanced mode.
+    bool keepAdvanced = userMode != user_mode::silent_mode &&
+                        msiEcHelper.hasFanMode() &&
+                        getFanMode() == fan_mode::advanced_fan_mode;
+
+    if (msiEcHelper.hasFanMode() && !keepAdvanced) {
         msiEcHelper.setFanMode(fanMode);
     }
 
